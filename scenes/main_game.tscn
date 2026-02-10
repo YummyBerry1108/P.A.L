@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgen6uw20ofh3"]
+
+[ext_resource type="PackedScene" uid="uid://xspjlcfhu1vw" path="res://scenes/enemy.tscn" id="1_s3esy"]
+[ext_resource type="Script" uid="uid://dyqq3yrkf31of" path="res://scripts/snail.gd" id="2_72e8q"]
+
+[node name="MainGame" type="Node2D"]
+
+[node name="Snail" parent="." instance=ExtResource("1_s3esy")]
+script = ExtResource("2_72e8q")
