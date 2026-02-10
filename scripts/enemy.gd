@@ -3,7 +3,7 @@ class_name Enemy extends CharacterBody2D
 @export var texture: Texture2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hitbox: CollisionShape2D = $HitBox
-@onready var hurtbox: CollisionShape2D = $HurtBox
+@onready var hurt_box: CollisionShape2D = $HurtBox
 
 var hp: float = 100
 var speed: float = 100
@@ -15,7 +15,7 @@ func _ready():
 		resize_to(300, 300)
 		
 func _physics_process(delta: float):
-	velocity = direction * speed
+	velocity = direction * speed * delta
 	move_and_slide()
 
 func resize_to(target_width: float, target_height: float) -> void:

@@ -3,7 +3,7 @@ extends Enemy
 enum State { TARGET, LOCK_ON, DASH, CHASE , ROOT , IDLE}
 var current_state = State.LOCK_ON
 
-@export var dash_speed: float = 900.0
+@export var dash_speed: float = 900.0 * 60
 @export var target_duration: float = 0.5
 @export var lock_duration: float = 0.5 
 @export var dash_duration: float = 1
@@ -12,20 +12,17 @@ var current_state = State.LOCK_ON
 
 func _ready():
 	super()
-	speed = 250
+	speed = 250 * 60
 	_start_root_phase()
 
 func _physics_process(delta: float):
-	
-	var dist = global_position.distance_to(get_nearest_player())
-	
 	match current_state:
 		State.CHASE:
-			velocity = direction * speed
+			velocity = direction * speed * delta
 		State.IDLE:
 			velocity = Vector2.ZERO
 		State.DASH:
-			velocity = direction * dash_speed
+			velocity = direction * dash_speed * delta
 	move_and_slide()
 
 func _start_root_phase() -> void:

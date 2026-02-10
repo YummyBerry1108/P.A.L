@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgen6uw20ofh3"]
+[gd_scene load_steps=7 format=3 uid="uid://dgen6uw20ofh3"]
 
 [ext_resource type="PackedScene" uid="uid://xspjlcfhu1vw" path="res://scenes/enemy.tscn" id="1_s3esy"]
 [ext_resource type="Script" uid="uid://dyqq3yrkf31of" path="res://scripts/snail.gd" id="2_72e8q"]
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/rabbit.gd" id="4_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://ccq0mf846jlqt" path="res://imgs/Rabbit.png" id="5_ipu61"]
+[ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/rock.gd" id="5_ygxny"]
+[ext_resource type="Texture2D" uid="uid://bgnimqvp2jja2" path="res://imgs/Rock.png" id="6_ygxny"]
 
 [node name="MainGame" type="Node2D"]
 
 [node name="Rabbit" parent="." instance=ExtResource("1_s3esy")]
 position = Vector2(114, 127)
 script = ExtResource("4_0rdsr")
-dash_speed = 900.0
+dash_speed = 54000.0
 target_duration = 0.5
 lock_duration = 0.5
 dash_duration = 1.0
@@ -21,3 +23,10 @@ texture = ExtResource("5_ipu61")
 [node name="Snail" parent="." instance=ExtResource("1_s3esy")]
 position = Vector2(788, 127)
 script = ExtResource("2_72e8q")
+
+[node name="Rock" parent="." instance=ExtResource("1_s3esy")]
+position = Vector2(462, 305)
+script = ExtResource("5_ygxny")
+max_speed = 18000.0
+steer_force = 300.0
+texture = ExtResource("6_ygxny")
