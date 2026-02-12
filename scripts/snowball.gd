@@ -1,7 +1,6 @@
 extends Projectile
 
 const skill_name: String = "snowball"
-const firerate: float = 2
 
 func _ready() -> void:
 	super._ready()
