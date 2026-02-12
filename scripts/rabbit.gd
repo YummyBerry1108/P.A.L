@@ -80,5 +80,4 @@ func _start_dash_phase() -> void:
 	
 	await get_tree().create_timer(dash_duration).timeout
 	
-	
 	_start_idle_phase()

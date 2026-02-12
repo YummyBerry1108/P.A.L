@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvcahiono6yix"]
 
-[ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/test_player.gd" id="1_0ax77"]
+[ext_resource type="Script" path="res://scripts/test_player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/pig.png" id="1_e7mys"]
 [ext_resource type="PackedScene" uid="uid://elks0b27hwwp" path="res://scenes/icicle.tscn" id="2_22uif"]
 
