@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bj866ltlivhuw"]
 
 [ext_resource type="Texture2D" uid="uid://dcif3w56oloin" path="res://imgs/dummy.png" id="1_0j1vb"]
-[ext_resource type="Script" path="res://scripts/dummy.gd" id="1_2hh5m"]
+[ext_resource type="Script" uid="uid://cn3cdstigg4i" path="res://scripts/dummy.gd" id="1_2hh5m"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="1_k1tqs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k1tqs"]
@@ -79,6 +79,9 @@ shape = SubResource("RectangleShape2D_2hh5m")
 libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
+
+[node name="DamageNumberPosition" type="Node2D" parent="."]
+position = Vector2(0, -182)
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_shape_entered" from="HurtBox" to="." method="_on_hurt_box_area_shape_entered"]
