@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var projectile: PackedScene
 @export var fire_rate: int = 1
 
-const SPEED: float = 300.0
+const SPEED: float = 500.0
 
 var can_shoot: bool = true
 

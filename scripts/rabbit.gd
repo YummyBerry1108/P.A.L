@@ -12,6 +12,9 @@ var current_state = State.LOCK_ON
 
 func _ready():
 	super()
+	if texture:
+		sprite.texture = texture
+		resize_to(400, 400)
 	speed = 250 * 60
 	_start_root_phase()
 
@@ -53,8 +56,8 @@ func _start_idle_phase() -> void:
 	_start_root_phase()
 
 func _start_target_phase() -> void:
-	set_collision_mask_value(PhysicsLayers.ENEMY_HITBOX, true)
-	set_collision_layer_value(PhysicsLayers.ENEMY_HITBOX, true)
+	set_collision_mask_value(PhysicsLayers.ENEMY, true)
+	set_collision_layer_value(PhysicsLayers.ENEMY, true)
 	current_state = State.TARGET
 	
 	velocity = Vector2.ZERO
@@ -74,8 +77,8 @@ func _start_lock_on_phase() -> void:
 	_start_dash_phase()
 
 func _start_dash_phase() -> void:
-	set_collision_mask_value(PhysicsLayers.ENEMY_HITBOX, false)
-	set_collision_layer_value(PhysicsLayers.ENEMY_HITBOX, false)
+	set_collision_mask_value(PhysicsLayers.ENEMY, false)
+	set_collision_layer_value(PhysicsLayers.ENEMY, false)
 	current_state = State.DASH
 	
 	await get_tree().create_timer(dash_duration).timeout
