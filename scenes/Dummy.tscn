@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bj866ltlivhuw"]
+[gd_scene load_steps=9 format=3 uid="uid://bj866ltlivhuw"]
 
 [ext_resource type="Texture2D" uid="uid://dcif3w56oloin" path="res://imgs/dummy.png" id="1_0j1vb"]
 [ext_resource type="Script" uid="uid://cn3cdstigg4i" path="res://scripts/dummy.gd" id="1_2hh5m"]
@@ -9,11 +9,9 @@ shader = ExtResource("1_k1tqs")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0j1vb"]
-size = Vector2(98, 241)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hh5m"]
-size = Vector2(263.25, 108)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k1tqs"]
+radius = 48.0
+height = 252.0
 
 [sub_resource type="Animation" id="Animation_de8r6"]
 length = 0.001
@@ -63,17 +61,16 @@ texture = ExtResource("1_0j1vb")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_0j1vb")
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_k1tqs")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -26)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_2hh5m")
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_k1tqs")
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
