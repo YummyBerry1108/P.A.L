@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=6 format=3 uid="uid://bnq5ta0nntfv3"]
 
-[ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player.gd" id="1_0ax77"]
+[ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/test_player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/pig.png" id="1_e7mys"]
 [ext_resource type="PackedScene" uid="uid://elks0b27hwwp" path="res://scenes/icicle.tscn" id="2_22uif"]
-[ext_resource type="Script" uid="uid://b8dxuy1dgjsjp" path="res://scripts/movement.gd" id="4_qlg0r"]
-[ext_resource type="Script" uid="uid://mo3sr0qj2gfa" path="res://scripts/attack.gd" id="5_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ax77"]
 size = Vector2(328, 518)
@@ -12,7 +10,7 @@ size = Vector2(328, 518)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22uif"]
 size = Vector2(349, 534)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
 collision_layer = 2
 collision_mask = 3
@@ -40,19 +38,3 @@ collision_mask = 0
 position = Vector2(12.5, -4.76837e-07)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_22uif")
-
-[node name="Behaviors" type="Node2D" parent="."]
-
-[node name="Movement" type="Node" parent="Behaviors"]
-script = ExtResource("4_qlg0r")
-
-[node name="Attack" type="Node" parent="Behaviors"]
-script = ExtResource("5_tuyoq")
-
-[node name="Skills" type="Node2D" parent="."]
-
-[node name="icicle" type="Node" parent="Skills"]
-
-[node name="snowball" type="Node" parent="Skills"]
-
-[node name="Projectiles" type="Node" parent="."]
