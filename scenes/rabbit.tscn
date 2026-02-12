@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvbjuk7t2yx1x"]
+
+[ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/rabbit.gd" id="1_0rrc3"]
+[ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/rabbit.png" id="2_dxh4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 192
+collision_mask = 113
+script = ExtResource("1_0rrc3")
+texture = ExtResource("2_dxh4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dxh4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_md0e3")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfde1nigv6m7e"]
+
+[ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/rock.gd" id="1_1di36"]
+[ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/rock.png" id="2_mek2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 192
+collision_mask = 113
+script = ExtResource("1_1di36")
+texture = ExtResource("2_mek2u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mek2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_md0e3")
