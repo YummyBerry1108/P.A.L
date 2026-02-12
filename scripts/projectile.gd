@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var target_speed: float = 240.0
 @export var acceleration: float = 0.0
 @export var lifespan: float = 1.0
+@export var firerate: float = 1.0
 
 var speed: float = 0.0
 var diraction: Vector2 = Vector2.RIGHT
