@@ -11,5 +11,22 @@ config_version=5
 [application]
 
 config/name="P.A.L"
+run/main_scene="uid://dgen6uw20ofh3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[layer_names]
+
+2d_physics/layer_1="TERRAIN"
+2d_physics/layer_2="PLAYER"
+2d_physics/layer_3="ENEMY"
+2d_physics/layer_4="PROJECTILE"
+2d_physics/layer_5="PLAYER_HITBOX"
+2d_physics/layer_6="PLAYER_HURT_BOX"
+2d_physics/layer_7="ENEMY_HITBOX"
+2d_physics/layer_8="ENEMY_HURT_BOX"
