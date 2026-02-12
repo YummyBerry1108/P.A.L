@@ -9,8 +9,9 @@ shader = ExtResource("3_haj5u")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(195.375, 230.25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haj5u"]
+radius = 114.583
+height = 287.5
 
 [sub_resource type="Animation" id="Animation_de8r6"]
 length = 0.001
@@ -61,24 +62,26 @@ material = SubResource("ShaderMaterial_ukfwh")
 texture = ExtResource("2_dxh4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-11, 85.25)
-shape = SubResource("RectangleShape2D_md0e3")
+position = Vector2(-6.25, 91.6667)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-10, 88)
-shape = SubResource("RectangleShape2D_md0e3")
+position = Vector2(-6.25, 91.6667)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-11, 88)
-shape = SubResource("RectangleShape2D_md0e3")
+position = Vector2(-6.25, 91.6667)
+shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

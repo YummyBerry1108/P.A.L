@@ -6,7 +6,7 @@ class_name Enemy extends CharacterBody2D
 @onready var hurt_box: Area2D = $HurtBox
 @onready var damage_number_position: Node2D = $DamageNumberPosition # Only for damage position
 
-var hp: float = 100
+var hp: float = 50
 var speed: float = 100
 var direction: Vector2 = Vector2.ZERO
 
