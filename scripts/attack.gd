@@ -13,7 +13,6 @@ func shoot(player, skills):
 		if not cooldowns.has(skill_name) or now_time >= cooldowns[skill_name]:
 			var new_projectile: Projectile = skill_node.instantiate()
 			cooldowns[skill_name] = now_time + (1 / new_projectile.firerate)
-			print(now_time - cooldowns[skill_name], " ---- ", 1.0 / new_projectile.firerate, " --- ", cooldowns.has(skill_name))
 			new_projectile.position = player.position
 			new_projectile.look_at(player.get_global_mouse_position())
 			player.get_node("Projectiles").add_child(new_projectile)
