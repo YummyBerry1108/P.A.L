@@ -85,4 +85,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
 
+[node name="DamageNumberPosition" type="Node2D" parent="."]
+position = Vector2(2.08333, -260.417)
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
