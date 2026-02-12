@@ -19,9 +19,14 @@ func _physics_process(delta: float):
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	var damage = 10.0
-	hp -= damage
+	var projectile_root: Node = area.owner
+	var damage: float = 0.0 
+	
+	if projectile_root:
+		damage = projectile_root.damage
+		
 	DamageNumber.display_number(damage, damage_number_position.global_position, false)
+	hp -= damage
 	if hp <= 0:
 		die()
 	$HitFlashAnimationPlayer.play("hit_flash")

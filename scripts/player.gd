@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var projectile: PackedScene
+@export var damage: float = 10.0
 
 const SPEED: float = 300.0
 var skills: Dictionary = {}
