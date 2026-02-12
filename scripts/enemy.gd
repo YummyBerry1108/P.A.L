@@ -7,7 +7,7 @@ class_name Enemy extends CharacterBody2D
 @onready var damage_number_position: Node2D = $DamageNumberPosition # Only for damage position
 
 var hp: float = 50
-var speed: float = 100
+var speed: float = 100 * 60
 var direction: Vector2 = Vector2.ZERO
 
 func _ready():
@@ -36,9 +36,18 @@ func resize_to(target_width: float, target_height: float) -> void:
 		scale = Vector2(scale_x, scale_y)
 
 func get_nearest_player() -> Vector2:
+	var min_distance: float = INF
+	var res: Vector2 = Vector2.ZERO
 	var players = get_tree().get_nodes_in_group("players")
-	var player_pos = players[0].global_position
-	return player_pos
+	
+	for player in players:
+		var player_pos : Vector2 = player.global_position
+		var distance : float = global_position.distance_to(player_pos)
+		if distance < min_distance:
+			min_distance = distance
+			res = player_pos
+	
+	return res
 
 func die() -> void:
 	queue_free()

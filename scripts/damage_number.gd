@@ -9,6 +9,8 @@ func display_number(value: int, position: Vector2, is_critical: bool = false):
 	number.text = str(value)
 	number.z_index = RenderLayers.UI
 	number.label_settings = LabelSettings.new()
+	number.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	number.grow_vertical = Control.GROW_DIRECTION_BOTH
 	
 	var color = '#FFF'
 	if is_critical:
@@ -25,6 +27,7 @@ func display_number(value: int, position: Vector2, is_critical: bool = false):
 	
 	await number.resized
 	number.pivot_offset = Vector2(number.size / 2)
+	
 	
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
