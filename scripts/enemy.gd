@@ -2,8 +2,8 @@ class_name Enemy extends CharacterBody2D
 
 @export var texture: Texture2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var hitbox: CollisionShape2D = $HitBox
-@onready var hurt_box: CollisionShape2D = $HurtBox
+@onready var hitbox: Area2D = $HitBox
+@onready var hurt_box: Area2D = $HurtBox
 
 var hp: float = 100
 var speed: float = 100

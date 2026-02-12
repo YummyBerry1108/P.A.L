@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="P.A.L"
-run/main_scene="uid://mjpbg0kpp31x"
+run/main_scene="uid://dgen6uw20ofh3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://64gwusxyxfto"
 
