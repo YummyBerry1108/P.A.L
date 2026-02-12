@@ -14,7 +14,6 @@ func _ready():
 	super()
 	if texture:
 		sprite.texture = texture
-		resize_to(400, 400)
 	speed = 250 * 60
 	_start_root_phase()
 

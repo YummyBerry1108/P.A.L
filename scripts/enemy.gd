@@ -12,7 +12,6 @@ var direction: Vector2 = Vector2.ZERO
 func _ready():
 	if texture:
 		sprite.texture = texture
-		resize_to(300, 300)
 		
 func _physics_process(delta: float):
 	velocity = direction * speed * delta
