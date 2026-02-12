@@ -51,6 +51,8 @@ script = ExtResource("5_tuyoq")
 
 [node name="Skills" type="Node2D" parent="."]
 
+[node name="icicle" type="Node" parent="Skills"]
+
 [node name="snowball" type="Node" parent="Skills"]
 
 [node name="Projectiles" type="Node" parent="."]
