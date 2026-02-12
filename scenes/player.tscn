@@ -28,7 +28,6 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(20, -22.5)
 rotation = 1.5708
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="HurtBox" type="Area2D" parent="."]
