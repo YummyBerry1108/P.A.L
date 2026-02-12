@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://buw3f5mmgtexj"]
+
+[ext_resource type="Script" uid="uid://cy52g0gnohop5" path="res://scripts/snowball.gd" id="1_6tw0o"]
+[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/snowball.png" id="2_xsgkx"]
+[ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/player_hitbox.gd" id="3_dnn3y"]
+
+[sub_resource type="Curve" id="Curve_xsgkx"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tw0o"]
+radius = 97.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnn3y"]
+radius = 110.05
+
+[node name="Snowball" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+collision_layer = 8
+script = ExtResource("1_6tw0o")
+initial_speed = 1200.0
+target_speed = 1200.0
+lifespan = 5.0
+metadata/_custom_type_script = "uid://dovcw856nioy3"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime = 2.5
+preprocess = 0.1
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 70.0
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_xsgkx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xsgkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6tw0o")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 128
+script = ExtResource("3_dnn3y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_dnn3y")
