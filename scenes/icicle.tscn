@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://elks0b27hwwp"]
 
-[ext_resource type="Script" uid="uid://csdc87enx2g3c" path="res://scripts/icicle.gd" id="1_gwwa3"]
+[ext_resource type="Script" path="res://scripts/icicle.gd" id="1_gwwa3"]
 [ext_resource type="Texture2D" uid="uid://q1grapy7j4bt" path="res://imgs/icicle.png" id="2_cgg6r"]
-[ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/player_hitbox.gd" id="2_obek3"]
+[ext_resource type="Script" path="res://scripts/player_hitbox.gd" id="2_obek3"]
 
 [sub_resource type="Curve" id="Curve_gwwa3"]
 _limits = [0.0, 4.0, 0.0, 1.0]
@@ -22,7 +22,6 @@ script = ExtResource("1_gwwa3")
 initial_speed = 1800.0
 target_speed = 1800.0
 lifespan = 5.0
-metadata/_custom_type_script = "uid://dovcw856nioy3"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 lifetime = 3.0

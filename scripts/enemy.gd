@@ -18,6 +18,9 @@ func _physics_process(delta: float):
 	velocity = direction * speed * delta
 	move_and_slide()
 
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	$HitFlashAnimationPlayer.play("hit_flash")
+
 func resize_to(target_width: float, target_height: float) -> void:
 	if texture:
 		var original_size = texture.get_size()
@@ -28,8 +31,9 @@ func resize_to(target_width: float, target_height: float) -> void:
 		scale = Vector2(scale_x, scale_y)
 
 func get_nearest_player() -> Vector2:
-	var mouse_pos = get_global_mouse_position()
-	return mouse_pos
+	var players = get_tree().get_nodes_in_group("players")
+	var player_pos = players[0].global_position
+	return player_pos
 
 func taken_damage(damage: float) -> void:
 	hp -= damage

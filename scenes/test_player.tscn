@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvcahiono6yix"]
 
-[ext_resource type="Script" path="res://scripts/test_player.gd" id="1_0ax77"]
+[ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/test_player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/pig.png" id="1_e7mys"]
 [ext_resource type="PackedScene" uid="uid://elks0b27hwwp" path="res://scenes/icicle.tscn" id="2_22uif"]
 
@@ -13,7 +13,7 @@ size = Vector2(349, 534)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 3
 script = ExtResource("1_0ax77")
 projectile = ExtResource("2_22uif")
 
@@ -35,6 +35,6 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(19, -13.5)
+position = Vector2(12.5, -4.76837e-07)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_22uif")
