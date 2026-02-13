@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=8 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/pig.png" id="1_e7mys"]
 [ext_resource type="PackedScene" uid="uid://elks0b27hwwp" path="res://scenes/icicle.tscn" id="2_22uif"]
 [ext_resource type="Script" uid="uid://b8dxuy1dgjsjp" path="res://scripts/movement.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://mo3sr0qj2gfa" path="res://scripts/attack.gd" id="5_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/health_bar.tscn" id="6_tuyoq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
 radius = 127.5
@@ -32,12 +33,14 @@ shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 0
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(20, -22.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
+
+[node name="InvincibilityTimer" type="Timer" parent="HurtBox"]
 
 [node name="Behaviors" type="Node2D" parent="."]
 
@@ -54,3 +57,15 @@ script = ExtResource("5_tuyoq")
 [node name="snowball" type="Node" parent="Skills"]
 
 [node name="Projectiles" type="Node" parent="."]
+
+[node name="UI" type="Node2D" parent="."]
+scale = Vector2(2.5, 2.5)
+
+[node name="HealthBar" parent="UI" instance=ExtResource("6_tuyoq")]
+offset_left = 393.0
+offset_top = 872.0
+offset_right = 1801.0
+offset_bottom = 945.0
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="HurtBox/InvincibilityTimer" to="." method="_on_timer_timeout"]
