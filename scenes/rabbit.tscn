@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/rabbit.png" id="2_dxh4p"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukfwh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
+resource_local_to_scene = true
 shader = ExtResource("3_haj5u")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
@@ -58,7 +59,7 @@ script = ExtResource("1_0rrc3")
 texture = ExtResource("2_dxh4p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ukfwh")
+material = SubResource("ShaderMaterial_haj5u")
 texture = ExtResource("2_dxh4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

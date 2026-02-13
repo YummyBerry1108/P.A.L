@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_5b1ba"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_er827"]
+resource_local_to_scene = true
 shader = ExtResource("3_5b1ba")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
