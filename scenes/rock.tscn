@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/rock.png" id="2_mek2u"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_ik6fu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_872ht"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ik6fu"]
+resource_local_to_scene = true
 shader = ExtResource("3_ik6fu")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
@@ -57,7 +58,7 @@ script = ExtResource("1_1di36")
 texture = ExtResource("2_mek2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_872ht")
+material = SubResource("ShaderMaterial_ik6fu")
 texture = ExtResource("2_mek2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
