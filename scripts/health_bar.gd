@@ -3,7 +3,7 @@ extends ProgressBar
 @onready var timer: Timer = $Timer
 @onready var damage_bar: ProgressBar = $DamageBar
 
-var health: float = 0 : set = _set_health
+var health: float = 0.0
 
 func _ready():
 	await  get_tree().process_frame
@@ -16,7 +16,7 @@ func _ready():
 	else:
 		show()
 
-func _set_health(new_health):
+func _set_health(new_health: float):
 	var prev_health = health
 	health = min(max_value, new_health)
 	value = health
