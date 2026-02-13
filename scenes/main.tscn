@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://mjpbg0kpp31x"]
 
-[ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/Dummy.tscn" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
-[ext_resource type="PackedScene" uid="uid://dvcahiono6yix" path="res://scenes/player.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://buw3f5mmgtexj" path="res://scenes/snowball.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://cvbjuk7t2yx1x" path="res://scenes/rabbit.tscn" id="4_tefeu"]
-[ext_resource type="PackedScene" uid="uid://dfde1nigv6m7e" path="res://scenes/rock.tscn" id="5_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://dpldsb20x272n" path="res://scenes/snail.tscn" id="6_tipki"]
-[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/health_bar.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_tipki"]
+[ext_resource type="PackedScene" uid="uid://dvcahiono6yix" path="res://scenes/player/player.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://buw3f5mmgtexj" path="res://scenes/skills/snowball.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cvbjuk7t2yx1x" path="res://scenes/enemies/rabbit.tscn" id="4_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dfde1nigv6m7e" path="res://scenes/enemies/rock.tscn" id="5_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://dpldsb20x272n" path="res://scenes/enemies/snail.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="8_85g3d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tipki"]
 font_size = 64

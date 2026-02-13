@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=8 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/player/pig.png" id="1_e7mys"]

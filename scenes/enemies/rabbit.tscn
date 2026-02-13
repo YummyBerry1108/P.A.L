@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cvbjuk7t2yx1x"]
 
-[ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/rabbit.gd" id="1_0rrc3"]
-[ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/rabbit.png" id="2_dxh4p"]
+[ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
+[ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/enemies/Rabbit.png" id="2_dxh4p"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
