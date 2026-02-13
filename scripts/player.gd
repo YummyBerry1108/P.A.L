@@ -1,8 +1,9 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
+
+signal health_changed(health: float)
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
-@onready var health_bar: ProgressBar = $UI/HealthBar
 
 @export var projectile: PackedScene
 @export var damage: float = 10.0
@@ -13,7 +14,6 @@ const SPEED: float = 300.0
 var skills: Dictionary = {}
 
 func _ready() -> void:
-	health_bar.init_health(hp)
 	pass
 
 func _process(delta: float) -> void:
@@ -34,7 +34,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		enemy_damage = enemy_root.damage
 		
 	hp -= enemy_damage
-	health_bar.health = hp
+	health_changed.emit(hp)
 	is_invincible = true
 	invincibility_timer.start()
 	
