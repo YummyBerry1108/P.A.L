@@ -1,6 +1,6 @@
 class_name ShootingHelper extends Node
 
-func set_shoot_timer(wait, repeats, player: CharacterBody2D, projectile, rot: float, skill_node) -> void:
+func set_shoot_timer(wait: float, repeats: int, player: CharacterBody2D, projectile: Projectile, rot: float, skill_node: PackedScene) -> void:
 	projectile.queue_free()
 	for i in repeats:
 		var new_projectile: Projectile = skill_node.instantiate()

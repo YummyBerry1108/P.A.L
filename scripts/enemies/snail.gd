@@ -1,10 +1,10 @@
 extends Enemy
 
-func _ready():
+func _ready() -> void:
 	super()
-	speed = 100 * 60
+	speed = 100
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var target_pos: Vector2 = get_nearest_player()
-	velocity = global_position.direction_to(target_pos) * speed * delta
+	velocity = global_position.direction_to(target_pos) * speed * speed_multiplier
 	move_and_slide()

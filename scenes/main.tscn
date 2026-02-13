@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_tipki"]
+[ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://dvcahiono6yix" path="res://scenes/player/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://buw3f5mmgtexj" path="res://scenes/skills/snowball.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cvbjuk7t2yx1x" path="res://scenes/enemies/rabbit.tscn" id="4_tefeu"]
@@ -22,20 +22,11 @@ script = ExtResource("1_tipki")
 position = Vector2(418, 5)
 
 [node name="Dummy2" parent="." instance=ExtResource("1_0wfyh")]
-position = Vector2(645, 181)
+position = Vector2(604, 261)
 
 [node name="Player" parent="." groups=["players"] instance=ExtResource("2_sugp2")]
 position = Vector2(-744, 26)
 projectile = ExtResource("3_sugp2")
-
-[node name="Rabbit" parent="." instance=ExtResource("4_tefeu")]
-position = Vector2(332, 355)
-
-[node name="Rock" parent="." instance=ExtResource("5_o6xl0")]
-position = Vector2(-328, 517)
-
-[node name="Snail" parent="." instance=ExtResource("6_tipki")]
-position = Vector2(-369, -322)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -55,5 +46,14 @@ text = "Time"
 label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Rabbit" parent="." instance=ExtResource("4_tefeu")]
+position = Vector2(-1163, 550)
+
+[node name="Rock" parent="." instance=ExtResource("5_o6xl0")]
+position = Vector2(-1285, -133)
+
+[node name="Snail" parent="." instance=ExtResource("6_tipki")]
+position = Vector2(-150, -479)
 
 [connection signal="health_changed" from="Player" to="UI/HealthBar" method="_set_health"]
