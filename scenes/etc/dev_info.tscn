@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv58nk33343xb"]
+
+[ext_resource type="Script" uid="uid://h1t4845vi1cv" path="res://scripts/etc/dev_info.gd" id="1_illus"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6lib"]
+font_size = 32
+
+[node name="DevInfo" type="Label"]
+offset_left = 75.0
+offset_top = -115.0
+offset_right = 115.0
+offset_bottom = -92.0
+text = "Basic Info"
+label_settings = SubResource("LabelSettings_c6lib")
+script = ExtResource("1_illus")
+
+[node name="DPSTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DPSTimer" to="." method="_on_dps_timer_timeout"]

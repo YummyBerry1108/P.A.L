@@ -5,32 +5,45 @@ class_name Enemy extends CharacterBody2D
 @onready var hitbox: Area2D = $HitBox
 @onready var hurt_box: Area2D = $HurtBox
 @onready var damage_number_position: Node2D = $DamageNumberPosition # Only for damage position
+@onready var effect_component: EffectComponent = $EffectComponent
+@onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
+#@onready var dev_info: Label = $DevInfo
+
 
 var hp: float = 50
-var speed: float = 100 * 60
+var speed: float = 100
+var speed_multiplier: float = 1.0
 var direction: Vector2 = Vector2.ZERO
 var damage: float = 10.0
 
-func _ready():
+func _ready() -> void:
 	if texture:
 		sprite.texture = texture
 		
-func _physics_process(delta: float):
-	velocity = direction * speed * delta
+func _physics_process(delta: float) -> void:
+	velocity = direction * speed * delta * speed_multiplier
 	move_and_slide()
 
+func update_speed() -> void:
+	speed_multiplier = effect_component.get_speed_multiplier()
+
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	var projectile_root: Node = area.owner
-	var player_damage: float = 0.0 
+	var projectile = area.owner as Projectile
 	
-	if projectile_root:
-		player_damage = projectile_root.damage
+	if projectile:
+		take_damage(projectile.damage)
 		
-	DamageNumber.display_number(player_damage, damage_number_position.global_position, false)
-	hp -= player_damage
+		for effect in projectile.status_effects:
+			effect_component.add_effect(effect)
+			
+func take_damage(projectile_damage: float) -> void:
+	DamageNumber.display_number(projectile_damage, damage_number_position.global_position, false)
+	hp -= projectile_damage
+	hit_flash_animation_player.play("hit_flash")
+	#if dev_info:
+		#dev_info.take_damage(projectile_damage)
 	if hp <= 0:
 		die()
-	$HitFlashAnimationPlayer.play("hit_flash")
 
 func resize_to(target_width: float, target_height: float) -> void:
 	if texture:

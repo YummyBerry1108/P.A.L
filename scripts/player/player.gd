@@ -11,6 +11,7 @@ signal health_changed(health: float)
 @export var is_invincible: bool = false
 
 const SPEED: float = 300.0
+var speed_mutiplier: float = 1.0
 var skills: Dictionary = {}
 
 func _ready() -> void:
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 	fetch_behavior("Attack", { "player": self, "skills": skills })
 
 func _physics_process(delta: float) -> void:
-	fetch_behavior("Movement", { "player": self, "SPEED": SPEED, "delta": delta })
+	fetch_behavior("Movement", { "player": self, "SPEED": SPEED * speed_mutiplier, "delta": delta })
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
@@ -38,7 +39,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	is_invincible = true
 	invincibility_timer.start()
 	
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	is_invincible = false
 	var overlapping_areas = hurt_box.get_overlapping_areas()
 	if overlapping_areas.is_empty():
@@ -46,9 +47,9 @@ func _on_timer_timeout():
 	else:
 		_on_hurt_box_area_entered(overlapping_areas[0])
 		
-func fetch_behavior(name: String, args):
-	get_node_or_null("Behaviors/" + name).run(args)
+func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
+	get_node_or_null("Behaviors/" + behavior_name).run(args)
 
-func pull_skills():
+func pull_skills() -> void:
 	for child: SkillData in get_node("Skills").get_children():
 		skills[child.skill_name] = child
