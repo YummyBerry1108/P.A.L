@@ -9,6 +9,7 @@ class_name Enemy extends CharacterBody2D
 var hp: float = 50
 var speed: float = 100 * 60
 var direction: Vector2 = Vector2.ZERO
+var damage: float = 10.0
 
 func _ready():
 	if texture:
@@ -20,13 +21,13 @@ func _physics_process(delta: float):
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	var projectile_root: Node = area.owner
-	var damage: float = 0.0 
+	var player_damage: float = 0.0 
 	
 	if projectile_root:
-		damage = projectile_root.damage
+		player_damage = projectile_root.damage
 		
-	DamageNumber.display_number(damage, damage_number_position.global_position, false)
-	hp -= damage
+	DamageNumber.display_number(player_damage, damage_number_position.global_position, false)
+	hp -= player_damage
 	if hp <= 0:
 		die()
 	$HitFlashAnimationPlayer.play("hit_flash")
