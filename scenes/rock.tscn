@@ -9,8 +9,8 @@ shader = ExtResource("3_ik6fu")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(307.75, 336.563)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ik6fu"]
+radius = 192.702
 
 [sub_resource type="Animation" id="Animation_de8r6"]
 length = 0.001
@@ -62,7 +62,7 @@ texture = ExtResource("2_mek2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 41)
-shape = SubResource("RectangleShape2D_md0e3")
+shape = SubResource("CircleShape2D_ik6fu")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 64
@@ -70,7 +70,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(10, 41)
-shape = SubResource("RectangleShape2D_md0e3")
+shape = SubResource("CircleShape2D_ik6fu")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 128
@@ -78,11 +78,14 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(10, 41)
-shape = SubResource("RectangleShape2D_md0e3")
+shape = SubResource("CircleShape2D_ik6fu")
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
+
+[node name="DamageNumberPosition" type="Node2D" parent="."]
+position = Vector2(2.08333, -260.417)
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

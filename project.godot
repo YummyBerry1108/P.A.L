@@ -15,6 +15,10 @@ run/main_scene="uid://mjpbg0kpp31x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://64gwusxyxfto"
 
+[autoload]
+
+DamageNumber="*res://scripts/damage_number.gd"
+
 [display]
 
 window/size/viewport_width=1920

@@ -1,11 +1,19 @@
 extends CharacterBody2D
 
+@onready var hurt_box: Area2D = $HurtBox
+@onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
+@onready var health_bar: ProgressBar = $UI/HealthBar
+
 @export var projectile: PackedScene
+@export var damage: float = 10.0
+@export var hp: float = 100.0
+@export var is_invincible: bool = false
 
 const SPEED: float = 300.0
 var skills: Dictionary = {}
 
 func _ready() -> void:
+	health_bar.init_health(hp)
 	pass
 
 func _process(delta: float) -> void:
@@ -16,6 +24,28 @@ func _physics_process(delta: float) -> void:
 	fetch_behavior("Movement", { "player": self, "SPEED": SPEED, "delta": delta })
 	move_and_slide()
 
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if is_invincible:
+		return 
+	
+	var enemy_root: Node = area.owner
+	var enemy_damage: float = 0.0
+	if enemy_root:
+		enemy_damage = enemy_root.damage
+		
+	hp -= enemy_damage
+	health_bar.health = hp
+	is_invincible = true
+	invincibility_timer.start()
+	
+func _on_timer_timeout():
+	is_invincible = false
+	var overlapping_areas = hurt_box.get_overlapping_areas()
+	if overlapping_areas.is_empty():
+		return
+	else:
+		_on_hurt_box_area_entered(overlapping_areas[0])
+		
 func fetch_behavior(name: String, args):
 	get_node_or_null("Behaviors/" + name).run(args)
 
