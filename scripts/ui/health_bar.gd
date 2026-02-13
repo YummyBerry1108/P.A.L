@@ -5,7 +5,7 @@ extends ProgressBar
 
 var health: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	await  get_tree().process_frame
 	
 	var player_node = get_parent()
@@ -16,7 +16,7 @@ func _ready():
 	else:
 		show()
 
-func _set_health(new_health: float):
+func _set_health(new_health: float) -> void:
 	var prev_health = health
 	health = min(max_value, new_health)
 	value = health
@@ -30,7 +30,7 @@ func _set_health(new_health: float):
 	else:
 		damage_bar.value = health
 
-func init_health(_health: float):
+func init_health(_health: float) -> void:
 	health = _health
 	max_value = health
 	value = health

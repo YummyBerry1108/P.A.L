@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpldsb20x272n"]
+[gd_scene load_steps=10 format=3 uid="uid://dpldsb20x272n"]
 
 [ext_resource type="Script" uid="uid://dyqq3yrkf31of" path="res://scripts/enemies/snail.gd" id="1_6lcqf"]
 [ext_resource type="Texture2D" uid="uid://bvxu5ba4nh5cp" path="res://imgs/enemies/Snail.png" id="2_5b1ba"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_5b1ba"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_ju45m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_er827"]
 resource_local_to_scene = true
@@ -88,5 +89,9 @@ libraries = {
 
 [node name="DamageNumberPosition" type="Node2D" parent="."]
 position = Vector2(2.08333, -260.417)
+
+[node name="EffectComponent" type="Node" parent="."]
+script = ExtResource("4_ju45m")
+metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
