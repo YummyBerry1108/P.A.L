@@ -17,7 +17,7 @@ config/icon="uid://64gwusxyxfto"
 
 [autoload]
 
-DamageNumber="*res://scripts/damage_number.gd"
+DamageNumber="*res://scripts/ui/damage_number.gd"
 
 [display]
 
