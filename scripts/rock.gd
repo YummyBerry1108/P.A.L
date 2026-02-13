@@ -1,9 +1,7 @@
 extends Enemy
 
-@export var max_speed: float = 300.0 * 60
-@export var steer_force: float = 5.0 * 60
-
-
+@export var max_speed: float = 400.0 * 60
+@export var steer_force: float = 3.0 * 60
 
 func _ready():
 	super()
