@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2adua1cshxrj"]
+
+[ext_resource type="Script" uid="uid://orapm17lbee3" path="res://scripts/player/shooting_helper.gd" id="1_cn155"]
+
+[node name="Shoot" type="Node"]
+script = ExtResource("1_cn155")
