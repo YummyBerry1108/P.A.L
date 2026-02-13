@@ -20,5 +20,5 @@ func fetch_behavior(name: String, args):
 	get_node_or_null("Behaviors/" + name).run(args)
 
 func pull_skills():
-	for child: Node in get_node("Skills").get_children():
-		skills[child.name] = child
+	for child: SkillData in get_node("Skills").get_children():
+		skills[child.skill_name] = child

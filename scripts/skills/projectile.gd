@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var acceleration: float = 0.0
 @export var lifespan: float = 1.0
 @export var firerate: float = 1.0
+@export_range(0, 360) var arc: float = 0
+@export_range(0, 360) var arc_increment: float = 30
 
 var speed: float = 0.0
 var diraction: Vector2 = Vector2.RIGHT

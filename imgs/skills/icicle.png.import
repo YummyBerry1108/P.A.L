@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diq6bg4jjfqoq"
-path="res://.godot/imported/rabbit.png-17f0b801bcdd63c27864707cc09c91ec.ctex"
+uid="uid://q1grapy7j4bt"
+path="res://.godot/imported/icicle.png-69fc96d593cca63d5ac4c3ba7c2d63d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://imgs/rabbit.png"
-dest_files=["res://.godot/imported/rabbit.png-17f0b801bcdd63c27864707cc09c91ec.ctex"]
+source_file="res://imgs/skills/icicle.png"
+dest_files=["res://.godot/imported/icicle.png-69fc96d593cca63d5ac4c3ba7c2d63d2.ctex"]
 
 [params]
 

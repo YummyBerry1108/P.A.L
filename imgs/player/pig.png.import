@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvxu5ba4nh5cp"
-path="res://.godot/imported/snail.png-12272773b1752cd8c5702ef99290afdc.ctex"
+uid="uid://cw36huqbpeu5w"
+path="res://.godot/imported/pig.png-7d1a2a01deb0a254d120a0a27df05330.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://imgs/snail.png"
-dest_files=["res://.godot/imported/snail.png-12272773b1752cd8c5702ef99290afdc.ctex"]
+source_file="res://imgs/player/pig.png"
+dest_files=["res://.godot/imported/pig.png-7d1a2a01deb0a254d120a0a27df05330.ctex"]
 
 [params]
 
