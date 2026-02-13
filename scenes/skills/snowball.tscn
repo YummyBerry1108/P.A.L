@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://buw3f5mmgtexj"]
 
-[ext_resource type="Script" uid="uid://cy52g0gnohop5" path="res://scripts/snowball.gd" id="1_6tw0o"]
-[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/snowball.png" id="2_xsgkx"]
-[ext_resource type="Script" path="res://scripts/player_hitbox.gd" id="3_dnn3y"]
+[ext_resource type="Script" uid="uid://cy52g0gnohop5" path="res://scripts/skills/snowball.gd" id="1_6tw0o"]
+[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="2_xsgkx"]
+[ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/skills/player_hitbox.gd" id="3_dnn3y"]
 
 [sub_resource type="Curve" id="Curve_xsgkx"]
 _limits = [0.0, 4.0, 0.0, 1.0]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q1grapy7j4bt"
-path="res://.godot/imported/icicle.png-c306589b5c5b789934c2bde5d7d0a729.ctex"
+uid="uid://c1plvmep6w14"
+path="res://.godot/imported/snowball.png-c9291061ea25bdfbcd28b721f62c805d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://imgs/icicle.png"
-dest_files=["res://.godot/imported/icicle.png-c306589b5c5b789934c2bde5d7d0a729.ctex"]
+source_file="res://imgs/skills/snowball.png"
+dest_files=["res://.godot/imported/snowball.png-c9291061ea25bdfbcd28b721f62c805d.ctex"]
 
 [params]
 
