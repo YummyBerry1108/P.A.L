@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfde1nigv6m7e"]
+[gd_scene load_steps=11 format=3 uid="uid://dfde1nigv6m7e"]
 
 [ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/enemies/rock.gd" id="1_1di36"]
 [ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/enemies/Rock.png" id="2_mek2u"]
@@ -51,6 +51,11 @@ _data = {
 &"hit_flash": SubResource("Animation_k1tqs")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_42d3v"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Rock" type="CharacterBody2D"]
 scale = Vector2(0.375, 0.375)
 collision_layer = 4
@@ -93,5 +98,8 @@ position = Vector2(2.08333, -260.417)
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_42d3v")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_42d3v")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -4,6 +4,7 @@ signal health_changed(health: float)
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
+@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 
 @export var projectile: PackedScene
 @export var damage: float = 10.0
@@ -11,21 +12,35 @@ signal health_changed(health: float)
 @export var is_invincible: bool = false
 
 const SPEED: float = 300.0
+var _old_hp: float
 var speed_mutiplier: float = 1.0
 var skills: Dictionary = {}
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _ready() -> void:
-	pass
+	_old_hp = hp
+	if not is_multiplayer_authority():
+		$Camera2D.enabled = false
 
 func _process(delta: float) -> void:
 	pull_skills()
 	fetch_behavior("Attack", { "player": self, "skills": skills })
+	
+	if _old_hp != hp:
+		health_changed.emit(hp)
+		_old_hp = hp
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
 	fetch_behavior("Movement", { "player": self, "SPEED": SPEED * speed_mutiplier, "delta": delta })
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if not multiplayer.is_server():
+		return
 	if is_invincible:
 		return 
 	
@@ -33,11 +48,9 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	var enemy_damage: float = 0.0
 	if enemy_root:
 		enemy_damage = enemy_root.damage
-		
-	hp -= enemy_damage
-	health_changed.emit(hp)
-	is_invincible = true
-	invincibility_timer.start()
+	
+	take_damage.rpc(enemy_damage)
+	
 	
 func _on_timer_timeout() -> void:
 	is_invincible = false
@@ -46,7 +59,14 @@ func _on_timer_timeout() -> void:
 		return
 	else:
 		_on_hurt_box_area_entered(overlapping_areas[0])
-		
+
+@rpc("any_peer", "call_local")
+func take_damage(damage: float):
+	hp -= damage
+	is_invincible = true
+	invincibility_timer.start()
+	
+
 func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
 	get_node_or_null("Behaviors/" + behavior_name).run(args)
 

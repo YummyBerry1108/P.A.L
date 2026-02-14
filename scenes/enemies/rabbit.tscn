@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvbjuk7t2yx1x"]
+[gd_scene load_steps=11 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
 [ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/enemies/Rabbit.png" id="2_dxh4p"]
@@ -52,6 +52,11 @@ _data = {
 &"hit_flash": SubResource("Animation_k1tqs")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q7wfq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Rabbit" type="CharacterBody2D"]
 scale = Vector2(0.48, 0.48)
 collision_layer = 4
@@ -94,5 +99,8 @@ position = Vector2(2.08333, -260.417)
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_q7wfq")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q7wfq")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -21,6 +21,8 @@ func _ready() -> void:
 		sprite.texture = texture
 		
 func _physics_process(delta: float) -> void:
+	if not multiplayer.is_server():
+		return
 	velocity = direction * speed * delta * speed_multiplier
 	move_and_slide()
 
