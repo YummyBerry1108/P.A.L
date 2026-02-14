@@ -29,6 +29,8 @@ func _physics_process(delta: float) -> void:
 
 func _start_root_phase() -> void:
 	current_state = State.ROOT
+	set_collision_mask_value(PhysicsLayers.ENEMY, true)
+	set_collision_layer_value(PhysicsLayers.ENEMY, true)
 	
 	var dist = global_position.distance_to(get_nearest_player())
 	
@@ -55,8 +57,6 @@ func _start_idle_phase() -> void:
 	_start_root_phase()
 
 func _start_target_phase() -> void:
-	set_collision_mask_value(PhysicsLayers.ENEMY, true)
-	set_collision_layer_value(PhysicsLayers.ENEMY, true)
 	current_state = State.TARGET
 	
 	velocity = Vector2.ZERO
@@ -76,9 +76,9 @@ func _start_lock_on_phase() -> void:
 	_start_dash_phase()
 
 func _start_dash_phase() -> void:
+	current_state = State.DASH
 	set_collision_mask_value(PhysicsLayers.ENEMY, false)
 	set_collision_layer_value(PhysicsLayers.ENEMY, false)
-	current_state = State.DASH
 	
 	await get_tree().create_timer(dash_duration).timeout
 	

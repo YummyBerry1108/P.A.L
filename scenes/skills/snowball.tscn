@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="3_4epak"]
 [ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/skills/player_hitbox.gd" id="3_dnn3y"]
 
-[sub_resource type="Resource" id="Resource_vj7cf"]
+[sub_resource type="Resource" id="Resource_v1sjg"]
 script = ExtResource("3_4epak")
 speed_multiplier = 0.75
-stack_mode = 0
+stack_mode = 1
 duration = 3.0
 tick_interval = 1.0
 metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
@@ -32,7 +32,7 @@ script = ExtResource("1_6tw0o")
 initial_speed = 1200.0
 target_speed = 1200.0
 lifespan = 5.0
-status_effects = Array[ExtResource("2_v1sjg")]([SubResource("Resource_vj7cf")])
+status_effects = Array[ExtResource("2_v1sjg")]([SubResource("Resource_v1sjg")])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 20
