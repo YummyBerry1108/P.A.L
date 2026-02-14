@@ -6,15 +6,7 @@ extends ProgressBar
 var health: float = 0.0
 
 func _ready() -> void:
-	await  get_tree().process_frame
-	
-	var player_node = get_parent()
-	
-	if not player_node.is_multiplayer_authority():
-		hide()
-		set_process(false)
-	else:
-		show()
+	pass
 
 func _set_health(new_health: float) -> void:
 	var prev_health = health

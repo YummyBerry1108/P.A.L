@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=9 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/player/pig.png" id="1_e7mys"]
@@ -10,6 +10,11 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
 radius = 127.5
 height = 505.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75vfm"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = false
+properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
@@ -30,6 +35,7 @@ flip_h = true
 position = Vector2(20, -22.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 32
@@ -63,6 +69,9 @@ skill_name = "snowball"
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
 
 [node name="Projectiles" type="Node" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_75vfm")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="HurtBox/InvincibilityTimer" to="." method="_on_timer_timeout"]

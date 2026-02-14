@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpldsb20x272n"]
+[gd_scene load_steps=11 format=3 uid="uid://dpldsb20x272n"]
 
 [ext_resource type="Script" uid="uid://dyqq3yrkf31of" path="res://scripts/enemies/snail.gd" id="1_6lcqf"]
 [ext_resource type="Texture2D" uid="uid://bvxu5ba4nh5cp" path="res://imgs/enemies/Snail.png" id="2_5b1ba"]
@@ -51,6 +51,11 @@ _data = {
 &"hit_flash": SubResource("Animation_k1tqs")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ju45m"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Snail" type="CharacterBody2D"]
 scale = Vector2(0.36, 0.36)
 collision_layer = 4
@@ -93,5 +98,8 @@ position = Vector2(2.08333, -260.417)
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_ju45m")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ju45m")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
