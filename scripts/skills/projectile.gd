@@ -6,13 +6,8 @@ class_name Projectile extends CharacterBody2D
 @export var target_speed: float = 240.0
 @export var acceleration: float = 0.0
 @export var lifespan: float = 1.0
-@export var firerate: float = 1.0
 @export var damage: float = 0.0
 @export var status_effects: Array[StatusEffectRes] = []
-
-@export_range(0, 360) var arc: float = 0
-@export_range(0, 360) var arc_increment: float = 30
-
 
 var speed: float = 0.0
 var direction: Vector2 = Vector2.RIGHT
@@ -39,6 +34,6 @@ func _physics_process(delta: float) -> void:
 	
 func _before_lifespan_expired() -> void:
 	pass
-	
+
 func _on_hurt_box_aera_entered(area: Area2D) -> void:
 	pass
