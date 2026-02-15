@@ -5,6 +5,7 @@ signal health_changed(health: float)
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+@onready var projectiles: Node = $Projectiles
 
 @export var projectile: PackedScene
 @export var damage: float = 10.0

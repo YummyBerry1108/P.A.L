@@ -1,13 +1,7 @@
 class_name ShootingHelper extends Node
 
-func set_shoot_timer(wait: float, repeats: int, player: CharacterBody2D, projectile: Projectile, rot: float, skill_node: PackedScene) -> void:
-	projectile.queue_free()
+func set_shoot_timer(wait: float, repeats: int, player_global_position: Vector2, projectile_global_rotation: float, skill_scene_name: String, player_damage: float) -> void:	
 	for i in repeats:
-		var new_projectile: Projectile = skill_node.instantiate()
-		new_projectile.global_position = player.global_position
-		new_projectile.global_rotation = rot
-		new_projectile.damage = player.damage
-		#print(new_projectile.global_position, " ", new_projectile.global_rotation, " ", new_projectile.name)
-		player.get_node("Projectiles").add_child(new_projectile)
+		get_parent().owner.projectiles.add_projectile.rpc(skill_scene_name, player_global_position, projectile_global_rotation, player_damage)
 		await get_tree().create_timer(0.1).timeout
 	queue_free()

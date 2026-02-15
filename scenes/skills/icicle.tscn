@@ -30,9 +30,7 @@ script = ExtResource("1_14fa5")
 initial_speed = 1800.0
 target_speed = 1800.0
 lifespan = 5.0
-firerate = 0.333
 status_effects = Array[ExtResource("2_itw7c")]([SubResource("Resource_tw5ay")])
-arc_increment = 15.0
 metadata/_custom_type_script = "uid://dovcw856nioy3"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
