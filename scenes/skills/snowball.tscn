@@ -1,18 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://buw3f5mmgtexj"]
+[gd_scene load_steps=7 format=3 uid="uid://buw3f5mmgtexj"]
 
 [ext_resource type="Script" uid="uid://cy52g0gnohop5" path="res://scripts/skills/snowball.gd" id="1_6tw0o"]
-[ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="2_v1sjg"]
 [ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="2_xsgkx"]
-[ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="3_4epak"]
 [ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/skills/player_hitbox.gd" id="3_dnn3y"]
-
-[sub_resource type="Resource" id="Resource_v1sjg"]
-script = ExtResource("3_4epak")
-speed_multiplier = 0.75
-stack_mode = 1
-duration = 3.0
-tick_interval = 1.0
-metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
 
 [sub_resource type="Curve" id="Curve_xsgkx"]
 _limits = [0.0, 4.0, 0.0, 1.0]
@@ -32,7 +22,6 @@ script = ExtResource("1_6tw0o")
 initial_speed = 1200.0
 target_speed = 1200.0
 lifespan = 5.0
-status_effects = Array[ExtResource("2_v1sjg")]([SubResource("Resource_v1sjg")])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 20

@@ -30,16 +30,25 @@ func update_speed() -> void:
 	speed_multiplier = effect_component.get_speed_multiplier()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if !multiplayer.is_server(): return
 	var projectile = area.owner as Projectile
+	var damage: float = 0.0
+	var critical_hit: bool = false
 	
 	if projectile:
-		take_damage(projectile.damage)
+		if randf() <= projectile.crit_chance:
+			damage = projectile.damage * projectile.crit_damage_multiplier
+			critical_hit = true
+		else:
+			damage = projectile.damage
+		take_damage.rpc(damage, critical_hit)
 		
 		for effect in projectile.status_effects:
 			effect_component.add_effect(effect)
 			
-func take_damage(projectile_damage: float) -> void:
-	DamageNumber.display_number(projectile_damage, damage_number_position.global_position, false)
+@rpc("any_peer", "call_local")
+func take_damage(projectile_damage: float, critical_hit: bool) -> void:
+	DamageNumber.display_number(projectile_damage, damage_number_position.global_position, critical_hit)
 	hp -= projectile_damage
 	hit_flash_animation_player.play("hit_flash")
 	#if dev_info:

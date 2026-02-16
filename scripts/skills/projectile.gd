@@ -5,9 +5,11 @@ class_name Projectile extends CharacterBody2D
 @export var initial_speed: float = 240.0
 @export var target_speed: float = 240.0
 @export var acceleration: float = 0.0
+@export var status_effects: Array[StatusEffectRes] = []
+@export_range(0.0, 1.0, 0.01) var crit_chance: float = 0
+@export var crit_damage_multiplier: float = 2.0
 @export var lifespan: float = 1.0
 @export var damage: float = 0.0
-@export var status_effects: Array[StatusEffectRes] = []
 
 var speed: float = 0.0
 var direction: Vector2 = Vector2.RIGHT
