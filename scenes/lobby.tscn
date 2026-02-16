@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwgj38ot3mfrp"]
+
+[ext_resource type="Script" uid="uid://b2n5olga6rckm" path="res://scripts/lobby_scene.gd" id="1_5gu6x"]
+[ext_resource type="PackedScene" uid="uid://xx8brnpv61gg" path="res://scenes/ui/player_list.tscn" id="2_5gu6x"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5gu6x")
+
+[node name="PlayerList" parent="." instance=ExtResource("2_5gu6x")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 999.0
+offset_top = 48.0
+offset_right = 1236.0
+offset_bottom = 141.0
+grow_horizontal = 1
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 62.0
+offset_right = 688.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+text = "Start Game"
+
+[node name="LeaveLobby" type="Button" parent="."]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 171.0
+offset_right = 688.0
+offset_bottom = 202.0
+scale = Vector2(2, 2)
+text = "Leave"
+
+[connection signal="button_down" from="StartGame" to="." method="_start_game"]
+[connection signal="button_down" from="LeaveLobby" to="." method="_leave_lobby"]
