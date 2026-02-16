@@ -58,7 +58,6 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
 
-
 # When the server decides to start the game from a UI scene,
 # do Lobby.load_game.rpc(filepath)
 @rpc("call_local", "reliable")
@@ -75,12 +74,10 @@ func player_loaded():
 			$/root/Main.start_game()
 			players_loaded = 0
 
-
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
-
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
