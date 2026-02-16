@@ -21,8 +21,8 @@ DamageNumber="*res://scripts/ui/damage_number.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1066
+window/size/viewport_height=600
 
 [input]
 
