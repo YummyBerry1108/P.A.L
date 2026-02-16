@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=9 format=3 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
@@ -12,6 +12,11 @@ font_size = 64
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tefeu"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tipki")
@@ -39,6 +44,9 @@ text = "Time"
 label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI/TimeLabel"]
+replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [node name="Rabbit" parent="." instance=ExtResource("4_tefeu")]
 position = Vector2(-1163, 550)

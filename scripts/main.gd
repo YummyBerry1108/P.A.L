@@ -24,7 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_timer_running:
 		time_elapsed += delta
-		update_timer_ui()
+		_update_timer_ui()
 
 func _on_spawned(node: Player) -> void:
 	print("Author: ",  multiplayer.get_unique_id())
@@ -48,7 +48,10 @@ func _on_player_disconnected(id) -> void:
 	if player_container.has_node(str(id)):
 		player_container.get_node(str(id)).queue_free()
 
-func update_timer_ui() -> void:
+func _update_timer_ui() -> void:
+	if not multiplayer.is_server():
+		return
+
 	var minutes = floor(time_elapsed / 60)
 	var seconds = int(time_elapsed) % 60
 	
