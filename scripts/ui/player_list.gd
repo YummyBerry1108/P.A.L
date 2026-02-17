@@ -8,6 +8,8 @@ func _ready() -> void:
 	Player List
 	----------------
 	"""
+	player_list = Lobby.players
+	_change_label()
 	#text = Lobby.players 
 
 func _on_lobby_player_connected(peer_id: int, player_info: Dictionary) -> void:

@@ -6,7 +6,9 @@ func _ready() -> void:
 	Lobby.player_connected.connect(player_list._on_lobby_player_connected)
 	Lobby.player_disconnected.connect(player_list._on_lobby_plater_disconnected)
 	Lobby.server_disconnected.connect(_leave_lobby)
-	
+
+	if multiplayer.multiplayer_peer.get_class() != "OfflineMultiplayerPeer":
+		return
 	if Lobby.is_server:
 		Lobby.create_game()
 	else:
