@@ -15,5 +15,6 @@ label_settings = SubResource("LabelSettings_c6lib")
 script = ExtResource("1_illus")
 
 [node name="DPSTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="DPSTimer" to="." method="_on_dps_timer_timeout"]

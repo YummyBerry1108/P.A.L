@@ -18,4 +18,4 @@ func on_tick(actor: Node2D, delta: float, instance: EffectInstance) -> void:
 
 func apply_damage(actor: Node2D) -> void:
 	if actor.has_method("take_damage"):
-		actor.take_damage(damage_per_tick)
+		actor.take_damage.rpc(damage_per_tick, false)
