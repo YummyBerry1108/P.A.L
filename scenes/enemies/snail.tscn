@@ -62,6 +62,9 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_6lcqf")
 texture = ExtResource("2_5b1ba")
+hp = 100.0
+damage = 5.0
+knockback_resistance = 0.3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_er827")

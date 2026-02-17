@@ -1,6 +1,7 @@
 class_name SkillData extends Node
 
 @export_category("Basic")
+@export var disable: bool = false
 @export var attack_type: String = "Single"
 @export var projectile_type: String = "Normal"
 @export var skill_name: String = "NULL"
@@ -14,8 +15,11 @@ class_name SkillData extends Node
 @export_range(0, 360) var arc_increment: float = 30
 
 @export_category("ProjectileSetting")
-@export var poojectile_damage: float = 10.0
+@export var projectile_damage: float = 10.0
 @export var status_effects: Array[StatusEffectRes] = []
 @export_group("CriticalHitSetting")
 @export_range(0.0, 1.0, 0.01) var crit_chance: float = 0
 @export var crit_damage_multiplier: float = 2.0
+@export_group("KnockbackSetting")
+@export var knockback_force: float = 0.0
+@export var knockback_duration: float = 0.0
