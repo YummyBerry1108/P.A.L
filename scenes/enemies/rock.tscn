@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfde1nigv6m7e"]
+[gd_scene load_steps=13 format=3 uid="uid://dfde1nigv6m7e"]
 
 [ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/enemies/rock.gd" id="1_1di36"]
 [ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/enemies/Rock.png" id="2_mek2u"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_ik6fu"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_42d3v"]
+[ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://knockback_component.gd" id="5_285kf"]
+[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://damage_component.gd" id="5_ouckr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ik6fu"]
 resource_local_to_scene = true
@@ -62,6 +64,7 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_1di36")
 texture = ExtResource("2_mek2u")
+hp = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ik6fu")
@@ -92,12 +95,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
 
-[node name="DamageNumberPosition" type="Node2D" parent="."]
+[node name="DamageNumberPosition" type="Marker2D" parent="."]
 position = Vector2(2.08333, -260.417)
 
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_42d3v")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "knockback_componet", "hurt_box")]
+script = ExtResource("5_ouckr")
+actor = NodePath("..")
+effect_component = NodePath("../EffectComponent")
+damage_number_position = NodePath("../DamageNumberPosition")
+knockback_componet = NodePath("../KnockbackComponent")
+hurt_box = NodePath("../HurtBox")
+metadata/_custom_type_script = "uid://ckuysfco5ijdx"
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
+script = ExtResource("5_285kf")
+actor = NodePath("..")
+hurt_box = NodePath("../HurtBox")
+knockback_resistance = 0.9
+metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_42d3v")

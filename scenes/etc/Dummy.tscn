@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj866ltlivhuw"]
+[gd_scene load_steps=14 format=3 uid="uid://bj866ltlivhuw"]
 
 [ext_resource type="Texture2D" uid="uid://dcif3w56oloin" path="res://imgs/etc/dummy.png" id="1_0j1vb"]
 [ext_resource type="Script" uid="uid://cn3cdstigg4i" path="res://scripts/etc/dummy.gd" id="1_2hh5m"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="1_k1tqs"]
 [ext_resource type="PackedScene" uid="uid://dv58nk33343xb" path="res://scenes/etc/dev_info.tscn" id="2_gyliq"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_c6lib"]
+[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://damage_component.gd" id="6_n7vjf"]
+[ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://knockback_component.gd" id="7_cv0xs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k1tqs"]
 resource_local_to_scene = true
@@ -15,6 +17,8 @@ shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k1tqs"]
 radius = 48.0
 height = 252.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7vjf"]
 
 [sub_resource type="Animation" id="Animation_de8r6"]
 length = 0.001
@@ -58,7 +62,9 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_2hh5m")
 
-[node name="DevInfo" parent="." instance=ExtResource("2_gyliq")]
+[node name="DevInfo" parent="." node_paths=PackedStringArray("actor", "damage_component") instance=ExtResource("2_gyliq")]
+actor = NodePath("..")
+damage_component = NodePath("../DamageComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_k1tqs")
@@ -68,6 +74,14 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_k1tqs")
+
+[node name="Hitbox" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_n7vjf")
+disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 128
@@ -82,12 +96,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
 
-[node name="DamageNumberPosition" type="Node2D" parent="."]
+[node name="DamageNumberPosition" type="Marker2D" parent="."]
 position = Vector2(0, -182)
 
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_c6lib")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "knockback_componet", "hurt_box")]
+script = ExtResource("6_n7vjf")
+actor = NodePath("..")
+effect_component = NodePath("../EffectComponent")
+damage_number_position = NodePath("../DamageNumberPosition")
+knockback_componet = NodePath("../KnockbackComponent")
+hurt_box = NodePath("../HurtBox")
+metadata/_custom_type_script = "uid://ckuysfco5ijdx"
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
+script = ExtResource("7_cv0xs")
+actor = NodePath("..")
+hurt_box = NodePath("../HurtBox")
+knockback_resistance = 1.0
+metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_shape_entered" from="HurtBox" to="." method="_on_hurt_box_area_shape_entered"]

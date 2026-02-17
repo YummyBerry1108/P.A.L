@@ -10,6 +10,8 @@ class_name Projectile extends CharacterBody2D
 @export var crit_damage_multiplier: float = 2.0
 @export var lifespan: float = 1.0
 @export var damage: float = 0.0
+@export var knockback_force: float = 0.0
+@export var knockback_duration: float = 0.0
 
 var speed: float = 0.0
 var direction: Vector2 = Vector2.RIGHT
