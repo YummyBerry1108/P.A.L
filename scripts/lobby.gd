@@ -16,14 +16,15 @@ const MAX_CONNECTIONS: int = 20
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
-var players = {}
+var players: Dictionary = {}
+var player_username: String
 var server_ip: String
 # This is the local player info. This should be modified locally
 # before the connection is made. It will be passed to every other peer.
 # For example, the value of "name" can be set to something the player
 # entered in a UI scene.
 var is_server: bool
-var player_info: Dictionary = {"name": "Name"}
+var player_info: Dictionary
 var players_loaded: int = 0
 
 func _ready() -> void:
@@ -43,6 +44,8 @@ func join_game(address: String = ""):
 	var error = peer.create_client(address, PORT)
 	if error:
 		return error
+	if player_username:
+		player_info["name"] = player_username
 	multiplayer.multiplayer_peer = peer
 
 func create_game():
@@ -50,8 +53,9 @@ func create_game():
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
 		return error
+	if player_username:
+		player_info["name"] = player_username
 	multiplayer.multiplayer_peer = peer
-
 	players[1] = player_info
 	player_connected.emit(1, player_info)
 

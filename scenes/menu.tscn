@@ -29,7 +29,7 @@ text = "Server"
 layout_mode = 2
 text = "Client"
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="IP" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = -204.0
 offset_top = 250.0
@@ -38,6 +38,16 @@ scale = Vector2(2, 2)
 text = "127.0.0.1"
 placeholder_text = "Enter IP"
 
+[node name="Username" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = -203.0
+offset_top = 336.0
+offset_right = 1.0
+offset_bottom = 371.0
+scale = Vector2(2, 2)
+placeholder_text = "Enter Username"
+
 [connection signal="button_down" from="VBoxContainer/Server" to="." method="_on_server_button_down"]
 [connection signal="button_down" from="VBoxContainer/Client" to="." method="_on_client_button_down"]
-[connection signal="text_changed" from="TextEdit" to="." method="_changed_ip"]
+[connection signal="text_changed" from="IP" to="." method="_changed_ip"]
+[connection signal="text_changed" from="Username" to="." method="_changed_username"]
