@@ -81,23 +81,21 @@ func _on_player_died(id: int) -> void:
 
 func _check_game_over() -> void:
 	if player_died_amount == player_amount:
-		if multiplayer.is_server():
-			for enemy: Enemy in enemy_container.get_children():
-				enemy.queue_free()
-			for player: Player in player_container.get_children():
-				player.queue_free()
-		await get_tree().create_timer(3.0).timeout
-		if multiplayer.is_server():
-			Lobby.return_to_lobby.rpc()
-		
-		#_game_over.rpc()
+		_game_over()
 
 func _on_server_disconnected() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
-@rpc("authority", "call_local", "reliable")
+
 func _game_over() -> void:
-	get_tree().change_scene_to_file("res://scenes/lobby.tscn")
+	if multiplayer.is_server():
+		for enemy: Enemy in enemy_container.get_children():
+			enemy.queue_free()
+		for player: Player in player_container.get_children():
+			player.queue_free()
+	await get_tree().create_timer(3.0).timeout
+	if multiplayer.is_server():
+		Lobby.return_to_lobby.rpc()
 	
 func spawn_enemy(enemy_name: String = "rock", amount: int = 1) -> void:
 	if not multiplayer.is_server():

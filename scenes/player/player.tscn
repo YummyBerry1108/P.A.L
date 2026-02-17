@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=15 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/player/pig.png" id="1_e7mys"]
@@ -9,10 +9,11 @@
 [ext_resource type="Script" uid="uid://bo45ui2ddb6ge" path="res://scripts/player/projectiles.gd" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://b0ccd72rcl386" path="res://scripts/effects/poison_effect.gd" id="8_h17s1"]
+[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="10_h17s1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
-radius = 127.5
-height = 505.0
+radius = 41.0
+height = 198.0
 
 [sub_resource type="Resource" id="Resource_5gtgg"]
 script = ExtResource("8_h17s1")
@@ -22,13 +23,17 @@ duration = 3.1
 tick_interval = 1.0
 metadata/_custom_type_script = "uid://b0ccd72rcl386"
 
+[sub_resource type="LabelSettings" id="LabelSettings_5gtgg"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75vfm"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = false
 properties/0/replication_mode = 2
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(0.4, 0.4)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0ax77")
@@ -40,11 +45,12 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -51)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_e7mys")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(20, -22.5)
+position = Vector2(4, -47)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
 disabled = true
@@ -54,7 +60,7 @@ collision_layer = 32
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(20, -22.5)
+position = Vector2(4, -47)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
 
@@ -86,6 +92,26 @@ metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
 
 [node name="Projectiles" type="Node" parent="."]
 script = ExtResource("7_0owmy")
+
+[node name="DisplayName" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = -153.0
+offset_right = 54.0
+offset_bottom = -108.0
+grow_horizontal = 2
+text = "Name"
+label_settings = SubResource("LabelSettings_5gtgg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" parent="." instance=ExtResource("10_h17s1")]
+offset_left = -120.0
+offset_top = 38.0
+offset_right = 120.0
+offset_bottom = 48.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_75vfm")
