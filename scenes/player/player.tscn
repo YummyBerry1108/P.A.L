@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=16 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/player/pig.png" id="1_e7mys"]
 [ext_resource type="PackedScene" uid="uid://elks0b27hwwp" path="res://scenes/skills/icicle.tscn" id="2_22uif"]
 [ext_resource type="Script" uid="uid://b8dxuy1dgjsjp" path="res://scripts/player/movement.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://mo3sr0qj2gfa" path="res://scripts/player/attack.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://eqvunbi1juho" path="res://scripts/player/spectate.gd" id="6_je7p5"]
 [ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://bo45ui2ddb6ge" path="res://scripts/player/projectiles.gd" id="7_0owmy"]
 [ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="7_5gtgg"]
@@ -59,6 +60,7 @@ shape = SubResource("CapsuleShape2D_qlg0r")
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 64
 
@@ -76,6 +78,9 @@ script = ExtResource("4_qlg0r")
 
 [node name="Attack" type="Node" parent="Behaviors"]
 script = ExtResource("5_tuyoq")
+
+[node name="Spectate" type="Node" parent="Behaviors"]
+script = ExtResource("6_je7p5")
 
 [node name="Skills" type="Node" parent="."]
 

@@ -24,6 +24,9 @@ func _process(delta: float) -> void:
 	if is_timer_running:
 		time_elapsed += delta
 		_update_timer_ui()
+	
+	if multiplayer.is_server() and Input.is_action_pressed("force_game_over"):
+		_game_over()
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():
@@ -42,9 +45,7 @@ func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
 	player.global_position = Vector2.ZERO
 	player.name = str(id)
-	#if "name" in Lobby.players[id]:
-		#player.username = Lobby.players[id]["name"]
-	player.add_to_group("players")
+	#player.add_to_group("players")
 	player_container.add_child(player)
 	player.player_died.connect(_on_player_died)
 	
@@ -68,6 +69,8 @@ func _on_player_disconnected(id: int) -> void:
 		var disconnect_player: Player = player_container.get_node(str(id))
 		if not disconnect_player.is_alive:
 			player_died_amount -= 1
+		else:
+			disconnect_player.remove_from_group("players")
 		# What if player shoot a projectile that didn't disappear yet?
 		disconnect_player.queue_free()
 	
@@ -96,7 +99,7 @@ func _game_over() -> void:
 			enemy.queue_free()
 		for player: Player in player_container.get_children():
 			player.queue_free()
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	if multiplayer.is_server():
 		Lobby.return_to_lobby.rpc()
 	
