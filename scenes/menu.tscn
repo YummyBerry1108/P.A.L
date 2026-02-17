@@ -17,24 +17,28 @@ anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -207.0
 offset_top = 65.0
-offset_bottom = 131.0
+offset_right = 205.0
+offset_bottom = 175.0
 grow_horizontal = 0
-scale = Vector2(2, 2)
+theme_override_constants/separation = 8
 
 [node name="Server" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Server"
 
 [node name="Client" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Client"
 
 [node name="IP" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = -204.0
-offset_top = 250.0
-offset_bottom = 285.0
-scale = Vector2(2, 2)
+offset_left = -203.0
+offset_top = 252.0
+offset_right = 205.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 32
 text = "127.0.0.1"
 placeholder_text = "Enter IP"
 
@@ -42,9 +46,9 @@ placeholder_text = "Enter IP"
 layout_mode = 0
 offset_left = -203.0
 offset_top = 336.0
-offset_right = 1.0
-offset_bottom = 371.0
-scale = Vector2(2, 2)
+offset_right = 205.0
+offset_bottom = 402.0
+theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter Username"
 
 [connection signal="button_down" from="VBoxContainer/Server" to="." method="_on_server_button_down"]

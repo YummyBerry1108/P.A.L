@@ -70,6 +70,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="InvincibilityTimer" type="Timer" parent="HurtBox"]
+wait_time = 0.5
 
 [node name="Behaviors" type="Node2D" parent="."]
 

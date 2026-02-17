@@ -24,12 +24,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 544.0
-offset_top = 41.0
-offset_right = 640.0
-offset_bottom = 72.0
+offset_left = 525.0
+offset_top = 47.0
+offset_right = 731.0
+offset_bottom = 100.0
 grow_horizontal = 2
-scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 32
 text = "Start Game"
 
 [node name="LeaveLobby" type="Button" parent="."]
@@ -37,12 +37,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 544.0
+offset_left = 526.0
 offset_top = 114.0
-offset_right = 640.0
-offset_bottom = 145.0
+offset_right = 731.0
+offset_bottom = 167.0
 grow_horizontal = 2
-scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 32
 text = "Leave"
 
 [connection signal="button_down" from="StartGame" to="." method="_start_game"]
