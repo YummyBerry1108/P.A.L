@@ -55,7 +55,6 @@ func create_game():
 	players[1] = player_info
 	player_connected.emit(1, player_info)
 
-
 func remove_multiplayer_peer() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
@@ -65,7 +64,6 @@ func remove_multiplayer_peer() -> void:
 @rpc("call_local", "reliable")
 func load_game(game_scene_path: String) -> void:
 	get_tree().change_scene_to_file(game_scene_path)
-
 
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
@@ -99,10 +97,8 @@ func _on_connected_ok() -> void:
 	players[peer_id] = player_info
 	player_connected.emit(peer_id, player_info)
 
-
 func _on_connected_fail() -> void:
 	remove_multiplayer_peer()
-
 
 func _on_server_disconnected():
 	remove_multiplayer_peer()
