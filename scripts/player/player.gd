@@ -7,6 +7,8 @@ signal player_died(id: int)
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var projectiles: Node = $Projectiles
+@onready var display_name: Label = $DisplayName
+@onready var health_bar: ProgressBar = $HealthBar
 
 @export var projectile: PackedScene
 @export var damage: float = 10.0
@@ -24,8 +26,16 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_old_hp = hp
-	if not is_multiplayer_authority():
+	display_name.text = name
+	health_changed.connect(health_bar._set_health)
+	health_bar.init_health(hp)
+	
+	if is_multiplayer_authority():
+		health_bar.hide()
+		display_name.hide()
+	else:
 		$Camera2D.enabled = false
+		
 
 func _process(delta: float) -> void:
 	pull_skills()
