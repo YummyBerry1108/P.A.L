@@ -1,7 +1,7 @@
 extends Enemy
 
 enum State { TARGET, LOCK_ON, DASH, CHASE , ROOT , IDLE}
-var current_state = State.LOCK_ON
+var current_state = State.ROOT
 
 @export var dash_speed: float = 900.0
 @export var target_duration: float = 0.5
@@ -15,9 +15,11 @@ func _ready() -> void:
 	if texture:
 		sprite.texture = texture
 	speed = 250
+	if !multiplayer.is_server(): return
 	_start_root_phase()
 
 func _physics_process(delta: float) -> void:
+	if !multiplayer.is_server(): return
 	match current_state:
 		State.CHASE:
 			velocity = direction * speed * speed_multiplier

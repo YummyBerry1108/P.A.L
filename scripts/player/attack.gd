@@ -8,30 +8,39 @@ func run(args: Dictionary) -> void:
 	if not is_multiplayer_authority():
 		return
 	if Input.is_action_pressed("shoot"):
-		cooldown(args["player"], args["skills"])
+		cooldown()
 
-func cooldown(player: CharacterBody2D, skills: Dictionary) -> void:
+#func cooldown(player: CharacterBody2D, skills: Dictionary) -> void:
+func cooldown() -> void:
 	var now_time = Time.get_unix_time_from_system()
-	for skill_name in skills:
-		var skill_scene_name: String = "res://scenes/skills/" + skill_name + ".tscn"
-		var skill_data : SkillData = skills[skill_name]
+	for skill_name in owner.skills:
 		if not cooldowns.has(skill_name) or now_time >= cooldowns[skill_name]:
-			cooldowns[skill_name] = now_time + (1 / skill_data.firerate)
-			how_to_shoot(player, skill_data, skill_scene_name)
+			cooldowns[skill_name] = now_time + (1 / owner.skills[skill_name].firerate)
+			how_to_shoot(skill_name)
 
-func how_to_shoot(player: CharacterBody2D, skill_data: SkillData, skill_scene_name: String) -> void:
+#func how_to_shoot(player: CharacterBody2D, skill_data: SkillData, skill_scene_name: String) -> void:
+func how_to_shoot(skill_name: String) -> void:
+	var skill_data = owner.skills[skill_name] as SkillData
 	if skill_data.attack_type == "Single":
-		var rotations = calculate_directions(player.global_position, player.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
+		var rotations = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
 		#print(rotations)
 		for rot in rotations:
 			#print("ROT : ", rot)
-			var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
-			add_child(shooting_helper, true)
-			shooting_helper.set_shoot_timer(0.1, skill_data.multishot, player.global_position, rot, skill_scene_name, player.damage)
+			create_shooting_helper.rpc(skill_name, rot)
+			
 	elif skill_data.attack_type == "Burst":
 		pass
 	elif skill_data.attack_type == "Shotgun":
 		pass
+
+@rpc("any_peer", "call_local")
+func create_shooting_helper(skill_name: String, rot: float) -> void:
+	var skill_scene_name: String = "res://scenes/skills/" + skill_name + ".tscn"
+	var skill_data = owner.skills[skill_name] as SkillData
+	var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
+	
+	add_child(shooting_helper, true)
+	shooting_helper.set_shoot_timer(0.1, skill_data, rot, skill_scene_name)
 
 func calculate_directions(base_position: Vector2, target: Vector2, projectile_count: int, shooting_arc: float) -> Array[float]:
 	var rot = base_position.direction_to(target).angle()
