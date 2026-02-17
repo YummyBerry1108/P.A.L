@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	fetch_behavior("Attack", { "player": self, "skills": skills })
 	
 	if _old_hp != hp:
-		health_changed.emit(hp)
+		#health_changed.emit(hp)
 		_old_hp = hp
 
 func _physics_process(delta: float) -> void:
@@ -67,6 +67,7 @@ func take_damage(damage: float) -> void:
 	if not is_alive:
 		return
 	hp -= damage
+	health_changed.emit(hp)
 	if hp <= 0:
 		die()
 	is_invincible = true
