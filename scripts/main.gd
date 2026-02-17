@@ -44,7 +44,7 @@ func _update_spectate_ui(new_text: String) -> void:
 	spectate_label.text = "Spectating: " + new_text
 	spectate_label.show()
 
-func _on_enemy_spawned(node: Enemy) -> void:
+func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
 
 # Called only on the server.
@@ -59,16 +59,16 @@ func _add_player_node(id: int) -> void:
 	if id == 1:
 		_on_player_spawned(player)
 		
-func _on_player_spawned(node: Player) -> void:
+func _on_player_spawned(player: Player) -> void:
 	#print("ID: ",  multiplayer.get_unique_id())
-	#print("Spawn: ", node.name)
-	#print("Name: ", node.username)a
+	#print("Spawn: ", player.name)
+	#print("Name: ", player.username)
 	if not multiplayer.is_server():
-		node.player_died.connect(_on_player_died)
-	if node.is_multiplayer_authority():
-		node.health_changed.connect(health_bar._set_health)
-		node.spectate_changed.connect(_update_spectate_ui)
-		health_bar.init_health(node.hp)
+		player.player_died.connect(_on_player_died)
+	if player.is_multiplayer_authority():
+		player.health_changed.connect(health_bar._set_health)
+		player.spectate_changed.connect(_update_spectate_ui)
+		health_bar.init_health(player.hp)
 		
 func _on_player_disconnected(id: int) -> void:
 	player_amount -= 1

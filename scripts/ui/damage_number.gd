@@ -3,7 +3,9 @@ extends Node
 # This is an autoload script
 # Follow 'Project -> Globals -> Autoload' to find it
 
-func display_number(value: int, position: Vector2, is_critical: bool = false):
+func display_number(value: float, position: Vector2, is_critical: bool = false):
+	value = int(value)
+	
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(value)
