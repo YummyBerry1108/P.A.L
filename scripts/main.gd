@@ -75,10 +75,9 @@ func _on_player_died(id: int) -> void:
 	print("In ", multiplayer.get_unique_id())
 	print("ID: ", id, " die!")
 	player_died_amount += 1
-	if player_container.has_node(str(id)):
+	if multiplayer.is_server() and player_container.has_node(str(id)):
 		var disconnect_player: Player = player_container.get_node(str(id))
-		if multiplayer.is_server():
-			disconnect_player.remove_from_group("players")
+		disconnect_player.remove_from_group("players")
 	_check_game_over()
 
 func _check_game_over() -> void:
@@ -88,7 +87,7 @@ func _check_game_over() -> void:
 				enemy.queue_free()
 			for player: Player in player_container.get_children():
 				player.queue_free()
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		if multiplayer.is_server():
 			Lobby.return_to_lobby.rpc()
 		
