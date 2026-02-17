@@ -18,11 +18,14 @@ config/icon="uid://64gwusxyxfto"
 [autoload]
 
 DamageNumber="*res://scripts/ui/damage_number.gd"
+Lobby="*res://scripts/lobby.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input]
 
