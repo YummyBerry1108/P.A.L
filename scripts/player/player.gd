@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal health_changed(health: float)
 signal player_died(id: int)
+signal spectate_changed(name: String)
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
