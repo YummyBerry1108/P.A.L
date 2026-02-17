@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/enemies/rock.gd" id="1_1di36"]
 [ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/enemies/Rock.png" id="2_mek2u"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_ik6fu"]
-[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_42d3v"]
-[ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://knockback_component.gd" id="5_285kf"]
-[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://damage_component.gd" id="5_ouckr"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="4_42d3v"]
+[ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="5_285kf"]
+[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_ouckr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ik6fu"]
 resource_local_to_scene = true
