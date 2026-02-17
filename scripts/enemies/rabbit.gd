@@ -15,9 +15,11 @@ func _ready() -> void:
 	if texture:
 		sprite.texture = texture
 	speed = 250
+	if !multiplayer.is_server(): return
 	_start_root_phase()
 
 func _physics_process(delta: float) -> void:
+	if !multiplayer.is_server(): return
 	match current_state:
 		State.CHASE:
 			velocity = direction * speed * speed_multiplier
