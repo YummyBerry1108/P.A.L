@@ -18,7 +18,7 @@ func _ready() -> void:
 	if !multiplayer.is_server(): return
 	_start_root_phase()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !multiplayer.is_server(): return
 	match current_state:
 		State.CHASE:
