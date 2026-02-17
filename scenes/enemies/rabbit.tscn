@@ -55,7 +55,7 @@ _data = {
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q7wfq"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 
 [node name="Rabbit" type="CharacterBody2D"]
 scale = Vector2(0.48, 0.48)

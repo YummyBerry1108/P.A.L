@@ -100,6 +100,9 @@ func _game_over() -> void:
 	get_tree().change_scene_to_file("res://scenes/lobby.tscn")
 	
 func spawn_enemy(enemy_name: String = "rock", amount: int = 1) -> void:
+	if not multiplayer.is_server():
+		return
+		
 	for i in range(amount):
 		var enemy_node: PackedScene = load("res://scenes/enemies/" + enemy_name + ".tscn")
 		var new_enemy: Enemy = enemy_node.instantiate()
@@ -115,9 +118,9 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	spawn_enemy("rabbit", 1)
-	spawn_enemy("rock", 1)
-	spawn_enemy("snail", 1)
+	spawn_enemy("rabbit", 30)
+	spawn_enemy("rock", 30)
+	spawn_enemy("snail", 30)
 	
 
 	
