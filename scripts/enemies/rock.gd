@@ -13,6 +13,6 @@ func _physics_process(delta: float) -> void:
 	var desired_velocity = direction * max_speed * speed_multiplier
 	var steering = (desired_velocity - velocity).limit_length(steer_force)
 	velocity += steering * delta
-	move_and_slide()
-
 	
+	knockback_check(delta)
+	move_and_slide()

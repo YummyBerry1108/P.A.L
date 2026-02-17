@@ -14,6 +14,7 @@ func run(args: Dictionary) -> void:
 func cooldown() -> void:
 	var now_time = Time.get_unix_time_from_system()
 	for skill_name in owner.skills:
+		if owner.skills[skill_name].disable: continue
 		if not cooldowns.has(skill_name) or now_time >= cooldowns[skill_name]:
 			cooldowns[skill_name] = now_time + (1 / owner.skills[skill_name].firerate)
 			how_to_shoot(skill_name)

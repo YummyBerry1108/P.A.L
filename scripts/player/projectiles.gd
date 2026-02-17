@@ -10,9 +10,11 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 	new_projectile.global_position = owner.global_position
 	new_projectile.global_rotation = projectile_global_rotation
 	if multiplayer.is_server():
-		new_projectile.damage = skill_data.poojectile_damage + owner.damage
+		new_projectile.damage = skill_data.projectile_damage + owner.damage
 		new_projectile.crit_chance = skill_data.crit_chance
 		new_projectile.crit_damage_multiplier = skill_data.crit_damage_multiplier
 		new_projectile.status_effects = skill_data.status_effects
+		new_projectile.knockback_force = skill_data.knockback_force
+		new_projectile.knockback_duration = skill_data.knockback_duration
 
 	add_child(new_projectile, true)
