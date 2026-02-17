@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var health_bar: ProgressBar = $UI/HealthBar
 @onready var time_label: Label = $UI/TimeLabel
+@onready var spectate_label: Label = $UI/SpectateLabel
 @onready var player_container: Node2D = $PlayerContainer
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
@@ -19,6 +20,8 @@ func _ready() -> void:
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 	player_spawner.spawned.connect(_on_player_spawned)
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
+	
+	spectate_label.hide()
 
 func _process(delta: float) -> void:
 	if is_timer_running:
@@ -36,6 +39,10 @@ func _update_timer_ui() -> void:
 	var seconds = int(time_elapsed) % 60
 	
 	time_label.text = "%02d:%02d" % [minutes, seconds]
+
+func _update_spectate_ui(new_text: String) -> void:
+	spectate_label.text = "Spectating: " + new_text
+	spectate_label.show()
 
 func _on_enemy_spawned(node: Enemy) -> void:
 	pass
@@ -55,11 +62,12 @@ func _add_player_node(id: int) -> void:
 func _on_player_spawned(node: Player) -> void:
 	#print("ID: ",  multiplayer.get_unique_id())
 	#print("Spawn: ", node.name)
-	#print("Name: ", node.username)
+	#print("Name: ", node.username)a
 	if not multiplayer.is_server():
 		node.player_died.connect(_on_player_died)
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(health_bar._set_health)
+		node.spectate_changed.connect(_update_spectate_ui)
 		health_bar.init_health(node.hp)
 		
 func _on_player_disconnected(id: int) -> void:

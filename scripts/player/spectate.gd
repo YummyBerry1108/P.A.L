@@ -37,6 +37,6 @@ func _get_all_alive_players() -> Array:
 
 func _set_spectate_target(target_node: Player) -> void:
 	owner.spectate_target = target_node 
-		
+	owner.spectate_changed.emit(target_node.username)
 	if target_node.has_node("Camera2D"):
 		target_node.get_node("Camera2D").make_current()
