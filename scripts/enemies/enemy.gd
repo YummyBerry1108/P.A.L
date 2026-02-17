@@ -32,8 +32,8 @@ func update_speed() -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if !multiplayer.is_server(): return
 	var projectile = area.owner as Projectile
-	var damage: float = 0.0
 	var critical_hit: bool = false
+	damage = 0.0
 	
 	if projectile:
 		if randf() <= projectile.crit_chance:

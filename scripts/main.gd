@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var health_bar: ProgressBar = $UI/HealthBar
 @onready var time_label: Label = $UI/TimeLabel
+@onready var spectate_label: Label = $UI/SpectateLabel
 @onready var player_container: Node2D = $PlayerContainer
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
@@ -19,11 +20,16 @@ func _ready() -> void:
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 	player_spawner.spawned.connect(_on_player_spawned)
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
+	
+	spectate_label.hide()
 
 func _process(delta: float) -> void:
 	if is_timer_running:
 		time_elapsed += delta
 		_update_timer_ui()
+	
+	if multiplayer.is_server() and Input.is_action_pressed("force_game_over"):
+		_game_over()
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():
@@ -34,7 +40,11 @@ func _update_timer_ui() -> void:
 	
 	time_label.text = "%02d:%02d" % [minutes, seconds]
 
-func _on_enemy_spawned(node: Enemy) -> void:
+func _update_spectate_ui(new_text: String) -> void:
+	spectate_label.text = "Spectating: " + new_text
+	spectate_label.show()
+
+func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
 
 # Called only on the server.
@@ -42,24 +52,23 @@ func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
 	player.global_position = Vector2.ZERO
 	player.name = str(id)
-	#if "name" in Lobby.players[id]:
-		#player.username = Lobby.players[id]["name"]
-	player.add_to_group("players")
+	#player.add_to_group("players")
 	player_container.add_child(player)
 	player.player_died.connect(_on_player_died)
 	
 	if id == 1:
 		_on_player_spawned(player)
 		
-func _on_player_spawned(node: Player) -> void:
+func _on_player_spawned(player: Player) -> void:
 	#print("ID: ",  multiplayer.get_unique_id())
-	#print("Spawn: ", node.name)
-	#print("Name: ", node.username)
+	#print("Spawn: ", player.name)
+	#print("Name: ", player.username)
 	if not multiplayer.is_server():
-		node.player_died.connect(_on_player_died)
-	if node.is_multiplayer_authority():
-		node.health_changed.connect(health_bar._set_health)
-		health_bar.init_health(node.hp)
+		player.player_died.connect(_on_player_died)
+	if player.is_multiplayer_authority():
+		player.health_changed.connect(health_bar._set_health)
+		player.spectate_changed.connect(_update_spectate_ui)
+		health_bar.init_health(player.hp)
 		
 func _on_player_disconnected(id: int) -> void:
 	player_amount -= 1
@@ -68,6 +77,8 @@ func _on_player_disconnected(id: int) -> void:
 		var disconnect_player: Player = player_container.get_node(str(id))
 		if not disconnect_player.is_alive:
 			player_died_amount -= 1
+		else:
+			disconnect_player.remove_from_group("players")
 		# What if player shoot a projectile that didn't disappear yet?
 		disconnect_player.queue_free()
 	
@@ -96,7 +107,7 @@ func _game_over() -> void:
 			enemy.queue_free()
 		for player: Player in player_container.get_children():
 			player.queue_free()
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	if multiplayer.is_server():
 		Lobby.return_to_lobby.rpc()
 	
