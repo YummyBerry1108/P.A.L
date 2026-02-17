@@ -15,6 +15,7 @@ var speed: float = 100
 var speed_multiplier: float = 1.0
 var direction: Vector2 = Vector2.ZERO
 var damage: float = 10.0
+var exp_give: int = 1
 
 func _ready() -> void:
 	if texture:
@@ -55,16 +56,8 @@ func take_damage(projectile_damage: float, critical_hit: bool) -> void:
 		#dev_info.take_damage(projectile_damage)
 	if hp <= 0 and multiplayer.is_server():
 		die()
-
-func resize_to(target_width: float, target_height: float) -> void:
-	if texture:
-		var original_size = texture.get_size()
 		
-		var scale_x = target_width / original_size.x
-		var scale_y = target_height / original_size.y
-		
-		scale = Vector2(scale_x, scale_y)
-
+## find player by group, return the nearest player's position
 func get_nearest_player() -> Vector2:
 	var min_distance: float = INF
 	var res: Vector2 = Vector2.ZERO

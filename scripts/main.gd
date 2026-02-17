@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var health_bar: ProgressBar = $UI/HealthBar
+@onready var exp_bar: ProgressBar = $UI/ExpBar
+@onready var exp_label: Label = $UI/ExpLabel
 @onready var time_label: Label = $UI/TimeLabel
 @onready var spectate_label: Label = $UI/SpectateLabel
 @onready var player_container: Node2D = $PlayerContainer
@@ -14,6 +16,9 @@ var player_died_amount: int = 0
 var time_elapsed: float = 0.0
 var is_timer_running: bool = true
 
+var exp: int = 0
+var level: int = 0
+
 func _ready() -> void:
 	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 	Lobby.server_disconnected.connect(_on_server_disconnected)
@@ -21,6 +26,8 @@ func _ready() -> void:
 	player_spawner.spawned.connect(_on_player_spawned)
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
 	
+	exp_bar.value = exp
+	exp_label.text = "Level: 0"
 	spectate_label.hide()
 
 func _process(delta: float) -> void:
@@ -30,6 +37,9 @@ func _process(delta: float) -> void:
 	
 	if multiplayer.is_server() and Input.is_action_pressed("force_game_over"):
 		_game_over()
+	
+	if Input.is_action_pressed("get_exp"):
+		_add_experience(1)
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():
@@ -44,9 +54,33 @@ func _update_spectate_ui(new_text: String) -> void:
 	spectate_label.text = "Spectating: " + new_text
 	spectate_label.show()
 
+func _add_experience(exp_value: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	while exp_value > 0:
+		if exp_bar.value + exp_value > exp_bar.max_value:
+			exp_value = exp_bar.value + exp_value - exp_bar.max_value
+			exp_bar.value = exp_bar.max_value
+		else:
+			exp_bar.value += exp_value
+			exp_value = 0
+		
+		if exp_bar.value == exp_bar.max_value:
+			_level_up()
+
+func _level_up() -> void:
+	level += 1
+	exp_bar.max_value = int(exp_bar.max_value * 1.1)
+	exp_bar.value = 0
+	exp_label.text = "Level: " + str(level)
+
 func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
 
+## give exp to main game
+func _on_enemy_died(enemy: Enemy) -> void:
+	pass
 # Called only on the server.
 func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
@@ -93,13 +127,12 @@ func _on_player_died(id: int) -> void:
 		disconnect_player.remove_from_group("players")
 	_check_game_over()
 
+func _on_server_disconnected() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	
 func _check_game_over() -> void:
 	if player_died_amount == player_amount:
 		_game_over()
-
-func _on_server_disconnected() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
-
 
 func _game_over() -> void:
 	if multiplayer.is_server():
