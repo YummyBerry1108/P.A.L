@@ -27,16 +27,27 @@ position = Vector2(604, 261)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="UI" instance=ExtResource("8_85g3d")]
-offset_left = 504.0
-offset_top = 623.0
-offset_right = 1253.0
-offset_bottom = 679.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -511.0
+offset_top = -60.0
+offset_right = -19.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="TimeLabel" type="Label" parent="UI"]
-offset_left = 890.0
-offset_top = 8.0
-offset_right = 1019.0
-offset_bottom = 96.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_top = 25.0
+offset_right = 77.0
+offset_bottom = 113.0
+grow_horizontal = 2
 text = "Time"
 label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
