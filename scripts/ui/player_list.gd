@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _on_lobby_player_connected(peer_id: int, player_info: Dictionary) -> void:
 	player_list[peer_id] = player_info
+	
 	_change_label()
 	
 func _on_lobby_plater_disconnected(peer_id: int) -> void:
@@ -24,6 +25,7 @@ func _change_label() -> void:
 	Player List
 	----------------
 	"""
-	
-	for player_id in player_list:
+	var player_keys: Array = player_list.keys()
+	player_keys.sort()
+	for player_id in player_keys:
 		text += str(player_id) + "\n"
