@@ -10,14 +10,14 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 
-const PORT = 7000
-const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
-const MAX_CONNECTIONS = 20
+const PORT: int = 7000
+const DEFAULT_SERVER_IP: String = "127.0.0.1" # IPv4 localhost
+const MAX_CONNECTIONS: int = 20
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
 var players = {}
-
+var server_ip: String
 # This is the local player info. This should be modified locally
 # before the connection is made. It will be passed to every other peer.
 # For example, the value of "name" can be set to something the player
@@ -35,13 +35,15 @@ func _ready() -> void:
 
 func join_game(address: String = ""):
 	if address.is_empty():
-		address = DEFAULT_SERVER_IP
+		if server_ip.is_empty():
+			address = DEFAULT_SERVER_IP
+		else:
+			address = server_ip
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-
 
 func create_game():
 	var peer = ENetMultiplayerPeer.new()

@@ -70,10 +70,9 @@ func _on_player_disconnected(id: int) -> void:
 	
 	_check_game_over()
 
-#@rpc("any_peer", "call_local", "reliable")
 func _on_player_died(id: int) -> void:
-	print("In ", multiplayer.get_unique_id())
-	print("ID: ", id, " die!")
+	#print("In ", multiplayer.get_unique_id())
+	#print("ID: ", id, " die!")
 	player_died_amount += 1
 	if multiplayer.is_server() and player_container.has_node(str(id)):
 		var disconnect_player: Player = player_container.get_node(str(id))
