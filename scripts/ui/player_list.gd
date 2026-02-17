@@ -30,4 +30,9 @@ func _change_label() -> void:
 	var player_keys: Array = player_list.keys()
 	player_keys.sort()
 	for player_id in player_keys:
-		text += str(player_id) + "\n"
+		var player_name: String
+		if "name" in player_list[player_id]:
+			player_name = player_list[player_id]["name"]
+		else:
+			player_name = "Guest " + str(player_id)
+		text += player_name + "\n"

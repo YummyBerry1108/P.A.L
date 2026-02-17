@@ -42,6 +42,8 @@ func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
 	player.global_position = Vector2.ZERO
 	player.name = str(id)
+	#if "name" in Lobby.players[id]:
+		#player.username = Lobby.players[id]["name"]
 	player.add_to_group("players")
 	player_container.add_child(player)
 	player.player_died.connect(_on_player_died)
@@ -52,6 +54,7 @@ func _add_player_node(id: int) -> void:
 func _on_player_spawned(node: Player) -> void:
 	#print("ID: ",  multiplayer.get_unique_id())
 	#print("Spawn: ", node.name)
+	#print("Name: ", node.username)
 	if not multiplayer.is_server():
 		node.player_died.connect(_on_player_died)
 	if node.is_multiplayer_authority():
@@ -116,9 +119,9 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	spawn_enemy("rabbit", 30)
-	spawn_enemy("rock", 30)
-	spawn_enemy("snail", 30)
+	spawn_enemy("rabbit", 1)
+	spawn_enemy("rock", 1)
+	spawn_enemy("snail", 1)
 	
 
 	

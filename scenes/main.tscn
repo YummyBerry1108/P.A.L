@@ -65,5 +65,5 @@ _spawnable_scenes = PackedStringArray("uid://cvbjuk7t2yx1x", "uid://dfde1nigv6m7
 spawn_path = NodePath("../EnemyContainer")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dvcahiono6yix", "uid://cvbjuk7t2yx1x")
+_spawnable_scenes = PackedStringArray("uid://dvcahiono6yix")
 spawn_path = NodePath("../PlayerContainer")

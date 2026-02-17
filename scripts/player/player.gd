@@ -15,6 +15,7 @@ signal player_died(id: int)
 @export var hp: float = 100.0
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
+@export var username: String
 
 const SPEED: float = 300.0
 var _old_hp: float
@@ -26,7 +27,12 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	_old_hp = hp
-	display_name.text = name
+	if "name" in Lobby.players[name.to_int()]:
+		username = Lobby.players[name.to_int()]["name"]
+	else:
+		username = "Guest " + str(name)
+	display_name.text = username
+	
 	health_changed.connect(health_bar._set_health)
 	health_bar.init_health(hp)
 	
