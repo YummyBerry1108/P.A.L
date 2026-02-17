@@ -2,12 +2,13 @@ class_name Player extends CharacterBody2D
 
 signal health_changed(health: float)
 signal player_died(id: int)
+signal spectate_changed(name: String) # used in spectate.gd
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var projectiles: Node = $Projectiles
-@onready var display_name: Label = $DisplayName
+@onready var display_name: Label = $DisplayName 
 @onready var health_bar: ProgressBar = $HealthBar
 
 @export var projectile: PackedScene
@@ -16,6 +17,9 @@ signal player_died(id: int)
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
 @export var username: String
+
+var is_spectating = false
+var spectate_target: Player = null 
 
 const SPEED: float = 300.0
 var _old_hp: float
@@ -26,6 +30,7 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
+	add_to_group("players")
 	_old_hp = hp
 	if "name" in Lobby.players[name.to_int()]:
 		username = Lobby.players[name.to_int()]["name"]
@@ -39,14 +44,15 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		health_bar.hide()
 		display_name.hide()
-	else:
-		$Camera2D.enabled = false
+		$Camera2D.make_current()
 		
 
 func _process(delta: float) -> void:
-	pull_skills()
-	fetch_behavior("Attack", { "player": self, "skills": skills })
-	
+	if is_alive:
+		pull_skills()
+		fetch_behavior("Attack", { "player": self, "skills": skills })
+	if is_spectating:
+		fetch_behavior("Spectate", { "player": self, "is_spectating": is_spectating,"spectate_target": spectate_target, "camera": $Camera2D})
 	if _old_hp != hp:
 		#health_changed.emit(hp)
 		_old_hp = hp
@@ -78,6 +84,10 @@ func _on_timer_timeout() -> void:
 	else:
 		_on_hurt_box_area_entered(overlapping_areas[0])
 
+func start_spectating():
+	is_spectating = true
+	$Behaviors/Spectate.switch_to_next_player()
+
 @rpc("any_peer", "call_local")
 func take_damage(damage: float) -> void:
 	if not is_alive:
@@ -95,6 +105,7 @@ func die() -> void:
 	set_physics_process(false)
 	if is_multiplayer_authority():
 		$Camera2D.enabled = false
+		start_spectating()
 
 func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
 	get_node_or_null("Behaviors/" + behavior_name).run(args)
