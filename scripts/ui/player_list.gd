@@ -14,7 +14,6 @@ func _ready() -> void:
 
 func _on_lobby_player_connected(peer_id: int, player_info: Dictionary) -> void:
 	player_list[peer_id] = player_info
-	
 	_change_label()
 	
 func _on_lobby_plater_disconnected(peer_id: int) -> void:
@@ -35,4 +34,7 @@ func _change_label() -> void:
 			player_name = player_list[player_id]["name"]
 		else:
 			player_name = "Guest " + str(player_id)
+		
+		if player_id == multiplayer.get_unique_id():
+			player_name =  "> " + player_name + " <"
 		text += player_name + "\n"
