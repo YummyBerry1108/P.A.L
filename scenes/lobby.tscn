@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwgj38ot3mfrp"]
+
+[ext_resource type="Script" uid="uid://b2n5olga6rckm" path="res://scripts/lobby_scene.gd" id="1_5gu6x"]
+[ext_resource type="PackedScene" uid="uid://xx8brnpv61gg" path="res://scenes/ui/player_list.tscn" id="2_5gu6x"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5gu6x")
+
+[node name="PlayerList" parent="." instance=ExtResource("2_5gu6x")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1011.0
+offset_top = 27.0
+offset_right = 1248.0
+offset_bottom = 120.0
+grow_horizontal = 0
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 544.0
+offset_top = 41.0
+offset_right = 640.0
+offset_bottom = 72.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "Start Game"
+
+[node name="LeaveLobby" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 544.0
+offset_top = 114.0
+offset_right = 640.0
+offset_bottom = 145.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "Leave"
+
+[connection signal="button_down" from="StartGame" to="." method="_start_game"]
+[connection signal="button_down" from="LeaveLobby" to="." method="_leave_lobby"]
