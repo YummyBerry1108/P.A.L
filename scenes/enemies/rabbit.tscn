@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvbjuk7t2yx1x"]
+[gd_scene load_steps=13 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
 [ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/enemies/Rabbit.png" id="2_dxh4p"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_q7wfq"]
+[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://damage_component.gd" id="5_46k04"]
+[ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://knockback_component.gd" id="6_7hee8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
 resource_local_to_scene = true
@@ -65,7 +67,6 @@ script = ExtResource("1_0rrc3")
 texture = ExtResource("2_dxh4p")
 hp = 75.0
 damage = 15.0
-knockback_resistance = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_haj5u")
@@ -96,12 +97,27 @@ libraries = {
 &"": SubResource("AnimationLibrary_de8r6")
 }
 
-[node name="DamageNumberPosition" type="Node2D" parent="."]
+[node name="DamageNumberPosition" type="Marker2D" parent="."]
 position = Vector2(2.08333, -260.417)
 
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_q7wfq")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
+script = ExtResource("5_46k04")
+actor = NodePath("..")
+effect_component = NodePath("../EffectComponent")
+damage_number_position = NodePath("../DamageNumberPosition")
+hurt_box = NodePath("../HurtBox")
+metadata/_custom_type_script = "uid://ckuysfco5ijdx"
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
+script = ExtResource("6_7hee8")
+actor = NodePath("..")
+hurt_box = NodePath("../HurtBox")
+knockback_resistance = 0.5
+metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_q7wfq")

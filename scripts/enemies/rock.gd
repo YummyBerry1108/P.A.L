@@ -14,5 +14,5 @@ func _physics_process(delta: float) -> void:
 	var steering = (desired_velocity - velocity).limit_length(steer_force)
 	velocity += steering * delta
 	
-	knockback_check(delta)
+	knockback_component.knockback_check(delta)
 	move_and_slide()

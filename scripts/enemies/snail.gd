@@ -9,5 +9,5 @@ func _physics_process(delta: float) -> void:
 	var target_pos: Vector2 = get_nearest_player()
 	velocity = global_position.direction_to(target_pos) * speed * speed_multiplier
 	
-	knockback_check(delta)
+	knockback_component.knockback_check(delta)
 	move_and_slide()

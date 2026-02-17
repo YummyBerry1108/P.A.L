@@ -10,6 +10,7 @@ var current_state = State.ROOT
 @export var jump_duration: float = 0.5
 @export var idle_duration: float = 0.5
 
+
 func _ready() -> void:
 	super()
 	if texture:
@@ -33,14 +34,8 @@ func _physics_process(delta: float) -> void:
 		velocity = knockback
 		knockback_timer -= delta
 	
-	knockback_check(delta)
+	knockback_component.knockback_check(delta)
 	move_and_slide()
-
-func knockback_check(delta: float) -> void:
-	if knockback_timer > 0:
-		current_state = State.IDLE
-		velocity = knockback * (1-knockback_resistance)
-		knockback_timer -= delta
 
 func _start_root_phase() -> void:
 	current_state = State.ROOT
