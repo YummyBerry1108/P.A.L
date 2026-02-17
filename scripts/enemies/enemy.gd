@@ -53,7 +53,7 @@ func take_damage(projectile_damage: float, critical_hit: bool) -> void:
 	hit_flash_animation_player.play("hit_flash")
 	#if dev_info:
 		#dev_info.take_damage(projectile_damage)
-	if hp <= 0:
+	if hp <= 0 and multiplayer.is_server():
 		die()
 
 func resize_to(target_width: float, target_height: float) -> void:

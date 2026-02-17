@@ -1,7 +1,7 @@
 extends Enemy
 
 enum State { TARGET, LOCK_ON, DASH, CHASE , ROOT , IDLE}
-var current_state = State.LOCK_ON
+var current_state = State.ROOT
 
 @export var dash_speed: float = 900.0
 @export var target_duration: float = 0.5

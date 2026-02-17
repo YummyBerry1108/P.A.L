@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://xx8brnpv61gg"]
+
+[ext_resource type="Script" uid="uid://bwetgdn8s3vsn" path="res://scripts/ui/player_list.gd" id="1_etwee"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_etwee"]
+font_size = 32
+
+[node name="PlayerList" type="Label"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_right = 110.0
+offset_bottom = 112.0
+grow_horizontal = 2
+text = "Player name 1
+Player name 2"
+label_settings = SubResource("LabelSettings_etwee")
+horizontal_alignment = 1
+script = ExtResource("1_etwee")

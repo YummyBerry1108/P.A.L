@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(health: float)
+signal player_died(id: int)
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
@@ -11,6 +12,7 @@ signal health_changed(health: float)
 @export var damage: float = 10.0
 @export var hp: float = 100.0
 @export var is_invincible: bool = false
+@export var is_alive: bool = true
 
 const SPEED: float = 300.0
 var _old_hp: float
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 	fetch_behavior("Attack", { "player": self, "skills": skills })
 	
 	if _old_hp != hp:
-		health_changed.emit(hp)
+		#health_changed.emit(hp)
 		_old_hp = hp
 
 func _physics_process(delta: float) -> void:
@@ -52,7 +54,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	take_damage.rpc(enemy_damage)
 	
-	
 func _on_timer_timeout() -> void:
 	is_invincible = false
 	var overlapping_areas = hurt_box.get_overlapping_areas()
@@ -62,11 +63,22 @@ func _on_timer_timeout() -> void:
 		_on_hurt_box_area_entered(overlapping_areas[0])
 
 @rpc("any_peer", "call_local")
-func take_damage(damage: float):
+func take_damage(damage: float) -> void:
+	if not is_alive:
+		return
 	hp -= damage
+	health_changed.emit(hp)
+	if hp <= 0:
+		die()
 	is_invincible = true
 	invincibility_timer.start()
-	
+
+func die() -> void:
+	is_alive = false
+	player_died.emit(name.to_int())
+	set_physics_process(false)
+	if is_multiplayer_authority():
+		$Camera2D.enabled = false
 
 func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
 	get_node_or_null("Behaviors/" + behavior_name).run(args)

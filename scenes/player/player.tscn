@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://b0ccd72rcl386"
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75vfm"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = false
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
