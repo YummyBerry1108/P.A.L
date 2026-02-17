@@ -29,5 +29,15 @@ text = "Server"
 layout_mode = 2
 text = "Client"
 
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = -204.0
+offset_top = 250.0
+offset_bottom = 285.0
+scale = Vector2(2, 2)
+text = "127.0.0.1"
+placeholder_text = "Enter IP"
+
 [connection signal="button_down" from="VBoxContainer/Server" to="." method="_on_server_button_down"]
 [connection signal="button_down" from="VBoxContainer/Client" to="." method="_on_client_button_down"]
+[connection signal="text_changed" from="TextEdit" to="." method="_changed_ip"]
