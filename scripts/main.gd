@@ -61,7 +61,6 @@ func _on_enemy_spawned(_enemy: Enemy) -> void:
 
 ## give exp to main game
 func _on_enemy_died(enemy: Enemy) -> void:
-	#print(enemy)
 	var exp_orb: CharacterBody2D = exp_orb_scene.instantiate()
 	exp_orb.global_position = enemy.global_position
 	exp_orb.exp_amount = enemy.exp_amount
@@ -150,9 +149,9 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	spawn_enemy("rabbit", 1)
-	spawn_enemy("rock", 1)
-	spawn_enemy("snail", 1)
+	spawn_enemy("rabbit", 0)
+	spawn_enemy("rock", 0)
+	spawn_enemy("snail", 3)
 	
 
 	
