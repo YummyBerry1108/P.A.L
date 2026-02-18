@@ -11,7 +11,6 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var display_name: Label = $DisplayName 
 @onready var health_bar: ProgressBar = $HealthBar
 
-@export var projectile: PackedScene
 @export var damage: float = 10.0
 @export var hp: float = 100.0
 @export var is_invincible: bool = false
@@ -46,7 +45,6 @@ func _ready() -> void:
 		display_name.hide()
 		$Camera2D.make_current()
 		
-
 func _process(delta: float) -> void:
 	if is_alive:
 		pull_skills()

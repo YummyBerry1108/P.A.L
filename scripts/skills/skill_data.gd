@@ -1,8 +1,9 @@
 class_name SkillData extends Node
 
+#ACTUAL NODE NAME DOES NOT MATTER FOR SKILL DATA NODES
+
 @export_category("Basic")
 @export var disable: bool = false
-@export var attack_type: String = "Single"
 @export var projectile_type: String = "Normal"
 @export var skill_name: String = "NULL"
 
@@ -10,6 +11,7 @@ class_name SkillData extends Node
 @export var multishot: int = 1
 @export var projectile_count: int = 1
 @export var firerate: float = 1
+@export_range(0, 360) var rotation_randomization: float = 0
 @export_group("Arc")
 @export_range(0, 360) var arc: float = 0
 @export_range(0, 360) var arc_increment: float = 30

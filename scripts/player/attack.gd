@@ -17,22 +17,16 @@ func cooldown() -> void:
 		if owner.skills[skill_name].disable: continue
 		if not cooldowns.has(skill_name) or now_time >= cooldowns[skill_name]:
 			cooldowns[skill_name] = now_time + (1 / owner.skills[skill_name].firerate)
-			how_to_shoot(skill_name)
+			fire_in_different_rotations(skill_name)
 
 #func how_to_shoot(player: CharacterBody2D, skill_data: SkillData, skill_scene_name: String) -> void:
-func how_to_shoot(skill_name: String) -> void:
+func fire_in_different_rotations(skill_name: String) -> void:
 	var skill_data = owner.skills[skill_name] as SkillData
-	if skill_data.attack_type == "Single":
-		var rotations = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
-		#print(rotations)
-		for rot in rotations:
-			#print("ROT : ", rot)
-			create_shooting_helper.rpc(skill_name, rot)
-			
-	elif skill_data.attack_type == "Burst":
-		pass
-	elif skill_data.attack_type == "Shotgun":
-		pass
+	var rotations = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
+	#print(rotations)
+	for rot in rotations:
+		#print("ROT : ", rot)
+		create_shooting_helper.rpc(skill_name, rot)
 
 @rpc("any_peer", "call_local")
 func create_shooting_helper(skill_name: String, rot: float) -> void:

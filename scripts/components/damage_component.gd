@@ -3,7 +3,7 @@ class_name DamageComponent extends Node
 @export var actor: Enemy
 @export var effect_component: EffectComponent
 @export var damage_number_position: Marker2D
-@export var knockback_componet: KnockbackComponent
+@export var knockback_component: KnockbackComponent
 @export var hurt_box: Area2D
 
 signal on_hit(damage: float)
@@ -13,21 +13,22 @@ func _ready() -> void:
 		hurt_box.area_entered.connect(_on_hurt_box_area_entered)
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if !multiplayer.is_server(): return
+	if not multiplayer.is_server(): return
 	var projectile = area.owner as Projectile
 	var critical_hit: bool = false
 	var result = 0.0
 	
-	if projectile:
+	if projectile != null:
 		if randf() <= projectile.crit_chance:
 			result = projectile.damage * projectile.crit_damage_multiplier
 			critical_hit = true
 		else:
 			result = projectile.damage
+		
 		take_damage.rpc(result, critical_hit)
 		
-		if knockback_componet:
-			knockback_componet.apply_knockback(projectile.knockback_force, projectile.velocity.normalized(), projectile.knockback_duration)
+		if knockback_component:
+			knockback_component.apply_knockback(projectile.knockback_force, projectile.velocity.normalized(), projectile.knockback_duration)
 		
 		for effect in projectile.status_effects:
 			effect_component.add_effect(effect)

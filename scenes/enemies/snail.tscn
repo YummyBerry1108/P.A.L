@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dyqq3yrkf31of" path="res://scripts/enemies/snail.gd" id="1_6lcqf"]
 [ext_resource type="Texture2D" uid="uid://bvxu5ba4nh5cp" path="res://imgs/enemies/Snail.png" id="2_5b1ba"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_5b1ba"]
-[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="4_ju45m"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_ju45m"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_duwbg"]
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="6_nube2"]
 
@@ -103,12 +103,11 @@ position = Vector2(2.08333, -260.417)
 script = ExtResource("4_ju45m")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "knockback_componet", "hurt_box")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
 script = ExtResource("5_duwbg")
 actor = NodePath("..")
 effect_component = NodePath("../EffectComponent")
 damage_number_position = NodePath("../DamageNumberPosition")
-knockback_componet = NodePath("../KnockbackComponent")
 hurt_box = NodePath("../HurtBox")
 metadata/_custom_type_script = "uid://ckuysfco5ijdx"
 

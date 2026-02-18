@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhfmuydovevvi"]
+
+[ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="1_e7b3e"]
+
+[node name="snowball_data" type="Node"]
+script = ExtResource("1_e7b3e")
+skill_name = "snowball"
+crit_chance = 0.2
+metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
