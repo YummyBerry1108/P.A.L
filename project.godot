@@ -75,3 +75,4 @@ get_exp={
 2d_physics/layer_6="PLAYER_HURTBOX"
 2d_physics/layer_7="ENEMY_HITBOX"
 2d_physics/layer_8="ENEMY_HURTBOX"
+2d_physics/layer_9="EXP"

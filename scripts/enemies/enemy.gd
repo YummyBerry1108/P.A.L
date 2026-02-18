@@ -1,6 +1,9 @@
 class_name Enemy extends CharacterBody2D
 
+signal _on_enemy_died(enemy: Enemy)
+
 @export var texture: Texture2D
+@export var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $HitBox
 @onready var hurt_box: Area2D = $HurtBox
@@ -15,7 +18,7 @@ var speed: float = 100
 var speed_multiplier: float = 1.0
 var direction: Vector2 = Vector2.ZERO
 var damage: float = 10.0
-var exp_give: int = 1
+var exp_amount: int = 1
 
 func _ready() -> void:
 	if texture:
@@ -34,15 +37,15 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if !multiplayer.is_server(): return
 	var projectile = area.owner as Projectile
 	var critical_hit: bool = false
-	damage = 0.0
+	var result = 0.0
 	
 	if projectile:
 		if randf() <= projectile.crit_chance:
-			damage = projectile.damage * projectile.crit_damage_multiplier
+			result = projectile.damage * projectile.crit_damage_multiplier
 			critical_hit = true
 		else:
-			damage = projectile.damage
-		take_damage.rpc(damage, critical_hit)
+			result = projectile.damage
+		take_damage.rpc(result, critical_hit)
 		
 		for effect in projectile.status_effects:
 			effect_component.add_effect(effect)
@@ -73,4 +76,5 @@ func get_nearest_player() -> Vector2:
 	return res
 
 func die() -> void:
+	_on_enemy_died.emit(self)
 	queue_free()

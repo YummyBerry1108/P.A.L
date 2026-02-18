@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=12 format=3 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
+[ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="8_85g3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
@@ -82,6 +84,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jyhfs")
 max_value = 10.0
 value = 10.0
 show_percentage = false
+script = ExtResource("4_jyhfs")
 
 [node name="ExpLabel" type="Label" parent="UI"]
 offset_left = 21.0
@@ -90,6 +93,7 @@ offset_right = 110.0
 offset_bottom = 670.0
 text = "Level:"
 label_settings = SubResource("LabelSettings_jyhfs")
+script = ExtResource("5_tbgi4")
 
 [node name="SpectateLabel" type="Label" parent="UI"]
 offset_left = 38.0
@@ -121,6 +125,8 @@ replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [node name="PlayerContainer" type="Node2D" parent="."]
 
+[node name="ExpOrbContainer" type="Node2D" parent="."]
+
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://cvbjuk7t2yx1x", "uid://dfde1nigv6m7e", "uid://dpldsb20x272n")
 spawn_path = NodePath("../EnemyContainer")
@@ -128,3 +134,9 @@ spawn_path = NodePath("../EnemyContainer")
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dvcahiono6yix")
 spawn_path = NodePath("../PlayerContainer")
+
+[node name="ExpOrbSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://b78bhpq31lil4")
+spawn_path = NodePath("../ExpOrbContainer")
+
+[connection signal="_on_level_up" from="UI/ExpBar" to="UI/ExpLabel" method="_level_up"]

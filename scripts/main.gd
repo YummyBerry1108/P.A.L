@@ -7,17 +7,16 @@ extends Node2D
 @onready var spectate_label: Label = $UI/SpectateLabel
 @onready var player_container: Node2D = $PlayerContainer
 @onready var enemy_container: Node2D = $EnemyContainer
+@onready var exp_orb_container: Node2D = $ExpOrbContainer
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
 @onready var enemy_spawner: MultiplayerSpawner = $EnemySpawner
 
+var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 var player_scene: Resource = preload("res://scenes/player/player.tscn")
 var player_amount: int = 0
 var player_died_amount: int = 0
 var time_elapsed: float = 0.0
 var is_timer_running: bool = true
-
-var exp: int = 0
-var level: int = 0
 
 func _ready() -> void:
 	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
@@ -26,7 +25,7 @@ func _ready() -> void:
 	player_spawner.spawned.connect(_on_player_spawned)
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
 	
-	exp_bar.value = exp
+	exp_bar.value = 0
 	exp_label.text = "Level: 0"
 	spectate_label.hide()
 
@@ -39,7 +38,10 @@ func _process(delta: float) -> void:
 		_game_over()
 	
 	if Input.is_action_pressed("get_exp"):
-		_add_experience(1)
+		add_experience(1)
+
+func add_experience(value: int) -> void:
+	exp_bar.add_experience(value)
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():
@@ -54,33 +56,17 @@ func _update_spectate_ui(new_text: String) -> void:
 	spectate_label.text = "Spectating: " + new_text
 	spectate_label.show()
 
-func _add_experience(exp_value: int) -> void:
-	if not multiplayer.is_server():
-		return
-
-	while exp_value > 0:
-		if exp_bar.value + exp_value > exp_bar.max_value:
-			exp_value = exp_bar.value + exp_value - exp_bar.max_value
-			exp_bar.value = exp_bar.max_value
-		else:
-			exp_bar.value += exp_value
-			exp_value = 0
-		
-		if exp_bar.value == exp_bar.max_value:
-			_level_up()
-
-func _level_up() -> void:
-	level += 1
-	exp_bar.max_value = int(exp_bar.max_value * 1.1)
-	exp_bar.value = 0
-	exp_label.text = "Level: " + str(level)
-
 func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
 
 ## give exp to main game
 func _on_enemy_died(enemy: Enemy) -> void:
-	pass
+	#print(enemy)
+	var exp_orb: CharacterBody2D = exp_orb_scene.instantiate()
+	exp_orb.global_position = enemy.global_position
+	exp_orb.exp_amount = enemy.exp_amount
+	exp_orb_container.call_deferred("add_child", exp_orb, true)
+	
 # Called only on the server.
 func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
@@ -153,7 +139,8 @@ func spawn_enemy(enemy_name: String = "rock", amount: int = 1) -> void:
 		var new_enemy: Enemy = enemy_node.instantiate()
 		var x = randf_range(1, 3) * (randi()%2)*2 - 1 # -1 or 1
 		var y = randf_range(1, 3) * (randi()%2)*2 - 1
-		new_enemy.global_position = Vector2(x, y) * 500
+		new_enemy.global_position = Vector2(x, y) * 300
+		new_enemy._on_enemy_died.connect(_on_enemy_died)
 		enemy_container.add_child(new_enemy, true)
 
 # Called only on the server.
@@ -163,9 +150,9 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	spawn_enemy("rabbit", 10)
-	spawn_enemy("rock", 10)
-	spawn_enemy("snail", 10)
+	spawn_enemy("rabbit", 1)
+	spawn_enemy("rock", 1)
+	spawn_enemy("snail", 1)
 	
 
 	
