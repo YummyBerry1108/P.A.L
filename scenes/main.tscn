@@ -1,8 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=12 format=3 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
+[ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="8_85g3d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
+bg_color = Color(0.743349, 0.742466, 0.425433, 1)
+border_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jyhfs"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
 font_size = 32
@@ -19,6 +37,15 @@ shadow_size = 0
 properties/0/path = NodePath(".:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath("../ExpLabel:text")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("../ExpBar:value")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("../ExpBar:max_value")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tipki")
@@ -37,12 +64,36 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -511.0
-offset_top = -60.0
-offset_right = -19.0
-offset_bottom = -15.0
+offset_left = -510.0
+offset_top = -112.0
+offset_right = -18.0
+offset_bottom = -67.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="ExpBar" type="ProgressBar" parent="UI"]
+z_index = 5
+z_as_relative = false
+offset_left = 18.0
+offset_top = 675.0
+offset_right = 1263.0
+offset_bottom = 702.0
+theme_override_constants/outline_size = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_sugp2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jyhfs")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+script = ExtResource("4_jyhfs")
+
+[node name="ExpLabel" type="Label" parent="UI"]
+offset_left = 21.0
+offset_top = 625.0
+offset_right = 110.0
+offset_bottom = 670.0
+text = "Level:"
+label_settings = SubResource("LabelSettings_jyhfs")
+script = ExtResource("5_tbgi4")
 
 [node name="SpectateLabel" type="Label" parent="UI"]
 offset_left = 38.0
@@ -66,12 +117,15 @@ label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI/TimeLabel"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI"]
+root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
 [node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="ExpOrbContainer" type="Node2D" parent="."]
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://cvbjuk7t2yx1x", "uid://dfde1nigv6m7e", "uid://dpldsb20x272n")
@@ -80,3 +134,9 @@ spawn_path = NodePath("../EnemyContainer")
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dvcahiono6yix")
 spawn_path = NodePath("../PlayerContainer")
+
+[node name="ExpOrbSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://b78bhpq31lil4")
+spawn_path = NodePath("../ExpOrbContainer")
+
+[connection signal="_on_level_up" from="UI/ExpBar" to="UI/ExpLabel" method="_level_up"]

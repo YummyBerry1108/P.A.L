@@ -8,3 +8,4 @@ const PLAYER_HITBOX = 5
 const PLAYER_HURT_BOX = 6
 const ENEMY_HITBOX = 7
 const ENEMY_HURT_BOX = 8
+const EXP = 9

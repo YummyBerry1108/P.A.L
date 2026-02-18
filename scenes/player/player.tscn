@@ -14,6 +14,18 @@
 radius = 41.0
 height = 198.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je7p5"]
+radius = 72.0
+height = 218.0
+
+[sub_resource type="Resource" id="Resource_5gtgg"]
+script = ExtResource("8_h17s1")
+damage_per_tick = 5.0
+stack_mode = 0
+duration = 3.1
+tick_interval = 1.0
+metadata/_custom_type_script = "uid://b0ccd72rcl386"
+
 [sub_resource type="LabelSettings" id="LabelSettings_5gtgg"]
 font_size = 32
 outline_size = 8
@@ -48,6 +60,15 @@ position = Vector2(4, -47)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qlg0r")
 disabled = true
+
+[node name="ExpCheck" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExpCheck"]
+position = Vector2(5, -37)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_je7p5")
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false

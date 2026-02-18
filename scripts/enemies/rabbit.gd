@@ -10,7 +10,6 @@ var current_state = State.ROOT
 @export var jump_duration: float = 0.5
 @export var idle_duration: float = 0.5
 
-
 func _ready() -> void:
 	super()
 	if texture:
