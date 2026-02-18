@@ -149,7 +149,7 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	spawn_enemy("rabbit", 0)
+	spawn_enemy("rabbit", 1)
 	spawn_enemy("rock", 0)
 	spawn_enemy("snail", 3)
 	

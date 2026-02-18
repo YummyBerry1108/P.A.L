@@ -5,5 +5,7 @@
 [node name="snowball_data" type="Node"]
 script = ExtResource("1_e7b3e")
 skill_name = "snowball"
-crit_chance = 0.2
+projectile_damage = 5.0
+knockback_force = 200.0
+knockback_duration = 0.1
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"

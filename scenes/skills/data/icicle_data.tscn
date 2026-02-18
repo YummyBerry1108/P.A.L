@@ -18,4 +18,7 @@ skill_name = "icicle"
 firerate = 0.333
 arc_increment = 15.0
 status_effects = Array[ExtResource("2_bqvsj")]([SubResource("Resource_5gtgg")])
+crit_chance = 0.2
+knockback_force = 500.0
+knockback_duration = 0.2
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
