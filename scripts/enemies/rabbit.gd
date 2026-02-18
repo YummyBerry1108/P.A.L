@@ -18,7 +18,7 @@ func _ready() -> void:
 	if !multiplayer.is_server(): return
 	_start_root_phase()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !multiplayer.is_server(): return
 	match current_state:
 		State.CHASE:
@@ -27,6 +27,13 @@ func _physics_process(_delta: float) -> void:
 			velocity = Vector2.ZERO
 		State.DASH:
 			velocity = direction * dash_speed * speed_multiplier
+	
+	if knockback_timer > 0:
+		current_state = State.IDLE
+		velocity = knockback
+		knockback_timer -= delta
+	
+	knockback_component.knockback_check(delta)
 	move_and_slide()
 
 func _start_root_phase() -> void:
@@ -36,7 +43,7 @@ func _start_root_phase() -> void:
 	
 	var dist = global_position.distance_to(get_nearest_player())
 	
-	if dist <= 400:
+	if dist <= 500:
 		_start_target_phase()
 	else:
 		_start_chase_phase()

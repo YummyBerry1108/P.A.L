@@ -13,11 +13,25 @@ signal _on_enemy_died(enemy: Enemy)
 #@onready var dev_info: Label = $DevInfo
 
 
-var hp: float = 50
+
+@export var texture: Texture2D
+@export_category("Basic")
+@export var hp: float = 50
+@export var damage: float = 10.0
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var hurt_box: Area2D = $HurtBox
+@onready var effect_component: EffectComponent = $EffectComponent
+@onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
+@onready var damage_component: DamageComponent = $DamageComponent
+@onready var knockback_component: KnockbackComponent = $KnockbackComponent
+
+#@onready var dev_info: Label = $DevInfo
+
 var speed: float = 100
 var speed_multiplier: float = 1.0
 var direction: Vector2 = Vector2.ZERO
-var damage: float = 10.0
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 var exp_amount: int = 1
 
 func _ready() -> void:
@@ -27,7 +41,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not multiplayer.is_server():
 		return
-	velocity = direction * speed * delta * speed_multiplier
+	velocity = direction * speed * speed_multiplier
+
 	move_and_slide()
 
 func update_speed() -> void:

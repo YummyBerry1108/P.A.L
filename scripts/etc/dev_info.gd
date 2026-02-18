@@ -1,20 +1,23 @@
 extends Label
 
 @onready var dps_timer: Timer = $DPSTimer
+@export var actor: Enemy
+@export var damage_component: DamageComponent
 
 var speed: float:
 	get:
-		return owner.speed
+		return actor.speed
 var speed_multiplier: float:
 	get:
-		return owner.speed_multiplier
+		return actor.speed_multiplier
 
 var total_damage: float = 0.0
 var damage_this_second: float = 0.0
 var current_dps: float = 0.0
 
 func _ready() -> void:
-	pass
+	if damage_component:
+		damage_component.on_hit.connect(take_damage)
 
 func _process(delta: float) -> void:
 	text = """

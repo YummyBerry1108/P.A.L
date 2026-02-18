@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=13 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cw36huqbpeu5w" path="res://imgs/player/pig.png" id="1_e7mys"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://eqvunbi1juho" path="res://scripts/player/spectate.gd" id="6_je7p5"]
 [ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://bo45ui2ddb6ge" path="res://scripts/player/projectiles.gd" id="7_0owmy"]
-[ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="7_5gtgg"]
-[ext_resource type="Script" uid="uid://b0ccd72rcl386" path="res://scripts/effects/poison_effect.gd" id="8_h17s1"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="10_h17s1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
@@ -103,13 +101,17 @@ script = ExtResource("6_tuyoq")
 skill_name = "icicle"
 firerate = 0.333
 arc_increment = 15.0
-status_effects = Array[ExtResource("7_5gtgg")]([SubResource("Resource_5gtgg")])
+crit_chance = 0.2
+knockback_force = 100.0
+knockback_duration = 1.0
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
 
 [node name="snowball" type="Node" parent="Skills"]
 script = ExtResource("6_tuyoq")
 skill_name = "snowball"
-crit_chance = 0.2
+projectile_damage = 5.0
+knockback_force = 100.0
+knockback_duration = 0.5
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"
 
 [node name="Projectiles" type="Node" parent="."]
