@@ -15,7 +15,7 @@ var effect_name: String = "Effect"
 func on_apply(actor: CharacterBody2D) -> void:
 	pass
 
-func on_tick(actor: Node2D, delta: float, instance: EffectInstance) -> void:
+func _on_tick(actor: Node2D, delta: float, instance: EffectInstance) -> void:
 	pass
 
 func on_remove(actor: CharacterBody2D) -> void:

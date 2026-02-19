@@ -1,21 +1,16 @@
 class_name PoisonEffect extends StatusEffectRes
 
-@export var damage_per_tick: float
+@export var damage_per_tick: float = 5.0
 
-#func _init(_duration: float = 3.0, _damage_per_tick: float = 5.0, _tick_interval: float = 1.0) -> void:
-	#duration = _duration
-	#if not damage_per_tick:
-		#damage_per_tick = _damage_per_tick
-	#tick_interval = _tick_interval
-	#stack_mode = StackMode.STACK
-
-func on_tick(actor: Node2D, delta: float, instance: EffectInstance) -> void:
-	instance.tick_timer -= delta
-	
-	if instance.tick_timer <= 0:
-		apply_damage(actor)
-		instance.tick_timer = tick_interval
+func _on_tick(actor: Node2D, delta: float, instance: EffectInstance) -> void:
+	if instance.ticks_left > 0:
+		instance.tick_timer -= delta
+		
+		if instance.tick_timer <= 0:
+			apply_damage(actor)
+			instance.ticks_left -= 1
+			instance.tick_timer += tick_interval
 
 func apply_damage(actor: Node2D) -> void:
-	if actor.has_method("take_damage"):
-		actor.damage_component.take_damage.rpc(damage_per_tick, false)
+	if actor.has_node("DamageComponent"):
+		actor.get_node("DamageComponent").take_damage.rpc(damage_per_tick, false)

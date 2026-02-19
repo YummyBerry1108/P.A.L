@@ -10,7 +10,6 @@ func run(args: Dictionary) -> void:
 	if Input.is_action_pressed("shoot"):
 		cooldown()
 
-#func cooldown(player: CharacterBody2D, skills: Dictionary) -> void:
 func cooldown() -> void:
 	var now_time = Time.get_unix_time_from_system()
 	for skill_name in owner.skills:
@@ -19,10 +18,9 @@ func cooldown() -> void:
 			cooldowns[skill_name] = now_time + (1 / owner.skills[skill_name].firerate)
 			fire_in_different_rotations(skill_name)
 
-#func how_to_shoot(player: CharacterBody2D, skill_data: SkillData, skill_scene_name: String) -> void:
 func fire_in_different_rotations(skill_name: String) -> void:
-	var skill_data = owner.skills[skill_name] as SkillData
-	var rotations = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
+	var skill_data: SkillData = owner.skills[skill_name]
+	var rotations: Array[float] = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
 	#print(rotations)
 	for rot in rotations:
 		#print("ROT : ", rot)
@@ -31,7 +29,7 @@ func fire_in_different_rotations(skill_name: String) -> void:
 @rpc("any_peer", "call_local")
 func create_shooting_helper(skill_name: String, rot: float) -> void:
 	var skill_scene_name: String = "res://scenes/skills/" + skill_name + ".tscn"
-	var skill_data = owner.skills[skill_name] as SkillData
+	var skill_data: SkillData = owner.skills[skill_name] 
 	var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
 	
 	add_child(shooting_helper, true)

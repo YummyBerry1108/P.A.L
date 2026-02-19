@@ -4,7 +4,7 @@ var active_effects: Array[EffectInstance] = []
 @onready var actor: CharacterBody2D = get_parent()
 
 func add_effect(res: StatusEffectRes) -> void:
-	var existing_effect = null
+	var existing_effect: EffectInstance = null
 	for inst in active_effects:
 		if inst.data.effect_name == res.effect_name:
 			existing_effect = inst
@@ -13,7 +13,7 @@ func add_effect(res: StatusEffectRes) -> void:
 	if existing_effect:
 		match res.stack_mode:
 			StatusEffectRes.StackMode.REFRESH:
-				existing_effect.time_left = res.duration
+				existing_effect.on_refresh()
 				existing_effect.data.on_refresh(actor)
 				return 
 			StatusEffectRes.StackMode.IGNORE:
@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		var inst = active_effects[i]
 		inst.time_left -= delta
 		
-		inst.data.on_tick(actor, delta, inst)
+		inst.data._on_tick(actor, delta, inst)
 		
 		if inst.time_left <= 0:
 			inst.data.on_remove(actor)

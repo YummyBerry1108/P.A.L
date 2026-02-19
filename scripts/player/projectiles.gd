@@ -2,7 +2,7 @@ extends Node
 
 var loaded_skills: Dictionary = {}
 
-func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_global_rotation: float):
+func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_global_rotation: float) -> void:
 	if not loaded_skills.has(skill_scene_name):
 		loaded_skills[skill_scene_name] = load(skill_scene_name)
 

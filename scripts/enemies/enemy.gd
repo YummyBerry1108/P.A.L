@@ -10,12 +10,12 @@ signal _on_enemy_died(enemy: Enemy)
 @export_category("Basic")
 @export var hp: float = 50
 @export var damage: float = 10.0
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var hurt_box: Area2D = $HurtBox
-@onready var effect_component: EffectComponent = $EffectComponent
-@onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
-@onready var damage_component: DamageComponent = $DamageComponent
-@onready var knockback_component: KnockbackComponent = $KnockbackComponent
+@onready var sprite: Sprite2D = get_node("Sprite2D")
+@onready var hurt_box: Area2D = get_node("HurtBox")
+@onready var effect_component: EffectComponent = get_node("EffectComponent")
+@onready var hit_flash_animation_player: AnimationPlayer = get_node("HitFlashAnimationPlayer")
+@onready var damage_component: DamageComponent = get_node("DamageComponent")
+@onready var knockback_component: KnockbackComponent = get_node("KnockbackComponent")
 
 #@onready var dev_info: Label = $DevInfo
 

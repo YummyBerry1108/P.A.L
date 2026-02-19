@@ -1,8 +1,5 @@
 class_name Dummy extends Enemy
 
-@onready var dev_info: Label = $DevInfo
-@onready var dps_timer: Timer = $DevInfo/DPSTimer
-
 var total_damage: float = 0.0
 
 var damage_this_second: float = 0.0
