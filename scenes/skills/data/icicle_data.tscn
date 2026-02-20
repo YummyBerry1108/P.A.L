@@ -12,7 +12,7 @@ duration = 3.1
 tick_interval = 1.0
 metadata/_custom_type_script = "uid://b0ccd72rcl386"
 
-[node name="icicle_data" type="Node"]
+[node name="IcicleData" type="Node"]
 script = ExtResource("1_cgqye")
 skill_name = "icicle"
 firerate = 0.333

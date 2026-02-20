@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=21 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dhfmuydovevvi" path="res://scenes/skills/data/snowball_data.tscn" id="7_h17s1"]
 [ext_resource type="Texture2D" uid="uid://co1d4vw80cpet" path="res://imgs/player/frame_0005.png" id="7_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="10_h17s1"]
+[ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -74,6 +75,7 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0ax77")
 damage = 0.0
+hp = 10000.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -125,9 +127,14 @@ script = ExtResource("6_je7p5")
 
 [node name="Skills" type="Node" parent="."]
 
-[node name="icicle_data" parent="Skills" instance=ExtResource("6_5gtgg")]
+[node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
+firerate = 1.0
 
-[node name="snowball_data" parent="Skills" instance=ExtResource("7_h17s1")]
+[node name="IcicleData" parent="Skills" instance=ExtResource("6_5gtgg")]
+disable = true
+
+[node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
+disable = true
 
 [node name="Projectiles" type="Node" parent="."]
 script = ExtResource("7_0owmy")

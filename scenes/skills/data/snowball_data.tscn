@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="1_e7b3e"]
 
-[node name="snowball_data" type="Node"]
+[node name="SnowballData" type="Node"]
 script = ExtResource("1_e7b3e")
 skill_name = "snowball"
 projectile_damage = 5.0

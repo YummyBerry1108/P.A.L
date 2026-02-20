@@ -1,6 +1,6 @@
 class_name Projectile extends CharacterBody2D
 
-@onready var hitbox: Area2D = get_node("Hitbox")
+@onready var hitbox: Area2D = get_node_or_null("Hitbox")
 
 @export var initial_speed: float = 240.0
 @export var target_speed: float = 240.0
