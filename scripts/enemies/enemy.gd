@@ -17,7 +17,6 @@ var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 @onready var hit_flash_animation_player: AnimationPlayer = get_node("HitFlashAnimationPlayer")
 @onready var damage_component: DamageComponent = get_node("DamageComponent")
 @onready var knockback_component: KnockbackComponent = get_node("KnockbackComponent")
-
 #@onready var dev_info: Label = $DevInfo
 
 var speed: float = 100

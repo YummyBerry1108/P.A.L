@@ -3,6 +3,8 @@ extends Enemy
 enum State { TARGET, LOCK_ON, DASH, CHASE , ROOT , IDLE}
 var current_state = State.ROOT
 
+@onready var state_timer: Timer = $StateTimer
+
 @export var dash_speed: float = 900.0
 @export var target_duration: float = 0.5
 @export var lock_duration: float = 0.5 
@@ -10,10 +12,12 @@ var current_state = State.ROOT
 @export var jump_duration: float = 0.5
 @export var idle_duration: float = 0.5
 
+
 func _ready() -> void:
 	super()
 	speed = 250
 	if !multiplayer.is_server(): return
+	state_timer.one_shot = true
 	_start_root_phase()
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +38,13 @@ func _physics_process(delta: float) -> void:
 	knockback_component.knockback_check(delta)
 	move_and_slide()
 
+func _start_state_timer(duration: float, next_phase: Callable) -> void:
+	for conn in state_timer.timeout.get_connections():
+		state_timer.timeout.disconnect(conn.callable)
+		
+	state_timer.timeout.connect(next_phase)
+	state_timer.start(duration)
+
 func _start_root_phase() -> void:
 	current_state = State.ROOT
 	set_collision_mask_value(PhysicsLayers.ENEMY, true)
@@ -52,25 +63,21 @@ func _start_chase_phase() -> void:
 	var target_pos: Vector2 = get_nearest_player()
 	direction = global_position.direction_to(target_pos)
 	
-	await get_tree().create_timer(jump_duration).timeout
-	
-	_start_idle_phase()
+	_start_state_timer(idle_duration, _start_root_phase)
 
 func _start_idle_phase() -> void:
 	current_state = State.IDLE
 	
 	await get_tree().create_timer(idle_duration).timeout
 	
-	_start_root_phase()
+	_start_state_timer(idle_duration, _start_root_phase)
 
 func _start_target_phase() -> void:
 	current_state = State.TARGET
 	
 	velocity = Vector2.ZERO
 	
-	await get_tree().create_timer(lock_duration).timeout
-	
-	_start_lock_on_phase()
+	_start_state_timer(lock_duration, _start_lock_on_phase)
 
 func _start_lock_on_phase() -> void:
 	
@@ -78,15 +85,12 @@ func _start_lock_on_phase() -> void:
 	
 	var target_pos: Vector2 = get_nearest_player()
 	direction = global_position.direction_to(target_pos)
-	await get_tree().create_timer(lock_duration).timeout
 	
-	_start_dash_phase()
+	_start_state_timer(lock_duration, _start_dash_phase)
 
 func _start_dash_phase() -> void:
 	current_state = State.DASH
 	set_collision_mask_value(PhysicsLayers.ENEMY, false)
 	set_collision_layer_value(PhysicsLayers.ENEMY, false)
 	
-	await get_tree().create_timer(dash_duration).timeout
-	
-	_start_idle_phase()
+	_start_state_timer(dash_duration, _start_idle_phase)
