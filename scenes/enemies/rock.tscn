@@ -66,6 +66,9 @@ script = ExtResource("1_1di36")
 texture = ExtResource("2_mek2u")
 hp = 200.0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+speed_scale = 2.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ik6fu")
 texture = ExtResource("2_mek2u")

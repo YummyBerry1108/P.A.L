@@ -1,58 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvbjuk7t2yx1x"]
+[gd_scene load_steps=13 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
+[ext_resource type="Texture2D" uid="uid://diq6bg4jjfqoq" path="res://imgs/enemies/Rabbit.png" id="2_dxh4p"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
-[ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/frame_0001.png" id="4_ka7i1"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_q7wfq"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_46k04"]
-[ext_resource type="Texture2D" uid="uid://bih7glidu7518" path="res://imgs/enemies/Rabbit/frame_0002.png" id="5_qo215"]
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="6_7hee8"]
-[ext_resource type="Texture2D" uid="uid://btuovxrl35pjr" path="res://imgs/enemies/Rabbit/frame_0003.png" id="6_lmywa"]
-[ext_resource type="Texture2D" uid="uid://caoxtedun0pdg" path="res://imgs/enemies/Rabbit/frame_0004.png" id="7_mnrav"]
-[ext_resource type="Texture2D" uid="uid://dh05d2323f1g0" path="res://imgs/enemies/Rabbit/frame_0005.png" id="8_eq4af"]
-[ext_resource type="Texture2D" uid="uid://dhs2xkmaafhpk" path="res://imgs/enemies/Rabbit/frame_0006.png" id="9_jsgxj"]
-[ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/frame_0007.png" id="10_xwg4q"]
-[ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
-[ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
 resource_local_to_scene = true
 shader = ExtResource("3_haj5u")
 shader_parameter/enabled = false
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nu5es"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_ka7i1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_qo215")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_lmywa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_mnrav")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_eq4af")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_jsgxj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_xwg4q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_av6w0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haj5u"]
 radius = 114.583
@@ -63,7 +22,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +38,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,25 +58,19 @@ _data = {
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("AnimatedSprite2D:frame")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath("AnimatedSprite2D:flip_h")
-properties/2/spawn = true
-properties/2/replication_mode = 2
 
 [node name="Rabbit" type="CharacterBody2D"]
 scale = Vector2(0.48, 0.48)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_0rrc3")
+texture = ExtResource("2_dxh4p")
 hp = 75.0
 damage = 15.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_haj5u")
-sprite_frames = SubResource("SpriteFrames_nu5es")
-speed_scale = 2.0
+texture = ExtResource("2_dxh4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6.25, 91.6667)
@@ -146,12 +99,6 @@ libraries = {
 
 [node name="DamageNumberPosition" type="Marker2D" parent="."]
 position = Vector2(2.08333, -260.417)
-
-[node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "animated_sprite_2d")]
-script = ExtResource("12_qo215")
-actor = NodePath("..")
-animated_sprite_2d = NodePath("../AnimatedSprite2D")
-metadata/_custom_type_script = "uid://doq8etj8lyb57"
 
 [node name="EffectComponent" type="Node" parent="."]
 script = ExtResource("4_q7wfq")

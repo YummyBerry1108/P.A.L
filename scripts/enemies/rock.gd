@@ -1,10 +1,13 @@
 extends Enemy
 
+@onready var sprite: Sprite2D = get_node("Sprite2D")
 @export var max_speed: float = 400.0
 @export var steer_force: float = 300.0
 
 func _ready() -> void:
 	super()
+	if texture:
+		sprite.texture = texture
 
 func _physics_process(delta: float) -> void:
 	if !multiplayer.is_server(): return

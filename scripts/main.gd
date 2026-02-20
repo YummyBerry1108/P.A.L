@@ -25,6 +25,7 @@ func _ready() -> void:
 	player_spawner.spawned.connect(_on_player_spawned)
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
 	
+	player_scene.resource_local_to_scene = true
 	exp_bar.value = 0
 	exp_label.text = "Level: 0"
 	spectate_label.hide()
@@ -150,7 +151,7 @@ func start_game() -> void:
 		player_amount += 1
 	
 	spawn_enemy("rabbit", 1)
-	spawn_enemy("rock", 0)
+	spawn_enemy("rock", 1)
 	spawn_enemy("snail", 3)
 	
 

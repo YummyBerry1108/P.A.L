@@ -66,6 +66,8 @@ script = ExtResource("1_2hh5m")
 actor = NodePath("..")
 damage_component = NodePath("../DamageComponent")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_k1tqs")
 texture = ExtResource("1_0j1vb")

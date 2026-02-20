@@ -5,7 +5,7 @@ func run(args: Dictionary) -> void:
 
 func WASD_movement(player: Player, SPEED: float, delta: float) -> void:
 	var dir = Vector2(0, 0)
-	var animation_sprite = player.sprite_2d
+	var animation_sprite: AnimatedSprite2D = player.sprite_2d
 	
 	if Input.is_action_pressed("right"):
 		dir.x += 1
@@ -19,9 +19,9 @@ func WASD_movement(player: Player, SPEED: float, delta: float) -> void:
 	animation_sprite.flip_h = animation_sprite.flip_h if dir.x == 0 else dir.x < 0 
 	
 	if(dir.length() == 0):
-		animation_sprite.texture.set_current_frame(0)
+		animation_sprite.frame = 0
 	else:
-		animation_sprite.texture.pause = false
+		animation_sprite.play()
 	
 	player.velocity = dir * SPEED
 	

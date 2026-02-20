@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		var inst = active_effects[i]
 		inst.time_left -= delta
 		
-		inst.data.on_tick(actor, delta, inst)
+		inst.data._on_tick(actor, delta, inst)
 		
 		if inst.time_left <= 0:
 			inst.data.on_remove(actor)

@@ -10,7 +10,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var projectiles: Node = $Projectiles
 @onready var display_name: Label = $DisplayName 
 @onready var health_bar: ProgressBar = $HealthBar
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var damage: float = 10.0
 @export var hp: float = 100.0

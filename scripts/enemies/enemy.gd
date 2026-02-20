@@ -3,14 +3,15 @@ class_name Enemy extends CharacterBody2D
 signal _on_enemy_died(enemy: Enemy)
 
 
-@export var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
+var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 #@onready var dev_info: Label = $DevInfo
 
 @export var texture: Texture2D
 @export_category("Basic")
 @export var hp: float = 50
 @export var damage: float = 10.0
-@onready var sprite: Sprite2D = get_node("Sprite2D")
+@onready var animated_sprite_2d: AnimatedSprite2D = get_node("AnimatedSprite2D")
+#@onready var sprite: Sprite2D = get_node("Sprite2D")
 @onready var hurt_box: Area2D = get_node("HurtBox")
 @onready var effect_component: EffectComponent = get_node("EffectComponent")
 @onready var hit_flash_animation_player: AnimationPlayer = get_node("HitFlashAnimationPlayer")
@@ -27,8 +28,9 @@ var knockback_timer: float = 0.0
 var exp_amount: int = 1
 
 func _ready() -> void:
-	if texture:
-		sprite.texture = texture
+	pass
+	#if texture:
+		#sprite.texture = texture
 		
 func _physics_process(delta: float) -> void:
 	if not multiplayer.is_server():

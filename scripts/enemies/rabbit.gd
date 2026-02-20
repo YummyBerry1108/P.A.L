@@ -12,8 +12,6 @@ var current_state = State.ROOT
 
 func _ready() -> void:
 	super()
-	if texture:
-		sprite.texture = texture
 	speed = 250
 	if !multiplayer.is_server(): return
 	_start_root_phase()
