@@ -3,7 +3,6 @@ class_name DamageComponent extends Node
 @export var actor: Enemy
 @export var effect_component: EffectComponent
 @export var damage_number_position: Marker2D
-@export var knockback_component: KnockbackComponent
 @export var hurt_box: Area2D
 
 signal on_hit(damage: float)
@@ -26,9 +25,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			result = projectile.damage
 		
 		take_damage.rpc(result, critical_hit)
-		
-		if knockback_component:
-			knockback_component.apply_knockback(projectile.knockback_force, projectile.velocity.normalized(), projectile.knockback_duration)
 		
 		for effect in projectile.status_effects:
 			effect_component.add_effect(effect)

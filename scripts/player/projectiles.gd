@@ -18,3 +18,4 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 		new_projectile.knockback_duration = skill_data.knockback_duration
 
 	add_child(new_projectile, true)
+	new_projectile.owner = owner

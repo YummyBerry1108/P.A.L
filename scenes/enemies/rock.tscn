@@ -101,12 +101,11 @@ libraries = {
 [node name="DamageNumberPosition" type="Marker2D" parent="."]
 position = Vector2(2.08333, -260.417)
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "knockback_component", "hurt_box")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
 script = ExtResource("5_ouckr")
 actor = NodePath("..")
 effect_component = NodePath("../EffectComponent")
 damage_number_position = NodePath("../DamageNumberPosition")
-knockback_component = NodePath("../KnockbackComponent")
 hurt_box = NodePath("../HurtBox")
 metadata/_custom_type_script = "uid://ckuysfco5ijdx"
 
