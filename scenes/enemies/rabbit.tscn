@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 [ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/frame_0001.png" id="4_ka7i1"]
-[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/effects/effect_component.gd" id="4_q7wfq"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_46k04"]
 [ext_resource type="Texture2D" uid="uid://bih7glidu7518" path="res://imgs/enemies/Rabbit/frame_0002.png" id="5_qo215"]
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="6_7hee8"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/frame_0007.png" id="10_xwg4q"]
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
 resource_local_to_scene = true
@@ -153,17 +153,18 @@ actor = NodePath("..")
 animated_sprite_2d = NodePath("../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://doq8etj8lyb57"
 
-[node name="EffectComponent" type="Node" parent="."]
-script = ExtResource("4_q7wfq")
-metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
-
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "knockback_component", "hurt_box")]
 script = ExtResource("5_46k04")
 actor = NodePath("..")
 effect_component = NodePath("../EffectComponent")
 damage_number_position = NodePath("../DamageNumberPosition")
+knockback_component = NodePath("../KnockbackComponent")
 hurt_box = NodePath("../HurtBox")
 metadata/_custom_type_script = "uid://ckuysfco5ijdx"
+
+[node name="EffectComponent" type="Node" parent="."]
+script = ExtResource("13_ka7i1")
+metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
 [node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
 script = ExtResource("6_7hee8")

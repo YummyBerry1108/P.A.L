@@ -1,4 +1,5 @@
-class_name EffectComponent extends Node
+class_name EffectComponent
+extends Node
 
 var active_effects: Array[EffectInstance] = []
 @onready var actor: CharacterBody2D = get_parent()
