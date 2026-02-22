@@ -3,6 +3,7 @@ extends Label
 var player_list: Dictionary = {}
 
 func _ready() -> void:
+	#visible_characters = -1
 	text =\
 	"""
 	Player List

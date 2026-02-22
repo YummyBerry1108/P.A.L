@@ -1,10 +1,7 @@
 extends Node2D
 
-@onready var health_bar: ProgressBar = $UI/HealthBar
-@onready var exp_bar: ProgressBar = $UI/ExpBar
-@onready var exp_label: Label = $UI/ExpLabel
-@onready var time_label: Label = $UI/TimeLabel
-@onready var spectate_label: Label = $UI/SpectateLabel
+@export var ui: Control
+
 @onready var player_container: Node2D = $PlayerContainer
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var exp_orb_container: Node2D = $ExpOrbContainer
@@ -19,6 +16,9 @@ var time_elapsed: float = 0.0
 var is_timer_running: bool = true
 
 func _ready() -> void:
+	
+	
+	
 	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 	Lobby.server_disconnected.connect(_on_server_disconnected)
 	Lobby.player_disconnected.connect(_on_player_disconnected)
@@ -26,9 +26,9 @@ func _ready() -> void:
 	enemy_spawner.spawned.connect(_on_enemy_spawned)
 	
 	player_scene.resource_local_to_scene = true
-	exp_bar.value = 0
-	exp_label.text = "Level: 0"
-	spectate_label.hide()
+	ui.exp_bar.value = 0
+	ui.exp_label.text = "Level: 0"
+	ui.spectate_label.hide()
 
 func _process(delta: float) -> void:
 	if is_timer_running:
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 		add_experience(1)
 
 func add_experience(value: int) -> void:
-	exp_bar.add_experience(value)
+	ui.exp_bar.add_experience(value)
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():
@@ -51,11 +51,11 @@ func _update_timer_ui() -> void:
 	var minutes = floor(time_elapsed / 60)
 	var seconds = int(time_elapsed) % 60
 	
-	time_label.text = "%02d:%02d" % [minutes, seconds]
+	ui.time_label.text = "%02d:%02d" % [minutes, seconds]
 
 func _update_spectate_ui(new_text: String) -> void:
-	spectate_label.text = "Spectating: " + new_text
-	spectate_label.show()
+	ui.spectate_label.text = "Spectating: " + new_text
+	ui.spectate_label.show()
 
 func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
@@ -86,9 +86,9 @@ func _on_player_spawned(player: Player) -> void:
 	if not multiplayer.is_server():
 		player.player_died.connect(_on_player_died)
 	if player.is_multiplayer_authority():
-		player.health_changed.connect(health_bar._set_health)
+		player.health_changed.connect(ui.health_bar._set_health)
 		player.spectate_changed.connect(_update_spectate_ui)
-		health_bar.init_health(player.hp)
+		ui.health_bar.init_health(player.hp)
 		
 func _on_player_disconnected(id: int) -> void:
 	player_amount -= 1

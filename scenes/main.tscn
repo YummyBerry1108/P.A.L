@@ -1,141 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=4 format=3 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
-[ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://y0ulfkia0dwf" path="res://scripts/ui/pause_label.gd" id="6_tefeu"]
-[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://huiugp0cfgho" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
-bg_color = Color(0.197937, 0.197937, 0.197937, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
-bg_color = Color(0.743349, 0.742466, 0.425433, 1)
-border_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jyhfs"]
-font_size = 32
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
-font_size = 32
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_tipki"]
-font_size = 64
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_tefeu"]
-font_size = 64
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tefeu"]
-properties/0/path = NodePath(".:text")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath("../ExpLabel:text")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath("../ExpBar:value")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath("../ExpBar:max_value")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_tipki")
+ui = NodePath("CanvasLayer/UI")
 
 [node name="Dummy" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(418, 5)
 
 [node name="Dummy2" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(604, 261)
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" parent="UI" instance=ExtResource("8_85g3d")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -510.0
-offset_top = -112.0
-offset_right = -18.0
-offset_bottom = -67.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="ExpBar" type="ProgressBar" parent="UI"]
-z_index = 5
-z_as_relative = false
-offset_left = 18.0
-offset_top = 675.0
-offset_right = 1263.0
-offset_bottom = 702.0
-theme_override_constants/outline_size = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_sugp2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jyhfs")
-max_value = 10.0
-value = 10.0
-show_percentage = false
-script = ExtResource("4_jyhfs")
-
-[node name="ExpLabel" type="Label" parent="UI"]
-offset_left = 21.0
-offset_top = 625.0
-offset_right = 110.0
-offset_bottom = 670.0
-text = "Level:"
-label_settings = SubResource("LabelSettings_jyhfs")
-script = ExtResource("5_tbgi4")
-
-[node name="SpectateLabel" type="Label" parent="UI"]
-offset_left = 38.0
-offset_top = 41.0
-offset_right = 217.0
-offset_bottom = 86.0
-text = "Spectating: "
-label_settings = SubResource("LabelSettings_sugp2")
-
-[node name="TimeLabel" type="Label" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -75.0
-offset_top = 25.0
-offset_right = 77.0
-offset_bottom = 113.0
-grow_horizontal = 2
-text = "Time"
-label_settings = SubResource("LabelSettings_tipki")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PauseLabel" type="Label" parent="UI"]
-process_mode = 3
-offset_left = 440.0
-offset_top = 276.0
-offset_right = 841.0
-offset_bottom = 364.0
-text = "Game Pause!"
-label_settings = SubResource("LabelSettings_tefeu")
-script = ExtResource("6_tefeu")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="UI"]
-root_path = NodePath("../TimeLabel")
-replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
@@ -155,4 +32,6 @@ spawn_path = NodePath("../PlayerContainer")
 _spawnable_scenes = PackedStringArray("uid://b78bhpq31lil4")
 spawn_path = NodePath("../ExpOrbContainer")
 
-[connection signal="_on_level_up" from="UI/ExpBar" to="UI/ExpLabel" method="_level_up"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_sugp2")]

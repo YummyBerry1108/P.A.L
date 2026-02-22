@@ -1,6 +1,6 @@
 extends Control
 
-@onready var player_list: Label = $PlayerList
+@export var player_list: Label
 
 func _ready() -> void:
 	Lobby.player_connected.connect(player_list._on_lobby_player_connected)

@@ -1,7 +1,7 @@
 extends Control
 
-@onready var ip: LineEdit = $IP
-@onready var username: LineEdit = $Username
+@export var ip: LineEdit
+@export var username: LineEdit
 
 func _on_server_button_down() -> void:
 	Lobby.is_server = true

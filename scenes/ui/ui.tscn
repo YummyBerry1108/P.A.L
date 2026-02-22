@@ -1,0 +1,289 @@
+[gd_scene load_steps=25 format=3 uid="uid://huiugp0cfgho"]
+
+[ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
+[ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
+[ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="2_0dwhk"]
+[ext_resource type="Texture2D" uid="uid://m6mof2chgq3" path="res://imgs/ui/map_frame.png" id="2_pfayw"]
+[ext_resource type="Texture2D" uid="uid://7qyh2o1fk3hf" path="res://imgs/ui/exp_icon.png" id="2_uegxj"]
+[ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="3_pfayw"]
+[ext_resource type="Script" uid="uid://y0ulfkia0dwf" path="res://scripts/ui/pause_label.gd" id="4_7vp6q"]
+[ext_resource type="Texture2D" uid="uid://doybf1yetn0ky" path="res://imgs/ui/player_info_background.png" id="5_jcn1r"]
+[ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="6_uegxj"]
+[ext_resource type="Texture2D" uid="uid://b1eskkahnho3u" path="res://imgs/ui/health_icon.png" id="9_y220t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swkix"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jyhfs"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0dwhk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uegxj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
+bg_color = Color(0.743349, 0.742466, 0.425433, 1)
+border_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y220t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hl07w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hc5d0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4kltc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tipki"]
+font_size = 64
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tefeu"]
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tefeu"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = false
+properties/0/replication_mode = 2
+properties/1/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar:value")
+properties/1/spawn = false
+properties/1/replication_mode = 2
+properties/2/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar:max_value")
+properties/2/spawn = false
+properties/2/replication_mode = 2
+properties/3/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel:text")
+properties/3/spawn = false
+properties/3/replication_mode = 2
+
+[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "spectate_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_0dwhk")
+exp_bar = NodePath("BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar")
+exp_label = NodePath("BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel")
+health_bar = NodePath("BottomVBoxContainer2/HBoxContainer/HealthBar")
+time_label = NodePath("TimeLabel")
+spectate_label = NodePath("BottomVBoxContainer/SpectateLabel")
+
+[node name="BottomVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="SpectateLabel" type="Label" parent="BottomVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Spectating: "
+label_settings = SubResource("LabelSettings_sugp2")
+
+[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxEmpty_swkix")
+
+[node name="ExpBoxContainer" type="VBoxContainer" parent="BottomVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="ExpLabelHBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ExpLabel" type="Label" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Level:"
+label_settings = SubResource("LabelSettings_jyhfs")
+script = ExtResource("3_pfayw")
+
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 650
+theme_override_styles/separator = SubResource("StyleBoxEmpty_0dwhk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_uegxj")
+
+[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_uegxj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ExpBar" type="ProgressBar" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+z_index = 5
+z_as_relative = false
+custom_minimum_size = Vector2(700, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/outline_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_sugp2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jyhfs")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+script = ExtResource("2_0dwhk")
+
+[node name="HSeparator2" type="HSeparator" parent="BottomVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_y220t")
+
+[node name="BottomVBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("9_y220t")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HealthBar" parent="BottomVBoxContainer2/HBoxContainer" instance=ExtResource("1_g5kmx")]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_hl07w")
+
+[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_hc5d0")
+
+[node name="RightSideVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -325.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TeammateDisplay" type="TextureRect" parent="RightSideVBoxContainer"]
+custom_minimum_size = Vector2(300, 140)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("5_jcn1r")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HSeparator" type="HSeparator" parent="RightSideVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4kltc")
+
+[node name="StatusDisplay" type="TextureRect" parent="RightSideVBoxContainer"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("6_uegxj")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LeftSideVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+
+[node name="MapFrame" type="TextureRect" parent="LeftSideVBoxContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("2_pfayw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_right = 76.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Time"
+label_settings = SubResource("LabelSettings_tipki")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseLabel" type="Label" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = -44.0
+offset_right = 200.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Pause!"
+label_settings = SubResource("LabelSettings_tefeu")
+script = ExtResource("4_7vp6q")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../TimeLabel")
+replication_config = SubResource("SceneReplicationConfig_tefeu")
+
+[connection signal="_on_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
