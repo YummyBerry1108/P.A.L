@@ -67,7 +67,7 @@ properties/2/spawn = true
 properties/2/replication_mode = 2
 properties/3/path = NodePath("AnimatedSprite2D:flip_h")
 properties/3/spawn = true
-properties/3/replication_mode = 1
+properties/3/replication_mode = 2
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -147,6 +147,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealthBar" parent="." instance=ExtResource("10_h17s1")]
+z_index = 5
+z_as_relative = false
 offset_left = -120.0
 offset_top = 38.0
 offset_right = 120.0
