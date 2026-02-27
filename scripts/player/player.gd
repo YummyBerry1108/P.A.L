@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(health: float)
+signal max_health_changed(health: float)
 signal player_died(id: int)
 signal spectate_changed(name: String) # used in spectate.gd
 
@@ -13,6 +14,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var damage: float = 10.0
+@export var max_hp: float = 100.0
 @export var hp: float = 100.0
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
@@ -39,6 +41,7 @@ func _ready() -> void:
 	display_name.text = username
 	
 	health_changed.connect(health_bar._set_health)
+	max_health_changed.connect(health_bar.init_health)
 	health_bar.init_health(hp)
 	
 	if is_multiplayer_authority():
@@ -97,6 +100,22 @@ func take_damage(damage: float) -> void:
 		die()
 	is_invincible = true
 	invincibility_timer.start()
+
+@rpc("any_peer", "call_local")
+func upgrade_stat(upgrade_id: String) -> void:
+	match upgrade_id:
+		"hp_up":
+			change_max_hp(max_hp + 10)
+		"speed_up":
+			speed_mutiplier += 0.1
+		"damage_up":
+			damage += 5
+	
+func change_max_hp(new_hp: float) -> void:
+	max_hp = new_hp
+	hp = max_hp
+	max_health_changed.emit(max_hp)
+	
 
 func die() -> void:
 	is_alive = false

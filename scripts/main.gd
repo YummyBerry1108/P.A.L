@@ -87,6 +87,7 @@ func _on_player_spawned(player: Player) -> void:
 		player.player_died.connect(_on_player_died)
 	if player.is_multiplayer_authority():
 		player.health_changed.connect(ui.health_bar._set_health)
+		player.max_health_changed.connect(ui.health_bar.init_health)
 		player.spectate_changed.connect(_update_spectate_ui)
 		ui.health_bar.init_health(player.hp)
 		

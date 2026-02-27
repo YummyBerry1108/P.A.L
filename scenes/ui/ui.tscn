@@ -326,3 +326,5 @@ root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeHBoxContainer" method="show_upgrades"]

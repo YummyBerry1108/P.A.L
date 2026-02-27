@@ -27,5 +27,6 @@ func _on_card_selected(upgrade_id: String):
 	hide()
 	for child in get_children():
 		child.queue_free()
-		
+	
 	GameManager.request_toggle_pause.rpc_id(1)
+	GameManager.submit_upgrade.rpc(upgrade_id)
