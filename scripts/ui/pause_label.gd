@@ -16,4 +16,5 @@ func _unhandled_input(event) -> void:
 	if event.is_action_pressed("pause"): 
 		text = "Game Pause!"
 		if multiplayer.is_server():
-			GameManager.request_toggle_pause.rpc_id(1)
+			var new_state = not get_tree().paused
+			GameManager.change_pause_state.rpc(new_state)

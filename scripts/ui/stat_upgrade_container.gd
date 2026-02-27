@@ -20,13 +20,14 @@ func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
 
 func _on_level_up() -> void:
-	GameManager.request_toggle_pause.rpc_id(1)
+	GameManager.change_pause_state.rpc(true)
 	show_upgrades.rpc()
 	
 @rpc("authority", "call_local", "reliable")
 func show_upgrades() -> void:
-	if not GameManager.player.is_alive:
+	if not GameManager.local_player.is_alive:
 		return
+		
 	for child in get_children():
 		child.queue_free()
 	show()
@@ -53,8 +54,7 @@ func _on_card_selected(upgrade_id: String) -> void:
 	for child in get_children():
 		child.queue_free()
 
-	GameManager.upgrade_choosen.rpc_id(1)
-	GameManager.submit_upgrade.rpc(upgrade_id)
+	GameManager.submit_upgrade.rpc_id(1, upgrade_id)
 
 func _on_timer_timeout() -> void:
 	var card = get_children().pick_random()
