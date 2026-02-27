@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv610u5482jt6"]
+
+[ext_resource type="Script" uid="uid://bliku4njuvr7f" path="res://scripts/ui/stat_upgrade_button.gd" id="1_uujw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wctt"]
+bg_color = Color(0.219658, 0.207127, 0.187937, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.81069, 0.811635, 0.831269, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uujw7"]
+bg_color = Color(0.14111, 0.13205, 0.118174, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.81069, 0.811635, 0.831269, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1n7eo"]
+font_size = 64
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jwdo"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StatUpgrade" type="Button" node_paths=PackedStringArray("title_label", "desc_label")]
+anchors_preset = -1
+anchor_top = -0.00277778
+anchor_right = 0.335156
+anchor_bottom = 0.752778
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_5wctt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uujw7")
+script = ExtResource("1_uujw7")
+title_label = NodePath("MarginContainer/VBoxContainer/TitleLabel")
+desc_label = NodePath("MarginContainer/VBoxContainer/DescLabel")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = -199.0
+offset_right = 152.5
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_1n7eo")
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Description"
+label_settings = SubResource("LabelSettings_1jwdo")
+horizontal_alignment = 1
+autowrap_mode = 1

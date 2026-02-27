@@ -4,6 +4,9 @@ extends Node
 
 signal pause_state_changed(is_paused: bool)
 
+var total_player: int = 0
+var players_upgraded: int = 0
+
 @rpc("any_peer", "call_local", "reliable")
 func request_toggle_pause():
 	if not multiplayer.is_server():

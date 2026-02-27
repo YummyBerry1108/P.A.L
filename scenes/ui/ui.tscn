@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://huiugp0cfgho"]
+[gd_scene load_steps=28 format=3 uid="uid://huiugp0cfgho"]
 
 [ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://doybf1yetn0ky" path="res://imgs/ui/player_info_background.png" id="5_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="6_uegxj"]
 [ext_resource type="Texture2D" uid="uid://b1eskkahnho3u" path="res://imgs/ui/health_icon.png" id="9_y220t"]
+[ext_resource type="Script" uid="uid://bg40okqql5s42" path="res://scripts/ui/stat_upgrade_container.gd" id="10_4kltc"]
+[ext_resource type="PackedScene" uid="uid://cv610u5482jt6" path="res://scenes/ui/stat_upgrade.tscn" id="11_hl07w"]
+[ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/etc/stat_upgrade_data.gd" id="13_swkix"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
 font_size = 32
@@ -71,7 +74,7 @@ properties/3/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/ExpLabelHBo
 properties/3/spawn = false
 properties/3/replication_mode = 2
 
-[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "spectate_label")]
+[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label", "stat_upgrade_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +88,9 @@ exp_bar = NodePath("BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar")
 exp_label = NodePath("BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel")
 health_bar = NodePath("BottomVBoxContainer2/HBoxContainer/HealthBar")
 time_label = NodePath("TimeLabel")
+pause_label = NodePath("PauseLabel")
 spectate_label = NodePath("BottomVBoxContainer/SpectateLabel")
+stat_upgrade_container = NodePath("StatUpgradeHBoxContainer")
 
 [node name="BottomVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -282,8 +287,42 @@ text = "Game Pause!"
 label_settings = SubResource("LabelSettings_tefeu")
 script = ExtResource("4_7vp6q")
 
+[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="." node_paths=PackedStringArray("stat_upgrades")]
+process_mode = 3
+layout_mode = 2
+offset_left = 130.0
+offset_top = 116.0
+offset_right = 1132.0
+offset_bottom = 595.0
+script = ExtResource("10_4kltc")
+upgrade_card_scene = ExtResource("11_hl07w")
+stat_upgrades = NodePath("../StatUpgrades")
+
+[node name="StatUpgrades" type="Node" parent="."]
+
+[node name="hp_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("13_swkix")
+upgrade_id = "hp_up"
+title = "HP+"
+description = "Add 10 HP"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="speed_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("13_swkix")
+upgrade_id = "speed_up"
+title = "Speed+"
+description = "Increase your move speed"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="damage_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("13_swkix")
+upgrade_id = "damage_up"
+title = "Damage+"
+description = "Increase your damage"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
 
-[connection signal="_on_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
