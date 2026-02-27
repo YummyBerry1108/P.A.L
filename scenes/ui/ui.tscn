@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://huiugp0cfgho"]
+[gd_scene load_steps=29 format=3 uid="uid://huiugp0cfgho"]
 
 [ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
@@ -60,6 +60,11 @@ font_size = 64
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_swkix"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tefeu"]
 properties/0/path = NodePath(".:text")
 properties/0/spawn = false
@@ -73,7 +78,7 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel:text")
 properties/3/spawn = false
 properties/3/replication_mode = 2
-properties/4/path = NodePath("../PauseLabel:text")
+properties/4/path = NodePath("../StatUpgradeUI/PauseLabel:text")
 properties/4/spawn = false
 properties/4/replication_mode = 2
 
@@ -91,9 +96,9 @@ exp_bar = NodePath("BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar")
 exp_label = NodePath("BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel")
 health_bar = NodePath("BottomVBoxContainer2/HBoxContainer/HealthBar")
 time_label = NodePath("TimeLabel")
-pause_label = NodePath("PauseLabel")
+pause_label = NodePath("StatUpgradeUI/PauseLabel")
 spectate_label = NodePath("BottomVBoxContainer/SpectateLabel")
-stat_upgrade_container = NodePath("StatUpgradeHBoxContainer")
+stat_upgrade_container = NodePath("StatUpgradeUI/StatUpgradeHBoxContainer")
 
 [node name="BottomVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -157,7 +162,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ExpBar" type="ProgressBar" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
-z_index = 5
 z_as_relative = false
 custom_minimum_size = Vector2(700, 27)
 layout_mode = 2
@@ -272,7 +276,29 @@ label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseLabel" type="Label" parent="."]
+[node name="StatUpgradeUI" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 564.0
+offset_right = -676.0
+offset_bottom = -680.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="StatUpgradeUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -564.0
+offset_right = 678.0
+offset_bottom = 677.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.635294)
+
+[node name="PauseLabel" type="Label" parent="StatUpgradeUI"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 8
@@ -280,44 +306,62 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.5
-offset_top = -44.0
-offset_right = 200.5
-offset_bottom = 44.0
+offset_left = -144.5
+offset_top = 296.0
+offset_right = 256.5
+offset_bottom = 384.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game Pause!"
 label_settings = SubResource("LabelSettings_tefeu")
 script = ExtResource("4_7vp6q")
 
-[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="." node_paths=PackedStringArray("stat_upgrades")]
+[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="StatUpgradeUI" node_paths=PackedStringArray("stat_upgrades", "upgrade_timer", "upgrade_timer_label", "background")]
 process_mode = 3
 layout_mode = 2
-offset_left = 130.0
+offset_left = -434.0
 offset_top = 116.0
-offset_right = 1132.0
+offset_right = 568.0
 offset_bottom = 595.0
 script = ExtResource("10_4kltc")
+choose_time = 10
 upgrade_card_scene = ExtResource("11_hl07w")
 stat_upgrades = NodePath("../StatUpgrades")
+upgrade_timer = NodePath("../UpgradeTimer")
+upgrade_timer_label = NodePath("../UpgradeTimeLabel")
+background = NodePath("../ColorRect")
 
-[node name="StatUpgrades" type="Node" parent="."]
+[node name="UpgradeTimeLabel" type="Label" parent="StatUpgradeUI"]
+layout_mode = 0
+offset_left = -73.0
+offset_top = 77.0
+offset_right = 211.0
+offset_bottom = 122.0
+text = "Upgrade Left Time"
+label_settings = SubResource("LabelSettings_swkix")
+horizontal_alignment = 1
 
-[node name="hp_up" type="Node" parent="StatUpgrades"]
+[node name="UpgradeTimer" type="Timer" parent="StatUpgradeUI"]
+process_mode = 3
+one_shot = true
+
+[node name="StatUpgrades" type="Node" parent="StatUpgradeUI"]
+
+[node name="hp_up" type="Node" parent="StatUpgradeUI/StatUpgrades"]
 script = ExtResource("13_swkix")
 upgrade_id = "hp_up"
 title = "HP+"
 description = "Add 10 HP"
 metadata/_custom_type_script = "uid://fmua36g13d4h"
 
-[node name="speed_up" type="Node" parent="StatUpgrades"]
+[node name="speed_up" type="Node" parent="StatUpgradeUI/StatUpgrades"]
 script = ExtResource("13_swkix")
 upgrade_id = "speed_up"
 title = "Speed+"
 description = "Increase your move speed"
 metadata/_custom_type_script = "uid://fmua36g13d4h"
 
-[node name="damage_up" type="Node" parent="StatUpgrades"]
+[node name="damage_up" type="Node" parent="StatUpgradeUI/StatUpgrades"]
 script = ExtResource("13_swkix")
 upgrade_id = "damage_up"
 title = "Damage+"
@@ -329,5 +373,6 @@ root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeHBoxContainer" method="_on_level_up"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeUI/PauseLabel" method="_on_level_up"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeUI/StatUpgradeHBoxContainer" method="_on_level_up"]
+[connection signal="timeout" from="StatUpgradeUI/UpgradeTimer" to="StatUpgradeUI/StatUpgradeHBoxContainer" method="_on_timer_timeout"]

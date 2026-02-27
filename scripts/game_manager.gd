@@ -4,6 +4,7 @@ extends Node
 
 signal pause_state_changed(is_paused: bool)
 
+var player: Player
 var total_player: int = 0
 var players_upgraded: Array = []
 
@@ -51,7 +52,6 @@ func _on_player_disconnected(id: int) -> void:
 	call_deferred("_check_resume")
 	
 func _check_resume() -> void:
-	print(get_tree().get_nodes_in_group("players").size())
 	if players_upgraded.size() >= get_tree().get_nodes_in_group("players").size():
 		var new_state = not get_tree().paused
 		apply_pause_state.rpc(new_state)
