@@ -5,10 +5,12 @@ extends HBoxContainer
 # Only add stat_upgrade button as its child
 
 ## toggle on little level up (1 level)
-func show_upgrades():
-	
+func _on_level_up() -> void:
 	GameManager.request_toggle_pause.rpc_id(1)
+	show_upgrades.rpc()
 	
+@rpc("authority", "call_local", "reliable")
+func show_upgrades() -> void:
 	for child in get_children():
 		child.queue_free()
 	show()
@@ -21,12 +23,12 @@ func show_upgrades():
 
 		card.upgrade_selected.connect(_on_card_selected)
 
-func _on_card_selected(upgrade_id: String):
+func _on_card_selected(upgrade_id: String) -> void:
 	print("玩家選擇了: ", upgrade_id)
 	
 	hide()
 	for child in get_children():
 		child.queue_free()
-	
-	GameManager.request_toggle_pause.rpc_id(1)
+
+	GameManager.upgrade_choosen.rpc_id(1)
 	GameManager.submit_upgrade.rpc(upgrade_id)

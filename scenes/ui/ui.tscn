@@ -73,6 +73,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath("../BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel:text")
 properties/3/spawn = false
 properties/3/replication_mode = 2
+properties/4/path = NodePath("../PauseLabel:text")
+properties/4/spawn = false
+properties/4/replication_mode = 2
 
 [node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label", "stat_upgrade_container")]
 layout_mode = 3
@@ -327,4 +330,4 @@ replication_config = SubResource("SceneReplicationConfig_tefeu")
 
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeHBoxContainer" method="show_upgrades"]
+[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeHBoxContainer" method="_on_level_up"]
