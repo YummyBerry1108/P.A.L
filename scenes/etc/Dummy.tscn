@@ -58,6 +58,8 @@ _data = {
 }
 
 [node name="Dummy" type="CharacterBody2D"]
+z_index = 2
+z_as_relative = false
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_2hh5m")

@@ -48,6 +48,8 @@ _data = {
 }
 
 [node name="Stick" type="CharacterBody2D"]
+z_index = 4
+z_as_relative = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_ygg8x")

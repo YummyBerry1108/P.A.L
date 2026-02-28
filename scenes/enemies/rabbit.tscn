@@ -107,6 +107,8 @@ properties/2/spawn = true
 properties/2/replication_mode = 2
 
 [node name="Rabbit" type="CharacterBody2D"]
+z_index = 2
+z_as_relative = false
 scale = Vector2(0.48, 0.48)
 collision_layer = 4
 collision_mask = 5

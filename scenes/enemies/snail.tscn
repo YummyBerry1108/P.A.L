@@ -143,6 +143,7 @@ properties/2/spawn = true
 properties/2/replication_mode = 2
 
 [node name="Snail" type="CharacterBody2D"]
+z_index = 2
 scale = Vector2(0.36, 0.36)
 collision_layer = 4
 collision_mask = 5

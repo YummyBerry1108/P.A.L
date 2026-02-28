@@ -16,6 +16,8 @@ radius = 97.0
 radius = 110.05
 
 [node name="Snowball" type="CharacterBody2D"]
+z_index = 4
+z_as_relative = false
 scale = Vector2(0.3, 0.3)
 collision_layer = 8
 script = ExtResource("1_6tw0o")

@@ -59,6 +59,8 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="Rock" type="CharacterBody2D"]
+z_index = 2
+z_as_relative = false
 scale = Vector2(0.375, 0.375)
 collision_layer = 4
 collision_mask = 5

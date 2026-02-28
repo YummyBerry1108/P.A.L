@@ -14,6 +14,8 @@ radius = 30.0
 height = 760.0
 
 [node name="Icicle" type="CharacterBody2D"]
+z_index = 4
+z_as_relative = false
 scale = Vector2(0.3, 0.3)
 collision_layer = 8
 script = ExtResource("1_14fa5")
