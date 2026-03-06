@@ -9,27 +9,37 @@ extends Node2D
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var exp_orb_container: Node2D = $ExpOrbContainer
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
-@onready var enemy_spawner: MultiplayerSpawner = $EnemySpawner
+@onready var multiplayer_enemy_spawner: MultiplayerSpawner = $MultiplayerEnemySpawner
+@onready var enemy_spawner: Node = $EnemySpawner
 
 var player_amount: int = 0
 var player_died_amount: int = 0
-var time_elapsed: float = 0.0
+var timer: float = 0.0
+var time_elapsed: float = 0.0 # use for total time 
 var is_timer_running: bool = true
+
+var enemy_names: Array[String] = ["snail", "rabbit", "rock"]
 
 func _ready() -> void:
 	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 	Lobby.server_disconnected.connect(_on_server_disconnected)
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 	player_spawner.spawned.connect(_on_player_spawned)
-	enemy_spawner.spawned.connect(_on_enemy_spawned)
+	multiplayer_enemy_spawner.spawned.connect(_on_enemy_spawned)
 	
 	ui.exp_bar.value = 0
 	ui.exp_label.text = "Level: 0"
 	ui.spectate_label.hide()
 
 func _process(delta: float) -> void:
+	
+	if timer > 3.0:
+		timer -= 3.0
+		enemy_spawner.spawn_enemy(enemy_names.pick_random())
+		
 	if is_timer_running:
 		time_elapsed += delta
+		timer += delta
 		_update_timer_ui()
 	
 	# press R
