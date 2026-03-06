@@ -3,6 +3,7 @@ extends Node
 # Autoload named GameManager
 
 signal pause_state_changed(is_paused: bool)
+signal player_amount_changed() # record player amount message by pause label
 
 var local_player: Player # the player that user control
 var players_upgraded: Array[int] = [] # use multiplayer id to record
@@ -29,6 +30,7 @@ func submit_upgrade(upgrade_id: String) -> void:
 		return
 		
 	players_upgraded.append(sender_id)
+	player_amount_changed.emit()
 	if player_node:
 		player_node.upgrade_stat.rpc(upgrade_id)
 	else:
@@ -46,6 +48,7 @@ func _on_player_disconnected(id: int) -> void:
 ## Resume game when all player have upgraded
 func _check_resume() -> void:
 	var player_amount: int = get_tree().get_nodes_in_group("players").size()
+	player_amount_changed.emit()
 	if players_upgraded.size() >= player_amount:
 		change_pause_state.rpc(false)
 		players_upgraded.clear()
