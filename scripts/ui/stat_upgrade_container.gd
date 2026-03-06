@@ -41,7 +41,7 @@ func show_upgrades() -> void:
 		var card = upgrade_card_scene.instantiate()
 		add_child(card)
 		var choose_stat: StatUpgradeData = stat_upgrades.get_children().pick_random()
-		card.setup(choose_stat.upgrade_id, choose_stat.title, choose_stat.description)
+		card.setup(choose_stat)
 
 		card.upgrade_selected.connect(_on_card_selected)
 

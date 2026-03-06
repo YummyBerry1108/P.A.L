@@ -16,7 +16,7 @@ border_width_left = 6
 border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
-border_color = Color(0.81069, 0.811635, 0.831269, 1)
+border_color = Color(0.828934, 0.806795, 0.814886, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n7eo"]
 font_size = 64
