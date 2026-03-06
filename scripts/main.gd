@@ -32,7 +32,7 @@ func _ready() -> void:
 	ui.spectate_label.hide()
 
 func _process(delta: float) -> void:
-	
+	# maybe use a timer node will be better?
 	if timer > 3.0:
 		timer -= 3.0
 		enemy_spawner.spawn_enemy(enemy_names.pick_random())
@@ -100,14 +100,15 @@ func _on_player_disconnected(id: int) -> void:
 func _on_player_died(id: int) -> void:
 	player_died_amount += 1
 	if multiplayer.is_server() and player_container.has_node(str(id)):
-		var disconnect_player: Player = player_container.get_node(str(id))
-		disconnect_player.remove_from_group("players")
+		var died_player: Player = player_container.get_node(str(id))
+		died_player.remove_from_group("players")
 	_check_game_over()
 
 ## All client will receive
 func _on_server_disconnected() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
-	
+
+## Will be call when player disconnect or died
 func _check_game_over() -> void:
 	if player_died_amount == player_amount:
 		_game_over()
@@ -121,19 +122,6 @@ func _game_over() -> void:
 	await get_tree().create_timer(1.0).timeout
 	if multiplayer.is_server():
 		Lobby.return_to_lobby.rpc()
-	
-func _spawn_enemy(enemy_name: String = "rock", amount: int = 1) -> void:
-	if not multiplayer.is_server():
-		return
-		
-	for i in range(amount):
-		var enemy_node: PackedScene = load("res://scenes/enemies/" + enemy_name + ".tscn")
-		var new_enemy: Enemy = enemy_node.instantiate()
-		var x = randf_range(1, 3) * (randi()%2)*2 - 1 # -1 or 1
-		var y = randf_range(1, 3) * (randi()%2)*2 - 1
-		new_enemy.global_position = Vector2(x, y) * 300
-		new_enemy._on_enemy_died.connect(_on_enemy_died)
-		enemy_container.add_child(new_enemy, true)
 		
 ## Called only on the server.
 func _add_player_node(id: int) -> void:
@@ -153,9 +141,5 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	_spawn_enemy("rabbit", 1)
-	_spawn_enemy("rock", 1)
-	_spawn_enemy("snail", 3)
-	
-
-	
+	for i in range(3):
+		enemy_spawner.spawn_enemy(enemy_names.pick_random())

@@ -8,6 +8,7 @@ const RADIUS = 8
 var total_weight: int = 0
 var available_coords: Dictionary = {}
 
+## do not spawn if no player alive in game
 func spawn_enemy(enemy_name: String = "rock") -> void:
 	if not multiplayer.is_server():
 		return
@@ -40,21 +41,32 @@ func _get_player_coords() -> Array[Vector2i]:
 func _record_available_coord(player_coords: Array[Vector2i]) -> void:
 	for coord: Vector2i in player_coords:
 		for dx in range(-RADIUS, RADIUS+1):
-			var dy = RADIUS - abs(dx)
-			var expect_coord: Vector2i = coord + Vector2i(dx, dy) 
-			if expect_coord in available_coords:
-				available_coords[expect_coord] += 1
+			var base_dy: int = RADIUS - abs(dx)
+			var dy_values: Array[int]
+			if base_dy == 0:
+				dy_values = [base_dy] 
 			else:
-				available_coords[expect_coord] = 1
-			total_weight += 1
+				dy_values = [base_dy, -base_dy]
 			
-			if dy == 0: continue
-			expect_coord = coord + Vector2i(dx, -dy)
-			if expect_coord in available_coords:
-				available_coords[expect_coord] += 1
-			else:
-				available_coords[expect_coord] = 1
-			total_weight += 1
+			for dy in dy_values:
+				var expect_coord: Vector2i = coord + Vector2i(dx, dy)
+				
+				if _check_coord_close_player(expect_coord, player_coords):
+					continue
+				
+				if expect_coord in available_coords:
+					available_coords[expect_coord] += 1
+				else:
+					available_coords[expect_coord] = 1
+				total_weight += 1
+				
+## return true if coord too close a player
+func _check_coord_close_player(expect_coord: Vector2i, player_coords) -> bool:
+	for other_coord in player_coords:
+		var diff: Vector2i = expect_coord - other_coord
+		if abs(diff.x) + abs(diff.y) < RADIUS:
+			return true
+	return false
 
 func _choose_coord() -> Vector2i:
 	var rand_num: int = randi_range(0, total_weight)

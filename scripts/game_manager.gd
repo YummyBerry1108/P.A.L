@@ -2,7 +2,7 @@ extends Node
 
 # Autoload named GameManager
 
-signal pause_state_changed(is_paused: bool)
+signal pause_state_changed(is_paused: bool) 
 signal player_amount_changed() # record player amount message by pause label
 
 var local_player: Player # the player that user control
