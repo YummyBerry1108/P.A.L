@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvbjuk7t2yx1x"]
+[gd_scene load_steps=31 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
+[ext_resource type="PackedScene" uid="uid://bhu3q46x60l8i" path="res://scenes/enemies/projectile/fire_path.tscn" id="2_qo215"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 [ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/frame_0001.png" id="4_ka7i1"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_46k04"]
@@ -14,6 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/hehavior_tree_component.gd" id="16_lmywa"]
+[ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/hehaviors/rabbit/idle.gd" id="17_mnrav"]
+[ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/hehaviors/rabbit/chase.gd" id="18_eq4af"]
+[ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/hehaviors/rabbit/dash.gd" id="19_nu5es"]
+[ext_resource type="Script" uid="uid://bjr7n5wb2xgmc" path="res://scripts/hehaviors/rabbit/lock.gd" id="20_81xei"]
+[ext_resource type="Script" uid="uid://i5deo372xafi" path="res://scripts/hehaviors/rabbit/root.gd" id="21_r5c22"]
+[ext_resource type="Script" uid="uid://ferx43cm173n" path="res://scripts/hehaviors/rabbit/target.gd" id="22_sqyl8"]
+[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/hehaviors/knockback.gd" id="23_81xei"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
 resource_local_to_scene = true
@@ -113,6 +122,7 @@ scale = Vector2(0.48, 0.48)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_0rrc3")
+fire_path = ExtResource("2_qo215")
 hp = 75.0
 damage = 15.0
 
@@ -167,12 +177,64 @@ metadata/_custom_type_script = "uid://ckuysfco5ijdx"
 script = ExtResource("13_ka7i1")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box", "behavior_tree_component")]
 script = ExtResource("6_7hee8")
 actor = NodePath("..")
 hurt_box = NodePath("../HurtBox")
-knockback_resistance = 0.5
+knockback_resistance = 0.1
+behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -133.333
+offset_top = -377.083
+offset_right = 136.667
+offset_bottom = -240.083
+theme_override_font_sizes/font_size = 100
+text = "input"
+horizontal_alignment = 1
+
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]
+script = ExtResource("16_lmywa")
+actor = NodePath("..")
+default_behavior = NodePath("Root")
+metadata/_custom_type_script = "uid://q7ubwpg31bmi"
+
+[node name="Root" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("21_r5c22")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Chase" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("18_eq4af")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Target" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("22_sqyl8")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Lock" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("20_81xei")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Dash" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("19_nu5es")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Idle" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("17_mnrav")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Knockback" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("knockback_component", "actor")]
+script = ExtResource("23_81xei")
+knockback_component = NodePath("../../KnockbackComponent")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
 
 [node name="StateTimer" type="Timer" parent="."]
 

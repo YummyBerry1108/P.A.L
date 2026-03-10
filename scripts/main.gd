@@ -33,9 +33,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# maybe use a timer node will be better?
-	if timer > 3.0:
-		timer -= 3.0
-		enemy_spawner.spawn_enemy(enemy_names.pick_random())
+	#if timer > 3.0:
+		#timer -= 3.0
+		#enemy_spawner.spawn_enemy(enemy_names.pick_random())
 		
 	if is_timer_running:
 		time_elapsed += delta
@@ -141,5 +141,5 @@ func start_game() -> void:
 		_add_player_node(player_id) 
 		player_amount += 1
 	
-	for i in range(3):
-		enemy_spawner.spawn_enemy(enemy_names.pick_random())
+	#for i in range(3):
+		#enemy_spawner.spawn_enemy(enemy_names.pick_random())
