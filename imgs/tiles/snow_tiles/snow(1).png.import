@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xvfpdh45hsst"
-path="res://.godot/imported/lava_1.png-27ed751ac168f86c583c6178333f1a53.ctex"
+uid="uid://cbhv5m324ay4m"
+path="res://.godot/imported/snow(1).png-894ca0abe4095f5eba60cd08003af01f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://imgs/tiles/lava_tiles/lava_1.png"
-dest_files=["res://.godot/imported/lava_1.png-27ed751ac168f86c583c6178333f1a53.ctex"]
+source_file="res://imgs/tiles/snow_tiles/snow(1).png"
+dest_files=["res://.godot/imported/snow(1).png-894ca0abe4095f5eba60cd08003af01f.ctex"]
 
 [params]
 
