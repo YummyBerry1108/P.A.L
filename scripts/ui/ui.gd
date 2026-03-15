@@ -6,4 +6,4 @@ extends Control
 @export var time_label: Label
 @export var pause_label: Label
 @export var spectate_label: Label
-@export var stat_upgrade_container: HBoxContainer
+@export var stat_upgrade_container: Control

@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5bj02fgrvrpf"]
+
+[ext_resource type="Script" uid="uid://bg40okqql5s42" path="res://scripts/ui/stat_upgrade_container.gd" id="1_r3gfj"]
+[ext_resource type="PackedScene" uid="uid://cv610u5482jt6" path="res://scenes/ui/stat_upgrade_button.tscn" id="2_pjxy1"]
+[ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/etc/stat_upgrade_data.gd" id="3_fa7vh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n1a3i"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StatUpgradeUI" type="Control" node_paths=PackedStringArray("container", "stat_upgrades", "upgrade_timer", "upgrade_timer_label", "background")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3gfj")
+upgrade_card_scene = ExtResource("2_pjxy1")
+container = NodePath("StatUpgradeHBoxContainer")
+stat_upgrades = NodePath("StatUpgrades")
+upgrade_timer = NodePath("UpgradeTimer")
+upgrade_timer_label = NodePath("UpgradeTimeLabel")
+background = NodePath("Mask")
+
+[node name="Mask" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.568627)
+
+[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 176.0
+offset_right = 1145.0
+offset_bottom = 577.0
+
+[node name="UpgradeTimeLabel" type="Label" parent="."]
+offset_left = 502.0
+offset_top = 109.0
+offset_right = 786.0
+offset_bottom = 154.0
+text = "Upgrade Left Time"
+label_settings = SubResource("LabelSettings_n1a3i")
+horizontal_alignment = 1
+
+[node name="UpgradeTimer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
+
+[node name="StatUpgrades" type="Node" parent="."]
+
+[node name="hp_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("3_fa7vh")
+upgrade_id = "hp_up"
+title = "HP+"
+description = "Add 10 HP"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="speed_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("3_fa7vh")
+upgrade_id = "speed_up"
+title = "Speed+"
+description = "Increase your move speed"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="damage_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("3_fa7vh")
+upgrade_id = "damage_up"
+title = "Damage+"
+description = "Increase your damage"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
