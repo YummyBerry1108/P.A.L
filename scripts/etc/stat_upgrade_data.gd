@@ -4,11 +4,11 @@ extends Node
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 
 const RARITY_COLORS: Dictionary = {
-	Rarity.COMMON: Colors.WHITE,   # 白
-	Rarity.UNCOMMON: Colors.GREEN, # 綠
-	Rarity.RARE: Colors.BLUE,      # 藍
-	Rarity.EPIC: Colors.PURPLE,    # 紫
-	Rarity.LEGENDARY: Colors.GOLD  # 金
+	Rarity.COMMON: Colors.WHITE,
+	Rarity.UNCOMMON: Colors.GREEN,
+	Rarity.RARE: Colors.BLUE,
+	Rarity.EPIC: Colors.PURPLE,
+	Rarity.LEGENDARY: Colors.GOLD
 }
 
 @export_category("Basic")
