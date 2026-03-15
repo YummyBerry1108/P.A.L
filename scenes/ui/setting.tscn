@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://2wcsygc1diga"]
+[gd_scene load_steps=3 format=3 uid="uid://bbk8rk6x2y5j1"]
 
 [ext_resource type="Script" uid="uid://tusarv8ki8ew" path="res://scripts/ui/setting.gd" id="1_wlg5k"]
 
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12549, 0.12549, 0.12549, 0.901961)
 
-[node name="Button" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -71,5 +71,18 @@ popup/item_1/id = 1
 popup/item_2/text = "1280x720"
 popup/item_2/id = 2
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VolLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_wmfb3")
+
+[node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/Resolution" to="." method="_on_resolution_item_selected"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]

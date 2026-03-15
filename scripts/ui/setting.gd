@@ -14,3 +14,10 @@ func _on_resolution_item_selected(index: int) -> void:
 
 func _on_button_pressed() -> void:
 	visible = not visible
+
+func _on_volume_value_changed(value: float) -> void:
+	pass # Replace with function body.
+
+func _unhandled_input(event) -> void:
+	if event.is_action_pressed("pause"):
+		visible = not visible
