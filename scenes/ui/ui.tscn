@@ -278,7 +278,7 @@ label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Mask" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,7 +329,7 @@ upgrade_card_scene = ExtResource("11_hl07w")
 stat_upgrades = NodePath("../StatUpgrades")
 upgrade_timer = NodePath("../UpgradeTimer")
 upgrade_timer_label = NodePath("../UpgradeTimeLabel")
-background = NodePath("../../ColorRect")
+background = NodePath("../../Mask")
 
 [node name="UpgradeTimeLabel" type="Label" parent="StatUpgradeUI"]
 layout_mode = 0
