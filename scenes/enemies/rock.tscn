@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfde1nigv6m7e"]
+[gd_scene load_steps=16 format=3 uid="uid://dfde1nigv6m7e"]
 
 [ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/enemies/rock.gd" id="1_1di36"]
 [ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/enemies/Rock.png" id="2_mek2u"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="5_285kf"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="5_betv5"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_ouckr"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/hehavior_tree_component.gd" id="7_betv5"]
+[ext_resource type="Script" uid="uid://b3gyv5sde7b5r" path="res://scripts/hehaviors/rock/chase.gd" id="8_45ckn"]
+[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/hehaviors/knockback.gd" id="8_bsk3k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ik6fu"]
 resource_local_to_scene = true
@@ -115,14 +118,32 @@ metadata/_custom_type_script = "uid://ckuysfco5ijdx"
 script = ExtResource("5_betv5")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box")]
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box", "behavior_tree_component")]
 script = ExtResource("5_285kf")
 actor = NodePath("..")
 hurt_box = NodePath("../HurtBox")
 knockback_resistance = 0.9
+behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_42d3v")
+
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]
+script = ExtResource("7_betv5")
+actor = NodePath("..")
+default_behavior = NodePath("Chase")
+metadata/_custom_type_script = "uid://q7ubwpg31bmi"
+
+[node name="Chase" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
+script = ExtResource("8_45ckn")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
+
+[node name="Knockback" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("knockback_component", "actor")]
+script = ExtResource("8_bsk3k")
+knockback_component = NodePath("../../KnockbackComponent")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://djghp02rtdu1r"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -76,7 +76,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if is_instance_of(enemy_root, Enemy):
 		enemy_damage = enemy_root.damage
 	elif "damage" in enemy_root:
-		enemy_damage = enemy_root.danage
+		enemy_damage = enemy_root.damage
 	
 	take_damage.rpc(enemy_damage)
 	

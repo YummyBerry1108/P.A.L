@@ -39,10 +39,12 @@ func change_behavior(target_behavior_name: String) -> bool:
 	return true
 
 func _physics_process(delta: float) -> void:
+	if !multiplayer.is_server(): return
 	current_behavior._physics_update(delta)
 	actor.move_and_slide()
-
+	
 func _process(delta: float) -> void:
+	if !multiplayer.is_server(): return
 	if label:
 		label.text = current_behavior.name
 	current_behavior._update(delta)

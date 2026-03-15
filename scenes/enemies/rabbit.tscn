@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
-[ext_resource type="PackedScene" uid="uid://bhu3q46x60l8i" path="res://scenes/enemies/projectile/fire_path.tscn" id="2_qo215"]
+[ext_resource type="PackedScene" uid="uid://bhu3q46x60l8i" path="res://scenes/enemies/projectile/fire_trail.tscn" id="2_81xei"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
 [ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/frame_0001.png" id="4_ka7i1"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_46k04"]
@@ -64,8 +64,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_haj5u"]
-radius = 114.583
-height = 287.5
+radius = 54.3333
+height = 146.667
 
 [sub_resource type="Animation" id="Animation_de8r6"]
 length = 0.001
@@ -118,21 +118,21 @@ properties/2/replication_mode = 2
 [node name="Rabbit" type="CharacterBody2D"]
 z_index = 2
 z_as_relative = false
-scale = Vector2(0.48, 0.48)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_0rrc3")
-fire_path = ExtResource("2_qo215")
+fire_trail_scene = ExtResource("2_81xei")
 hp = 75.0
 damage = 15.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_haj5u")
+position = Vector2(0, -41)
+scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_nu5es")
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6.25, 91.6667)
 shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -140,7 +140,6 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-6.25, 91.6667)
 shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -148,7 +147,6 @@ collision_layer = 128
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-6.25, 91.6667)
 shape = SubResource("CapsuleShape2D_haj5u")
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -186,12 +184,12 @@ behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
 [node name="Label" type="Label" parent="."]
-offset_left = -133.333
-offset_top = -377.083
-offset_right = 136.667
-offset_bottom = -240.083
+offset_left = -135.0
+offset_top = -258.0
+offset_right = 135.0
+offset_bottom = -121.0
 theme_override_font_sizes/font_size = 100
-text = "input"
+text = "Test"
 horizontal_alignment = 1
 
 [node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]

@@ -129,7 +129,6 @@ script = ExtResource("6_je7p5")
 [node name="Skills" type="Node" parent="."]
 
 [node name="IcicleData" parent="Skills" instance=ExtResource("6_5gtgg")]
-disable = true
 
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
 knockback_force = 250.0

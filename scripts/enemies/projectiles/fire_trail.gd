@@ -1,4 +1,4 @@
-extends Line2D
+class_name FireTrail extends Line2D
 
 @onready var hitbox: Area2D = $Hitbox
 
@@ -19,13 +19,13 @@ func update_path(start_pos: Vector2, current_pos: Vector2):
 	add_point(to_local(start_pos))
 	add_point(to_local(current_pos))
 	
+	if !multiplayer.is_server(): return
 	_update_collision(to_local(start_pos), to_local(current_pos))
 
 func _update_collision(p1: Vector2, p2: Vector2):
 	var dir = (p2 - p1).normalized()
 	var normal = Vector2(-dir.y, dir.x) * (width / 2.0)
 	
-	# Create a rectangle polygon around the line segment
 	var poly = PackedVector2Array([
 		p1 + normal,
 		p2 + normal,

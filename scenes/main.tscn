@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=16 format=4 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b78bhpq31lil4" path="res://scenes/etc/exp_orb.tscn" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://dnfxyldutu048" path="res://scripts/enemies/enemy_spawner.gd" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://dh1miktqbp1rb" path="res://imgs/tiles/lava_tiles/lava_1.png" id="5_tefeu"]
-[ext_resource type="PackedScene" uid="uid://cvbjuk7t2yx1x" path="res://scenes/enemies/rabbit.tscn" id="5_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://cl5ikthv13mvh" path="res://imgs/tiles/lava_tiles/lava_2.png" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://cmrcwa5hg2sk" path="res://imgs/tiles/lava_tiles/lava_3.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://b7pvaci6vlk5c" path="res://imgs/tiles/snow_tiles/snow.png" id="8_85g3d"]
@@ -450,15 +449,13 @@ position = Vector2(418, 5)
 [node name="Dummy2" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(604, 261)
 
-[node name="EnemyContainer" type="Node2D" parent="."]
+[node name="EnemyContainer" type="Node2D" parent="." groups=["containers"]]
 
-[node name="Rabbit" parent="EnemyContainer" instance=ExtResource("5_ya4ey")]
+[node name="PlayerContainer" type="Node2D" parent="." groups=["containers"]]
 
-[node name="PlayerContainer" type="Node2D" parent="."]
+[node name="ExpOrbContainer" type="Node2D" parent="." groups=["containers"]]
 
-[node name="ExpOrbContainer" type="Node2D" parent="."]
-
-[node name="ProjectileContainer" type="Node2D" parent="."]
+[node name="ProjectileContainer" type="Node2D" parent="." groups=["containers"]]
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("map", "enemy_container")]
 script = ExtResource("5_choun")

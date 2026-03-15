@@ -30,13 +30,6 @@ func _ready() -> void:
 	pass
 	#if texture:
 		#sprite.texture = texture
-		
-func _physics_process(delta: float) -> void:
-	if not multiplayer.is_server():
-		return
-	velocity = direction * speed * speed_multiplier
-
-	move_and_slide()
 
 func update_speed() -> void:
 	speed_multiplier = effect_component.get_speed_multiplier()
