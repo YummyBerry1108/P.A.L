@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhu3q46x60l8i"]
+
+[ext_resource type="Texture2D" uid="uid://64gwusxyxfto" path="res://icon.svg" id="1_jk58p"]
+[ext_resource type="Script" uid="uid://b4ovi23suhp3p" path="res://scripts/enemies/projectiles/fire_trail.gd" id="2_b0n0u"]
+
+[node name="FireTrail" type="Line2D"]
+points = PackedVector2Array(0, 0)
+width = 100.0
+texture = ExtResource("1_jk58p")
+texture_mode = 2
+script = ExtResource("2_b0n0u")
+duration = 5.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32

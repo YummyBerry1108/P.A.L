@@ -9,13 +9,13 @@ func _ready() -> void:
 	if texture:
 		sprite.texture = texture
 
-func _physics_process(delta: float) -> void:
-	if !multiplayer.is_server(): return
-	var target_pos: Vector2 = get_nearest_player()
-	direction = global_position.direction_to(target_pos)
-	var desired_velocity = direction * max_speed * speed_multiplier
-	var steering = (desired_velocity - velocity).limit_length(steer_force)
-	velocity += steering * delta
+#func _physics_process(delta: float) -> void:
+	#if !multiplayer.is_server(): return
+	#var target_pos: Vector2 = get_nearest_player()
+	#direction = global_position.direction_to(target_pos)
+	#var desired_velocity = direction * max_speed * speed_multiplier
+	#var steering = (desired_velocity - velocity).limit_length(steer_force)
+	#velocity += steering * delta
 	
-	knockback_component.knockback_check(delta)
-	move_and_slide()
+	#knockback_component.knockback_check(delta)
+	#move_and_slide()

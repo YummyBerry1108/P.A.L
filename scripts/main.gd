@@ -142,4 +142,4 @@ func start_game() -> void:
 		player_amount += 1
 	
 	for i in range(3):
-		enemy_spawner.spawn_enemy(enemy_names.pick_random())
+		enemy_spawner.spawn_enemy("rabbit")

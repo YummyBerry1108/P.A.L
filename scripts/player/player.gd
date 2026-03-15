@@ -71,9 +71,11 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if is_invincible:
 		return 
 	
-	var enemy_root: Node = area.owner
+	var enemy_root: Node2D = area.owner
 	var enemy_damage: float = 0.0
-	if enemy_root:
+	if is_instance_of(enemy_root, Enemy):
+		enemy_damage = enemy_root.damage
+	elif "damage" in enemy_root:
 		enemy_damage = enemy_root.damage
 	
 	take_damage.rpc(enemy_damage)
