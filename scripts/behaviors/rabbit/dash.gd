@@ -9,18 +9,14 @@ var fire_trail: FireTrail
 var projectile_container: Node2D	 
 
 func _enter_behavior() -> void:
-	fire_trail = actor.fire_trail_scene.instantiate()
+	spawn_fire_trail.rpc()
 	
-	add_child(fire_trail)
-	
-	dash_start_point = actor.global_position
 	time_left = duration
 	actor.set_collision_mask_value(PhysicsLayers.ENEMY, false)
 	actor.set_collision_layer_value(PhysicsLayers.ENEMY, false)
-	
 
 func _physics_update(delta: float) -> void:
-	fire_trail.update_path(dash_start_point, actor.global_position)
+	update_fire_trail.rpc()
 	actor.velocity = actor.direction * actor.dash_speed * actor.speed_multiplier
 	
 	time_left -= delta
@@ -32,3 +28,12 @@ func _exit_behavior() -> void:
 	actor.set_collision_mask_value(PhysicsLayers.ENEMY, true)
 	actor.set_collision_layer_value(PhysicsLayers.ENEMY, true)
 	
+@rpc("any_peer", "call_local")
+func spawn_fire_trail() -> void:
+	dash_start_point = actor.global_position
+	fire_trail = actor.fire_trail_scene.instantiate()
+	add_child(fire_trail, true)
+
+@rpc("any_peer", "call_local")
+func update_fire_trail() -> void:
+	fire_trail.update_path(dash_start_point, actor.global_position)

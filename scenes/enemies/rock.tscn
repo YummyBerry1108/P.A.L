@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="5_285kf"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="5_betv5"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_ouckr"]
-[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/hehavior_tree_component.gd" id="7_betv5"]
-[ext_resource type="Script" uid="uid://b3gyv5sde7b5r" path="res://scripts/hehaviors/rock/chase.gd" id="8_45ckn"]
-[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/hehaviors/knockback.gd" id="8_bsk3k"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="7_betv5"]
+[ext_resource type="Script" uid="uid://b3gyv5sde7b5r" path="res://scripts/behaviors/rock/chase.gd" id="8_45ckn"]
+[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/behaviors/knockback.gd" id="8_bsk3k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ik6fu"]
 resource_local_to_scene = true
@@ -129,10 +129,11 @@ metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_42d3v")
 
-[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior", "after_knockback_behavior")]
 script = ExtResource("7_betv5")
 actor = NodePath("..")
 default_behavior = NodePath("Chase")
+after_knockback_behavior = NodePath("Chase")
 metadata/_custom_type_script = "uid://q7ubwpg31bmi"
 
 [node name="Chase" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]

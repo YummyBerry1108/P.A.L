@@ -14,4 +14,4 @@ func _physics_update(delta: float) -> void:
 	
 	knockback_timer -= delta
 	if knockback_timer <= 0:
-		behavior_tree_component.change_behavior("default")
+		behavior_tree_component.change_behavior(behavior_tree_component.after_knockback_behavior.name.to_snake_case())

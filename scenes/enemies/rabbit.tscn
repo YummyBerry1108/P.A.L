@@ -15,14 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
-[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/hehavior_tree_component.gd" id="16_lmywa"]
-[ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/hehaviors/rabbit/idle.gd" id="17_mnrav"]
-[ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/hehaviors/rabbit/chase.gd" id="18_eq4af"]
-[ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/hehaviors/rabbit/dash.gd" id="19_nu5es"]
-[ext_resource type="Script" uid="uid://bjr7n5wb2xgmc" path="res://scripts/hehaviors/rabbit/lock.gd" id="20_81xei"]
-[ext_resource type="Script" uid="uid://i5deo372xafi" path="res://scripts/hehaviors/rabbit/root.gd" id="21_r5c22"]
-[ext_resource type="Script" uid="uid://ferx43cm173n" path="res://scripts/hehaviors/rabbit/target.gd" id="22_sqyl8"]
-[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/hehaviors/knockback.gd" id="23_81xei"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
+[ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/behaviors/rabbit/idle.gd" id="17_mnrav"]
+[ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/behaviors/rabbit/chase.gd" id="18_eq4af"]
+[ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/behaviors/rabbit/dash.gd" id="19_nu5es"]
+[ext_resource type="Script" uid="uid://bjr7n5wb2xgmc" path="res://scripts/behaviors/rabbit/lock.gd" id="20_81xei"]
+[ext_resource type="Script" uid="uid://i5deo372xafi" path="res://scripts/behaviors/rabbit/root.gd" id="21_r5c22"]
+[ext_resource type="Script" uid="uid://ferx43cm173n" path="res://scripts/behaviors/rabbit/target.gd" id="22_sqyl8"]
+[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/behaviors/knockback.gd" id="23_81xei"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_haj5u"]
 resource_local_to_scene = true
@@ -183,19 +183,11 @@ knockback_resistance = 0.1
 behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 
-[node name="Label" type="Label" parent="."]
-offset_left = -135.0
-offset_top = -258.0
-offset_right = 135.0
-offset_bottom = -121.0
-theme_override_font_sizes/font_size = 100
-text = "Test"
-horizontal_alignment = 1
-
-[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior", "after_knockback_behavior")]
 script = ExtResource("16_lmywa")
 actor = NodePath("..")
 default_behavior = NodePath("Root")
+after_knockback_behavior = NodePath("Idle")
 metadata/_custom_type_script = "uid://q7ubwpg31bmi"
 
 [node name="Root" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]

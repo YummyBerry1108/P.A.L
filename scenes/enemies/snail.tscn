@@ -24,9 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://chu6dg7y28u66" path="res://imgs/enemies/Snail/frame_0016.png" id="20_4pnik"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="21_e81s0"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="23_e81s0"]
-[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/hehavior_tree_component.gd" id="25_n6ysy"]
-[ext_resource type="Script" uid="uid://bc0f5shngihsy" path="res://scripts/hehaviors/snail/chase.gd" id="26_kgl5u"]
-[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/hehaviors/knockback.gd" id="27_yexrt"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="25_n6ysy"]
+[ext_resource type="Script" uid="uid://bc0f5shngihsy" path="res://scripts/behaviors/snail/chase.gd" id="26_kgl5u"]
+[ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/behaviors/knockback.gd" id="27_yexrt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_er827"]
 resource_local_to_scene = true
@@ -217,10 +217,11 @@ metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ju45m")
 
-[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior")]
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "default_behavior", "after_knockback_behavior")]
 script = ExtResource("25_n6ysy")
 actor = NodePath("..")
 default_behavior = NodePath("Chase")
+after_knockback_behavior = NodePath("Chase")
 metadata/_custom_type_script = "uid://q7ubwpg31bmi"
 
 [node name="Chase" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
