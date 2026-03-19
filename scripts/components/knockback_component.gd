@@ -24,5 +24,5 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 func apply_knockback(force: float, knockback_direction: Vector2, knockback_duration: float) -> void:
 	knockback = force * knockback_direction * (1-knockback_resistance)
 	knockback_timer = knockback_duration * (1-knockback_resistance)
-	print(knockback, knockback_timer)
+	#print(knockback, knockback_timer)
 	behavior_tree_component.change_behavior("knockback")

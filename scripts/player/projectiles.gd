@@ -9,6 +9,7 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 	var new_projectile: Projectile = loaded_skills[skill_scene_name].instantiate()
 	new_projectile.global_position = owner.global_position
 	new_projectile.global_rotation = projectile_global_rotation
+	new_projectile.scale = Vector2(skill_data.scale, skill_data.scale)
 	if multiplayer.is_server():
 		new_projectile.damage = skill_data.projectile_damage + owner.damage
 		new_projectile.crit_chance = skill_data.crit_chance
