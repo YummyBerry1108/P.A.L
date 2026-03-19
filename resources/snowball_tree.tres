@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillTreeData" load_steps=8 format=3 uid="uid://dh1vs8esjfrgm"]
+
+[ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_m7yi0"]
+[ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_l85ev"]
+[ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_xf0gt"]
+[ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_vl580"]
+
+[sub_resource type="Resource" id="Resource_xf0gt"]
+script = ExtResource("4_vl580")
+stat_name = "scale"
+operation = 1
+value = 1.2
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_77ek0"]
+script = ExtResource("3_xf0gt")
+upgrade_id = "snowball_scale+"
+upgrade_effects = Array[ExtResource("4_vl580")]([SubResource("Resource_xf0gt")])
+next_node_uids = Array[String]([])
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_uyfnw"]
+script = ExtResource("2_l85ev")
+skill_nodes = Array[ExtResource("3_xf0gt")]([SubResource("Resource_77ek0")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[resource]
+script = ExtResource("1_m7yi0")
+skill_paths = Array[ExtResource("2_l85ev")]([SubResource("Resource_uyfnw")])
+metadata/_custom_type_script = "uid://bwxmarxo3thqj"

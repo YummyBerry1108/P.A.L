@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dhfmuydovevvi" path="res://scenes/skills/data/snowball_data.tscn" id="7_h17s1"]
 [ext_resource type="Texture2D" uid="uid://co1d4vw80cpet" path="res://imgs/player/frame_0005.png" id="7_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="10_h17s1"]
-[ext_resource type="Script" uid="uid://5olw8pxlwuj" path="res://scripts/skills/skilltrees/skill_tree_manager.gd" id="11_myrg7"]
+[ext_resource type="Script" uid="uid://5olw8pxlwuj" path="res://scripts/skills/skilltrees/skill_tree.gd" id="11_myrg7"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
-[ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="14_kvlxm"]
+[ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path.gd" id="14_lgqa7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -135,11 +135,16 @@ script = ExtResource("6_je7p5")
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
 knockback_force = 250.0
 
-[node name="SnowballSkillTree" type="Node" parent="Skills/SnowballData" node_paths=PackedStringArray("actor")]
+[node name="SnowballSkillTree" type="Node" parent="Skills/SnowballData" node_paths=PackedStringArray("actor", "skill_paths")]
 script = ExtResource("11_myrg7")
 actor = NodePath("..")
-skill_tree_data = ExtResource("14_kvlxm")
+skill_paths = [NodePath("SnowballSkillPath1")]
 metadata/_custom_type_script = "uid://5olw8pxlwuj"
+
+[node name="SnowballSkillPath1" type="Node" parent="Skills/SnowballData/SnowballSkillTree" node_paths=PackedStringArray("skill_nodes")]
+script = ExtResource("14_lgqa7")
+skill_nodes = [NodePath("")]
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
 [node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
 disable = true
