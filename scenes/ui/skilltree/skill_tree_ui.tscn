@@ -75,6 +75,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="UpgradePointLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 815.0
 offset_top = 32.0
 offset_right = 1104.0
@@ -84,6 +85,7 @@ label_settings = SubResource("LabelSettings_3snot")
 horizontal_alignment = 1
 
 [node name="UpgradeTimeLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 455.0
 offset_top = 33.0
 offset_right = 739.0

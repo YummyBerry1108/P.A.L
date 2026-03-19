@@ -28,13 +28,11 @@ class_name SkillData extends Node
 @export var knockback_duration: float = 0.0
 
 func apply_upgrade(effect: SkillUpgrade) -> void:
-	# 1. 檢查這個變數是否存在於 SkillData 中
 	if effect.stat_name in self:
-		# 2. 取得當前的數值
+
 		var current_value = self.get(effect.stat_name)
 		var new_value = current_value
 		
-		# 3. 根據運算類型計算新數值
 		match effect.operation:
 			SkillUpgrade.OpType.ADD:
 				new_value += effect.value
@@ -43,13 +41,10 @@ func apply_upgrade(effect: SkillUpgrade) -> void:
 			SkillUpgrade.OpType.OVERRIDE:
 				new_value = effect.value
 				
-		# 4. 如果原變數是整數 (例如 projectile_count)，確保轉型回去
 		if typeof(current_value) == TYPE_INT:
 			new_value = int(new_value)
 			
-		# 5. 寫回變數
 		self.set(effect.stat_name, new_value)
-		print(effect.value)
 		print("已將 %s 從 %s 修改為 %s" % [effect.stat_name, current_value, new_value])
 	else:
 		push_warning("SkillData 中找不到變數: " + effect.stat_name)
