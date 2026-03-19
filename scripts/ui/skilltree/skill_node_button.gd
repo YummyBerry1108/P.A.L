@@ -1,5 +1,7 @@
 extends Button
 
+signal upgrade_selected
+
 @onready var border: ReferenceRect = $ReferenceRect
 var upgrade_id: String
 
@@ -13,6 +15,7 @@ func setup(uid: String) -> void:
 	
 func _on_pressed() -> void:
 	UpgradeEventbus.request_upgrade.emit(upgrade_id)
+	upgrade_selected.emit()
 
 func _on_skill_unlocked(id: String) -> void:
 	if upgrade_id == id:

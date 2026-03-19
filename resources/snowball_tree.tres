@@ -9,7 +9,7 @@
 script = ExtResource("4_vl580")
 stat_name = "scale"
 operation = 1
-value = 1.2
+value = 10.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_77ek0"]

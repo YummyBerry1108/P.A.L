@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdf5h75awup8s"]
+[gd_scene load_steps=6 format=3 uid="uid://cdf5h75awup8s"]
 
 [ext_resource type="Script" uid="uid://da7ald14ur5c2" path="res://scripts/ui/skilltree/skill_tree_ui.gd" id="1_5wouh"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="2_3snot"]
@@ -12,7 +12,13 @@ border_width_right = 10
 border_width_bottom = 10
 border_color = Color(0.775063, 0.775063, 0.775063, 1)
 
-[node name="SkillTreeUI" type="Control" node_paths=PackedStringArray("path_containers")]
+[sub_resource type="LabelSettings" id="LabelSettings_3snot"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeUI" type="Control" node_paths=PackedStringArray("path_containers", "upgrade_timer", "upgrade_timer_label", "upgrade_point_label")]
+process_mode = 3
 layout_mode = 3
 anchor_left = 0.041
 anchor_top = 0.04
@@ -25,9 +31,13 @@ offset_bottom = 0.359924
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5wouh")
+choose_time = 10
 skill_tree_data = ExtResource("2_3snot")
-button_scene = ExtResource("3_ltwuo")
 path_containers = [NodePath("VBoxContainer/HBoxContainer"), NodePath("VBoxContainer/HBoxContainer2"), NodePath("VBoxContainer/HBoxContainer3")]
+upgrade_timer = NodePath("UpgradeTimer")
+button_scene = ExtResource("3_ltwuo")
+upgrade_timer_label = NodePath("UpgradeTimeLabel")
+upgrade_point_label = NodePath("UpgradePointLabel")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -42,11 +52,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vqmqa")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.222
-anchor_top = 0.059
+anchor_top = 0.143
 anchor_right = 0.965
 anchor_bottom = 0.944
 offset_left = 0.039978
-offset_top = -0.176003
+offset_top = 0.0479965
 offset_right = 0.299927
 offset_bottom = 0.18396
 grow_horizontal = 2
@@ -63,3 +73,25 @@ size_flags_vertical = 3
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="UpgradePointLabel" type="Label" parent="."]
+offset_left = 815.0
+offset_top = 32.0
+offset_right = 1104.0
+offset_bottom = 77.0
+text = "Upgrade Point Left"
+label_settings = SubResource("LabelSettings_3snot")
+horizontal_alignment = 1
+
+[node name="UpgradeTimeLabel" type="Label" parent="."]
+offset_left = 455.0
+offset_top = 33.0
+offset_right = 739.0
+offset_bottom = 78.0
+text = "Upgrade Left Time"
+label_settings = SubResource("LabelSettings_3snot")
+horizontal_alignment = 1
+
+[node name="UpgradeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="UpgradeTimer" to="." method="_on_timer_timeout"]

@@ -26,14 +26,15 @@ func _ready() -> void:
 			UpgradeEventbus.on_skill_unlocked.emit(skill_path.skill_nodes[0].upgrade_id)
 
 func request_upgrade(upgrade_id: String) -> void:
-	sync_upgrade_node.rpc(upgrade_id)
+	if not is_multiplayer_authority():
+		return
+	upgrade_node(upgrade_id)
 
-@rpc("any_peer", "call_local", "reliable")
-func sync_upgrade_node(upgrade_id: String) -> void:
+func upgrade_node(upgrade_id: String) -> void:
 	if not uid_to_node.has(upgrade_id): return
 	if active_nodes.has(upgrade_id): return
 	if not unlocked_nodes.has(upgrade_id): return
-
+	
 	var current_node: SkillNodeData = uid_to_node[upgrade_id]
 
 	active_nodes.append(upgrade_id)
@@ -43,11 +44,17 @@ func sync_upgrade_node(upgrade_id: String) -> void:
 		if uid_to_node.has(next_uid) and not unlocked_nodes.has(next_uid):
 			unlocked_nodes.append(next_uid)
 			UpgradeEventbus.on_skill_unlocked.emit(next_uid)
-	
+	_sync_apply_upgrade.rpc(upgrade_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func _sync_apply_upgrade(upgrade_id: String) -> void:
+	var current_node: SkillNodeData = uid_to_node[upgrade_id]
 	for effect: SkillUpgrade in current_node.upgrade_effects:
 		actor.apply_upgrade(effect)
 
 func _unhandled_input(event) -> void:
+	if not is_multiplayer_authority():
+		return
 	if event.is_action_pressed("test_upgrade"):
 		print("T is pressed: 嘗試升級 snowball_scale+")
-		sync_upgrade_node.rpc("snowball_scale+")
+		upgrade_node("snowball_scale+")

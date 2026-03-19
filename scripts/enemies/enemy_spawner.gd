@@ -10,6 +10,9 @@ var available_coords: Dictionary = {}
 
 ## do not spawn if no player alive in game
 func spawn_enemy(enemy_name: String = "rock") -> void:
+	print("Enemy Spanwer Debuging Now.")
+	if enemy_name == "rabbit": return
+	
 	if not multiplayer.is_server():
 		return
 		
