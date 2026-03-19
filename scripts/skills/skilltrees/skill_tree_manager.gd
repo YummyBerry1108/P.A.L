@@ -17,7 +17,8 @@ func _ready() -> void:
 		for skill_node: SkillNodeData in skill_path.skill_nodes:
 			if skill_node.upgrade_id == "": continue
 			uid_to_node[skill_node.upgrade_id] = skill_node
-
+			
+@rpc("any_peer", "call_local", "reliable")
 func upgrade_node(upgrade_id: String) -> void:
 	if not uid_to_node.has(upgrade_id): return
 	if active_nodes.has(upgrade_id): return
@@ -32,10 +33,10 @@ func upgrade_node(upgrade_id: String) -> void:
 			unlocked_nodes.append(next_uid)
 			UpgradeEventbus.on_skill_unlocked.emit(next_uid)
 	
-	for effect in current_node.upgrade_effects:
+	for effect: SkillUpgrade in current_node.upgrade_effects:
 		actor.apply_upgrade(effect)
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("test_upgrade"):
 		print("T is pressed: 嘗試升級 snowball_scale+")
-		upgrade_node("snowball_scale+")
+		upgrade_node.rpc("snowball_scale+")
