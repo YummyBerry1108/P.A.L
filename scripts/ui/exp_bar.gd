@@ -1,6 +1,9 @@
 extends ProgressBar
 
 signal _on_little_level_up()
+signal _on_medium_level_up()
+
+var level: int = 0
 
 func add_experience(exp_value: int) -> void:
 	if not multiplayer.is_server():
@@ -18,7 +21,9 @@ func add_experience(exp_value: int) -> void:
 			_level_up()
 
 func _level_up() -> void:
-	_on_little_level_up.emit()
+	level += 1
+	if level % 5 != 0: _on_little_level_up.emit()
+	else: _on_medium_level_up.emit()
 	max_value = int(max_value * 1.1)
 	value = 0
 	

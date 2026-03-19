@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://huiugp0cfgho"]
+[gd_scene load_steps=27 format=3 uid="uid://huiugp0cfgho"]
 
 [ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://doybf1yetn0ky" path="res://imgs/ui/player_info_background.png" id="5_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="6_uegxj"]
 [ext_resource type="Texture2D" uid="uid://b1eskkahnho3u" path="res://imgs/ui/health_icon.png" id="9_y220t"]
-[ext_resource type="PackedScene" uid="uid://b5bj02fgrvrpf" path="res://scenes/ui/stat_upgrade_ui.tscn" id="11_4kltc"]
+[ext_resource type="PackedScene" uid="uid://b5bj02fgrvrpf" path="res://scenes/ui/stat_upgrade/stat_upgrade_ui.tscn" id="11_4kltc"]
+[ext_resource type="PackedScene" uid="uid://cdf5h75awup8s" path="res://scenes/ui/skilltree/skill_tree_ui.tscn" id="12_hl07w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
 font_size = 32
@@ -75,7 +76,7 @@ properties/4/path = NodePath("../PauseLabel:text")
 properties/4/spawn = false
 properties/4/replication_mode = 2
 
-[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label", "stat_upgrade_container")]
+[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label")]
 z_index = 5
 z_as_relative = false
 layout_mode = 3
@@ -93,7 +94,6 @@ health_bar = NodePath("BottomVBoxContainer2/HBoxContainer/HealthBar")
 time_label = NodePath("TimeLabel")
 pause_label = NodePath("PauseLabel")
 spectate_label = NodePath("BottomVBoxContainer/SpectateLabel")
-stat_upgrade_container = NodePath("StatUpgradeUI")
 
 [node name="BottomVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -292,6 +292,9 @@ script = ExtResource("4_7vp6q")
 [node name="StatUpgradeUI" parent="." instance=ExtResource("11_4kltc")]
 layout_mode = 1
 
+[node name="SkillTreeUI" parent="." instance=ExtResource("12_hl07w")]
+layout_mode = 1
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
@@ -299,3 +302,4 @@ replication_config = SubResource("SceneReplicationConfig_tefeu")
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
 [connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeUI" method="_on_level_up"]
+[connection signal="_on_medium_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdf5h75awup8s"]
+
+[ext_resource type="Script" uid="uid://da7ald14ur5c2" path="res://scripts/ui/skilltree/skill_tree_ui.gd" id="1_5wouh"]
+[ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="2_3snot"]
+[ext_resource type="PackedScene" uid="uid://bbwf12vyd3k6q" path="res://scenes/ui/skilltree/skill_node_button.tscn" id="3_ltwuo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqmqa"]
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.784314)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.775063, 0.775063, 0.775063, 1)
+
+[node name="SkillTreeUI" type="Control" node_paths=PackedStringArray("path_containers")]
+layout_mode = 3
+anchor_left = 0.041
+anchor_top = 0.04
+anchor_right = 0.962
+anchor_bottom = 0.962
+offset_left = -0.480003
+offset_top = 0.199999
+offset_right = 0.639893
+offset_bottom = 0.359924
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5wouh")
+skill_tree_data = ExtResource("2_3snot")
+button_scene = ExtResource("3_ltwuo")
+path_containers = [NodePath("VBoxContainer/HBoxContainer"), NodePath("VBoxContainer/HBoxContainer2"), NodePath("VBoxContainer/HBoxContainer3")]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqmqa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.222
+anchor_top = 0.059
+anchor_right = 0.965
+anchor_bottom = 0.944
+offset_left = 0.039978
+offset_top = -0.176003
+offset_right = 0.299927
+offset_bottom = 0.18396
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
