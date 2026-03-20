@@ -8,6 +8,12 @@ const RADIUS = 8
 var total_weight: int = 0
 var available_coords: Dictionary = {}
 
+var name_to_enemy: Dictionary[String, PackedScene] = {
+	"rock": preload("res://scenes/enemies/rock.tscn"),
+	"rabbit": preload("res://scenes/enemies/rabbit.tscn"),
+	"snail": preload("res://scenes/enemies/snail.tscn"),
+}
+
 ## do not spawn if no player alive in game
 func spawn_enemy(enemy_name: String = "rock") -> void:
 	print("Enemy Spanwer Debuging Now.")
@@ -24,7 +30,7 @@ func spawn_enemy(enemy_name: String = "rock") -> void:
 	_record_available_coord(player_coords)
 	var res_coord: Vector2i = _choose_coord()
 	
-	var enemy_node: PackedScene = load("res://scenes/enemies/" + enemy_name + ".tscn")
+	var enemy_node: PackedScene = name_to_enemy[enemy_name]
 	var new_enemy: Enemy = enemy_node.instantiate()
 	new_enemy.global_position = map.map_to_local(res_coord)
 	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
