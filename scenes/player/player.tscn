@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=25 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://5olw8pxlwuj" path="res://scripts/skills/skilltrees/skill_tree_manager.gd" id="11_myrg7"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="14_kvlxm"]
+[ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="16_uf5tr"]
+[ext_resource type="Resource" uid="uid://tsp6akg63sjm" path="res://resources/icicle_tree.tres" id="17_lgqa7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -135,14 +137,23 @@ script = ExtResource("6_je7p5")
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
 knockback_force = 250.0
 
-[node name="SnowballSkillTree" type="Node" parent="Skills/SnowballData" node_paths=PackedStringArray("actor")]
-script = ExtResource("11_myrg7")
-actor = NodePath("..")
-skill_tree_data = ExtResource("14_kvlxm")
-metadata/_custom_type_script = "uid://5olw8pxlwuj"
-
 [node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
 disable = true
+
+[node name="SkillTreeManager" type="Node" parent="." node_paths=PackedStringArray("actor", "skill_name_to_actor")]
+script = ExtResource("11_myrg7")
+actor = NodePath("../Skills/SnowballData")
+skill_tree_data = ExtResource("14_kvlxm")
+skill_name_to_tree = Dictionary[String, ExtResource("16_uf5tr")]({
+"icicle": ExtResource("17_lgqa7"),
+"snowball": ExtResource("14_kvlxm")
+})
+skill_name_to_actor = {
+"icicle": NodePath("../Skills/IcicleData"),
+"snowball": NodePath("../Skills/SnowballData"),
+"stick": NodePath("../Skills/StickData")
+}
+metadata/_custom_type_script = "uid://5olw8pxlwuj"
 
 [node name="Projectiles" type="Node" parent="."]
 script = ExtResource("7_0owmy")

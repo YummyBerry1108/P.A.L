@@ -17,20 +17,32 @@ extends Control
 @onready var tooltip_name: Label = $TooltipPanel/VBoxContainer/NameLabel
 @onready var tooltip_desc: Label = $TooltipPanel/VBoxContainer/DescLabel
 
+var manager_ref: SkillTreeManager
 var upgrade_point: int = 0
-
+var skills: Array[String] = ["snowball", "icicle"]
+var curr_idx: int = 0
 func _ready() -> void:
+	UpgradeEventbus.local_manager_ready.connect(_on_manager_ready)
+	UpgradeEventbus.after_change_tree.connect(after_manager_change_tree)
 	hide()
 	tooltip_panel.hide()
 	texture_rect.texture = skill_icon
-	_generate_ui_from_data()
 	
 func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
 	upgrade_point_label.text = "Point: " + str(upgrade_point)
 	if tooltip_panel.visible:
 		tooltip_panel.global_position = get_global_mouse_position() + Vector2(15, 15)
-	
+
+func _on_manager_ready(manager: SkillTreeManager) -> void:
+	# 防止重複綁定
+	if manager_ref != null: 
+		return 
+		
+	manager_ref = manager
+	_generate_ui_from_data()
+
+## Manage UI
 func _generate_ui_from_data() -> void:
 	if not skill_tree_data: return
 	
@@ -51,10 +63,24 @@ func _generate_ui_from_data() -> void:
 			var btn = button_scene.instantiate()
 			btn.upgrade_selected.connect(_on_upgrade_selected)
 			container.add_child(btn)
-			btn.setup(node_data.skill_id) # 自動傳入 UID
+			btn.setup(node_data.skill_id, manager_ref) # 自動傳入 UID
 			btn.mouse_entered.connect(_show_tooltip.bind(node_data))
 			btn.mouse_exited.connect(_hide_tooltip)
 
+func after_manager_change_tree() -> void:
+	skill_tree_data = manager_ref.skill_tree_data
+	_generate_ui_from_data()
+
+func next_skill() -> void:
+	curr_idx = (curr_idx + 1) % skills.size()
+	var skill_name: String = skills[curr_idx]
+	UpgradeEventbus.change_tree_from_UI.emit(skill_name)
+
+func previous_skill() -> void:
+	curr_idx = (curr_idx - 1 + skills.size()) % skills.size()
+	var skill_name: String = skills[curr_idx]
+	UpgradeEventbus.change_tree_from_UI.emit(skill_name)
+	
 ## Manage Upgrade and Multiplayer Logic
 func _on_level_up() -> void:
 	GameManager.change_pause_state.rpc(true)

@@ -52,6 +52,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vqmqa")
 
+[node name="ArrowVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 108.0
+offset_right = 253.0
+offset_bottom = 614.0
+
+[node name="Previous" type="Button" parent="ArrowVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "UP"
+
+[node name="HSeparator" type="HSeparator" parent="ArrowVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Next" type="Button" parent="ArrowVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "DOWN"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 12.0
@@ -148,4 +169,6 @@ layout_mode = 2
 
 [node name="UpgradeTimer" type="Timer" parent="."]
 
+[connection signal="pressed" from="ArrowVBoxContainer/Previous" to="." method="next_skill"]
+[connection signal="pressed" from="ArrowVBoxContainer/Next" to="." method="previous_skill"]
 [connection signal="timeout" from="UpgradeTimer" to="." method="_on_timer_timeout"]
