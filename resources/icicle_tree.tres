@@ -28,5 +28,6 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
 [resource]
 script = ExtResource("1_2ge66")
+skill_name = "icicle"
 skill_paths = Array[ExtResource("2_ysyf2")]([SubResource("Resource_is2dt")])
 metadata/_custom_type_script = "uid://bwxmarxo3thqj"

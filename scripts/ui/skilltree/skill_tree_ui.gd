@@ -2,9 +2,7 @@ extends Control
 
 @export_category("Basic")
 @export var choose_time: int
-@export var skill_icon: Texture
 @export_category("MainResource")
-@export var skill_tree_data: SkillTreeData
 @export var path_containers: Array[HBoxContainer]
 @export var upgrade_timer: Timer
 @export_category("UIResource")
@@ -20,13 +18,17 @@ extends Control
 var manager_ref: SkillTreeManager
 var upgrade_point: int = 0
 var skills: Array[String] = ["snowball", "icicle"]
+var skill_icons: Array[Resource] = [
+	preload("res://imgs/skills/snowball.png"), 
+	preload("res://imgs/skills/icicle.png")
+]
 var curr_idx: int = 0
+
 func _ready() -> void:
 	UpgradeEventbus.local_manager_ready.connect(_on_manager_ready)
-	UpgradeEventbus.after_change_tree.connect(after_manager_change_tree)
 	hide()
 	tooltip_panel.hide()
-	texture_rect.texture = skill_icon
+	texture_rect.texture = skill_icons[curr_idx]
 	
 func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
@@ -35,16 +37,13 @@ func _process(delta: float) -> void:
 		tooltip_panel.global_position = get_global_mouse_position() + Vector2(15, 15)
 
 func _on_manager_ready(manager: SkillTreeManager) -> void:
-	# 防止重複綁定
-	if manager_ref != null: 
-		return 
-		
 	manager_ref = manager
 	_generate_ui_from_data()
 
 ## Manage UI
 func _generate_ui_from_data() -> void:
-	if not skill_tree_data: return
+	if not manager_ref or not manager_ref.curr_skill_tree_data: return
+	var skill_tree_data: SkillTreeData = manager_ref.skill_name_to_tree[skills[curr_idx]]
 	
 	for container in path_containers:
 		for child in container.get_children():
@@ -62,24 +61,22 @@ func _generate_ui_from_data() -> void:
 			
 			var btn = button_scene.instantiate()
 			btn.upgrade_selected.connect(_on_upgrade_selected)
-			container.add_child(btn)
-			btn.setup(node_data.skill_id, manager_ref) # 自動傳入 UID
 			btn.mouse_entered.connect(_show_tooltip.bind(node_data))
 			btn.mouse_exited.connect(_hide_tooltip)
-
-func after_manager_change_tree() -> void:
-	skill_tree_data = manager_ref.skill_tree_data
-	_generate_ui_from_data()
+			container.add_child(btn)
+			btn.setup(node_data.skill_id, manager_ref)
 
 func next_skill() -> void:
 	curr_idx = (curr_idx + 1) % skills.size()
 	var skill_name: String = skills[curr_idx]
-	UpgradeEventbus.change_tree_from_UI.emit(skill_name)
+	texture_rect.texture = skill_icons[curr_idx]
+	_generate_ui_from_data()
 
 func previous_skill() -> void:
 	curr_idx = (curr_idx - 1 + skills.size()) % skills.size()
 	var skill_name: String = skills[curr_idx]
-	UpgradeEventbus.change_tree_from_UI.emit(skill_name)
+	texture_rect.texture = skill_icons[curr_idx]
+	_generate_ui_from_data()
 	
 ## Manage Upgrade and Multiplayer Logic
 func _on_level_up() -> void:

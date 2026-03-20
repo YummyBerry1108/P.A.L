@@ -65,5 +65,6 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
 [resource]
 script = ExtResource("1_m7yi0")
+skill_name = "snowball"
 skill_paths = Array[ExtResource("2_l85ev")]([SubResource("Resource_uyfnw"), SubResource("Resource_it8cn")])
 metadata/_custom_type_script = "uid://bwxmarxo3thqj"

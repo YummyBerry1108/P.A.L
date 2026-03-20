@@ -2,7 +2,7 @@ extends Button
 
 signal upgrade_selected
 
-@onready var border: ReferenceRect = $ReferenceRect
+@export var border: ReferenceRect
 var skill_id: String
 var manager_ref: SkillTreeManager # only for check node status, don't change anything in this
 

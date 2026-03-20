@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdf5h75awup8s"]
+[gd_scene load_steps=7 format=3 uid="uid://cdf5h75awup8s"]
 
 [ext_resource type="Script" uid="uid://da7ald14ur5c2" path="res://scripts/ui/skilltree/skill_tree_ui.gd" id="1_5wouh"]
-[ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="2_3snot"]
 [ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="2_vqmqa"]
 [ext_resource type="PackedScene" uid="uid://bbwf12vyd3k6q" path="res://scenes/ui/skilltree/skill_node_button.tscn" id="3_ltwuo"]
 [ext_resource type="Script" uid="uid://bwnifgc5wjc1k" path="res://scripts/ui/skilltree/draw_skill_path.gd" id="4_ltwuo"]
@@ -34,8 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5wouh")
 choose_time = 10
-skill_icon = ExtResource("2_vqmqa")
-skill_tree_data = ExtResource("2_3snot")
 path_containers = [NodePath("VBoxContainer/HBoxContainer"), NodePath("VBoxContainer/HBoxContainer2"), NodePath("VBoxContainer/HBoxContainer3")]
 upgrade_timer = NodePath("UpgradeTimer")
 texture_rect = NodePath("TextureRect")
@@ -65,6 +62,7 @@ size_flags_vertical = 3
 text = "UP"
 
 [node name="HSeparator" type="HSeparator" parent="ArrowVBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
