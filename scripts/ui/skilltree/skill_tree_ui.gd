@@ -1,0 +1,123 @@
+extends Control
+
+@export_category("Basic")
+@export var choose_time: int
+@export_category("MainResource")
+@export var path_containers: Array[HBoxContainer]
+@export var upgrade_timer: Timer
+@export_category("UIResource")
+@export var texture_rect: TextureRect
+@export var button_scene: PackedScene
+@export var upgrade_timer_label: Label
+@export var upgrade_point_label: Label
+
+@onready var tooltip_panel: PanelContainer = $TooltipPanel
+@onready var tooltip_name: Label = $TooltipPanel/VBoxContainer/NameLabel
+@onready var tooltip_desc: Label = $TooltipPanel/VBoxContainer/DescLabel
+
+var manager_ref: SkillTreeManager
+var upgrade_point: int = 0
+var skill_icons: Array[Resource]
+var curr_idx: int = 0
+
+func _ready() -> void:
+	UpgradeEventbus.local_manager_ready.connect(_on_manager_ready)
+	_put_icons()
+	hide()
+	tooltip_panel.hide()
+	texture_rect.texture = skill_icons[curr_idx]
+	
+func _process(delta: float) -> void:
+	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
+	upgrade_point_label.text = "Point: " + str(upgrade_point)
+	if tooltip_panel.visible:
+		tooltip_panel.global_position = get_global_mouse_position() + Vector2(15, 15)
+
+func _put_icons() -> void:
+	var dir = DirAccess.open("res://imgs/skills/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			if not file_name.get_extension() == "import":
+				var icon: Resource = load("res://imgs/skills/" + file_name)
+				skill_icons.append(icon)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+
+func _on_manager_ready(manager: SkillTreeManager) -> void:
+	manager_ref = manager
+	_generate_ui_from_data()
+
+## Manage UI
+func _generate_ui_from_data() -> void:
+	if not manager_ref: return
+	var skill_tree_data: SkillTreeData = manager_ref.skill_trees[curr_idx]
+	
+	for container in path_containers:
+		for child in container.get_children():
+			child.queue_free()
+			
+	# 確保路徑數量與容器數量匹配
+	var path_count = min(skill_tree_data.skill_paths.size(), path_containers.size())
+
+	for i in range(path_count):
+		var path_data = skill_tree_data.skill_paths[i]
+		var container = path_containers[i]
+
+		# 根據資料檔的節點數量，動態生成按鈕
+		for node_data in path_data.skill_nodes:
+			
+			var btn = button_scene.instantiate()
+			btn.upgrade_selected.connect(_on_upgrade_selected)
+			btn.mouse_entered.connect(_show_tooltip.bind(node_data))
+			btn.mouse_exited.connect(_hide_tooltip)
+			container.add_child(btn)
+			btn.setup(node_data.skill_id, manager_ref)
+
+func next_skill() -> void:
+	curr_idx = (curr_idx + 1) % manager_ref.skill_trees.size()
+	texture_rect.texture = skill_icons[curr_idx]
+	_generate_ui_from_data()
+
+func previous_skill() -> void:
+	curr_idx = (curr_idx - 1 + manager_ref.skill_trees.size()) % manager_ref.skill_trees.size()
+	texture_rect.texture = skill_icons[curr_idx]
+	_generate_ui_from_data()
+	
+## Manage Upgrade and Multiplayer Logic
+func _on_level_up() -> void:
+	GameManager.change_pause_state.rpc(true)
+	show_upgrades.rpc()
+	
+@rpc("authority", "call_local", "reliable")
+func show_upgrades() -> void:
+	if not GameManager.local_player.is_alive:
+		return
+		
+	upgrade_point += 1
+	show()
+	upgrade_timer.start(choose_time)
+
+func _on_upgrade_selected() -> void:
+	upgrade_point -= 1
+	if upgrade_point == 0:
+		hide()
+		_end_upgrade()
+
+func _on_timer_timeout() -> void:
+	hide()
+	_end_upgrade()
+	
+func _end_upgrade() -> void:
+	GameManager.skill_upgrade.rpc_id(1)
+
+## Manage Tooltip Logic
+func _show_tooltip(data: SkillNodeData) -> void:
+	tooltip_name.text = data.skill_name
+	tooltip_desc.text = data.skill_description
+	tooltip_panel.show()
+
+func _hide_tooltip() -> void:
+	tooltip_panel.hide()

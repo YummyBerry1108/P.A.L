@@ -1,0 +1,172 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdf5h75awup8s"]
+
+[ext_resource type="Script" uid="uid://da7ald14ur5c2" path="res://scripts/ui/skilltree/skill_tree_ui.gd" id="1_5wouh"]
+[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="2_vqmqa"]
+[ext_resource type="PackedScene" uid="uid://bbwf12vyd3k6q" path="res://scenes/ui/skilltree/skill_node_button.tscn" id="3_ltwuo"]
+[ext_resource type="Script" uid="uid://bwnifgc5wjc1k" path="res://scripts/ui/skilltree/draw_skill_path.gd" id="4_ltwuo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqmqa"]
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.941176)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.775063, 0.775063, 0.775063, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3snot"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeUI" type="Control" node_paths=PackedStringArray("path_containers", "upgrade_timer", "texture_rect", "upgrade_timer_label", "upgrade_point_label")]
+process_mode = 3
+layout_mode = 3
+anchor_left = 0.041
+anchor_top = 0.04
+anchor_right = 0.962
+anchor_bottom = 0.962
+offset_left = -0.480003
+offset_top = 0.199999
+offset_right = 0.639893
+offset_bottom = 0.359924
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5wouh")
+choose_time = 10
+path_containers = [NodePath("VBoxContainer/HBoxContainer"), NodePath("VBoxContainer/HBoxContainer2"), NodePath("VBoxContainer/HBoxContainer3")]
+upgrade_timer = NodePath("UpgradeTimer")
+texture_rect = NodePath("TextureRect")
+button_scene = ExtResource("3_ltwuo")
+upgrade_timer_label = NodePath("UpgradeTimeLabel")
+upgrade_point_label = NodePath("UpgradePointLabel")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vqmqa")
+
+[node name="ArrowVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 108.0
+offset_right = 253.0
+offset_bottom = 614.0
+
+[node name="Previous" type="Button" parent="ArrowVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "UP"
+
+[node name="HSeparator" type="HSeparator" parent="ArrowVBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Next" type="Button" parent="ArrowVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "DOWN"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 234.0
+offset_right = 1012.0
+offset_bottom = 1234.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_vqmqa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.222
+anchor_top = 0.143
+anchor_right = 0.965
+anchor_bottom = 0.944
+offset_left = 0.039978
+offset_top = 0.0479965
+offset_right = 0.299927
+offset_bottom = 0.18396
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+script = ExtResource("4_ltwuo")
+
+[node name="SkillNodeButton" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="SkillNodeButton2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+script = ExtResource("4_ltwuo")
+
+[node name="SkillNodeButton" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+script = ExtResource("4_ltwuo")
+
+[node name="SkillNodeButton" parent="VBoxContainer/HBoxContainer3" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="SkillNodeButton2" parent="VBoxContainer/HBoxContainer3" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="SkillNodeButton3" parent="VBoxContainer/HBoxContainer3" instance=ExtResource("3_ltwuo")]
+layout_mode = 2
+
+[node name="UpgradePointLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 32.0
+offset_right = 1104.0
+offset_bottom = 77.0
+text = "Upgrade Point Left"
+label_settings = SubResource("LabelSettings_3snot")
+horizontal_alignment = 1
+
+[node name="UpgradeTimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 33.0
+offset_right = 739.0
+offset_bottom = 78.0
+text = "Upgrade Left Time"
+label_settings = SubResource("LabelSettings_3snot")
+horizontal_alignment = 1
+
+[node name="TooltipPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TooltipPanel"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="TooltipPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="DescLabel" type="Label" parent="TooltipPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradeTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="ArrowVBoxContainer/Previous" to="." method="next_skill"]
+[connection signal="pressed" from="ArrowVBoxContainer/Next" to="." method="previous_skill"]
+[connection signal="timeout" from="UpgradeTimer" to="." method="_on_timer_timeout"]

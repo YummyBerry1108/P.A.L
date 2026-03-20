@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbwf12vyd3k6q"]
+
+[ext_resource type="Texture2D" uid="uid://64gwusxyxfto" path="res://icon.svg" id="1_mcooi"]
+[ext_resource type="Script" uid="uid://bqbcnf1dwi6aw" path="res://scripts/ui/skilltree/skill_node_button.gd" id="1_x1iev"]
+
+[node name="SkillNodeButton" type="Button" node_paths=PackedStringArray("border")]
+offset_right = 136.0
+offset_bottom = 136.0
+icon = ExtResource("1_mcooi")
+script = ExtResource("1_x1iev")
+border = NodePath("ReferenceRect")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+border_color = Color(0.840454, 0.648155, 0.111571, 1)
+border_width = 3.0
+editor_only = false
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsv5cxo6m3d1"
-path="res://.godot/imported/Rock.png-bf1253b80475accf18bfc2200683c6a4.ctex"
+uid="uid://bbdjdyljb3m66"
+path="res://.godot/imported/frame_0025.png-b792bc991ab0d1132c958b219727e170.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://imgs/enemies/Rock.png"
-dest_files=["res://.godot/imported/Rock.png-bf1253b80475accf18bfc2200683c6a4.ctex"]
+source_file="res://imgs/enemies/Rock/frame_0025.png"
+dest_files=["res://.godot/imported/frame_0025.png-b792bc991ab0d1132c958b219727e170.ctex"]
 
 [params]
 
