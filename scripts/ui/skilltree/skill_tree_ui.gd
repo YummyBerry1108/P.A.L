@@ -17,15 +17,12 @@ extends Control
 
 var manager_ref: SkillTreeManager
 var upgrade_point: int = 0
-var skills: Array[String] = ["snowball", "icicle"]
-var skill_icons: Array[Resource] = [
-	preload("res://imgs/skills/snowball.png"), 
-	preload("res://imgs/skills/icicle.png")
-]
+var skill_icons: Array[Resource]
 var curr_idx: int = 0
 
 func _ready() -> void:
 	UpgradeEventbus.local_manager_ready.connect(_on_manager_ready)
+	_put_icons()
 	hide()
 	tooltip_panel.hide()
 	texture_rect.texture = skill_icons[curr_idx]
@@ -36,14 +33,28 @@ func _process(delta: float) -> void:
 	if tooltip_panel.visible:
 		tooltip_panel.global_position = get_global_mouse_position() + Vector2(15, 15)
 
+func _put_icons() -> void:
+	var dir = DirAccess.open("res://imgs/skills/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			#print("Found file: " + file_name)
+			if not file_name.get_extension() == "import":
+				var icon: Resource = load("res://imgs/skills/" + file_name)
+				skill_icons.append(icon)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+
 func _on_manager_ready(manager: SkillTreeManager) -> void:
 	manager_ref = manager
 	_generate_ui_from_data()
 
 ## Manage UI
 func _generate_ui_from_data() -> void:
-	if not manager_ref or not manager_ref.curr_skill_tree_data: return
-	var skill_tree_data: SkillTreeData = manager_ref.skill_name_to_tree[skills[curr_idx]]
+	if not manager_ref: return
+	var skill_tree_data: SkillTreeData = manager_ref.skill_trees[curr_idx]
 	
 	for container in path_containers:
 		for child in container.get_children():
@@ -67,14 +78,12 @@ func _generate_ui_from_data() -> void:
 			btn.setup(node_data.skill_id, manager_ref)
 
 func next_skill() -> void:
-	curr_idx = (curr_idx + 1) % skills.size()
-	var skill_name: String = skills[curr_idx]
+	curr_idx = (curr_idx + 1) % manager_ref.skill_trees.size()
 	texture_rect.texture = skill_icons[curr_idx]
 	_generate_ui_from_data()
 
 func previous_skill() -> void:
-	curr_idx = (curr_idx - 1 + skills.size()) % skills.size()
-	var skill_name: String = skills[curr_idx]
+	curr_idx = (curr_idx - 1 + manager_ref.skill_trees.size()) % manager_ref.skill_trees.size()
 	texture_rect.texture = skill_icons[curr_idx]
 	_generate_ui_from_data()
 	

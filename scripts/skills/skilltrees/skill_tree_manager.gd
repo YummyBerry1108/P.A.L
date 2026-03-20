@@ -3,16 +3,16 @@ class_name SkillTreeManager
 
 @export var actor: SkillData
 @export var curr_skill_tree_data: SkillTreeData
-var skill_name_to_tree: Dictionary[String, SkillTreeData]
-var skill_id_to_name: Dictionary[String, String]
+var skill_trees: Array[SkillTreeData]
+var skill_id_to_name: Dictionary[String, String] # to know this upgrade under which skill
 
 var uid_to_node: Dictionary[String, SkillNodeData] = {}
 var unlocked_nodes: Array[String] = [] # 可以被點擊的節點
 var active_nodes: Array[String] = []   # 已經點亮/升級的節點
 
 func _ready() -> void:
-	put_skilltrees()
-	_init_skill_tree()
+	_put_skill_trees()
+	_init_manager()
 	if not is_multiplayer_authority():
 		return
 	UpgradeEventbus.request_upgrade.connect(request_upgrade)
@@ -21,10 +21,22 @@ func _ready() -> void:
 func _announce_to_ui() -> void:
 	if is_multiplayer_authority():
 		UpgradeEventbus.local_manager_ready.emit(self)
-
-func _init_skill_tree() -> void:
-	for skill_name in skill_name_to_tree:
-		var skill_tree_data: SkillTreeData = skill_name_to_tree[skill_name]
+		
+func _put_skill_trees() -> void:
+	var dir = DirAccess.open("res://resources/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			#print("Found file: " + file_name)
+			var skill_tree_data: SkillTreeData = load("res://resources/" + file_name)
+			skill_trees.append(skill_tree_data)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+		
+func _init_manager() -> void:
+	for skill_tree_data in skill_trees:
 		for skill_path: SkillPathData in skill_tree_data.skill_paths:
 			if skill_path.skill_nodes.size() > 0:
 				unlocked_nodes.append(skill_path.skill_nodes[0].skill_id)
@@ -33,7 +45,7 @@ func _init_skill_tree() -> void:
 			for skill_node: SkillNodeData in skill_path.skill_nodes:
 				if skill_node.skill_id == "": continue
 				uid_to_node[skill_node.skill_id] = skill_node
-				skill_id_to_name[skill_node.skill_id] = skill_name
+				skill_id_to_name[skill_node.skill_id] = skill_tree_data.skill_name
 
 func request_upgrade(skill_id: String) -> void:
 	if not is_multiplayer_authority():
@@ -71,18 +83,3 @@ func is_node_unlocked(id: String) -> bool:
 
 func is_node_active(id: String) -> bool:
 	return active_nodes.has(id)
-
-func put_skilltrees() -> void:
-	var dir = DirAccess.open("res://resources/")
-	if dir:
-		dir.list_dir_begin()
-		var file_name: String = dir.get_next()
-		while file_name != "":
-			#print("Found file: " + file_name)
-			var skill_tree_data: SkillTreeData = load("res://resources/" + file_name)
-			print(skill_tree_data)
-			skill_name_to_tree[skill_tree_data.skill_name] = skill_tree_data
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-	
