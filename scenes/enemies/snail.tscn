@@ -158,6 +158,8 @@ damage = 5.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_er827")
 sprite_frames = SubResource("SpriteFrames_igf3i")
+frame = 10
+frame_progress = 0.812261
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
