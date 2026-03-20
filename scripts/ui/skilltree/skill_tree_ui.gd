@@ -39,7 +39,6 @@ func _put_icons() -> void:
 		dir.list_dir_begin()
 		var file_name: String = dir.get_next()
 		while file_name != "":
-			#print("Found file: " + file_name)
 			if not file_name.get_extension() == "import":
 				var icon: Resource = load("res://imgs/skills/" + file_name)
 				skill_icons.append(icon)
