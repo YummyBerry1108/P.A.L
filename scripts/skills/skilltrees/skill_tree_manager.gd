@@ -17,38 +17,38 @@ func _ready() -> void:
 		
 	for skill_path: SkillPathData in skill_tree_data.skill_paths:
 		for skill_node: SkillNodeData in skill_path.skill_nodes:
-			if skill_node.upgrade_id == "": continue
-			uid_to_node[skill_node.upgrade_id] = skill_node
+			if skill_node.skill_id == "": continue
+			uid_to_node[skill_node.skill_id] = skill_node
 			
 	for skill_path: SkillPathData in skill_tree_data.skill_paths:
 		if skill_path.skill_nodes.size() > 0:
-			unlocked_nodes.append(skill_path.skill_nodes[0].upgrade_id)
-			UpgradeEventbus.on_skill_unlocked.emit(skill_path.skill_nodes[0].upgrade_id)
+			unlocked_nodes.append(skill_path.skill_nodes[0].skill_id)
+			UpgradeEventbus.on_skill_unlocked.emit(skill_path.skill_nodes[0].skill_id)
 
-func request_upgrade(upgrade_id: String) -> void:
+func request_upgrade(skill_id: String) -> void:
 	if not is_multiplayer_authority():
 		return
-	upgrade_node(upgrade_id)
+	upgrade_node(skill_id)
 
-func upgrade_node(upgrade_id: String) -> void:
-	if not uid_to_node.has(upgrade_id): return
-	if active_nodes.has(upgrade_id): return
-	if not unlocked_nodes.has(upgrade_id): return
+func upgrade_node(skill_id: String) -> void:
+	if not uid_to_node.has(skill_id): return
+	if active_nodes.has(skill_id): return
+	if not unlocked_nodes.has(skill_id): return
 	
-	var current_node: SkillNodeData = uid_to_node[upgrade_id]
+	var current_node: SkillNodeData = uid_to_node[skill_id]
 
-	active_nodes.append(upgrade_id)
-	UpgradeEventbus.on_skill_active.emit(upgrade_id)
+	active_nodes.append(skill_id)
+	UpgradeEventbus.on_skill_active.emit(skill_id)
 	
 	for next_uid in current_node.next_node_uids:
 		if uid_to_node.has(next_uid) and not unlocked_nodes.has(next_uid):
 			unlocked_nodes.append(next_uid)
 			UpgradeEventbus.on_skill_unlocked.emit(next_uid)
-	_sync_apply_upgrade.rpc(upgrade_id)
+	_sync_apply_upgrade.rpc(skill_id)
 
 @rpc("any_peer", "call_local", "reliable")
-func _sync_apply_upgrade(upgrade_id: String) -> void:
-	var current_node: SkillNodeData = uid_to_node[upgrade_id]
+func _sync_apply_upgrade(skill_id: String) -> void:
+	var current_node: SkillNodeData = uid_to_node[skill_id]
 	for effect: SkillUpgrade in current_node.upgrade_effects:
 		actor.apply_upgrade(effect)
 

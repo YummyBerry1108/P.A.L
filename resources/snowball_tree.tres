@@ -14,9 +14,11 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_77ek0"]
 script = ExtResource("3_xf0gt")
-upgrade_id = "snowball_scale+"
+skill_id = "snowball_scale+"
 upgrade_effects = Array[ExtResource("4_vl580")]([SubResource("Resource_xf0gt")])
 next_node_uids = Array[String]([])
+skill_name = "Big snowball"
+skill_description = "Make your snowball bigger!"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_uyfnw"]
@@ -33,9 +35,11 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_v7dbn"]
 script = ExtResource("3_xf0gt")
-upgrade_id = "snowball_damage+"
+skill_id = "snowball_damage+"
 upgrade_effects = Array[ExtResource("4_vl580")]([SubResource("Resource_vl580")])
 next_node_uids = Array[String](["snowball_damage++"])
+skill_name = "未命名技能"
+skill_description = ""
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_johu8"]
@@ -47,9 +51,11 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_bq4na"]
 script = ExtResource("3_xf0gt")
-upgrade_id = "snowball_damage++"
+skill_id = "snowball_damage++"
 upgrade_effects = Array[ExtResource("4_vl580")]([SubResource("Resource_johu8")])
 next_node_uids = Array[String]([])
+skill_name = "未命名技能"
+skill_description = ""
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_it8cn"]
