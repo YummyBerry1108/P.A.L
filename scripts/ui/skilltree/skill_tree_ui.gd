@@ -37,12 +37,18 @@ func _put_icons() -> void:
 	var dir = DirAccess.open("res://imgs/skills/")
 	if dir:
 		dir.list_dir_begin()
+		var file_names: Array[String] = []
 		var file_name: String = dir.get_next()
 		while file_name != "":
 			if not file_name.get_extension() == "import":
-				var icon: Resource = load("res://imgs/skills/" + file_name)
-				skill_icons.append(icon)
+				file_names.append(file_name)
 			file_name = dir.get_next()
+		
+		file_names.sort()
+		for sorted_name in file_names:
+			#print("Found file: " + sorted_name)
+			var icon: Resource = load("res://imgs/skills/" + sorted_name)
+			skill_icons.append(icon)
 	else:
 		print("An error occurred when trying to access the path.")
 

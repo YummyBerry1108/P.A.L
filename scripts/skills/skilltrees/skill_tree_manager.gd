@@ -26,12 +26,17 @@ func _put_skill_trees() -> void:
 	var dir = DirAccess.open("res://resources/skill_trees/")
 	if dir:
 		dir.list_dir_begin()
+		var file_names: Array[String] = []
 		var file_name: String = dir.get_next()
 		while file_name != "":
-			#print("Found file: " + file_name)
-			var skill_tree_data: SkillTreeData = load("res://resources/skill_trees/" + file_name)
-			skill_trees.append(skill_tree_data)
+			file_names.append(file_name)
 			file_name = dir.get_next()
+			
+		file_names.sort()
+		for sorted_name in file_names:
+			#print("Found file: " + sorted_name)
+			var skill_tree_data: SkillTreeData = load("res://resources/skill_trees/" + sorted_name)
+			skill_trees.append(skill_tree_data)
 	else:
 		print("An error occurred when trying to access the path.")
 		
