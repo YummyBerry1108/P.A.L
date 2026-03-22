@@ -111,7 +111,7 @@ func _on_timer_timeout() -> void:
 	_end_upgrade()
 	
 func _end_upgrade() -> void:
-	GameManager.skill_upgrade.rpc_id(1)
+	GameManager.submit_upgrade.rpc_id(1)
 
 ## Manage Tooltip Logic
 func _show_tooltip(data: SkillNodeData) -> void:

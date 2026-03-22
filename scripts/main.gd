@@ -82,7 +82,7 @@ func _on_player_spawned(player: Player) -> void:
 		player.health_changed.connect(ui.health_bar._set_health)
 		player.max_health_changed.connect(ui.health_bar.init_health)
 		player.spectate_changed.connect(_update_spectate_ui)
-		ui.health_bar.init_health(player.hp)
+		ui.health_bar.init_health(player.player_stat.hp)
 		
 func _on_player_disconnected(id: int) -> void:
 	player_amount -= 1

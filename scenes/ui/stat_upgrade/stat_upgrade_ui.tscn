@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5bj02fgrvrpf"]
+[gd_scene load_steps=4 format=3 uid="uid://b5bj02fgrvrpf"]
 
 [ext_resource type="Script" uid="uid://bg40okqql5s42" path="res://scripts/ui/stat_upgrade/stat_upgrade_ui.gd" id="1_r3gfj"]
 [ext_resource type="PackedScene" uid="uid://cv610u5482jt6" path="res://scenes/ui/stat_upgrade/stat_upgrade_button.tscn" id="2_pjxy1"]
-[ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/etc/stat_upgrade_data.gd" id="3_fa7vh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n1a3i"]
 font_size = 32
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="StatUpgradeUI" type="Control" node_paths=PackedStringArray("container", "stat_upgrades", "upgrade_timer", "upgrade_timer_label", "background")]
+[node name="StatUpgradeUI" type="Control" node_paths=PackedStringArray("container", "upgrade_timer", "upgrade_timer_label", "background")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -21,7 +20,6 @@ script = ExtResource("1_r3gfj")
 choose_time = 10
 upgrade_card_scene = ExtResource("2_pjxy1")
 container = NodePath("StatUpgradeHBoxContainer")
-stat_upgrades = NodePath("StatUpgrades")
 upgrade_timer = NodePath("UpgradeTimer")
 upgrade_timer_label = NodePath("UpgradeTimeLabel")
 background = NodePath("Mask")
@@ -54,28 +52,5 @@ horizontal_alignment = 1
 
 [node name="UpgradeTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="StatUpgrades" type="Node" parent="."]
-
-[node name="hp_up" type="Node" parent="StatUpgrades"]
-script = ExtResource("3_fa7vh")
-upgrade_id = "hp_up"
-title = "HP+"
-description = "Add 10 HP"
-metadata/_custom_type_script = "uid://fmua36g13d4h"
-
-[node name="speed_up" type="Node" parent="StatUpgrades"]
-script = ExtResource("3_fa7vh")
-upgrade_id = "speed_up"
-title = "Speed+"
-description = "Increase your move speed"
-metadata/_custom_type_script = "uid://fmua36g13d4h"
-
-[node name="damage_up" type="Node" parent="StatUpgrades"]
-script = ExtResource("3_fa7vh")
-upgrade_id = "damage_up"
-title = "Damage+"
-description = "Increase your damage"
-metadata/_custom_type_script = "uid://fmua36g13d4h"
 
 [connection signal="timeout" from="UpgradeTimer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=26 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
@@ -15,8 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://co1d4vw80cpet" path="res://imgs/player/frame_0005.png" id="7_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="10_h17s1"]
 [ext_resource type="Script" uid="uid://5olw8pxlwuj" path="res://scripts/skills/skilltrees/skill_tree_manager.gd" id="11_myrg7"]
+[ext_resource type="Script" uid="uid://l7jelo8hnshc" path="res://scripts/player/stats/player_stat_data.gd" id="11_uf5tr"]
+[ext_resource type="Script" uid="uid://cqmym637gdqmy" path="res://scripts/player/stats/stat_upgrade_manager.gd" id="12_8ydkj"]
+[ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/player/stats/stat_upgrade_data.gd" id="12_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
-[ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/snowball_tree.tres" id="14_kvlxm"]
+[ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -78,7 +81,6 @@ z_as_relative = false
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0ax77")
-damage = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.35, 0.35)
@@ -127,6 +129,41 @@ script = ExtResource("5_tuyoq")
 
 [node name="Spectate" type="Node" parent="Behaviors"]
 script = ExtResource("6_je7p5")
+
+[node name="PlayerStat" type="Node" parent="."]
+script = ExtResource("11_uf5tr")
+metadata/_custom_type_script = "uid://l7jelo8hnshc"
+
+[node name="StatUpgrades" type="Node" parent="."]
+script = ExtResource("12_8ydkj")
+metadata/_custom_type_script = "uid://cqmym637gdqmy"
+
+[node name="hp_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("12_lgqa7")
+upgrade_id = "hp_up"
+stat_name = "max_hp"
+value = 10.0
+title = "HP+"
+description = "Add 10 HP"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="speed_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("12_lgqa7")
+upgrade_id = "speed_up"
+stat_name = "speed_mutiplier"
+value = 0.1
+title = "Speed+"
+description = "Increase your move speed"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="damage_up" type="Node" parent="StatUpgrades"]
+script = ExtResource("12_lgqa7")
+upgrade_id = "damage_up"
+stat_name = "damage"
+value = 5.0
+title = "Damage+"
+description = "Increase your damage"
+metadata/_custom_type_script = "uid://fmua36g13d4h"
 
 [node name="Skills" type="Node" parent="."]
 

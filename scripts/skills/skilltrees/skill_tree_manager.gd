@@ -15,7 +15,7 @@ func _ready() -> void:
 	_init_manager()
 	if not is_multiplayer_authority():
 		return
-	UpgradeEventbus.request_upgrade.connect(request_upgrade)
+	UpgradeEventbus.skill_upgrade.connect(skill_upgrade)
 	call_deferred("_announce_to_ui")
 	
 func _announce_to_ui() -> void:
@@ -23,13 +23,13 @@ func _announce_to_ui() -> void:
 		UpgradeEventbus.local_manager_ready.emit(self)
 		
 func _put_skill_trees() -> void:
-	var dir = DirAccess.open("res://resources/")
+	var dir = DirAccess.open("res://resources/skill_trees/")
 	if dir:
 		dir.list_dir_begin()
 		var file_name: String = dir.get_next()
 		while file_name != "":
 			#print("Found file: " + file_name)
-			var skill_tree_data: SkillTreeData = load("res://resources/" + file_name)
+			var skill_tree_data: SkillTreeData = load("res://resources/skill_trees/" + file_name)
 			skill_trees.append(skill_tree_data)
 			file_name = dir.get_next()
 	else:
@@ -47,7 +47,7 @@ func _init_manager() -> void:
 				uid_to_node[skill_node.skill_id] = skill_node
 				skill_id_to_name[skill_node.skill_id] = skill_tree_data.skill_name
 
-func request_upgrade(skill_id: String) -> void:
+func skill_upgrade(skill_id: String) -> void:
 	if not is_multiplayer_authority():
 		return
 	upgrade_node(skill_id)

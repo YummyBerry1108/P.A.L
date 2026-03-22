@@ -19,7 +19,7 @@ func setup(uid: String, manager: SkillTreeManager) -> void:
 func _on_pressed() -> void:
 	if manager_ref.is_node_active(skill_id) or not manager_ref.is_node_unlocked(skill_id):
 		return
-	UpgradeEventbus.request_upgrade.emit(skill_id)
+	UpgradeEventbus.skill_upgrade.emit(skill_id)
 	upgrade_selected.emit()
 
 func _on_skill_unlocked(id: String) -> void:

@@ -5,13 +5,13 @@ signal upgrade_selected(upgrade_id: String)
 @export var title_label: Label
 @export var desc_label: Label
 
-var current_upgrade_id: String
+var stat_id: String
 
 func _ready() -> void:
 	pressed.connect(_on_button_pressed)
 
 func setup(data: StatUpgradeData) -> void:
-	current_upgrade_id = data.upgrade_id
+	stat_id = data.upgrade_id
 	title_label.text = data.title
 	desc_label.text = data.description
 	
@@ -30,4 +30,5 @@ func setup(data: StatUpgradeData) -> void:
 	add_theme_stylebox_override("hover", hover_style)
 
 func _on_button_pressed() -> void:
-	upgrade_selected.emit(current_upgrade_id)
+	UpgradeEventbus.stat_upgrade.emit(stat_id)
+	upgrade_selected.emit(stat_id)

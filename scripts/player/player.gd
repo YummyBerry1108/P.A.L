@@ -12,10 +12,8 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var display_name: Label = $DisplayName 
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_stat: PlayerStatData = $PlayerStat
 
-@export var damage: float = 10.0
-@export var max_hp: float = 100.0
-@export var hp: float = 100.0
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
 @export var username: String
@@ -23,9 +21,6 @@ signal spectate_changed(name: String) # used in spectate.gd
 var is_spectating = false
 var spectate_target: Player = null 
 
-const SPEED: float = 300.0
-var _old_hp: float
-var speed_mutiplier: float = 1.0
 var skills: Dictionary = {}
 
 func _enter_tree() -> void:
@@ -33,7 +28,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	add_to_group("players")
-	_old_hp = hp
 	if "name" in Lobby.players[name.to_int()]:
 		username = Lobby.players[name.to_int()]["name"]
 	else:
@@ -42,9 +36,10 @@ func _ready() -> void:
 	
 	health_changed.connect(health_bar._set_health)
 	max_health_changed.connect(health_bar.init_health)
-	health_bar.init_health(hp)
+	health_bar.init_health(player_stat.hp)
 	
 	if is_multiplayer_authority():
+		UpgradeEventbus.stat_upgrade.connect(player_stat.apply_upgrade.rpc)
 		health_bar.hide()
 		display_name.hide()
 		$Camera2D.make_current()
@@ -55,14 +50,11 @@ func _process(delta: float) -> void:
 		fetch_behavior("Attack", { "player": self, "skills": skills })
 	if is_spectating:
 		fetch_behavior("Spectate", { "player": self, "is_spectating": is_spectating,"spectate_target": spectate_target, "camera": $Camera2D})
-	if _old_hp != hp:
-		#health_changed.emit(hp)
-		_old_hp = hp
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
-	fetch_behavior("Movement", { "player": self, "SPEED": SPEED * speed_mutiplier, "delta": delta })
+	fetch_behavior("Movement", { "player": self, "SPEED": player_stat.SPEED * player_stat.speed_mutiplier, "delta": delta })
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
@@ -96,28 +88,12 @@ func start_spectating():
 func take_damage(damage: float) -> void:
 	if not is_alive:
 		return
-	hp -= damage
-	health_changed.emit(hp)
-	if hp <= 0:
+	player_stat.hp -= damage
+	health_changed.emit(player_stat.hp)
+	if player_stat.hp <= 0:
 		die()
 	is_invincible = true
 	invincibility_timer.start()
-
-@rpc("any_peer", "call_local")
-func upgrade_stat(upgrade_id: String) -> void:
-	match upgrade_id:
-		"hp_up":
-			change_max_hp(max_hp + 10)
-		"speed_up":
-			speed_mutiplier += 0.1
-		"damage_up":
-			damage += 5
-	
-func change_max_hp(new_hp: float) -> void:
-	max_hp = new_hp
-	hp = max_hp
-	max_health_changed.emit(max_hp)
-	
 
 func die() -> void:
 	is_alive = false

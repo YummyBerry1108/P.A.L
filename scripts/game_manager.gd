@@ -17,34 +17,13 @@ func change_pause_state(state: bool) -> void:
 	get_tree().paused = state
 	pause_state_changed.emit(state)
 
-## Apply upgrade effect and check how many player have upgraded
+## Check how many player have upgraded
 @rpc("any_peer", "call_local", "reliable")
-func submit_upgrade(upgrade_id: String) -> void:
+func submit_upgrade() -> void:
 	if not multiplayer.is_server():
 		return
 		
 	var sender_id = multiplayer.get_remote_sender_id()
-	var player_node = _get_player_node(sender_id)
-	
-	if sender_id in players_upgraded:
-		return
-		
-	players_upgraded.append(sender_id)
-	player_amount_changed.emit()
-	if player_node:
-		player_node.upgrade_stat.rpc(upgrade_id)
-	else:
-		push_error("無法找到玩家節點，ID: ", sender_id)
-	_check_resume()
-
-## Apply upgrade effect and check how many player have upgraded
-@rpc("any_peer", "call_local", "reliable")
-func skill_upgrade() -> void:
-	if not multiplayer.is_server():
-		return
-		
-	var sender_id = multiplayer.get_remote_sender_id()
-	var player_node = _get_player_node(sender_id)
 	
 	if sender_id in players_upgraded:
 		return

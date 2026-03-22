@@ -1,0 +1,86 @@
+[gd_resource type="Resource" script_class="SkillTreeData" load_steps=15 format=3 uid="uid://dh1vs8esjfrgm"]
+
+[ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_ukurl"]
+[ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_msp6f"]
+[ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_f1285"]
+[ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_rhmth"]
+
+[sub_resource type="Resource" id="Resource_xf0gt"]
+script = ExtResource("4_rhmth")
+stat_name = "scale"
+operation = 1
+value = 1.5
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_77ek0"]
+script = ExtResource("3_f1285")
+skill_id = "snowball_scale+"
+upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_xf0gt")])
+next_node_uids = Array[String](["snowball_scale++"])
+skill_name = "Big snowball"
+skill_description = "Make your snowball bigger!"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_3ks5h"]
+script = ExtResource("4_rhmth")
+stat_name = "scale"
+operation = 1
+value = 2.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_k3kae"]
+script = ExtResource("3_f1285")
+skill_id = "snowball_scale++"
+upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_3ks5h")])
+next_node_uids = Array[String]([])
+skill_name = "Bigger snowball"
+skill_description = "Bigger and bigger!"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_uyfnw"]
+script = ExtResource("2_msp6f")
+skill_nodes = Array[ExtResource("3_f1285")]([SubResource("Resource_77ek0"), SubResource("Resource_k3kae")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[sub_resource type="Resource" id="Resource_vl580"]
+script = ExtResource("4_rhmth")
+stat_name = "projectile_damage"
+operation = 0
+value = 5.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_v7dbn"]
+script = ExtResource("3_f1285")
+skill_id = "snowball_damage+"
+upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_vl580")])
+next_node_uids = Array[String](["snowball_damage++"])
+skill_name = "傷害增加"
+skill_description = "傷害增加"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_johu8"]
+script = ExtResource("4_rhmth")
+stat_name = "projectile_damage"
+operation = 0
+value = 100.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_bq4na"]
+script = ExtResource("3_f1285")
+skill_id = "snowball_damage++"
+upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_johu8")])
+next_node_uids = Array[String]([])
+skill_name = "傷害再次增加"
+skill_description = "傷害增加"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_it8cn"]
+script = ExtResource("2_msp6f")
+skill_nodes = Array[ExtResource("3_f1285")]([SubResource("Resource_v7dbn"), SubResource("Resource_bq4na")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[resource]
+script = ExtResource("1_ukurl")
+skill_name = "snowball"
+skill_paths = Array[ExtResource("2_msp6f")]([SubResource("Resource_uyfnw"), SubResource("Resource_it8cn")])
+metadata/_custom_type_script = "uid://bwxmarxo3thqj"

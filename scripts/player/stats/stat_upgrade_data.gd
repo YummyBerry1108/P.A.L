@@ -2,6 +2,7 @@ class_name StatUpgradeData
 extends Node
 
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
+enum OpType { ADD, MULTIPLY, OVERRIDE } 
 
 const RARITY_COLORS: Dictionary = {
 	Rarity.COMMON: Colors.WHITE,
@@ -13,6 +14,10 @@ const RARITY_COLORS: Dictionary = {
 
 @export_category("Basic")
 @export var upgrade_id: String = "NULL" # use to match actual upgrade effect, will upgrade at player script
+@export var stat_name: String = ""  
+@export var operation: OpType = OpType.ADD
+@export var value: float = 0.0
+@export_category("UI")
 @export var title: String = "NULL"
 @export var description: String = "NULL"
 @export var rarity: Rarity
