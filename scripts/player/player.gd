@@ -39,7 +39,7 @@ func _ready() -> void:
 	health_bar.init_health(player_stat.hp)
 	
 	if is_multiplayer_authority():
-		UpgradeEventbus.stat_upgrade.connect(player_stat.apply_upgrade.rpc)
+		UpgradeEventbus.stat_upgrade.connect(player_stat._on_stat_upgrade_received)
 		health_bar.hide()
 		display_name.hide()
 		$Camera2D.make_current()
