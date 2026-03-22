@@ -16,6 +16,9 @@ const SPEED: float = 300.0
 @export var hp: float = 100.0
 @export var speed_mutiplier: float = 1.0
 
+func _on_stat_upgrade_received(upgrade_id: String) -> void:
+	apply_upgrade.rpc(upgrade_id)
+
 @rpc("any_peer", "call_local", "reliable")
 func apply_upgrade(upgrade_id: String) -> void:
 		
