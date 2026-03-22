@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=27 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/player/stats/stat_upgrade_data.gd" id="12_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -168,12 +169,14 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="Skills" type="Node" parent="."]
 
 [node name="IcicleData" parent="Skills" instance=ExtResource("6_5gtgg")]
+disable = true
 
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
+disable = true
 knockback_force = 250.0
 
 [node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
-disable = true
+firerate = 1.0
 
 [node name="SkillTreeManager" type="Node" parent="."]
 script = ExtResource("11_myrg7")
@@ -207,6 +210,10 @@ offset_bottom = 48.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_75vfm")
+
+[node name="EffectComponent" type="Node" parent="."]
+script = ExtResource("21_3j4b4")
+metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="HurtBox/InvincibilityTimer" to="." method="_on_timer_timeout"]

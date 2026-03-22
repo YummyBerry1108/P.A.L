@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://nrlpavnibuuq"]
 
-[ext_resource type="Texture2D" uid="uid://64gwusxyxfto" path="res://icon.svg" id="1_q1b4f"]
 [ext_resource type="Script" uid="uid://cv5ry5dxacyh7" path="res://scripts/skills/stick.gd" id="1_ygg8x"]
+[ext_resource type="Texture2D" uid="uid://bs231370wbas5" path="res://imgs/skills/tachi.png" id="3_evi0d"]
 [ext_resource type="Script" uid="uid://b6s6b8gqbskvy" path="res://scripts/skills/player_hitbox.gd" id="3_tet5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwney"]
 size = Vector2(21, 129)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tet5g"]
-size = Vector2(20, 207)
+size = Vector2(129, 1305.13)
 
 [sub_resource type="Animation" id="Animation_evi0d"]
 length = 0.001
@@ -68,13 +68,14 @@ collision_mask = 128
 script = ExtResource("3_tet5g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RotCenter/Hitbox"]
-position = Vector2(0, -39.5)
+position = Vector2(-30, -602.065)
 shape = SubResource("RectangleShape2D_tet5g")
 
 [node name="Sprite2D" type="Sprite2D" parent="RotCenter"]
-position = Vector2(0, -159.5)
-scale = Vector2(0.15625, 1.61719)
-texture = ExtResource("1_q1b4f")
+position = Vector2(-5.04802, -770.737)
+rotation = -1.5708
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_evi0d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

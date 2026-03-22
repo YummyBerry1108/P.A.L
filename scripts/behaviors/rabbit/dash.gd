@@ -16,7 +16,8 @@ func _enter_behavior() -> void:
 	actor.set_collision_layer_value(PhysicsLayers.ENEMY, false)
 
 func _physics_update(delta: float) -> void:
-	update_fire_trail.rpc()
+	if fire_trail:
+		update_fire_trail.rpc()
 	actor.velocity = actor.direction * actor.dash_speed * actor.speed_multiplier
 	
 	time_left -= delta
