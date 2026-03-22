@@ -13,6 +13,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_stat: PlayerStatData = $PlayerStat
+@onready var effect_component: EffectComponent = $EffectComponent
 
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
@@ -54,7 +55,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
-	fetch_behavior("Movement", { "player": self, "SPEED": player_stat.SPEED * player_stat.speed_mutiplier, "delta": delta })
+	fetch_behavior("Movement", { "player": self, "SPEED": player_stat.SPEED * effect_component.get_speed_multiplier(player_stat.speed_mutiplier), "delta": delta })
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:

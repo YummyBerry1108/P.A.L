@@ -38,8 +38,7 @@ func _process(delta: float) -> void:
 			active_effects.remove_at(i)
 			inst.data.removed(actor)
 
-func get_speed_multiplier() -> float:
-	var mult = 1.0
+func get_speed_multiplier(mult: float = 1.0) -> float:
 	for inst in active_effects:
 		if inst.data is SlowEffect:
 			mult *= inst.data.speed_multiplier

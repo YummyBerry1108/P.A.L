@@ -11,6 +11,7 @@ func _ready() -> void:
 	
 	animation_player.play("attack", -1, 2.0)
 	
+	
 	await animation_player.animation_finished
 	_before_lifespan_expired()
 
