@@ -88,3 +88,6 @@ func is_node_unlocked(id: String) -> bool:
 
 func is_node_active(id: String) -> bool:
 	return active_nodes.has(id)
+
+func get_node_by_id(id: String) -> SkillNodeData:
+	return uid_to_node[id]

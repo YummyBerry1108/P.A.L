@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillTreeData" load_steps=8 format=3 uid="uid://tsp6akg63sjm"]
+[gd_resource type="Resource" script_class="SkillTreeData" load_steps=9 format=3 uid="uid://tsp6akg63sjm"]
 
 [ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_2ge66"]
 [ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_ysyf2"]
 [ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_pt7d4"]
 [ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_8frof"]
+[ext_resource type="Texture2D" uid="uid://q1grapy7j4bt" path="res://imgs/skills/icicle.png" id="4_btcus"]
 
 [sub_resource type="Resource" id="Resource_dsccw"]
 script = ExtResource("4_8frof")
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_2xmmf"]
 script = ExtResource("3_pt7d4")
+icon = ExtResource("4_btcus")
 skill_id = "icicle_damage+"
 upgrade_effects = Array[ExtResource("4_8frof")]([SubResource("Resource_dsccw")])
 next_node_uids = Array[String]([])

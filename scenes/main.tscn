@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvcahiono6yix" path="res://scenes/player/player.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bogubau3wnkvt" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b78bhpq31lil4" path="res://scenes/etc/exp_orb.tscn" id="3_tefeu"]
-[ext_resource type="Script" path="res://scripts/enemies/enemy_spawner.gd" id="5_choun"]
+[ext_resource type="Script" uid="uid://dnfxyldutu048" path="res://scripts/enemies/enemy_spawner.gd" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://xvfpdh45hsst" path="res://imgs/tiles/lava_tiles/lava_1.png" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://bfqtie8bxw43h" path="res://imgs/tiles/lava_tiles/lava_2.png" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://y2krys11pqhb" path="res://imgs/tiles/lava_tiles/lava_3.png" id="7_85g3d"]
