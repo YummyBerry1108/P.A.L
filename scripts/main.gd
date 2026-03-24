@@ -122,7 +122,7 @@ func _game_over() -> void:
 	await get_tree().create_timer(1.0).timeout
 	if multiplayer.is_server():
 		Lobby.return_to_lobby.rpc()
-		
+
 ## Called only on the server.
 func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
@@ -130,10 +130,10 @@ func _add_player_node(id: int) -> void:
 	player.name = str(id)
 	player.player_died.connect(_on_player_died)
 	player_container.add_child(player)
-	
+
 	if id == 1:
 		_on_player_spawned(player)
-		
+
 ## Called only on the server.
 func start_game() -> void:
 	print("Game Start!")

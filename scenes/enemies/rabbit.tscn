@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dhs2xkmaafhpk" path="res://imgs/enemies/Rabbit/frame_0006.png" id="9_jsgxj"]
 [ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/frame_0007.png" id="10_xwg4q"]
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
-[ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
+[ext_resource type="Script" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
 [ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
 [ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/behaviors/rabbit/idle.gd" id="17_mnrav"]
@@ -161,7 +161,6 @@ position = Vector2(2.08333, -260.417)
 script = ExtResource("12_qo215")
 actor = NodePath("..")
 animated_sprite_2d = NodePath("../AnimatedSprite2D")
-metadata/_custom_type_script = "uid://doq8etj8lyb57"
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
 script = ExtResource("5_46k04")
