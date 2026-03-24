@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4ojmlbosfvpg"]
+
+[ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="1_01ju4"]
+[ext_resource type="Script" uid="uid://cr3iveu57jsal" path="res://scripts/ui/status_display.gd" id="2_xeia0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xeia0"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StatusDisplay" type="TextureRect" node_paths=PackedStringArray("button_container", "status_label")]
+custom_minimum_size = Vector2(300, 400)
+offset_right = 300.0
+offset_bottom = 400.0
+texture = ExtResource("1_01ju4")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("2_xeia0")
+button_container = NodePath("ButtonContainer")
+status_label = NodePath("Label")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 26.0
+offset_right = 67.0
+offset_bottom = 188.0
+
+[node name="ToggleButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = ">"
+
+[node name="ToggleButton2" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "?"
+
+[node name="ToggleButton3" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "?"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 44.0
+offset_right = 273.0
+offset_bottom = 295.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Max HP: ...
+Damage: ...
+Speed Multiplier: ..."
+label_settings = SubResource("LabelSettings_xeia0")
+
+[connection signal="pressed" from="ButtonContainer/ToggleButton" to="." method="_on_toggle_button_pressed"]

@@ -21,3 +21,5 @@ const RARITY_COLORS: Dictionary = {
 @export var title: String = "NULL"
 @export var description: String = "NULL"
 @export var rarity: Rarity
+@export var upgrade_icon: Texture2D
+@export var card_image: Texture2D

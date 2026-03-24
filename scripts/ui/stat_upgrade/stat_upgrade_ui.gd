@@ -20,9 +20,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
 
-func _on_stat_upgrade_ready(stat_upgrade: Node) -> void:
+func _on_stat_upgrade_ready(stat_upgrade: StatUpgradeManager) -> void:
 	upgrades_ref = stat_upgrade
-	print(upgrades_ref)
 	for i in range(3):
 		var card = upgrade_card_scene.instantiate()
 		container.add_child(card)

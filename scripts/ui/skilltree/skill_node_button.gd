@@ -3,6 +3,8 @@ extends Button
 signal upgrade_selected
 
 @export var border: ReferenceRect
+@export var button_icon: TextureRect
+
 var skill_id: String
 var manager_ref: SkillTreeManager # only for check node status, don't change anything in this
 
@@ -14,6 +16,7 @@ func _ready() -> void:
 func setup(uid: String, manager: SkillTreeManager) -> void:
 	skill_id = uid
 	manager_ref = manager
+	button_icon.texture = manager_ref.get_node_by_id(skill_id).icon
 	update_visuals()
 	
 func _on_pressed() -> void:

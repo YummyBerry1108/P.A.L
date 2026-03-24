@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SkillTreeData" load_steps=15 format=3 uid="uid://dh1vs8esjfrgm"]
+[gd_resource type="Resource" script_class="SkillTreeData" load_steps=16 format=3 uid="uid://dh1vs8esjfrgm"]
 
 [ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_ukurl"]
 [ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_msp6f"]
 [ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_f1285"]
+[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="4_msp6f"]
 [ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_rhmth"]
 
 [sub_resource type="Resource" id="Resource_xf0gt"]
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_77ek0"]
 script = ExtResource("3_f1285")
+icon = ExtResource("4_msp6f")
 skill_id = "snowball_scale+"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_xf0gt")])
 next_node_uids = Array[String](["snowball_scale++"])
@@ -30,6 +32,7 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_k3kae"]
 script = ExtResource("3_f1285")
+icon = ExtResource("4_msp6f")
 skill_id = "snowball_scale++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_3ks5h")])
 next_node_uids = Array[String]([])
@@ -51,6 +54,7 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_v7dbn"]
 script = ExtResource("3_f1285")
+icon = ExtResource("4_msp6f")
 skill_id = "snowball_damage+"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_vl580")])
 next_node_uids = Array[String](["snowball_damage++"])
@@ -67,6 +71,7 @@ metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_bq4na"]
 script = ExtResource("3_f1285")
+icon = ExtResource("4_msp6f")
 skill_id = "snowball_damage++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_johu8")])
 next_node_uids = Array[String]([])

@@ -1,22 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cv610u5482jt6"]
 
+[ext_resource type="Texture2D" uid="uid://de4lojfij7ekk" path="res://imgs/ui/stat_upgrade/upgrade_damage.png" id="1_s6k2i"]
 [ext_resource type="Script" uid="uid://bliku4njuvr7f" path="res://scripts/ui/stat_upgrade/stat_upgrade_button.gd" id="1_uujw7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wctt"]
-bg_color = Color(0.219658, 0.207127, 0.187937, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.81069, 0.811635, 0.831269, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uujw7"]
-bg_color = Color(0.14111, 0.13205, 0.118174, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.828934, 0.806795, 0.814886, 1)
+[ext_resource type="Texture2D" uid="uid://dtxxn1mwmuan4" path="res://imgs/ui/stat_upgrade/upgrade_card_blue.png" id="2_fef8v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n7eo"]
 font_size = 64
@@ -28,7 +14,7 @@ font_size = 32
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="StatUpgrade" type="Button" node_paths=PackedStringArray("title_label", "desc_label")]
+[node name="StatUpgrade" type="Button" node_paths=PackedStringArray("title_label", "desc_label", "upgrade_icon", "card_image")]
 anchors_preset = -1
 anchor_top = -0.00277778
 anchor_right = 0.335156
@@ -36,12 +22,27 @@ anchor_bottom = 0.752778
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme_override_styles/hover = SubResource("StyleBoxFlat_5wctt")
-theme_override_styles/normal = SubResource("StyleBoxFlat_uujw7")
 script = ExtResource("1_uujw7")
 title_label = NodePath("MarginContainer/VBoxContainer/TitleLabel")
 desc_label = NodePath("MarginContainer/VBoxContainer/DescLabel")
+upgrade_icon = NodePath("MarginContainer/VBoxContainer/UpgradeIcon")
+card_image = NodePath("CardImage")
 metadata/_edit_use_anchors_ = true
+
+[node name="CardImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = 2.0
+offset_right = 213.0
+offset_bottom = 21.9998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_fef8v")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -51,9 +52,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -151.5
-offset_top = -199.0
+offset_top = -214.0
 offset_right = 152.5
-offset_bottom = 206.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 0
@@ -73,3 +74,10 @@ text = "Description"
 label_settings = SubResource("LabelSettings_1jwdo")
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="UpgradeIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_s6k2i")
+expand_mode = 1
+stretch_mode = 5

@@ -45,7 +45,7 @@ func apply_upgrade(upgrade_id: String) -> void:
 			new_value = int(new_value)
 			
 		self.set(stat_upgrade.stat_name, new_value)
-		if is_multiplayer_authority():
-			print("已將 player 的 %s 從 %s 修改為 %s" % [stat_upgrade.stat_name, current_value, new_value])
+		#if is_multiplayer_authority():
+			#print("已將 player %d 的 %s 從 %s 修改為 %s" % [multiplayer.get_unique_id(), stat_upgrade.stat_name, current_value, new_value])
 	else:
 		push_warning("SkillData 中找不到變數: " + stat_upgrade.stat_name)

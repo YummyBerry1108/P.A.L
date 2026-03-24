@@ -36,16 +36,17 @@ color = Color(0, 0, 0, 0.568627)
 [node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 126.0
-offset_top = 176.0
+offset_top = 141.0
 offset_right = 1145.0
-offset_bottom = 643.0
+offset_bottom = 686.0
+alignment = 1
 
 [node name="UpgradeTimeLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 502.0
-offset_top = 109.0
+offset_top = 85.0
 offset_right = 786.0
-offset_bottom = 154.0
+offset_bottom = 130.0
 text = "Upgrade Left Time"
 label_settings = SubResource("LabelSettings_n1a3i")
 horizontal_alignment = 1

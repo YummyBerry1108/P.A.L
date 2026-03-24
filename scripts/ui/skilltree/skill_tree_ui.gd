@@ -74,7 +74,6 @@ func _generate_ui_from_data() -> void:
 
 		# 根據資料檔的節點數量，動態生成按鈕
 		for node_data in path_data.skill_nodes:
-			
 			var btn = button_scene.instantiate()
 			btn.upgrade_selected.connect(_on_upgrade_selected)
 			btn.mouse_entered.connect(_show_tooltip.bind(node_data))

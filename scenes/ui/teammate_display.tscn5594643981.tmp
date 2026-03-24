@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo5plno10hitc"]
+
+[ext_resource type="Texture2D" uid="uid://doybf1yetn0ky" path="res://imgs/ui/player_info_background.png" id="1_qvg35"]
+[ext_resource type="Script" uid="uid://dxdaka76otb6" path="res://scripts/ui/teammate_display.gd" id="2_28v2t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qvg35"]
+font_size = 20
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_28v2t"]
+font_size = 20
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gj7jw"]
+font_size = 20
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TeammateDisplay" type="TextureRect" node_paths=PackedStringArray("player_info_container")]
+custom_minimum_size = Vector2(300, 140)
+offset_right = 300.0
+offset_bottom = 140.0
+texture = ExtResource("1_qvg35")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("2_28v2t")
+player_info_container = NodePath("PlayerInfoContainer")
+
+[node name="PlayerInfoContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 22.0
+offset_right = 283.0
+offset_bottom = 118.0
+
+[node name="Label" type="Label" parent="PlayerInfoContainer"]
+layout_mode = 2
+text = "player 1: hp / maxhp"
+label_settings = SubResource("LabelSettings_qvg35")
+
+[node name="Label2" type="Label" parent="PlayerInfoContainer"]
+layout_mode = 2
+text = "player 2: hp / maxhp"
+label_settings = SubResource("LabelSettings_28v2t")
+
+[node name="Label3" type="Label" parent="PlayerInfoContainer"]
+layout_mode = 2
+text = "player 3: hp / maxhp"
+label_settings = SubResource("LabelSettings_gj7jw")
