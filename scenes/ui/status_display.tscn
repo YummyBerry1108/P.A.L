@@ -7,7 +7,7 @@
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="StatusDisplay" type="TextureRect" node_paths=PackedStringArray("button_container", "status_label")]
+[node name="StatusDisplay" type="TextureRect" node_paths=PackedStringArray("status_label", "toggle_button")]
 custom_minimum_size = Vector2(300, 400)
 offset_right = 300.0
 offset_bottom = 400.0
@@ -15,8 +15,8 @@ texture = ExtResource("1_01ju4")
 expand_mode = 1
 stretch_mode = 4
 script = ExtResource("2_xeia0")
-button_container = NodePath("ButtonContainer")
 status_label = NodePath("Label")
+toggle_button = NodePath("ButtonContainer/ToggleButton")
 
 [node name="ButtonContainer" type="VBoxContainer" parent="."]
 layout_mode = 0

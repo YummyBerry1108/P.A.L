@@ -1,7 +1,7 @@
 extends TextureRect
 
-@export var button_container: VBoxContainer
 @export var status_label: Label
+@export var toggle_button: Button
 
 var player_data: PlayerStatData
 var player_ready: bool = false
@@ -33,6 +33,8 @@ func _on_toggle_button_pressed() -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	
 	if is_close:
+		toggle_button.text = "<"
 		tween.tween_property(self, "position", Vector2(240, 0), 0.5).set_ease(Tween.EASE_OUT)
 	else:
+		toggle_button.text = ">"
 		tween.tween_property(self, "position", Vector2(0, 0), 0.5).set_ease(Tween.EASE_OUT)
