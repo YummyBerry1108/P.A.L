@@ -45,7 +45,7 @@ func apply_upgrade(effect: SkillUpgrade) -> void:
 			new_value = int(new_value)
 			
 		self.set(effect.stat_name, new_value)
-		if is_multiplayer_authority():
-			print("已將 %s 的 %s 從 %s 修改為 %s" % [skill_name, effect.stat_name, current_value, new_value])
+		#if is_multiplayer_authority():
+			#print("已將 %s 的 %s 從 %s 修改為 %s" % [skill_name, effect.stat_name, current_value, new_value])
 	else:
 		push_warning("SkillData 中找不到變數: " + effect.stat_name)
