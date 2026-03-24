@@ -90,9 +90,10 @@ func take_damage(damage: float) -> void:
 	if not is_alive:
 		return
 	player_stat.hp -= damage
-	health_changed.emit(player_stat.hp)
 	if player_stat.hp <= 0:
+		player_stat.hp = 0
 		die()
+	health_changed.emit(player_stat.hp)
 	is_invincible = true
 	invincibility_timer.start()
 

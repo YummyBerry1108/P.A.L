@@ -1,16 +1,16 @@
 [gd_scene load_steps=28 format=3 uid="uid://bogubau3wnkvt"]
 
-[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
+[ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
 [ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="2_0dwhk"]
 [ext_resource type="Texture2D" uid="uid://m6mof2chgq3" path="res://imgs/ui/map_frame.png" id="2_pfayw"]
 [ext_resource type="Texture2D" uid="uid://7qyh2o1fk3hf" path="res://imgs/ui/exp_icon.png" id="2_uegxj"]
 [ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="3_pfayw"]
-[ext_resource type="Script" path="res://scripts/ui/pause_label.gd" id="4_7vp6q"]
-[ext_resource type="Texture2D" uid="uid://doybf1yetn0ky" path="res://imgs/ui/player_info_background.png" id="5_jcn1r"]
+[ext_resource type="Script" uid="uid://y0ulfkia0dwf" path="res://scripts/ui/pause_label.gd" id="4_7vp6q"]
 [ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="6_uegxj"]
+[ext_resource type="PackedScene" uid="uid://bo5plno10hitc" path="res://scenes/ui/teammate_display.tscn" id="7_swkix"]
 [ext_resource type="Texture2D" uid="uid://b1eskkahnho3u" path="res://imgs/ui/health_icon.png" id="9_y220t"]
-[ext_resource type="Script" path="res://scripts/ui/mini_map.gd" id="10_hc5d0"]
+[ext_resource type="Script" uid="uid://cra8y5gqvdr5i" path="res://scripts/ui/mini_map.gd" id="10_hc5d0"]
 [ext_resource type="PackedScene" uid="uid://b5bj02fgrvrpf" path="res://scenes/ui/stat_upgrade/stat_upgrade_ui.tscn" id="11_4kltc"]
 [ext_resource type="PackedScene" uid="uid://cdf5h75awup8s" path="res://scenes/ui/skilltree/skill_tree_ui.tscn" id="12_hl07w"]
 
@@ -219,17 +219,12 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -325.0
+offset_left = -314.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TeammateDisplay" type="TextureRect" parent="RightSideVBoxContainer"]
-custom_minimum_size = Vector2(300, 140)
+[node name="TeammateDisplay" parent="RightSideVBoxContainer" instance=ExtResource("7_swkix")]
 layout_mode = 2
-size_flags_horizontal = 8
-texture = ExtResource("5_jcn1r")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="HSeparator" type="HSeparator" parent="RightSideVBoxContainer"]
 layout_mode = 2
@@ -314,9 +309,11 @@ label_settings = SubResource("LabelSettings_tefeu")
 script = ExtResource("4_7vp6q")
 
 [node name="StatUpgradeUI" parent="." instance=ExtResource("11_4kltc")]
+visible = false
 layout_mode = 1
 
 [node name="SkillTreeUI" parent="." instance=ExtResource("12_hl07w")]
+visible = false
 layout_mode = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

@@ -9,6 +9,7 @@ extends Node
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
+signal all_player_ready()
 
 const PORT: int = 7000
 const DEFAULT_SERVER_IP: String = "127.0.0.1" # IPv4 localhost
@@ -77,6 +78,11 @@ func player_loaded() -> void:
 		if players_loaded == players.size():
 			$/root/Main.start_game()
 			players_loaded = 0
+			game_ready.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func game_ready() -> void:
+	all_player_ready.emit()
 
 @rpc("authority", "call_local", "reliable")
 func return_to_lobby() -> void:
