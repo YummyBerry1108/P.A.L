@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://7qyh2o1fk3hf" path="res://imgs/ui/exp_icon.png" id="2_uegxj"]
 [ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="3_pfayw"]
 [ext_resource type="Script" uid="uid://y0ulfkia0dwf" path="res://scripts/ui/pause_label.gd" id="4_7vp6q"]
-[ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="6_uegxj"]
 [ext_resource type="PackedScene" uid="uid://bo5plno10hitc" path="res://scenes/ui/teammate_display.tscn" id="7_swkix"]
+[ext_resource type="PackedScene" uid="uid://b4ojmlbosfvpg" path="res://scenes/ui/status_display.tscn" id="8_swkix"]
 [ext_resource type="Texture2D" uid="uid://b1eskkahnho3u" path="res://imgs/ui/health_icon.png" id="9_y220t"]
 [ext_resource type="Script" uid="uid://cra8y5gqvdr5i" path="res://scripts/ui/mini_map.gd" id="10_hc5d0"]
 [ext_resource type="PackedScene" uid="uid://b5bj02fgrvrpf" path="res://scenes/ui/stat_upgrade/stat_upgrade_ui.tscn" id="11_4kltc"]
@@ -231,13 +231,15 @@ layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4kltc")
 
-[node name="StatusDisplay" type="TextureRect" parent="RightSideVBoxContainer"]
+[node name="Control" type="Control" parent="RightSideVBoxContainer"]
 custom_minimum_size = Vector2(300, 400)
 layout_mode = 2
-size_flags_horizontal = 8
-texture = ExtResource("6_uegxj")
-expand_mode = 1
-stretch_mode = 4
+
+[node name="StatusDisplay" parent="RightSideVBoxContainer/Control" instance=ExtResource("8_swkix")]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 314.0
+offset_bottom = 404.0
 
 [node name="LeftSideVBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
