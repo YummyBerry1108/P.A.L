@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
 [ext_resource type="Script" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
-[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
+[ext_resource type="Script" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
 [ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/behaviors/rabbit/idle.gd" id="17_mnrav"]
 [ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/behaviors/rabbit/chase.gd" id="18_eq4af"]
 [ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/behaviors/rabbit/dash.gd" id="19_nu5es"]
@@ -187,7 +187,6 @@ script = ExtResource("16_lmywa")
 actor = NodePath("..")
 default_behavior = NodePath("Root")
 after_knockback_behavior = NodePath("Idle")
-metadata/_custom_type_script = "uid://q7ubwpg31bmi"
 
 [node name="Root" type="Node" parent="BehaviorTreeComponent" node_paths=PackedStringArray("actor")]
 script = ExtResource("21_r5c22")
