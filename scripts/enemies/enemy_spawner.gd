@@ -6,7 +6,7 @@ extends Node
 @export var spawn_amount_curve: Curve
 @export var max_game_time: float = 1800.0
 @export var base_spawn_interval: float = 5.0
-@export var min_spawn_interval: float = 1.0
+@export var min_spawn_interval: float = 2.0
 @export var base_enemy_count: int = 1
 
 @onready var spawn_timer: Timer = $SpawnTimer
