@@ -122,6 +122,7 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_0rrc3")
 fire_trail_scene = ExtResource("2_81xei")
+hp = 70.0
 damage = 15.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

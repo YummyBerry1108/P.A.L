@@ -24,6 +24,6 @@ func _level_up() -> void:
 	level += 1
 	if level % 5 != 0: _on_little_level_up.emit()
 	else: _on_medium_level_up.emit()
-	max_value = int(max_value * 1.1)
+	max_value = int(max_value * 1.1 + 1)
 	value = 0
 	
