@@ -28,16 +28,19 @@ offset_bottom = 188.0
 [node name="ToggleButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 text = ">"
 
 [node name="ToggleButton2" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 text = "?"
 
 [node name="ToggleButton3" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 0
 text = "?"
 
 [node name="Label" type="Label" parent="."]

@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dhs2xkmaafhpk" path="res://imgs/enemies/Rabbit/frame_0006.png" id="9_jsgxj"]
 [ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/frame_0007.png" id="10_xwg4q"]
 [ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
-[ext_resource type="Script" path="res://scripts/components/animation_component.gd" id="12_qo215"]
+[ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
-[ext_resource type="Script" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
 [ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/behaviors/rabbit/idle.gd" id="17_mnrav"]
 [ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/behaviors/rabbit/chase.gd" id="18_eq4af"]
 [ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/behaviors/rabbit/dash.gd" id="19_nu5es"]
@@ -122,7 +122,7 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_0rrc3")
 fire_trail_scene = ExtResource("2_81xei")
-hp = 75.0
+hp = 70.0
 damage = 15.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
