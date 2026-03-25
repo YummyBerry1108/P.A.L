@@ -10,6 +10,7 @@ var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 @export_category("Basic")
 @export var hp: float = 50
 @export var damage: float = 10.0
+@export var multiplier: float = 1.0
 @onready var animated_sprite_2d: AnimatedSprite2D = get_node("AnimatedSprite2D")
 #@onready var sprite: Sprite2D = get_node("Sprite2D")
 @onready var hurt_box: Area2D = get_node("HurtBox")
@@ -27,9 +28,7 @@ var knockback_timer: float = 0.0
 var exp_amount: int = 1
 
 func _ready() -> void:
-	pass
-	#if texture:
-		#sprite.texture = texture
+	hp *= multiplier
 
 func update_speed() -> void:
 	speed_multiplier = effect_component.get_speed_multiplier()

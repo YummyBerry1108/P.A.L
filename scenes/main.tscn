@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=24 format=4 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://c14j3dxa0lc43" path="res://imgs/tiles/dan_tiles/debug_arrow.png" id="8_trceg"]
 [ext_resource type="Texture2D" uid="uid://drmvfw6et5v5o" path="res://imgs/tiles/dan_tiles/snow_2.png" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://bw7le7nhurmcq" path="res://imgs/tiles/dan_tiles/snow.png" id="11_ya4ey"]
+
+[sub_resource type="Curve" id="Curve_trceg"]
+_limits = [1.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.05, 1.5), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.2, 2.5), 0.0, 0.0, 0, 0, Vector2(0.25, 5), 0.0, 0.0, 0, 0, Vector2(0.3, 2), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("8_trceg")
@@ -2880,6 +2885,9 @@ position = Vector2(604, 261)
 script = ExtResource("5_choun")
 map = NodePath("../TileMapManager/Snow")
 enemy_container = NodePath("../EnemyContainer")
+difficulty_curve = SubResource("Curve_trceg")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
 
 [node name="MultiplayerEnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://cvbjuk7t2yx1x", "uid://dfde1nigv6m7e", "uid://dpldsb20x272n")
