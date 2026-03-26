@@ -41,7 +41,7 @@ var color: String = "red"
 
 func _ready() -> void:
 	_set_up_variant_stat()
-	setup_despawn_timer()
+	#setup_despawn_timer()
 
 func _set_up_variant_stat() -> void:
 	pass

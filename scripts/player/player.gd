@@ -14,6 +14,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_stat: PlayerStatData = $PlayerStat
 @onready var effect_component: EffectComponent = $EffectComponent
+@onready var indicator_manager: Node = $IndicatorManager
 
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
@@ -47,6 +48,8 @@ func _ready() -> void:
 		
 func _process(delta: float) -> void:
 	if is_alive:
+		if indicator_manager.is_ready:
+			indicator_manager.update_indicators()
 		pull_skills()
 		fetch_behavior("Attack", { "player": self, "skills": skills })
 	if is_spectating:
