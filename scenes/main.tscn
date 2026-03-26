@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=28 format=4 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c14j3dxa0lc43" path="res://imgs/tiles/dan_tiles/debug_arrow.png" id="8_trceg"]
 [ext_resource type="Texture2D" uid="uid://drmvfw6et5v5o" path="res://imgs/tiles/dan_tiles/snow_2.png" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://bw7le7nhurmcq" path="res://imgs/tiles/dan_tiles/snow.png" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://dha0gveiow701" path="res://scripts/enemies/enemy_despawner.gd" id="12_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://cs6thm8f3d8c7" path="res://audio/lobby.mp3" id="14_a8y0u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_muem4"]
 texture = ExtResource("8_trceg")
