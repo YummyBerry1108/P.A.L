@@ -10,6 +10,7 @@ extends Node
 @export var min_spawn_interval: float = 2.0
 @export var base_enemy_count: int = 1
 
+@onready var enemy_despawner: EnemyDespawn = $EnemyDespawner
 @onready var spawn_timer: Timer = $SpawnTimer
 
 const RADIUS = 40
@@ -63,10 +64,7 @@ func _on_spawn_timer_timeout() -> void:
 	#print("生成時間: ", spawn_timer.wait_time)
 
 ## do not spawn if no player alive in game
-func spawn_enemy() -> void:
-	if not multiplayer.is_server():
-		return
-	
+func init_enemy() -> Array:
 	var difficulty: float = _get_difficulty()
 	var available_name: Array[String]
 	
@@ -76,9 +74,19 @@ func spawn_enemy() -> void:
 	
 	var selected_enemy: String = available_name.pick_random()
 	
-	_spawn_enemy(selected_enemy, difficulty)
+	selected_enemy = "snail" #DEBUGGG
+	
+	return [selected_enemy, difficulty]
 
-func _spawn_enemy(selected_enemy: String, difficulty: float) -> void:
+func spawn_enemy() -> void:
+	if not multiplayer.is_server():
+		return
+		
+	var init_parameters = init_enemy()
+	
+	var selected_enemy: String = init_parameters[0]
+	var difficulty: float = init_parameters[1]
+	
 	if check_spawn_coord():
 		var res_coord: Vector2i = _choose_coord()
 		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
@@ -88,7 +96,9 @@ func _spawn_enemy(selected_enemy: String, difficulty: float) -> void:
 		new_enemy.global_position = map.map_to_local(res_coord)
 		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
 		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
+		new_enemy._enemy_screen_update.connect(enemy_despawner.update_enemy_onscreen_rpc)
 		enemy_container.add_child(new_enemy, true)
+		enemy_despawner._change_despawn_timer.connect(new_enemy._change_despawn_timer_rpc)
 	
 func check_spawn_coord() -> bool:
 	available_coords.clear()

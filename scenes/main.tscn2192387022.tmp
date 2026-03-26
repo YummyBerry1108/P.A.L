@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c14j3dxa0lc43" path="res://imgs/tiles/dan_tiles/debug_arrow.png" id="8_trceg"]
 [ext_resource type="Texture2D" uid="uid://drmvfw6et5v5o" path="res://imgs/tiles/dan_tiles/snow_2.png" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://bw7le7nhurmcq" path="res://imgs/tiles/dan_tiles/snow.png" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://dha0gveiow701" path="res://scripts/enemies/enemy_despawner.gd" id="12_a8y0u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_muem4"]
 texture = ExtResource("8_trceg")
@@ -2857,19 +2858,19 @@ sources/2 = SubResource("TileSetAtlasSource_jbj1t")
 sources/0 = SubResource("TileSetAtlasSource_dp3eg")
 
 [sub_resource type="Curve" id="Curve_trceg"]
-_limits = [1.0, 15.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.05, 1.5), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.237946, 3.1236), 0.0, 0.0, 0, 0, Vector2(0.25, 5), 0.0, 0.0, 0, 0, Vector2(0.262055, 2.51685), 0.0, 0.0, 0, 0, Vector2(0.438936, 7.1944), 7.92939, 7.92939, 0, 0, Vector2(0.475212, 9.94009), 0.0, 0.0, 0, 0, Vector2(0.524788, 10.4892), 0.0, 0.0, 0, 0, Vector2(0.58283, 7.78276), 32.4383, 32.4383, 0, 0, Vector2(0.750907, 15), 0.0, 0.0, 0, 0]
-point_count = 11
+_limits = [1.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.05, 1.5), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.237946, 3.1236), 0.0, 0.0, 0, 0, Vector2(0.25, 5), 0.0, 0.0, 0, 0, Vector2(0.262055, 2.51685), 0.0, 0.0, 0, 0, Vector2(1, 7.8764), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="Curve" id="Curve_a8y0u"]
-_limits = [0.0, 20.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0202156, 0), 0.0, 0.0, 0, 0, Vector2(0.025, 4), 0.0, 0.0, 0, 0, Vector2(0.04, 1), 0.0, 0.0, 0, 0, Vector2(0.08, 3), 65.8223, 65.8223, 0, 0, Vector2(0.266247, 6.68271), 0.0, 0.0, 0, 0, Vector2(0.485325, 8.84857), 0.0, 0.0, 0, 0, Vector2(0.709794, 13.1027), 0.0, 0.0, 0, 0, Vector2(1, 16.4134), 0.0, 0.0, 0, 0]
+_limits = [0.0, 50.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0202156, 0), 0.0, 0.0, 0, 0, Vector2(0.025, 4), 0.0, 0.0, 0, 0, Vector2(0.04, 1), 0.0, 0.0, 0, 0, Vector2(0.08, 3), 65.8223, 65.8223, 0, 0, Vector2(0.266247, 6.68271), 0.0, 0.0, 0, 0, Vector2(0.485325, 8.84857), 0.0, 0.0, 0, 0, Vector2(0.710692, 11.1348), 0.0, 0.0, 0, 0, Vector2(1, 13.7819), 0.0, 0.0, 0, 0]
 point_count = 9
 metadata/_snap_count = 2
 
 [sub_resource type="Curve" id="Curve_jkv2x"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.247884, 0.338793), -0.26886, -0.26886, 0, 0, Vector2(0.351874, 0.175085), 0.0, 0.0, 0, 0, Vector2(0.376058, 0.324784), 6.71937, 6.71937, 0, 0, Vector2(0.428053, 0.518103), 0.0, 0.0, 0, 0, Vector2(0.50786, 0.498491), -0.488658, -0.488658, 0, 0, Vector2(0.518742, 0.288362), 0.0, 0.0, 0, 0, Vector2(0.740024, 0.590948), 0.0, 0.0, 0, 0, Vector2(0.860943, 1), 0.121949, 0.0, 0, 0]
-point_count = 9
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502008, 0.0908359), 0.363082, 0.363082, 0, 0, Vector2(0.60241, 0.32074), -0.526085, -0.526085, 0, 0, Vector2(0.75502, 0.404341), -0.488658, -0.488658, 0, 0, Vector2(0.891566, 0.312287), 0.0, 0.0, 0, 0, Vector2(1, 0.667235), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_tipki")
@@ -2941,9 +2942,3 @@ tile_set = SubResource("TileSet_tbgi4")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("3_sugp2")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("14_a8y0u")
-volume_db = -0.1
-autoplay = true

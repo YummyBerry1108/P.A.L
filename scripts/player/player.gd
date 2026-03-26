@@ -120,7 +120,9 @@ func heal(amount: float) -> void:
 
 func die() -> void:
 	is_alive = false
-	player_died.emit(name.to_int())
+	player_died.emit(self.name.to_int())
+	#print("Who emit ? ", multiplayer.get_unique_id())
+	#print("PLAYER THAT JUST DIED : ", self.name.to_int())
 	set_physics_process(false)
 	sprite_2d.play("dead")
 	if is_multiplayer_authority():
