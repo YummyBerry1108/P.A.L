@@ -36,7 +36,11 @@ func _on_all_player_ready() -> void:
 	for player in players:
 		if player.name == str(multiplayer.get_unique_id()): continue
 		player_nodes.append(player)
-		
+	
+	if not player_nodes:
+		visible = false
+		return
+	
 	for idx in range(player_nodes.size()):
 		player_to_label[player_nodes[idx]] = labels[idx]
 	

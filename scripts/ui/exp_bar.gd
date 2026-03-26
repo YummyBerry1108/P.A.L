@@ -22,8 +22,8 @@ func add_experience(exp_value: int) -> void:
 
 func _level_up() -> void:
 	level += 1
-	if level % 5 != 0: _on_little_level_up.emit()
-	else: _on_medium_level_up.emit()
+	if level % 5 == 0 and level <= 25: _on_medium_level_up.emit()
+	else: _on_little_level_up.emit()
 	max_value = int(max_value * 1.1 + 1)
 	value = 0
 	

@@ -7,7 +7,7 @@ var cooldowns: Dictionary[String, float] = {}
 func run(args: Dictionary) -> void:
 	if not is_multiplayer_authority():
 		return
-	if Input.is_action_pressed("shoot"):
+	if true:
 		cooldown()
 
 func cooldown() -> void:

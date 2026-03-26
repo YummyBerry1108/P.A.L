@@ -22,6 +22,7 @@ var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 @onready var damage_component: DamageComponent = get_node("DamageComponent")
 @onready var knockback_component: KnockbackComponent = get_node("KnockbackComponent")
 #@onready var dev_info: Label = $DevInfo
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var variant_type: VariantType = VariantType.normal
 
@@ -40,7 +41,7 @@ var color: String = "red"
 
 func _ready() -> void:
 	_set_up_variant_stat()
-	#setup_despawn_timer()
+	setup_despawn_timer()
 
 func _set_up_variant_stat() -> void:
 	pass

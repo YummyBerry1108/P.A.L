@@ -41,8 +41,8 @@ func _process(delta: float) -> void:
 		_game_over()
 	
 	# press E
-	if Input.is_action_pressed("get_exp"):
-		ui.exp_bar.add_experience(1)
+	#if Input.is_action_pressed("get_exp"):
+		#ui.exp_bar.add_experience(1)
 
 func _update_timer_ui() -> void:
 	if not multiplayer.is_server():

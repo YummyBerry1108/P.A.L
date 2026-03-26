@@ -1,6 +1,5 @@
-[gd_scene load_steps=28 format=4 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=27 format=4 uid="uid://mjpbg0kpp31x"]
 
-[ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://dvcahiono6yix" path="res://scenes/player/player.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bogubau3wnkvt" path="res://scenes/ui/ui.tscn" id="3_sugp2"]
@@ -2890,12 +2889,6 @@ tile_set = SubResource("TileSet_choun")
 z_as_relative = false
 tile_set = SubResource("TileSet_tbgi4")
 
-[node name="Dummy" parent="." instance=ExtResource("1_0wfyh")]
-position = Vector2(418, 5)
-
-[node name="Dummy2" parent="." instance=ExtResource("1_0wfyh")]
-position = Vector2(604, 261)
-
 [node name="EnemyContainer" type="Node2D" parent="." groups=["containers"]]
 
 [node name="PlayerContainer" type="Node2D" parent="." groups=["containers"]]
@@ -2947,5 +2940,5 @@ tile_set = SubResource("TileSet_tbgi4")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("14_a8y0u")
-volume_db = -0.1
+volume_db = -20.0
 autoplay = true

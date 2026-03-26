@@ -80,7 +80,7 @@ func init_enemy() -> Array:
 	
 	var selected_enemy: String = available_name.pick_random()
 	
-	selected_enemy = "snail" #DEBUGGG
+	#selected_enemy = "snail" #DEBUGGGa
 	
 	return [selected_enemy, difficulty]
 

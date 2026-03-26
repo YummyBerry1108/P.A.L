@@ -4,6 +4,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_c6lib"]
 font_size = 32
+font_color = Color(0, 0, 0, 1)
 
 [node name="DevInfo" type="Label"]
 offset_left = 75.0
