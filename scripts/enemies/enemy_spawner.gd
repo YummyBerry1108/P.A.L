@@ -4,11 +4,11 @@ extends Node
 @export var enemy_container: Node2D
 @export var difficulty_curve: Curve
 @export var spawn_amount_curve: Curve
+@export var elite_chance_curve: Curve
 @export var max_game_time: float = 1800.0
 @export var base_spawn_interval: float = 5.0
 @export var min_spawn_interval: float = 2.0
 @export var base_enemy_count: int = 1
-@export var elite_chance: float = 0.2
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -28,20 +28,10 @@ var name_to_difficulty: Dictionary[String, float] = {
 	"rock": 1.8,
 	"rabbit": 1.5,
 	"snail": 1.0,
+	#"rock": 4.8,
+	#"rabbit": 2.5,
+	#"snail": 2.0,
 }
-
-func weighted_random(weights: Array[float]) -> int:
-	var weights_sum: float = 0.0
-	for weight in weights:
-		weights_sum += weight
-	
-	var remaining_distance:  float = weights_sum * randf()
-	
-	for i in range(weights.size()):
-		remaining_distance -= weights[i]
-		if remaining_distance < 0: return i
-	
-	return 0
 
 func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
@@ -92,17 +82,17 @@ func spawn_enemy() -> void:
 	_spawn_enemy(selected_enemy, difficulty)
 
 func _spawn_enemy(selected_enemy: String, difficulty: float) -> void:
-	if check_spawn_coord(selected_enemy):
+	if check_spawn_coord():
 		var res_coord: Vector2i = _choose_coord()
 		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
 		var new_enemy: Enemy = enemy_node.instantiate()
 		new_enemy.multiplier = max(1, difficulty / 2)
 		new_enemy.global_position = map.map_to_local(res_coord)
-		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > elite_chance else new_enemy.VariantType.elite
+		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
 		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
 		enemy_container.add_child(new_enemy, true)
 	
-func check_spawn_coord(selected_enemy: String) -> bool:
+func check_spawn_coord() -> bool:
 	available_coords.clear()
 	total_weight = 0
 	
@@ -165,6 +155,12 @@ func _get_difficulty() -> float:
 	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)
 	var difficulty_multiplier: float = difficulty_curve.sample(progress)
 	return difficulty_multiplier
+
+func _get_elite_chance() -> float:
+	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)
+	var elite_chance: float = elite_chance_curve.sample(progress)
+	return elite_chance
+
 
 func _get_spawn_amount() -> float:
 	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)

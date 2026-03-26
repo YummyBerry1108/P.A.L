@@ -1,8 +1,8 @@
 extends Enemy
 
 func _ready() -> void:
-	super()
 	speed = 100
+	super()
 
 func _set_up_variant_stat() -> void:
 	match variant_type:
@@ -10,4 +10,5 @@ func _set_up_variant_stat() -> void:
 			animated_sprite_2d.play("red")
 		VariantType.elite:
 			animated_sprite_2d.play("blue")
+			#speed *= multiplier
 			damage *= multiplier * 2

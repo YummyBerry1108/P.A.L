@@ -281,9 +281,9 @@ metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
 [node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box", "behavior_tree_component")]
 script = ExtResource("6_nube2")
-knockback_resistance = 0.3
 actor = NodePath("..")
 hurt_box = NodePath("../HurtBox")
+knockback_resistance = 0.3
 behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://mjpbg0kpp31x"]
+[gd_scene load_steps=26 format=4 uid="uid://mjpbg0kpp31x"]
 
 [ext_resource type="PackedScene" uid="uid://bj866ltlivhuw" path="res://scenes/etc/Dummy.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dsdcddtelx5u8" path="res://scripts/main.gd" id="1_tipki"]
@@ -24,6 +24,10 @@ _limits = [0.0, 50.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0202156, 0), 0.0, 0.0, 0, 0, Vector2(0.025, 4), 0.0, 0.0, 0, 0, Vector2(0.04, 1), 0.0, 0.0, 0, 0, Vector2(0.08, 3), 65.8223, 65.8223, 0, 0, Vector2(0.266247, 6.68271), 0.0, 0.0, 0, 0, Vector2(0.485325, 8.84857), 0.0, 0.0, 0, 0, Vector2(0.710692, 11.1348), 0.0, 0.0, 0, 0, Vector2(1, 13.7819), 0.0, 0.0, 0, 0]
 point_count = 9
 metadata/_snap_count = 2
+
+[sub_resource type="Curve" id="Curve_jkv2x"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502008, 0.0908359), 0.363082, 0.363082, 0, 0, Vector2(0.60241, 0.32074), -0.526085, -0.526085, 0, 0, Vector2(0.75502, 0.404341), -0.488658, -0.488658, 0, 0, Vector2(0.891566, 0.312287), 0.0, 0.0, 0, 0, Vector2(1, 0.667235), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("8_trceg")
@@ -2869,9 +2873,9 @@ sources/0 = SubResource("TileSetAtlasSource_muem4")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_tipki")
+ui = NodePath("CanvasLayer/UI")
 player_scene = ExtResource("2_tbgi4")
 exp_orb_scene = ExtResource("3_tefeu")
-ui = NodePath("CanvasLayer/UI")
 
 [node name="Dummy" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(418, 5)
@@ -2893,6 +2897,7 @@ map = NodePath("../TileMapManager/Snow")
 enemy_container = NodePath("../EnemyContainer")
 difficulty_curve = SubResource("Curve_trceg")
 spawn_amount_curve = SubResource("Curve_a8y0u")
+elite_chance_curve = SubResource("Curve_jkv2x")
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawner"]
 

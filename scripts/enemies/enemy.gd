@@ -68,8 +68,8 @@ func _on_screen_exited() -> void:
 	despawn_timer.start()
 
 func _despawn() -> void:
-	print("despawn")
-	die()
+	queue_free()
+	#die()
 
 func update_speed() -> void:
 	speed_multiplier = effect_component.get_speed_multiplier()

@@ -11,8 +11,8 @@ extends Enemy
 @export var idle_duration: float = 0.5
 
 func _ready() -> void:
-	super()
 	speed = 250
+	super()
 
 func _set_up_variant_stat() -> void:
 	match variant_type:
@@ -20,6 +20,6 @@ func _set_up_variant_stat() -> void:
 			animated_sprite_2d.play("red")
 		VariantType.elite:
 			animated_sprite_2d.play("blue")
-			lock_duration = 0.25
-			target_duration = 0.25
+			lock_duration = 0.1
+			target_duration = 0.15
 			damage *= multiplier
