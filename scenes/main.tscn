@@ -16,18 +16,7 @@
 [ext_resource type="Script" uid="uid://dha0gveiow701" path="res://scripts/enemies/enemy_despawner.gd" id="12_a8y0u"]
 [ext_resource type="AudioStream" uid="uid://cs6thm8f3d8c7" path="res://audio/lobby.mp3" id="14_a8y0u"]
 
-[sub_resource type="Curve" id="Curve_trceg"]
-_limits = [1.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.05, 1.5), 0.0, 0.0, 0, 0, Vector2(0.1, 2), 0.0, 0.0, 0, 0, Vector2(0.237946, 3.1236), 0.0, 0.0, 0, 0, Vector2(0.25, 5), 0.0, 0.0, 0, 0, Vector2(0.262055, 2.51685), 0.0, 0.0, 0, 0, Vector2(1, 7.8764), 0.0, 0.0, 0, 0]
-point_count = 7
-
-[sub_resource type="Curve" id="Curve_a8y0u"]
-_limits = [0.0, 50.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.033, 0), 0.0, 0.0, 0, 0, Vector2(0.0392157, 2.84836), 0.0, 0.0, 0, 0, Vector2(0.0484429, 0.584015), 0.0, 0.0, 0, 0, Vector2(0.08, 3), 65.8223, 65.8223, 0, 0, Vector2(0.266247, 6.68271), 0.0, 0.0, 0, 0, Vector2(0.485325, 8.84857), 0.0, 0.0, 0, 0, Vector2(0.710692, 11.1348), 0.0, 0.0, 0, 0, Vector2(1, 13.7819), 0.0, 0.0, 0, 0]
-point_count = 9
-metadata/_snap_count = 2
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_muem4"]
 texture = ExtResource("8_trceg")
 texture_region_size = Vector2i(50, 50)
 0:0/0 = 0
