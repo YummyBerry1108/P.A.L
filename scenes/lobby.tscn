@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwgj38ot3mfrp"]
+[gd_scene load_steps=8 format=3 uid="uid://bwgj38ot3mfrp"]
 
 [ext_resource type="Script" uid="uid://b2n5olga6rckm" path="res://scripts/lobby_scene.gd" id="1_5gu6x"]
 [ext_resource type="Script" uid="uid://bwetgdn8s3vsn" path="res://scripts/ui/player_list.gd" id="2_5gu6x"]
+[ext_resource type="AudioStream" uid="uid://cs6thm8f3d8c7" path="res://audio/lobby.mp3" id="3_q60fs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q60fs"]
 
@@ -81,6 +82,9 @@ custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Leave"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_q60fs")
 
 [connection signal="button_down" from="VBoxContainer/StartGame" to="." method="_start_game"]
 [connection signal="button_down" from="VBoxContainer/LeaveLobby" to="." method="_leave_lobby"]
