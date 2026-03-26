@@ -1,6 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 signal _on_enemy_died(enemy: Enemy)
+signal _enemy_screen_update(player_id: int, enemy: Enemy, on_screen: bool)
 
 enum VariantType {normal, elite}
 
@@ -12,7 +13,7 @@ var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 @export var hp: float = 50
 @export var damage: float = 10.0
 @export var multiplier: float = 1.0
-@export var despawn_time: float = 15.0
+@export var despawn_time: float = 3.0 #CHANGED ORIG 15.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = get_node("AnimatedSprite2D")
 #@onready var sprite: Sprite2D = get_node("Sprite2D")
@@ -38,7 +39,6 @@ var knockback_timer: float = 0.0
 var exp_amount: int = 1
 var color: String = "red"
 
-
 func _ready() -> void:
 	_set_up_variant_stat()
 	setup_despawn_timer()
@@ -53,20 +53,51 @@ func setup_despawn_timer() -> void:
 	despawn_timer.wait_time = despawn_time
 	
 	
-	despawn_timer.timeout.connect(_despawn)
+	despawn_timer.timeout.connect(_despawn_rpc)
 	
 	visible_on_screen_notifier_2D.screen_exited.connect(_on_screen_exited)
 	visible_on_screen_notifier_2D.screen_entered.connect(_on_screen_entered)
 	
-	add_child(visible_on_screen_notifier_2D)
-	add_child(despawn_timer)
+	add_child(visible_on_screen_notifier_2D, true)
+	add_child(despawn_timer, true)
 
 func _on_screen_entered() -> void:
-	despawn_timer.stop()
+	_enemy_screen_update_signal_rpc.rpc(GameManager.local_player.name.to_int(), true)
+	#print('entry ', GameManager.local_player.name.to_int())
 
 func _on_screen_exited() -> void:
-	despawn_timer.start()
+	_enemy_screen_update_signal_rpc.rpc(GameManager.local_player.name.to_int(), false)
+	#print('bye bye ', GameManager.local_player.name.to_int())
+	
+@rpc("any_peer", "call_local")
+func _enemy_screen_update_signal_rpc(local_player: int, on_screen: bool):
+	if not multiplayer.is_server():
+		return
+	
+	_enemy_screen_update.emit(local_player, self.get_rid(), on_screen)
 
+func _change_despawn_timer_rpc(enemy_rid: RID, off_screen: bool) -> void:
+	if self.get_rid() == enemy_rid:
+		_change_despawn_timer.rpc(off_screen)
+
+@rpc("any_peer", "call_local")
+func _change_despawn_timer(off_screen) -> void:
+	if not multiplayer.is_server():
+		return
+	if self.despawn_timer.is_stopped() && off_screen:
+		self.despawn_timer.start()
+		#print("Started despawn timer for : ", self.name)
+	elif not self.despawn_timer.is_stopped():
+		self.despawn_timer.stop()
+		#print("Stopped despawn timer for : ", self.name)
+		
+func _despawn_rpc() -> void:
+	#print("yo")
+	if multiplayer.is_server():
+		#print("haha")
+		_despawn.rpc()
+
+@rpc("any_peer", "call_local")
 func _despawn() -> void:
 	queue_free()
 	#die()

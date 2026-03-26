@@ -11,6 +11,7 @@ extends Node2D
 @onready var player_spawner: MultiplayerSpawner = $PlayerSpawner
 @onready var multiplayer_enemy_spawner: MultiplayerSpawner = $MultiplayerEnemySpawner
 @onready var enemy_spawner: Node = $EnemySpawner
+@onready var enemy_despawner: Node = $EnemySpawner/EnemyDespawner
 
 var player_amount: int = 0
 var player_died_amount: int = 0
@@ -83,6 +84,8 @@ func _on_player_spawned(player: Player) -> void:
 		player.max_health_changed.connect(ui.health_bar.init_health)
 		player.spectate_changed.connect(_update_spectate_ui)
 		ui.health_bar.init_health(player.player_stat.hp)
+		enemy_despawner.add_player.rpc(player.name.to_int())
+		player.player_died.connect(enemy_despawner.remove_player_rpc)
 		
 func _on_player_disconnected(id: int) -> void:
 	player_amount -= 1
