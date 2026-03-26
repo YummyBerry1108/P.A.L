@@ -2940,6 +2940,8 @@ tile_set = SubResource("TileSet_tbgi4")
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("3_sugp2")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("14_a8y0u")
+volume_db = -0.1
 autoplay = true
