@@ -10,7 +10,7 @@
 script = ExtResource("4_8frof")
 stat_name = "projectile_damage"
 operation = 0
-value = 100.0
+value = 30.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_2xmmf"]
@@ -19,8 +19,8 @@ icon = ExtResource("4_btcus")
 skill_id = "icicle_damage+"
 upgrade_effects = Array[ExtResource("4_8frof")]([SubResource("Resource_dsccw")])
 next_node_uids = Array[String]([])
-skill_name = "icicle damage up"
-skill_description = "add damage"
+skill_name = "好冷啊"
+skill_description = "增加傷害"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_is2dt"]
