@@ -16,6 +16,7 @@ extends Node
 const RADIUS = 40
 
 var current_time: float = 0.0
+var player_count: int = 0
 var total_weight: int = 0
 var available_coords: Dictionary = {}
 
@@ -35,6 +36,9 @@ var name_to_difficulty: Dictionary[String, float] = {
 }
 
 func _ready() -> void:
+	if not multiplayer.is_server():
+		set_process(false)
+		return
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 	
@@ -44,6 +48,8 @@ func _process(delta: float) -> void:
 	if current_time < max_game_time:
 		current_time += delta
 		update_spawner_difficulty()
+	player_count = get_tree().get_node_count_in_group("players")
+	#print(_get_difficulty())
 
 func update_spawner_difficulty() -> void:
 	var new_interval: float = lerp(base_spawn_interval, min_spawn_interval, _get_difficulty() / 10)
@@ -55,7 +61,7 @@ func update_spawner_difficulty() -> void:
 			spawn_timer.start(spawn_timer.wait_time)
 
 func _on_spawn_timer_timeout() -> void:
-	var spawn_count: int = base_enemy_count + int(_get_spawn_amount())
+	var spawn_count: int = base_enemy_count + int(_get_spawn_amount() + player_count * 0.5)
 	
 	for i in range(spawn_count):
 		spawn_enemy()
@@ -107,10 +113,14 @@ func check_spawn_coord() -> bool:
 	var player_coords: Array[Vector2i] = _get_player_coords()
 	if player_coords.is_empty(): return false
 	_record_available_coord(player_coords)
-	return true
-
-func _get_speed_multiplier() -> float:
-	return 1 + current_time / max_game_time
+	var res_coord: Vector2i = _choose_coord()
+	
+	var enemy_node: PackedScene = name_to_enemy[selected_enemy]
+	var new_enemy: Enemy = enemy_node.instantiate()
+	new_enemy.multiplier = max(1, difficulty / 2 + player_count * 0.5)
+	new_enemy.global_position = map.map_to_local(res_coord)
+	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
+	enemy_container.add_child(new_enemy, true)
 
 ## get tilemap coords
 func _get_player_coords() -> Array[Vector2i]:
@@ -152,6 +162,7 @@ func _check_coord_close_player(expect_coord: Vector2i, player_coords) -> bool:
 			return true
 	return false
 
+## choose single coord by random and weight
 func _choose_coord() -> Vector2i:
 	var rand_num: int = randi_range(0, total_weight)
 	var curr_coord: Vector2i

@@ -15,7 +15,6 @@ extends Node2D
 
 var player_amount: int = 0
 var player_died_amount: int = 0
-var timer: float = 0.0
 var time_elapsed: float = 0.0 # use for total time 
 var is_timer_running: bool = true
 
@@ -32,15 +31,9 @@ func _ready() -> void:
 	ui.exp_label.text = "Level: 0"
 	ui.spectate_label.hide()
 
-func _process(delta: float) -> void:
-	# maybe use a timer node will be better?
-	if timer > 5.0:
-		timer -= 5.0
-		#enemy_spawner.spawn_enemy(enemy_names.pick_random())
-		
+func _process(delta: float) -> void:		
 	if is_timer_running:
 		time_elapsed += delta
-		timer += delta
 		_update_timer_ui()
 	
 	# press R

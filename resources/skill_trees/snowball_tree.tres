@@ -19,8 +19,8 @@ icon = ExtResource("4_msp6f")
 skill_id = "snowball_scale+"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_xf0gt")])
 next_node_uids = Array[String](["snowball_scale++"])
-skill_name = "Big snowball"
-skill_description = "Make your snowball bigger!"
+skill_name = "大雪球"
+skill_description = "讓雪球變大吧"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_3ks5h"]
@@ -36,8 +36,8 @@ icon = ExtResource("4_msp6f")
 skill_id = "snowball_scale++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_3ks5h")])
 next_node_uids = Array[String]([])
-skill_name = "Bigger snowball"
-skill_description = "Bigger and bigger!"
+skill_name = "更大的雪球"
+skill_description = "大還要更大"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_uyfnw"]
@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 script = ExtResource("4_rhmth")
 stat_name = "projectile_damage"
 operation = 0
-value = 5.0
+value = 10.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_v7dbn"]
@@ -58,7 +58,7 @@ icon = ExtResource("4_msp6f")
 skill_id = "snowball_damage+"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_vl580")])
 next_node_uids = Array[String](["snowball_damage++"])
-skill_name = "傷害增加"
+skill_name = "裡面包石頭"
 skill_description = "傷害增加"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
@@ -66,7 +66,7 @@ metadata/_custom_type_script = "uid://cyhc75bf8083e"
 script = ExtResource("4_rhmth")
 stat_name = "projectile_damage"
 operation = 0
-value = 100.0
+value = 30.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_bq4na"]
@@ -75,7 +75,7 @@ icon = ExtResource("4_msp6f")
 skill_id = "snowball_damage++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_johu8")])
 next_node_uids = Array[String]([])
-skill_name = "傷害再次增加"
+skill_name = "裡面包火屬性石頭"
 skill_description = "傷害增加"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
