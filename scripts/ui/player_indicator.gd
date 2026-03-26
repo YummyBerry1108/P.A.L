@@ -28,10 +28,12 @@ func update_indicators() -> void:
 			indicator.visible = false
 			continue
 			
+		var notifier = target_player.get_node_or_null("ScreenNotifier")
+		var dir = target_player.global_position - owner.global_position
+		
 		indicator.global_position = owner.global_position
 		
-		var dir = target_player.global_position - owner.global_position
-		if dir.length() > 500:
+		if notifier and not notifier.is_on_screen():
 			indicator.visible = true
 			indicator.rotation = dir.angle()
 		else:
