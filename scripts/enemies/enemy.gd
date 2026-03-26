@@ -25,6 +25,8 @@ var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 
 @export var variant_type: VariantType = VariantType.normal
 
+var player_speed_ref: float = 0.0
+
 var visible_on_screen_notifier_2D: VisibleOnScreenNotifier2D
 var despawn_timer: Timer
 
@@ -38,8 +40,6 @@ var color: String = "red"
 
 
 func _ready() -> void:
-	hp *= multiplier
-	
 	_set_up_variant_stat()
 	setup_despawn_timer()
 

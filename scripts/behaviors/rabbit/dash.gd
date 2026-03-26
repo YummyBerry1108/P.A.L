@@ -11,7 +11,7 @@ var projectile_container: Node2D
 func _enter_behavior() -> void:
 	spawn_fire_trail.rpc()
 	
-	time_left = duration
+	time_left = actor.dash_duration
 	actor.set_collision_mask_value(PhysicsLayers.ENEMY, false)
 	actor.set_collision_layer_value(PhysicsLayers.ENEMY, false)
 
@@ -33,6 +33,7 @@ func _exit_behavior() -> void:
 func spawn_fire_trail() -> void:
 	dash_start_point = actor.global_position
 	fire_trail = actor.fire_trail_scene.instantiate()
+	fire_trail.damage = actor.damage/3.0
 	add_child(fire_trail, true)
 	
 	var color: String = "red" if actor.variant_type == actor.VariantType.normal else "blue"

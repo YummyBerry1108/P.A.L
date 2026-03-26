@@ -37,9 +37,9 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 	
-	current_time = 1800
-	for i in range(10):
-		update_spawner_difficulty()
+	#current_time = 1800
+	#for i in range(10):
+		#update_spawner_difficulty()
 
 func _process(delta: float) -> void:
 	if current_time < max_game_time:
@@ -87,6 +87,7 @@ func _spawn_enemy(selected_enemy: String, difficulty: float) -> void:
 		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
 		var new_enemy: Enemy = enemy_node.instantiate()
 		new_enemy.multiplier = max(1, difficulty / 2)
+		new_enemy.player_speed_ref = _get_average_player_speed()
 		new_enemy.global_position = map.map_to_local(res_coord)
 		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
 		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
@@ -100,6 +101,15 @@ func check_spawn_coord() -> bool:
 	if player_coords.is_empty(): return false
 	_record_available_coord(player_coords)
 	return true
+
+func _get_average_player_speed() -> float:
+	var players = get_tree().get_nodes_in_group("players")
+	var total_speed: float = 0.0
+	for player in players:
+		var speed: float = player.player_stat.SPEED * player.effect_component.get_speed_multiplier(player.player_stat.speed_mutiplier)
+		total_speed += speed
+	
+	return total_speed/len(players)
 
 ## get tilemap coords
 func _get_player_coords() -> Array[Vector2i]:
