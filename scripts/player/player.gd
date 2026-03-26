@@ -122,7 +122,7 @@ func die() -> void:
 	is_alive = false
 	player_died.emit(name.to_int())
 	set_physics_process(false)
-	sprite_2d.frame = 0
+	sprite_2d.play("dead")
 	if is_multiplayer_authority():
 		$Camera2D.enabled = false
 		start_spectating()

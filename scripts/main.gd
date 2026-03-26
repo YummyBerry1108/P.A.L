@@ -72,6 +72,7 @@ func _on_enemy_died(enemy: Enemy) -> void:
 	exp_orb.global_position = enemy.global_position
 	exp_orb.exp_amount = enemy.exp_amount
 	exp_orb.collected.connect(ui.exp_bar.add_experience)
+	exp_orb.update_scale()
 	exp_orb_container.call_deferred("add_child", exp_orb, true)
 
 func _on_player_spawned(player: Player) -> void:

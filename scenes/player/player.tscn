@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=35 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
+[ext_resource type="Texture2D" uid="uid://bu5mg5jyhuhag" path="res://imgs/player/dead_pig.png" id="2_uniwh"]
 [ext_resource type="Texture2D" uid="uid://cwkucvc2y8oqi" path="res://imgs/player/frame_0001.png" id="3_fcs02"]
 [ext_resource type="Texture2D" uid="uid://b7abksd47xwdp" path="res://imgs/player/frame_0002.png" id="4_myrg7"]
 [ext_resource type="Script" uid="uid://b8dxuy1dgjsjp" path="res://scripts/player/movement.gd" id="4_qlg0r"]
@@ -34,6 +35,14 @@ resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_uniwh")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_ugbui")
 }, {
 "duration": 1.0,
@@ -52,7 +61,7 @@ animations = [{
 "texture": ExtResource("7_lgqa7")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walking",
 "speed": 5.0
 }]
 
@@ -82,6 +91,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath("AnimatedSprite2D:flip_h")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
@@ -97,6 +109,7 @@ zoom = Vector2(0.35, 0.35)
 position = Vector2(0, -51)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"walking"
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -200,7 +213,7 @@ script = ExtResource("7_0owmy")
 [node name="IndicatorManager" type="Node" parent="."]
 script = ExtResource("26_uniwh")
 
-[node name="ScreenNotifier" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(5, -38)
 scale = Vector2(10.1, 6.5)
 

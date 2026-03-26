@@ -6,8 +6,6 @@ class_name FireTrail extends Line2D
 @export var damage: int = 10
 @export var duration: float = 2.0
 
-@export var imgs: Array[CompressedTexture2D]
-
 var current_img_index: int = 0
 var collision_shape: CollisionPolygon2D
 

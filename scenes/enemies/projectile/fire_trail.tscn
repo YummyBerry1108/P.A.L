@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bhu3q46x60l8i"]
 
-[ext_resource type="Texture2D" uid="uid://bllarrquxu0b7" path="res://imgs/enemies/Rabbit/red/fire_trail/red_frame_2.png" id="2_0ib60"]
+[ext_resource type="Texture2D" uid="uid://bllarrquxu0b7" path="res://imgs/enemies/rabbit/red/fire_trail/red_frame_2.png" id="2_0ib60"]
 [ext_resource type="Script" uid="uid://b4ovi23suhp3p" path="res://scripts/enemies/projectiles/fire_trail.gd" id="2_b0n0u"]
-[ext_resource type="Texture2D" uid="uid://b18np8etij7x2" path="res://imgs/enemies/Rabbit/blue/fire_trail/blue_frame_1.png" id="3_r7lqy"]
-[ext_resource type="Texture2D" uid="uid://6xkmwudk5y7o" path="res://imgs/enemies/Rabbit/red/fire_trail/red_frame_1.png" id="3_tjdeo"]
-[ext_resource type="Texture2D" uid="uid://44pgt6tdhmim" path="res://imgs/enemies/Rabbit/blue/fire_trail/blue_frame_2.png" id="4_yl8bm"]
+[ext_resource type="Texture2D" uid="uid://b18np8etij7x2" path="res://imgs/enemies/rabbit/blue/fire_trail/blue_frame_1.png" id="3_r7lqy"]
+[ext_resource type="Texture2D" uid="uid://6xkmwudk5y7o" path="res://imgs/enemies/rabbit/red/fire_trail/red_frame_1.png" id="3_tjdeo"]
+[ext_resource type="Texture2D" uid="uid://44pgt6tdhmim" path="res://imgs/enemies/rabbit/blue/fire_trail/blue_frame_2.png" id="4_yl8bm"]
 
 [sub_resource type="Animation" id="Animation_0ib60"]
 length = 0.001

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://m0oyrovi1bc0"]
+
+[ext_resource type="Script" uid="uid://l10l56xh2w22" path="res://scripts/enemies/little_volcano.gd" id="1_p3ye8"]
+[ext_resource type="Texture2D" uid="uid://c12qipkx2r5tm" path="res://imgs/enemies/volcano/little_volcano0.png" id="2_aw1oo"]
+[ext_resource type="Texture2D" uid="uid://b3kei2xa2sdrn" path="res://imgs/enemies/volcano/little_volcano1.png" id="3_vibbp"]
+[ext_resource type="Texture2D" uid="uid://ceou8twbx73s4" path="res://imgs/enemies/volcano/little_volcano2.png" id="4_6hrev"]
+[ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="5_6hrev"]
+[ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="6_5e57s"]
+[ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="7_76tye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0j4ck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aw1oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vibbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6hrev")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vibbp"]
+radius = 212.0
+height = 792.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76tye"]
+radius = 212.0
+height = 790.0
+
+[node name="LittleVolcano" type="CharacterBody2D"]
+script = ExtResource("1_p3ye8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(60, -31)
+sprite_frames = SubResource("SpriteFrames_0j4ck")
+frame_progress = 0.945849
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vibbp")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_76tye")
+
+[node name="EffectComponent" type="Node" parent="."]
+script = ExtResource("5_6hrev")
+metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "effect_component", "damage_number_position", "hurt_box")]
+script = ExtResource("6_5e57s")
+actor = NodePath("..")
+effect_component = NodePath("../EffectComponent")
+damage_number_position = NodePath("../Marker2D")
+hurt_box = NodePath("../Hurtbox")
+metadata/_custom_type_script = "uid://ckuysfco5ijdx"
+
+[node name="BehaviorTreeComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("7_76tye")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://q7ubwpg31bmi"
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-1, -397)

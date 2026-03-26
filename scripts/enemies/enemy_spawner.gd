@@ -37,15 +37,12 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 	
-	current_time = 0
-	for i in range(10):
-		update_spawner_difficulty()
+	current_time = 1800
 
 func _process(delta: float) -> void:
 	if current_time < max_game_time:
 		current_time += delta
 		update_spawner_difficulty()
-	#print(_get_difficulty())
 
 func update_spawner_difficulty() -> void:
 	var new_interval: float = lerp(base_spawn_interval, min_spawn_interval, _get_difficulty() / 10)

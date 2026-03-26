@@ -2,12 +2,11 @@ class_name Enemy extends CharacterBody2D
 
 signal _on_enemy_died(enemy: Enemy)
 
-enum VariantType {normal, elite}
+enum VariantType {normal, elite, boss}
 
 var exp_orb_scene: Resource = preload("res://scenes/etc/exp_orb.tscn")
 #@onready var dev_info: Label = $DevInfo
 
-@export var texture: Texture2D
 @export_category("Basic")
 @export var hp: float = 50
 @export var damage: float = 10.0
