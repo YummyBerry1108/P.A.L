@@ -2869,9 +2869,9 @@ sources/0 = SubResource("TileSetAtlasSource_muem4")
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_tipki")
-ui = NodePath("CanvasLayer/UI")
 player_scene = ExtResource("2_tbgi4")
 exp_orb_scene = ExtResource("3_tefeu")
+ui = NodePath("CanvasLayer/UI")
 
 [node name="Dummy" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(418, 5)

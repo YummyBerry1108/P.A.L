@@ -1,25 +1,34 @@
-[gd_scene load_steps=31 format=3 uid="uid://cvbjuk7t2yx1x"]
+[gd_scene load_steps=40 format=3 uid="uid://cvbjuk7t2yx1x"]
 
 [ext_resource type="Script" uid="uid://djl6rfudyctlt" path="res://scripts/enemies/rabbit.gd" id="1_0rrc3"]
 [ext_resource type="PackedScene" uid="uid://bhu3q46x60l8i" path="res://scenes/enemies/projectile/fire_trail.tscn" id="2_81xei"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_haj5u"]
-[ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/frame_0001.png" id="4_ka7i1"]
+[ext_resource type="Texture2D" uid="uid://du7erdpx55xaj" path="res://imgs/enemies/Rabbit/blue/frame_0001.png" id="4_ka7i1"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_46k04"]
-[ext_resource type="Texture2D" uid="uid://bih7glidu7518" path="res://imgs/enemies/Rabbit/frame_0002.png" id="5_qo215"]
+[ext_resource type="Texture2D" uid="uid://bih7glidu7518" path="res://imgs/enemies/Rabbit/blue/frame_0002.png" id="5_qo215"]
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="6_7hee8"]
-[ext_resource type="Texture2D" uid="uid://btuovxrl35pjr" path="res://imgs/enemies/Rabbit/frame_0003.png" id="6_lmywa"]
-[ext_resource type="Texture2D" uid="uid://caoxtedun0pdg" path="res://imgs/enemies/Rabbit/frame_0004.png" id="7_mnrav"]
-[ext_resource type="Texture2D" uid="uid://dh05d2323f1g0" path="res://imgs/enemies/Rabbit/frame_0005.png" id="8_eq4af"]
-[ext_resource type="Texture2D" uid="uid://dhs2xkmaafhpk" path="res://imgs/enemies/Rabbit/frame_0006.png" id="9_jsgxj"]
-[ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/frame_0007.png" id="10_xwg4q"]
-[ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/frame_0008.png" id="11_av6w0"]
+[ext_resource type="Texture2D" uid="uid://btuovxrl35pjr" path="res://imgs/enemies/Rabbit/blue/frame_0003.png" id="6_lmywa"]
+[ext_resource type="Texture2D" uid="uid://caoxtedun0pdg" path="res://imgs/enemies/Rabbit/blue/frame_0004.png" id="7_mnrav"]
+[ext_resource type="Texture2D" uid="uid://dh05d2323f1g0" path="res://imgs/enemies/Rabbit/blue/frame_0005.png" id="8_eq4af"]
+[ext_resource type="Texture2D" uid="uid://dhs2xkmaafhpk" path="res://imgs/enemies/Rabbit/blue/frame_0006.png" id="9_jsgxj"]
+[ext_resource type="Texture2D" uid="uid://qdrocn7gnb7x" path="res://imgs/enemies/Rabbit/blue/frame_0007.png" id="10_xwg4q"]
+[ext_resource type="Texture2D" uid="uid://dq5peh84dw1fm" path="res://imgs/enemies/Rabbit/blue/frame_0008.png" id="11_av6w0"]
+[ext_resource type="Texture2D" uid="uid://bv5cjaxotvb35" path="res://imgs/enemies/Rabbit/red/frame_0001.png" id="12_ljxta"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="12_qo215"]
+[ext_resource type="Texture2D" uid="uid://bumuxbsqs2dso" path="res://imgs/enemies/Rabbit/red/frame_0002.png" id="13_5e8hi"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="13_ka7i1"]
+[ext_resource type="Texture2D" uid="uid://m2uct2cjc347" path="res://imgs/enemies/Rabbit/red/frame_0003.png" id="14_iq463"]
+[ext_resource type="Texture2D" uid="uid://d3iakfvtkia24" path="res://imgs/enemies/Rabbit/red/frame_0004.png" id="15_onppv"]
 [ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="16_lmywa"]
+[ext_resource type="Texture2D" uid="uid://dpl5ec5c8cpmp" path="res://imgs/enemies/Rabbit/red/frame_0005.png" id="16_m0vq6"]
 [ext_resource type="Script" uid="uid://dnxa5ypvvtkl" path="res://scripts/behaviors/rabbit/idle.gd" id="17_mnrav"]
+[ext_resource type="Texture2D" uid="uid://bfv4h3wcymb8w" path="res://imgs/enemies/Rabbit/red/frame_0006.png" id="17_w0mkh"]
 [ext_resource type="Script" uid="uid://bjbhj5gwx38s2" path="res://scripts/behaviors/rabbit/chase.gd" id="18_eq4af"]
+[ext_resource type="Texture2D" uid="uid://bv8bcv368kl0a" path="res://imgs/enemies/Rabbit/red/frame_0007.png" id="18_pkrme"]
+[ext_resource type="Texture2D" uid="uid://daa2djkcds3jr" path="res://imgs/enemies/Rabbit/red/frame_0008.png" id="19_le6ct"]
 [ext_resource type="Script" uid="uid://bnu8kfn86sbpl" path="res://scripts/behaviors/rabbit/dash.gd" id="19_nu5es"]
 [ext_resource type="Script" uid="uid://bjr7n5wb2xgmc" path="res://scripts/behaviors/rabbit/lock.gd" id="20_81xei"]
+[ext_resource type="Texture2D" uid="uid://bnwwegam6w2qf" path="res://imgs/enemies/Rabbit/red/frame_0009.png" id="20_f8c3s"]
 [ext_resource type="Script" uid="uid://i5deo372xafi" path="res://scripts/behaviors/rabbit/root.gd" id="21_r5c22"]
 [ext_resource type="Script" uid="uid://ferx43cm173n" path="res://scripts/behaviors/rabbit/target.gd" id="22_sqyl8"]
 [ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/behaviors/knockback.gd" id="23_81xei"]
@@ -59,7 +68,39 @@ animations = [{
 "texture": ExtResource("11_av6w0")
 }],
 "loop": true,
-"name": &"default",
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ljxta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5e8hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_iq463")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_onppv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_m0vq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_w0mkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_pkrme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_le6ct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_f8c3s")
+}],
+"loop": true,
+"name": &"red",
 "speed": 5.0
 }]
 
@@ -130,6 +171,7 @@ material = SubResource("ShaderMaterial_haj5u")
 position = Vector2(0, -41)
 scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_nu5es")
+animation = &"blue"
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -176,9 +218,9 @@ metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
 
 [node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurt_box", "behavior_tree_component")]
 script = ExtResource("6_7hee8")
+knockback_resistance = 0.1
 actor = NodePath("..")
 hurt_box = NodePath("../HurtBox")
-knockback_resistance = 0.1
 behavior_tree_component = NodePath("../BehaviorTreeComponent")
 metadata/_custom_type_script = "uid://bksmn3hpunxeh"
 

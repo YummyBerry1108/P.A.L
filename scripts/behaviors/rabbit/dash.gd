@@ -34,6 +34,9 @@ func spawn_fire_trail() -> void:
 	dash_start_point = actor.global_position
 	fire_trail = actor.fire_trail_scene.instantiate()
 	add_child(fire_trail, true)
+	
+	var color: String = "red" if actor.variant_type == actor.VariantType.normal else "blue"
+	fire_trail.animation_player.play("fire_flip_"+color)
 
 @rpc("any_peer", "call_local")
 func update_fire_trail() -> void:

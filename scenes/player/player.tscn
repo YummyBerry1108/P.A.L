@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://l7jelo8hnshc" path="res://scripts/player/stats/player_stat_data.gd" id="11_uf5tr"]
 [ext_resource type="Script" uid="uid://cqmym637gdqmy" path="res://scripts/player/stats/stat_upgrade_manager.gd" id="12_8ydkj"]
 [ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/player/stats/stat_upgrade_data.gd" id="12_lgqa7"]
-[ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
+[ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/tachi_data.tscn" id="13_fcs02"]
 [ext_resource type="Texture2D" uid="uid://blmto0svdbd23" path="res://imgs/ui/stat_upgrade/upgrade_HP.png" id="14_cnsyf"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://dxolm3i2d2qdu" path="res://imgs/ui/stat_upgrade/upgrade_speed.png" id="15_007i1"]
@@ -185,7 +185,7 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
 knockback_force = 250.0
 
-[node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
+[node name="TachiData" parent="Skills" instance=ExtResource("13_fcs02")]
 firerate = 1.0
 
 [node name="SkillTreeManager" type="Node" parent="."]

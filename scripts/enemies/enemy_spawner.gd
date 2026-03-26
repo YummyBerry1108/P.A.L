@@ -8,6 +8,7 @@ extends Node
 @export var base_spawn_interval: float = 5.0
 @export var min_spawn_interval: float = 2.0
 @export var base_enemy_count: int = 1
+@export var elite_chance: float = 0.2
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -29,9 +30,26 @@ var name_to_difficulty: Dictionary[String, float] = {
 	"snail": 1.0,
 }
 
+func weighted_random(weights: Array[float]) -> int:
+	var weights_sum: float = 0.0
+	for weight in weights:
+		weights_sum += weight
+	
+	var remaining_distance:  float = weights_sum * randf()
+	
+	for i in range(weights.size()):
+		remaining_distance -= weights[i]
+		if remaining_distance < 0: return i
+	
+	return 0
+
 func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
+	
+	current_time = 1800
+	for i in range(10):
+		update_spawner_difficulty()
 
 func _process(delta: float) -> void:
 	if current_time < max_game_time:
@@ -71,21 +89,27 @@ func spawn_enemy() -> void:
 	
 	var selected_enemy: String = available_name.pick_random()
 	
+	_spawn_enemy(selected_enemy, difficulty)
+
+func _spawn_enemy(selected_enemy: String, difficulty: float) -> void:
+	if check_spawn_coord(selected_enemy):
+		var res_coord: Vector2i = _choose_coord()
+		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
+		var new_enemy: Enemy = enemy_node.instantiate()
+		new_enemy.multiplier = max(1, difficulty / 2)
+		new_enemy.global_position = map.map_to_local(res_coord)
+		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > elite_chance else new_enemy.VariantType.elite
+		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
+		enemy_container.add_child(new_enemy, true)
+	
+func check_spawn_coord(selected_enemy: String) -> bool:
 	available_coords.clear()
 	total_weight = 0
 	
 	var player_coords: Array[Vector2i] = _get_player_coords()
-	if player_coords.is_empty(): return
+	if player_coords.is_empty(): return false
 	_record_available_coord(player_coords)
-	var res_coord: Vector2i = _choose_coord()
-	
-	var enemy_node: PackedScene = name_to_enemy[selected_enemy]
-	var new_enemy: Enemy = enemy_node.instantiate()
-	new_enemy.multiplier = max(1, difficulty / 2)
-	new_enemy.global_position = map.map_to_local(res_coord)
-	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
-	enemy_container.add_child(new_enemy, true)
-
+	return true
 
 ## get tilemap coords
 func _get_player_coords() -> Array[Vector2i]:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://c12s4hrhxvltl"]
+[gd_scene load_steps=2 format=3 uid="uid://8ca1w8oyy030"]
 
 [ext_resource type="Script" uid="uid://cqo7dhdmm7uc6" path="res://scripts/enemies/projectiles/projectile_spawer.gd" id="1_05apt"]
 
