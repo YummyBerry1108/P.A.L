@@ -7,7 +7,7 @@ signal collected(exp_amount: int)
 var exp_amount: int = 1
 
 func _ready() -> void:
-	pass
+	scale = Vector2.ONE * (1 + exp_amount / 15)
 	
 func _physics_process(delta: float) -> void:
 	rotation += deg_to_rad(50.0) * delta

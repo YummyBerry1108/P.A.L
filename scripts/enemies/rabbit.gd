@@ -19,9 +19,11 @@ func _ready() -> void:
 func _set_up_variant_stat() -> void:
 	match variant_type:
 		VariantType.normal:
+			exp_amount *= floor(multiplier)
 			hp *= multiplier
 			animated_sprite_2d.play("red")
 		VariantType.elite:
+			exp_amount *= floor(multiplier) * 5
 			hp *= multiplier * 2
 			animated_sprite_2d.play("blue")
 			lock_duration = 0.1
@@ -29,4 +31,3 @@ func _set_up_variant_stat() -> void:
 			damage *= multiplier
 			detection_range = 600
 			speed *= 1.5
-			#dash_speed *= speed_multiplier_ref
