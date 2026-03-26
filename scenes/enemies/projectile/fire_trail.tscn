@@ -1,12 +1,73 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhu3q46x60l8i"]
+[gd_scene load_steps=11 format=3 uid="uid://bhu3q46x60l8i"]
 
-[ext_resource type="Texture2D" uid="uid://64gwusxyxfto" path="res://icon.svg" id="1_jk58p"]
+[ext_resource type="Texture2D" uid="uid://bllarrquxu0b7" path="res://imgs/enemies/rabbit/red/fire_trail/red_frame_2.png" id="2_0ib60"]
 [ext_resource type="Script" uid="uid://b4ovi23suhp3p" path="res://scripts/enemies/projectiles/fire_trail.gd" id="2_b0n0u"]
+[ext_resource type="Texture2D" uid="uid://b18np8etij7x2" path="res://imgs/enemies/rabbit/blue/fire_trail/blue_frame_1.png" id="3_r7lqy"]
+[ext_resource type="Texture2D" uid="uid://6xkmwudk5y7o" path="res://imgs/enemies/rabbit/red/fire_trail/red_frame_1.png" id="3_tjdeo"]
+[ext_resource type="Texture2D" uid="uid://44pgt6tdhmim" path="res://imgs/enemies/rabbit/blue/fire_trail/blue_frame_2.png" id="4_yl8bm"]
+
+[sub_resource type="Animation" id="Animation_0ib60"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0ib60")]
+}
+
+[sub_resource type="Animation" id="Animation_tjdeo"]
+resource_name = "fire_flip_blue"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_r7lqy"), ExtResource("4_yl8bm")]
+}
+
+[sub_resource type="Animation" id="Animation_b0n0u"]
+resource_name = "fire_flip_red"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_tjdeo"), ExtResource("2_0ib60")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ib60"]
+_data = {
+&"RESET": SubResource("Animation_0ib60"),
+&"fire_flip_blue": SubResource("Animation_tjdeo"),
+&"fire_flip_red": SubResource("Animation_b0n0u")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tjdeo"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="FireTrail" type="Line2D"]
-points = PackedVector2Array(0, 0)
-width = 100.0
-texture = ExtResource("1_jk58p")
+width = 300.0
+texture = ExtResource("2_0ib60")
 texture_mode = 2
 script = ExtResource("2_b0n0u")
 duration = 5.0
@@ -14,3 +75,13 @@ duration = 5.0
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 32
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0ib60")
+}
+autoplay = "fire_flip_red"
+speed_scale = 0.5
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_tjdeo")

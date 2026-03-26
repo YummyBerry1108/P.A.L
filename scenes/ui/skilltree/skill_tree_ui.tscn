@@ -206,6 +206,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="UpgradeTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="pressed" from="ArrowVBoxContainer/Previous" to="." method="next_skill"]
 [connection signal="pressed" from="ArrowVBoxContainer/Next" to="." method="previous_skill"]

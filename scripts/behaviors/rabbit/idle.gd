@@ -4,7 +4,7 @@ extends Behavior
 var time_left: float = 0.0
 
 func _enter_behavior() -> void:
-	time_left = duration
+	time_left = actor.idle_duration
 
 func _physics_update(delta: float) -> void:
 	actor.velocity = Vector2.ZERO

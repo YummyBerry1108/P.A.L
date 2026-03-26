@@ -4,11 +4,13 @@ extends Node
 @export var enemy_container: Node2D
 @export var difficulty_curve: Curve
 @export var spawn_amount_curve: Curve
+@export var elite_chance_curve: Curve
 @export var max_game_time: float = 1800.0
 @export var base_spawn_interval: float = 5.0
 @export var min_spawn_interval: float = 2.0
 @export var base_enemy_count: int = 1
 
+@onready var enemy_despawner: EnemyDespawn = $EnemyDespawner
 @onready var spawn_timer: Timer = $SpawnTimer
 
 const RADIUS = 40
@@ -28,6 +30,9 @@ var name_to_difficulty: Dictionary[String, float] = {
 	"rock": 1.8,
 	"rabbit": 1.5,
 	"snail": 1.0,
+	#"rock": 4.8,
+	#"rabbit": 2.5,
+	#"snail": 2.0,
 }
 
 func _ready() -> void:
@@ -36,6 +41,8 @@ func _ready() -> void:
 		return
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
+	
+	current_time = 0
 
 func _process(delta: float) -> void:
 	if current_time < max_game_time:
@@ -59,14 +66,11 @@ func _on_spawn_timer_timeout() -> void:
 	for i in range(spawn_count):
 		spawn_enemy()
 	
-	print("生成數: ", spawn_count)
-	print("生成時間: ", spawn_timer.wait_time)
+	#print("生成數: ", spawn_count)
+	#print("生成時間: ", spawn_timer.wait_time)
 
 ## do not spawn if no player alive in game
-func spawn_enemy() -> void:
-	if not multiplayer.is_server():
-		return
-	
+func init_enemy() -> Array:
 	var difficulty: float = _get_difficulty()
 	var available_name: Array[String]
 	
@@ -76,11 +80,38 @@ func spawn_enemy() -> void:
 	
 	var selected_enemy: String = available_name.pick_random()
 	
+	selected_enemy = "snail" #DEBUGGG
+	
+	return [selected_enemy, difficulty]
+
+func spawn_enemy() -> void:
+	if not multiplayer.is_server():
+		return
+		
+	var init_parameters = init_enemy()
+	
+	var selected_enemy: String = init_parameters[0]
+	var difficulty: float = init_parameters[1]
+	
+	if check_spawn_coord():
+		var res_coord: Vector2i = _choose_coord()
+		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
+		var new_enemy: Enemy = enemy_node.instantiate()
+		new_enemy.multiplier = max(1, difficulty / 2)
+		new_enemy.speed_multiplier_ref = _get_speed_multiplier()
+		new_enemy.global_position = map.map_to_local(res_coord)
+		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
+		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
+		new_enemy._enemy_screen_update.connect(enemy_despawner.update_enemy_onscreen_rpc)
+		enemy_container.add_child(new_enemy, true)
+		enemy_despawner._change_despawn_timer.connect(new_enemy._change_despawn_timer_rpc)
+	
+func check_spawn_coord() -> bool:
 	available_coords.clear()
 	total_weight = 0
 	
 	var player_coords: Array[Vector2i] = _get_player_coords()
-	if player_coords.is_empty(): return
+	if player_coords.is_empty(): return false
 	_record_available_coord(player_coords)
 	var res_coord: Vector2i = _choose_coord()
 	
@@ -146,6 +177,12 @@ func _get_difficulty() -> float:
 	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)
 	var difficulty_multiplier: float = difficulty_curve.sample(progress)
 	return difficulty_multiplier
+
+func _get_elite_chance() -> float:
+	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)
+	var elite_chance: float = elite_chance_curve.sample(progress)
+	return elite_chance
+
 
 func _get_spawn_amount() -> float:
 	var progress: float = clamp(current_time / max_game_time, 0.0, 1.0)

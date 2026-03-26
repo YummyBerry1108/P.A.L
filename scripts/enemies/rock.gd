@@ -6,13 +6,16 @@ extends Enemy
 func _ready() -> void:
 	super()
 
-#func _physics_process(delta: float) -> void:
-	#if !multiplayer.is_server(): return
-	#var target_pos: Vector2 = get_nearest_player()
-	#direction = global_position.direction_to(target_pos)
-	#var desired_velocity = direction * max_speed * speed_multiplier
-	#var steering = (desired_velocity - velocity).limit_length(steer_force)
-	#velocity += steering * delta
-	
-	#knockback_component.knockback_check(delta)
-	#move_and_slide()
+func _set_up_variant_stat() -> void:
+	match variant_type:
+		VariantType.normal:
+			exp_amount *= floor(multiplier)
+			hp *= multiplier
+			animated_sprite_2d.play("red")
+		VariantType.elite:
+			exp_amount *= floor(multiplier) * 5
+			hp *= multiplier * 3
+			animated_sprite_2d.play("blue")
+			steer_force *= 1.5
+			max_speed *= 1.5
+			damage *= multiplier

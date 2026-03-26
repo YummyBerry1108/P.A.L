@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=35 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
+[ext_resource type="Texture2D" uid="uid://bu5mg5jyhuhag" path="res://imgs/player/dead_pig.png" id="2_uniwh"]
 [ext_resource type="Texture2D" uid="uid://cwkucvc2y8oqi" path="res://imgs/player/frame_0001.png" id="3_fcs02"]
 [ext_resource type="Texture2D" uid="uid://b7abksd47xwdp" path="res://imgs/player/frame_0002.png" id="4_myrg7"]
 [ext_resource type="Script" uid="uid://b8dxuy1dgjsjp" path="res://scripts/player/movement.gd" id="4_qlg0r"]
@@ -18,7 +19,7 @@
 [ext_resource type="Script" uid="uid://l7jelo8hnshc" path="res://scripts/player/stats/player_stat_data.gd" id="11_uf5tr"]
 [ext_resource type="Script" uid="uid://cqmym637gdqmy" path="res://scripts/player/stats/stat_upgrade_manager.gd" id="12_8ydkj"]
 [ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/player/stats/stat_upgrade_data.gd" id="12_lgqa7"]
-[ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/stick_data.tscn" id="13_fcs02"]
+[ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/tachi_data.tscn" id="13_fcs02"]
 [ext_resource type="Texture2D" uid="uid://blmto0svdbd23" path="res://imgs/ui/stat_upgrade/upgrade_HP.png" id="14_cnsyf"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://dxolm3i2d2qdu" path="res://imgs/ui/stat_upgrade/upgrade_speed.png" id="15_007i1"]
@@ -27,10 +28,19 @@
 [ext_resource type="Texture2D" uid="uid://dtxxn1mwmuan4" path="res://imgs/ui/stat_upgrade/upgrade_card_blue.png" id="17_28m0y"]
 [ext_resource type="Texture2D" uid="uid://b5e75bns2pp48" path="res://imgs/ui/stat_upgrade/upgrade_card_yellow.png" id="19_uniwh"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uniwh")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ugbui")
@@ -51,7 +61,7 @@ animations = [{
 "texture": ExtResource("7_lgqa7")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walking",
 "speed": 5.0
 }]
 
@@ -81,6 +91,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath("AnimatedSprite2D:flip_h")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
@@ -96,6 +109,7 @@ zoom = Vector2(0.35, 0.35)
 position = Vector2(0, -51)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_ugbui")
+animation = &"walking"
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -185,7 +199,7 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="SnowballData" parent="Skills" instance=ExtResource("7_h17s1")]
 knockback_force = 250.0
 
-[node name="StickData" parent="Skills" instance=ExtResource("13_fcs02")]
+[node name="TachiData" parent="Skills" instance=ExtResource("13_fcs02")]
 firerate = 1.0
 
 [node name="SkillTreeManager" type="Node" parent="."]
@@ -195,6 +209,13 @@ metadata/_custom_type_script = "uid://5olw8pxlwuj"
 
 [node name="Projectiles" type="Node" parent="."]
 script = ExtResource("7_0owmy")
+
+[node name="IndicatorManager" type="Node" parent="."]
+script = ExtResource("26_uniwh")
+
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(5, -38)
+scale = Vector2(10.1, 6.5)
 
 [node name="DisplayName" type="Label" parent="."]
 anchors_preset = 5

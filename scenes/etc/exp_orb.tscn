@@ -1,23 +1,26 @@
 [gd_scene load_steps=6 format=3 uid="uid://b78bhpq31lil4"]
 
 [ext_resource type="Script" uid="uid://dgqqs5ri3b6ep" path="res://scripts/etc/exp_orb.gd" id="1_5nfcg"]
-[ext_resource type="Texture2D" uid="uid://c1plvmep6w14" path="res://imgs/skills/snowball.png" id="1_kpwub"]
+[ext_resource type="Texture2D" uid="uid://c4cbyw1w1iiwm" path="res://imgs/etc/exp_orb.png" id="2_iajgw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5nfcg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7v8t4"]
+radius = 38.0526
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5nfcg"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath(".:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="ExpOrb" type="CharacterBody2D"]
 script = ExtResource("1_5nfcg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_kpwub")
+texture = ExtResource("2_iajgw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5nfcg")

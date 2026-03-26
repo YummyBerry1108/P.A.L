@@ -9,11 +9,12 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var projectiles: Node = $Projectiles
-@onready var display_name: Label = $DisplayName 
+@onready var display_name: Label = $DisplayName
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_stat: PlayerStatData = $PlayerStat
 @onready var effect_component: EffectComponent = $EffectComponent
+@onready var indicator_manager: Node = $IndicatorManager
 
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
@@ -45,8 +46,18 @@ func _ready() -> void:
 		display_name.hide()
 		$Camera2D.make_current()
 		
+	if multiplayer.is_server():
+		_apply_healing_effect()
+
+func _apply_healing_effect() -> void:
+	var new_inf_heal_effect = INFHealEffect.new()
+	new_inf_heal_effect.duration = 1.0
+	effect_component.add_effect(new_inf_heal_effect)
+
 func _process(delta: float) -> void:
 	if is_alive:
+		if indicator_manager.is_ready:
+			indicator_manager.update_indicators()
 		pull_skills()
 		fetch_behavior("Attack", { "player": self, "skills": skills })
 	if is_spectating:
@@ -97,11 +108,23 @@ func take_damage(damage: float) -> void:
 	is_invincible = true
 	invincibility_timer.start()
 
+@rpc("any_peer", "call_local")
+func heal(amount: float) -> void:
+	if not is_alive:
+		return
+	player_stat.hp += amount
+	if player_stat.hp > player_stat.max_hp:
+		player_stat.hp = player_stat.max_hp
+	
+	health_changed.emit(player_stat.hp)
+
 func die() -> void:
 	is_alive = false
-	player_died.emit(name.to_int())
+	player_died.emit(self.name.to_int())
+	#print("Who emit ? ", multiplayer.get_unique_id())
+	#print("PLAYER THAT JUST DIED : ", self.name.to_int())
 	set_physics_process(false)
-	sprite_2d.frame = 0
+	sprite_2d.play("dead")
 	if is_multiplayer_authority():
 		$Camera2D.enabled = false
 		start_spectating()

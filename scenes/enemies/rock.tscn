@@ -1,56 +1,97 @@
-[gd_scene load_steps=60 format=3 uid="uid://dfde1nigv6m7e"]
+[gd_scene load_steps=101 format=3 uid="uid://dfde1nigv6m7e"]
 
 [ext_resource type="Script" uid="uid://cdv6q3x020oup" path="res://scripts/enemies/rock.gd" id="1_1di36"]
-[ext_resource type="Texture2D" uid="uid://dsv5cxo6m3d1" path="res://imgs/enemies/Rock/Rock.png" id="2_mek2u"]
-[ext_resource type="Texture2D" uid="uid://18705fknsybe" path="res://imgs/enemies/Rock/frame_0000.png" id="3_e0wct"]
+[ext_resource type="Texture2D" uid="uid://18705fknsybe" path="res://imgs/enemies/rock/red/frame_0000.png" id="3_e0wct"]
 [ext_resource type="Shader" uid="uid://dlq8hyfh2pkr1" path="res://shader/hit_flash.tres" id="3_ik6fu"]
-[ext_resource type="Texture2D" uid="uid://dvqiau804ilco" path="res://imgs/enemies/Rock/frame_0001.png" id="4_868pk"]
+[ext_resource type="Texture2D" uid="uid://dvqiau804ilco" path="res://imgs/enemies/rock/red/frame_0001.png" id="4_868pk"]
+[ext_resource type="Texture2D" uid="uid://ct8vvhey1s413" path="res://imgs/enemies/rock/blue/frame_0000.png" id="4_fnina"]
 [ext_resource type="Script" uid="uid://bksmn3hpunxeh" path="res://scripts/components/knockback_component.gd" id="5_285kf"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="5_betv5"]
 [ext_resource type="Script" uid="uid://ckuysfco5ijdx" path="res://scripts/components/damage_component.gd" id="5_ouckr"]
-[ext_resource type="Texture2D" uid="uid://bpjvyvmm6smyo" path="res://imgs/enemies/Rock/frame_0002.png" id="5_qj3ap"]
-[ext_resource type="Texture2D" uid="uid://dfq4upwog8ule" path="res://imgs/enemies/Rock/frame_0003.png" id="6_55cwv"]
+[ext_resource type="Texture2D" uid="uid://bpjvyvmm6smyo" path="res://imgs/enemies/rock/red/frame_0002.png" id="5_qj3ap"]
+[ext_resource type="Texture2D" uid="uid://sh6b1wpfr15m" path="res://imgs/enemies/rock/blue/frame_0001.png" id="5_xauwm"]
+[ext_resource type="Texture2D" uid="uid://dfq4upwog8ule" path="res://imgs/enemies/rock/red/frame_0003.png" id="6_55cwv"]
+[ext_resource type="Texture2D" uid="uid://b34ou6qidtwp6" path="res://imgs/enemies/rock/blue/frame_0002.png" id="6_cqs6c"]
+[ext_resource type="Texture2D" uid="uid://sex7ol748pk5" path="res://imgs/enemies/rock/blue/frame_0003.png" id="7_87yv2"]
 [ext_resource type="Script" uid="uid://q7ubwpg31bmi" path="res://scripts/components/behavior_tree_component.gd" id="7_betv5"]
-[ext_resource type="Texture2D" uid="uid://dryjqip2i6ai6" path="res://imgs/enemies/Rock/frame_0004.png" id="7_tead2"]
-[ext_resource type="Texture2D" uid="uid://cnjfcai4hsdk" path="res://imgs/enemies/Rock/frame_0005.png" id="8_8pwen"]
+[ext_resource type="Texture2D" uid="uid://dryjqip2i6ai6" path="res://imgs/enemies/rock/red/frame_0004.png" id="7_tead2"]
+[ext_resource type="Texture2D" uid="uid://cnjfcai4hsdk" path="res://imgs/enemies/rock/red/frame_0005.png" id="8_8pwen"]
 [ext_resource type="Script" uid="uid://b3gyv5sde7b5r" path="res://scripts/behaviors/rock/chase.gd" id="8_45ckn"]
 [ext_resource type="Script" uid="uid://vfdyi7a8s5vq" path="res://scripts/behaviors/knockback.gd" id="8_bsk3k"]
-[ext_resource type="Texture2D" uid="uid://bcqu6nidt1ja1" path="res://imgs/enemies/Rock/frame_0006.png" id="9_ovj50"]
-[ext_resource type="Texture2D" uid="uid://ds1pnb3uymy4d" path="res://imgs/enemies/Rock/frame_0007.png" id="10_itxhp"]
-[ext_resource type="Texture2D" uid="uid://bo3bemb15hxbp" path="res://imgs/enemies/Rock/frame_0008.png" id="11_cbi1q"]
-[ext_resource type="Texture2D" uid="uid://bpbiwtvlslray" path="res://imgs/enemies/Rock/frame_0009.png" id="12_6mvfi"]
-[ext_resource type="Texture2D" uid="uid://bmyrx0nnp3e5a" path="res://imgs/enemies/Rock/frame_0010.png" id="13_8xbfl"]
-[ext_resource type="Texture2D" uid="uid://b1suttujnupo5" path="res://imgs/enemies/Rock/frame_0011.png" id="14_ttuui"]
-[ext_resource type="Texture2D" uid="uid://bumkfivoue7t4" path="res://imgs/enemies/Rock/frame_0012.png" id="15_52gyw"]
-[ext_resource type="Texture2D" uid="uid://mgei6t41ngoc" path="res://imgs/enemies/Rock/frame_0013.png" id="16_7j8n2"]
-[ext_resource type="Texture2D" uid="uid://1kud1weg6rga" path="res://imgs/enemies/Rock/frame_0014.png" id="17_n4fab"]
-[ext_resource type="Texture2D" uid="uid://b0btarb5x7qcs" path="res://imgs/enemies/Rock/frame_0015.png" id="18_j3xjm"]
-[ext_resource type="Texture2D" uid="uid://bhcal74ggb2hs" path="res://imgs/enemies/Rock/frame_0016.png" id="19_ngnk1"]
-[ext_resource type="Texture2D" uid="uid://cb836nycth7g1" path="res://imgs/enemies/Rock/frame_0017.png" id="20_k7y8g"]
-[ext_resource type="Texture2D" uid="uid://d1l6xssgjpv7f" path="res://imgs/enemies/Rock/frame_0018.png" id="21_3owqy"]
-[ext_resource type="Texture2D" uid="uid://d3p8s33ji42gf" path="res://imgs/enemies/Rock/frame_0019.png" id="22_numdc"]
-[ext_resource type="Texture2D" uid="uid://xn4knuciksmu" path="res://imgs/enemies/Rock/frame_0020.png" id="23_qswaq"]
-[ext_resource type="Texture2D" uid="uid://54koiyeq1fac" path="res://imgs/enemies/Rock/frame_0021.png" id="24_f1qi0"]
-[ext_resource type="Texture2D" uid="uid://dpjqrevac6hhl" path="res://imgs/enemies/Rock/frame_0022.png" id="25_lnpaf"]
-[ext_resource type="Texture2D" uid="uid://lidulpft3wlt" path="res://imgs/enemies/Rock/frame_0023.png" id="26_mkgou"]
-[ext_resource type="Texture2D" uid="uid://ckxinsweshq00" path="res://imgs/enemies/Rock/frame_0024.png" id="27_u120b"]
-[ext_resource type="Texture2D" uid="uid://bbdjdyljb3m66" path="res://imgs/enemies/Rock/frame_0025.png" id="28_h4v8u"]
-[ext_resource type="Texture2D" uid="uid://cm2w1t217l3qc" path="res://imgs/enemies/Rock/frame_0026.png" id="29_vnsro"]
-[ext_resource type="Texture2D" uid="uid://b2mxc618cxn4q" path="res://imgs/enemies/Rock/frame_0027.png" id="30_lcomp"]
-[ext_resource type="Texture2D" uid="uid://dn4yh1ykwewpn" path="res://imgs/enemies/Rock/frame_0028.png" id="31_c55gl"]
-[ext_resource type="Texture2D" uid="uid://cwhbwpnpdl10i" path="res://imgs/enemies/Rock/frame_0029.png" id="32_is5pm"]
-[ext_resource type="Texture2D" uid="uid://dkwceag4x7h56" path="res://imgs/enemies/Rock/frame_0030.png" id="33_cfmjf"]
-[ext_resource type="Texture2D" uid="uid://k7f3w6h2otx7" path="res://imgs/enemies/Rock/frame_0031.png" id="34_kkjti"]
-[ext_resource type="Texture2D" uid="uid://cge8b6uwwr342" path="res://imgs/enemies/Rock/frame_0032.png" id="35_0g84s"]
-[ext_resource type="Texture2D" uid="uid://clb2uow42li60" path="res://imgs/enemies/Rock/frame_0033.png" id="36_xy3mx"]
-[ext_resource type="Texture2D" uid="uid://cyuabu1ore22q" path="res://imgs/enemies/Rock/frame_0034.png" id="37_fgl8f"]
-[ext_resource type="Texture2D" uid="uid://dlv4f6bcgbyb8" path="res://imgs/enemies/Rock/frame_0035.png" id="38_6g214"]
-[ext_resource type="Texture2D" uid="uid://dqedrgbvgyb81" path="res://imgs/enemies/Rock/frame_0036.png" id="39_nhwqh"]
-[ext_resource type="Texture2D" uid="uid://k74oaj6tfutd" path="res://imgs/enemies/Rock/frame_0037.png" id="40_d8wmq"]
-[ext_resource type="Texture2D" uid="uid://dpt1pi8r0lshj" path="res://imgs/enemies/Rock/frame_0038.png" id="41_njt8w"]
-[ext_resource type="Texture2D" uid="uid://c6miaol1kanxr" path="res://imgs/enemies/Rock/frame_0039.png" id="42_3hndf"]
-[ext_resource type="Texture2D" uid="uid://yaxc0xrl3qgw" path="res://imgs/enemies/Rock/frame_0040.png" id="43_7n7ii"]
-[ext_resource type="Texture2D" uid="uid://c061k2gelumae" path="res://imgs/enemies/Rock/frame_0041.png" id="44_8fnmk"]
+[ext_resource type="Texture2D" uid="uid://bfnql5jjqy65c" path="res://imgs/enemies/rock/blue/frame_0004.png" id="8_jv1xh"]
+[ext_resource type="Texture2D" uid="uid://wn1jt6aci8pf" path="res://imgs/enemies/rock/blue/frame_0005.png" id="9_g0koy"]
+[ext_resource type="Texture2D" uid="uid://bcqu6nidt1ja1" path="res://imgs/enemies/rock/red/frame_0006.png" id="9_ovj50"]
+[ext_resource type="Texture2D" uid="uid://ds1pnb3uymy4d" path="res://imgs/enemies/rock/red/frame_0007.png" id="10_itxhp"]
+[ext_resource type="Texture2D" uid="uid://cfutd06rhxues" path="res://imgs/enemies/rock/blue/frame_0006.png" id="10_wskj6"]
+[ext_resource type="Texture2D" uid="uid://bo3bemb15hxbp" path="res://imgs/enemies/rock/red/frame_0008.png" id="11_cbi1q"]
+[ext_resource type="Texture2D" uid="uid://47582f0r6iq7" path="res://imgs/enemies/rock/blue/frame_0007.png" id="11_viexu"]
+[ext_resource type="Texture2D" uid="uid://bpbiwtvlslray" path="res://imgs/enemies/rock/red/frame_0009.png" id="12_6mvfi"]
+[ext_resource type="Texture2D" uid="uid://dxpgj60kpih36" path="res://imgs/enemies/rock/blue/frame_0008.png" id="12_jp4dc"]
+[ext_resource type="Texture2D" uid="uid://bmyrx0nnp3e5a" path="res://imgs/enemies/rock/red/frame_0010.png" id="13_8xbfl"]
+[ext_resource type="Texture2D" uid="uid://c7lj51yt78bi7" path="res://imgs/enemies/rock/blue/frame_0009.png" id="13_458xj"]
+[ext_resource type="Texture2D" uid="uid://kh02sa4r7ft7" path="res://imgs/enemies/rock/blue/frame_0010.png" id="14_085xx"]
+[ext_resource type="Texture2D" uid="uid://b1suttujnupo5" path="res://imgs/enemies/rock/red/frame_0011.png" id="14_ttuui"]
+[ext_resource type="Texture2D" uid="uid://bumkfivoue7t4" path="res://imgs/enemies/rock/red/frame_0012.png" id="15_52gyw"]
+[ext_resource type="Texture2D" uid="uid://btg7b3l4dh1l8" path="res://imgs/enemies/rock/blue/frame_0011.png" id="15_hkptk"]
+[ext_resource type="Texture2D" uid="uid://mgei6t41ngoc" path="res://imgs/enemies/rock/red/frame_0013.png" id="16_7j8n2"]
+[ext_resource type="Texture2D" uid="uid://6mtkmu730676" path="res://imgs/enemies/rock/blue/frame_0012.png" id="16_ptr6i"]
+[ext_resource type="Texture2D" uid="uid://di1quwwh4aal" path="res://imgs/enemies/rock/blue/frame_0013.png" id="17_7rsho"]
+[ext_resource type="Texture2D" uid="uid://1kud1weg6rga" path="res://imgs/enemies/rock/red/frame_0014.png" id="17_n4fab"]
+[ext_resource type="Texture2D" uid="uid://boiu1yqpu7glm" path="res://imgs/enemies/rock/blue/frame_0014.png" id="18_4i8p7"]
+[ext_resource type="Texture2D" uid="uid://b0btarb5x7qcs" path="res://imgs/enemies/rock/red/frame_0015.png" id="18_j3xjm"]
+[ext_resource type="Texture2D" uid="uid://bhcal74ggb2hs" path="res://imgs/enemies/rock/red/frame_0016.png" id="19_ngnk1"]
+[ext_resource type="Texture2D" uid="uid://dfi1ll3rh3t1" path="res://imgs/enemies/rock/blue/frame_0015.png" id="19_xpd3u"]
+[ext_resource type="Texture2D" uid="uid://cb836nycth7g1" path="res://imgs/enemies/rock/red/frame_0017.png" id="20_k7y8g"]
+[ext_resource type="Texture2D" uid="uid://cci6biitud8ss" path="res://imgs/enemies/rock/blue/frame_0016.png" id="20_q7yi8"]
+[ext_resource type="Texture2D" uid="uid://d1l6xssgjpv7f" path="res://imgs/enemies/rock/red/frame_0018.png" id="21_3owqy"]
+[ext_resource type="Texture2D" uid="uid://bi4jtp2ig6ghm" path="res://imgs/enemies/rock/blue/frame_0017.png" id="21_35d6k"]
+[ext_resource type="Texture2D" uid="uid://dmdowgbr3vokp" path="res://imgs/enemies/rock/blue/frame_0018.png" id="22_nk4hw"]
+[ext_resource type="Texture2D" uid="uid://d3p8s33ji42gf" path="res://imgs/enemies/rock/red/frame_0019.png" id="22_numdc"]
+[ext_resource type="Texture2D" uid="uid://bf6y8krgb5y41" path="res://imgs/enemies/rock/blue/frame_0019.png" id="23_cuaso"]
+[ext_resource type="Texture2D" uid="uid://xn4knuciksmu" path="res://imgs/enemies/rock/red/frame_0020.png" id="23_qswaq"]
+[ext_resource type="Texture2D" uid="uid://d236kj7ccgu50" path="res://imgs/enemies/rock/blue/frame_0020.png" id="24_2s5h4"]
+[ext_resource type="Texture2D" uid="uid://54koiyeq1fac" path="res://imgs/enemies/rock/red/frame_0021.png" id="24_f1qi0"]
+[ext_resource type="Texture2D" uid="uid://dpjqrevac6hhl" path="res://imgs/enemies/rock/red/frame_0022.png" id="25_lnpaf"]
+[ext_resource type="Texture2D" uid="uid://dhm7bldpgpn22" path="res://imgs/enemies/rock/blue/frame_0021.png" id="25_xr4tl"]
+[ext_resource type="Texture2D" uid="uid://bqwbhidscyc2" path="res://imgs/enemies/rock/blue/frame_0022.png" id="26_eice5"]
+[ext_resource type="Texture2D" uid="uid://lidulpft3wlt" path="res://imgs/enemies/rock/red/frame_0023.png" id="26_mkgou"]
+[ext_resource type="Texture2D" uid="uid://dd2cj715tyfei" path="res://imgs/enemies/rock/blue/frame_0023.png" id="27_nlpe2"]
+[ext_resource type="Texture2D" uid="uid://ckxinsweshq00" path="res://imgs/enemies/rock/red/frame_0024.png" id="27_u120b"]
+[ext_resource type="Texture2D" uid="uid://beneir8smf8aa" path="res://imgs/enemies/rock/blue/frame_0024.png" id="28_gmkv3"]
+[ext_resource type="Texture2D" uid="uid://bbdjdyljb3m66" path="res://imgs/enemies/rock/red/frame_0025.png" id="28_h4v8u"]
+[ext_resource type="Texture2D" uid="uid://byuusdnpivswy" path="res://imgs/enemies/rock/blue/frame_0025.png" id="29_6og7b"]
+[ext_resource type="Texture2D" uid="uid://cm2w1t217l3qc" path="res://imgs/enemies/rock/red/frame_0026.png" id="29_vnsro"]
+[ext_resource type="Texture2D" uid="uid://mbjri6fn28te" path="res://imgs/enemies/rock/blue/frame_0026.png" id="30_l35e7"]
+[ext_resource type="Texture2D" uid="uid://b2mxc618cxn4q" path="res://imgs/enemies/rock/red/frame_0027.png" id="30_lcomp"]
+[ext_resource type="Texture2D" uid="uid://dn4yh1ykwewpn" path="res://imgs/enemies/rock/red/frame_0028.png" id="31_c55gl"]
+[ext_resource type="Texture2D" uid="uid://5y5xbiuhppxt" path="res://imgs/enemies/rock/blue/frame_0027.png" id="31_ndsqc"]
+[ext_resource type="Texture2D" uid="uid://yotguidmbc08" path="res://imgs/enemies/rock/blue/frame_0028.png" id="32_7jyhc"]
+[ext_resource type="Texture2D" uid="uid://cwhbwpnpdl10i" path="res://imgs/enemies/rock/red/frame_0029.png" id="32_is5pm"]
+[ext_resource type="Texture2D" uid="uid://dkwceag4x7h56" path="res://imgs/enemies/rock/red/frame_0030.png" id="33_cfmjf"]
+[ext_resource type="Texture2D" uid="uid://cw4hr26evgugp" path="res://imgs/enemies/rock/blue/frame_0029.png" id="33_dsfsr"]
+[ext_resource type="Texture2D" uid="uid://b0qvpiy3jjurq" path="res://imgs/enemies/rock/blue/frame_0030.png" id="34_byioa"]
+[ext_resource type="Texture2D" uid="uid://k7f3w6h2otx7" path="res://imgs/enemies/rock/red/frame_0031.png" id="34_kkjti"]
+[ext_resource type="Texture2D" uid="uid://cge8b6uwwr342" path="res://imgs/enemies/rock/red/frame_0032.png" id="35_0g84s"]
+[ext_resource type="Texture2D" uid="uid://26vakxpnp30q" path="res://imgs/enemies/rock/blue/frame_0031.png" id="35_w4qx4"]
+[ext_resource type="Texture2D" uid="uid://uq635x5nf6fi" path="res://imgs/enemies/rock/blue/frame_0032.png" id="36_5xx2t"]
+[ext_resource type="Texture2D" uid="uid://clb2uow42li60" path="res://imgs/enemies/rock/red/frame_0033.png" id="36_xy3mx"]
+[ext_resource type="Texture2D" uid="uid://cyuabu1ore22q" path="res://imgs/enemies/rock/red/frame_0034.png" id="37_fgl8f"]
+[ext_resource type="Texture2D" uid="uid://djdtbilkaqaso" path="res://imgs/enemies/rock/blue/frame_0033.png" id="37_tbla3"]
+[ext_resource type="Texture2D" uid="uid://dlv4f6bcgbyb8" path="res://imgs/enemies/rock/red/frame_0035.png" id="38_6g214"]
+[ext_resource type="Texture2D" uid="uid://c6qohxibyteth" path="res://imgs/enemies/rock/blue/frame_0034.png" id="38_f88wo"]
+[ext_resource type="Texture2D" uid="uid://be5nkhnqulp02" path="res://imgs/enemies/rock/blue/frame_0035.png" id="39_j8p25"]
+[ext_resource type="Texture2D" uid="uid://dqedrgbvgyb81" path="res://imgs/enemies/rock/red/frame_0036.png" id="39_nhwqh"]
+[ext_resource type="Texture2D" uid="uid://k74oaj6tfutd" path="res://imgs/enemies/rock/red/frame_0037.png" id="40_d8wmq"]
+[ext_resource type="Texture2D" uid="uid://lqrp0nkxc4bh" path="res://imgs/enemies/rock/blue/frame_0036.png" id="40_dab5m"]
+[ext_resource type="Texture2D" uid="uid://cj76hww5xipsu" path="res://imgs/enemies/rock/blue/frame_0037.png" id="41_4qewn"]
+[ext_resource type="Texture2D" uid="uid://dpt1pi8r0lshj" path="res://imgs/enemies/rock/red/frame_0038.png" id="41_njt8w"]
+[ext_resource type="Texture2D" uid="uid://b1jjbyeuqikbi" path="res://imgs/enemies/rock/blue/frame_0038.png" id="42_2kf4a"]
+[ext_resource type="Texture2D" uid="uid://c6miaol1kanxr" path="res://imgs/enemies/rock/red/frame_0039.png" id="42_3hndf"]
+[ext_resource type="Texture2D" uid="uid://yaxc0xrl3qgw" path="res://imgs/enemies/rock/red/frame_0040.png" id="43_7n7ii"]
+[ext_resource type="Texture2D" uid="uid://osfya2iqj2ax" path="res://imgs/enemies/rock/blue/frame_0039.png" id="43_huup1"]
+[ext_resource type="Texture2D" uid="uid://3d7y7l22tegj" path="res://imgs/enemies/rock/blue/frame_0040.png" id="44_7lkf2"]
+[ext_resource type="Texture2D" uid="uid://c061k2gelumae" path="res://imgs/enemies/rock/red/frame_0041.png" id="44_8fnmk"]
+[ext_resource type="Texture2D" uid="uid://butre4vcnk7ux" path="res://imgs/enemies/rock/blue/frame_0041.png" id="45_6uttv"]
 [ext_resource type="Script" uid="uid://doq8etj8lyb57" path="res://scripts/components/animation_component.gd" id="46_868pk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_868pk"]
@@ -62,6 +103,137 @@ shader_parameter/ColorParameter = Color(1, 1, 1, 1)
 [sub_resource type="SpriteFrames" id="SpriteFrames_7nnvq"]
 resource_local_to_scene = true
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fnina")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xauwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cqs6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_87yv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jv1xh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g0koy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wskj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_viexu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jp4dc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_458xj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_085xx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_hkptk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ptr6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7rsho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_4i8p7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xpd3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_q7yi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_35d6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_nk4hw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_cuaso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_2s5h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xr4tl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_eice5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_nlpe2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_gmkv3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_6og7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_l35e7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ndsqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_7jyhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_dsfsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_byioa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_w4qx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_5xx2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_tbla3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_f88wo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_j8p25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_dab5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_4qewn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_2kf4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_huup1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_7lkf2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_6uttv")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_e0wct")
@@ -190,7 +362,7 @@ animations = [{
 "texture": ExtResource("44_8fnmk")
 }],
 "loop": true,
-"name": &"default",
+"name": &"red",
 "speed": 5.0
 }]
 
@@ -238,6 +410,15 @@ _data = {
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("AnimatedSprite2D:flip_h")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="Rock" type="CharacterBody2D"]
 z_index = 2
@@ -246,23 +427,24 @@ scale = Vector2(0.375, 0.375)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_1di36")
-texture = ExtResource("2_mek2u")
 hp = 90.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_868pk")
 sprite_frames = SubResource("SpriteFrames_7nnvq")
+animation = &"blue"
+frame_progress = 0.26727
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(10, 41)
 shape = SubResource("CircleShape2D_ik6fu")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(10, 41)
 shape = SubResource("CircleShape2D_ik6fu")
 

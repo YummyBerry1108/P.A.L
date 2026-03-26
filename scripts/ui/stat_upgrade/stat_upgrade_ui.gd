@@ -46,9 +46,6 @@ func show_upgrades() -> void:
 func _on_card_selected(upgrade_id: String) -> void:
 	hide()
 	upgrade_timer.stop()
-	#for child in container.get_children():
-		#child.queue_free()
-
 	GameManager.submit_upgrade.rpc_id(1)
 
 func _on_timer_timeout() -> void:
