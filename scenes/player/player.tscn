@@ -200,7 +200,7 @@ script = ExtResource("7_0owmy")
 [node name="IndicatorManager" type="Node" parent="."]
 script = ExtResource("26_uniwh")
 
-[node name="ScreenNotifier" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="ScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(5, -38)
 scale = Vector2(10.1, 6.5)
 

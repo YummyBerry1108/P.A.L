@@ -108,6 +108,7 @@ func show_upgrades() -> void:
 func _on_upgrade_selected() -> void:
 	upgrade_point -= 1
 	if upgrade_point == 0:
+		upgrade_timer.stop()
 		hide()
 		_end_upgrade()
 
