@@ -32,13 +32,12 @@ var name_to_difficulty: Dictionary[String, float] = {
 
 func _ready() -> void:
 	if not multiplayer.is_server():
+		set_process(false)
 		return
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 
 func _process(delta: float) -> void:
-	if not multiplayer.is_server():
-		return
 	if current_time < max_game_time:
 		current_time += delta
 		update_spawner_difficulty()
@@ -92,7 +91,6 @@ func spawn_enemy() -> void:
 	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
 	enemy_container.add_child(new_enemy, true)
 
-
 ## get tilemap coords
 func _get_player_coords() -> Array[Vector2i]:
 	var coords: Array[Vector2i] = []
@@ -133,6 +131,7 @@ func _check_coord_close_player(expect_coord: Vector2i, player_coords) -> bool:
 			return true
 	return false
 
+## choose single coord by random and weight
 func _choose_coord() -> Vector2i:
 	var rand_num: int = randi_range(0, total_weight)
 	var curr_coord: Vector2i
