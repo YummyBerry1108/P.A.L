@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dvcahiono6yix"]
+[gd_scene load_steps=34 format=3 uid="uid://dvcahiono6yix"]
 
 [ext_resource type="Script" uid="uid://dfhwqa0wy4jhx" path="res://scripts/player/player.gd" id="1_0ax77"]
 [ext_resource type="Texture2D" uid="uid://cqyb8lfggjfvl" path="res://imgs/player/frame_0000.png" id="2_ugbui"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dtxxn1mwmuan4" path="res://imgs/ui/stat_upgrade/upgrade_card_blue.png" id="17_28m0y"]
 [ext_resource type="Texture2D" uid="uid://b5e75bns2pp48" path="res://imgs/ui/stat_upgrade/upgrade_card_yellow.png" id="19_uniwh"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 resource_local_to_scene = true
@@ -195,6 +196,13 @@ metadata/_custom_type_script = "uid://5olw8pxlwuj"
 
 [node name="Projectiles" type="Node" parent="."]
 script = ExtResource("7_0owmy")
+
+[node name="IndicatorManager" type="Node" parent="."]
+script = ExtResource("26_uniwh")
+
+[node name="ScreenNotifier" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(5, -38)
+scale = Vector2(10.1, 6.5)
 
 [node name="DisplayName" type="Label" parent="."]
 anchors_preset = 5

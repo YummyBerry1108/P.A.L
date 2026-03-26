@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2bj00erjhsw5"]
+
+[ext_resource type="Texture2D" uid="uid://bl8u4vb3uh44o" path="res://imgs/ui/right-arrow.png" id="1_bjboy"]
+
+[node name="PlayerIndicator" type="Node2D"]
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_bjboy")
+offset = Vector2(200, 0)

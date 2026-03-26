@@ -37,7 +37,7 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 	
-	current_time = 1800
+	current_time = 0
 	for i in range(10):
 		update_spawner_difficulty()
 
