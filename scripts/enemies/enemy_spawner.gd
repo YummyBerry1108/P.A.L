@@ -14,6 +14,7 @@ extends Node
 const RADIUS = 40
 
 var current_time: float = 0.0
+var player_count: int = 0
 var total_weight: int = 0
 var available_coords: Dictionary = {}
 
@@ -30,13 +31,18 @@ var name_to_difficulty: Dictionary[String, float] = {
 }
 
 func _ready() -> void:
+	if not multiplayer.is_server():
+		return
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start(base_spawn_interval)
 
 func _process(delta: float) -> void:
+	if not multiplayer.is_server():
+		return
 	if current_time < max_game_time:
 		current_time += delta
 		update_spawner_difficulty()
+	player_count = get_tree().get_node_count_in_group("players")
 	#print(_get_difficulty())
 
 func update_spawner_difficulty() -> void:
@@ -49,7 +55,7 @@ func update_spawner_difficulty() -> void:
 			spawn_timer.start(spawn_timer.wait_time)
 
 func _on_spawn_timer_timeout() -> void:
-	var spawn_count: int = base_enemy_count + int(_get_spawn_amount())
+	var spawn_count: int = base_enemy_count + int(_get_spawn_amount() + player_count * 0.5)
 	
 	for i in range(spawn_count):
 		spawn_enemy()
@@ -81,7 +87,7 @@ func spawn_enemy() -> void:
 	
 	var enemy_node: PackedScene = name_to_enemy[selected_enemy]
 	var new_enemy: Enemy = enemy_node.instantiate()
-	new_enemy.multiplier = max(1, difficulty / 2)
+	new_enemy.multiplier = max(1, difficulty / 2 + player_count * 0.5)
 	new_enemy.global_position = map.map_to_local(res_coord)
 	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
 	enemy_container.add_child(new_enemy, true)
