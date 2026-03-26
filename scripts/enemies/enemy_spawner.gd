@@ -98,7 +98,6 @@ func spawn_enemy() -> void:
 		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
 		var new_enemy: Enemy = enemy_node.instantiate()
 		new_enemy.multiplier = max(1, difficulty / 2)
-		new_enemy.speed_multiplier_ref = _get_speed_multiplier()
 		new_enemy.global_position = map.map_to_local(res_coord)
 		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
 		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
@@ -113,14 +112,7 @@ func check_spawn_coord() -> bool:
 	var player_coords: Array[Vector2i] = _get_player_coords()
 	if player_coords.is_empty(): return false
 	_record_available_coord(player_coords)
-	var res_coord: Vector2i = _choose_coord()
-	
-	var enemy_node: PackedScene = name_to_enemy[selected_enemy]
-	var new_enemy: Enemy = enemy_node.instantiate()
-	new_enemy.multiplier = max(1, difficulty / 2 + player_count * 0.5)
-	new_enemy.global_position = map.map_to_local(res_coord)
-	new_enemy._on_enemy_died.connect(owner._on_enemy_died)
-	enemy_container.add_child(new_enemy, true)
+	return true
 
 ## get tilemap coords
 func _get_player_coords() -> Array[Vector2i]:
