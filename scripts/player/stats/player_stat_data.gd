@@ -14,6 +14,7 @@ const SPEED: float = 300.0
 		owner.max_health_changed.emit(value)
 
 @export var hp: float = 100.0
+@export var heal_amount: float = 2.0
 @export var speed_mutiplier: float = 1.0
 
 func _on_stat_upgrade_received(upgrade_id: String) -> void:

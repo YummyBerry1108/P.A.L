@@ -4,6 +4,7 @@ extends Enemy
 
 @onready var state_timer: Timer = $StateTimer
 
+@export var detection_range: int = 500
 @export var dash_speed: float = 900.0
 @export var chase_duration: float = 0.5
 @export var target_duration: float = 0.5
@@ -26,4 +27,6 @@ func _set_up_variant_stat() -> void:
 			lock_duration = 0.1
 			target_duration = 0.15
 			damage *= multiplier
-			speed *= player_speed_ref/speed
+			detection_range = 600
+			speed *= 1.5
+			#dash_speed *= speed_multiplier_ref

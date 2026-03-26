@@ -13,4 +13,4 @@ func _set_up_variant_stat() -> void:
 			hp *= multiplier * 10.0
 			animated_sprite_2d.play("blue")
 			damage *= multiplier * 2
-			speed *= player_speed_ref/speed
+			speed *= speed_multiplier_ref

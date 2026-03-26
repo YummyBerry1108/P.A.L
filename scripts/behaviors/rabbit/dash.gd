@@ -1,12 +1,11 @@
 extends Behavior
 
-@export var duration: float = 1
 var dash_start_point: Vector2
 var dash_finish_point: Vector2
 var time_left: float = 0.0
 var fire_trail: FireTrail
 
-var projectile_container: Node2D	 
+var projectile_container: Node2D
 
 func _enter_behavior() -> void:
 	spawn_fire_trail.rpc()

@@ -15,7 +15,7 @@ var flip: bool = true
 
 func _ready():
 	collision_shape = CollisionPolygon2D.new()
-	hitbox.add_child(collision_shape)
+	hitbox.add_child(collision_shape, true)
 	
 	get_tree().create_timer(duration).timeout.connect(func(): queue_free())
 

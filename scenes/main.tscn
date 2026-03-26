@@ -2868,8 +2868,8 @@ point_count = 9
 metadata/_snap_count = 2
 
 [sub_resource type="Curve" id="Curve_jkv2x"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502008, 0.0908359), 0.363082, 0.363082, 0, 0, Vector2(0.60241, 0.32074), -0.526085, -0.526085, 0, 0, Vector2(0.75502, 0.404341), -0.488658, -0.488658, 0, 0, Vector2(0.891566, 0.312287), 0.0, 0.0, 0, 0, Vector2(1, 0.667235), 0.0, 0.0, 0, 0]
-point_count = 6
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.246269, 0.269663), -0.26886, -0.26886, 0, 0, Vector2(0.537313, 0.505618), -0.488658, -0.488658, 0, 0, Vector2(0.891566, 0.312287), 0.0, 0.0, 0, 0, Vector2(1, 0.667235), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_tipki")

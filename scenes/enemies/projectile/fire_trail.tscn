@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhu3q46x60l8i"]
+[gd_scene load_steps=11 format=3 uid="uid://bhu3q46x60l8i"]
 
 [ext_resource type="Texture2D" uid="uid://bllarrquxu0b7" path="res://imgs/enemies/Rabbit/red/fire_trail/red_frame_2.png" id="2_0ib60"]
 [ext_resource type="Script" uid="uid://b4ovi23suhp3p" path="res://scripts/enemies/projectiles/fire_trail.gd" id="2_b0n0u"]
@@ -60,6 +60,11 @@ _data = {
 &"fire_flip_red": SubResource("Animation_b0n0u")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tjdeo"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="FireTrail" type="Line2D"]
 width = 300.0
 texture = ExtResource("2_0ib60")
@@ -77,3 +82,6 @@ libraries = {
 }
 autoplay = "fire_flip_red"
 speed_scale = 0.5
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_tjdeo")

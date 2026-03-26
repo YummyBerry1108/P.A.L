@@ -9,7 +9,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var projectiles: Node = $Projectiles
-@onready var display_name: Label = $DisplayName 
+@onready var display_name: Label = $DisplayName
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_stat: PlayerStatData = $PlayerStat
@@ -45,6 +45,14 @@ func _ready() -> void:
 		display_name.hide()
 		$Camera2D.make_current()
 		
+	if multiplayer.is_server():
+		_apply_healing_effect()
+
+func _apply_healing_effect() -> void:
+	var new_inf_heal_effect = INFHealEffect.new()
+	new_inf_heal_effect.duration = 1.0
+	effect_component.add_effect(new_inf_heal_effect)
+
 func _process(delta: float) -> void:
 	if is_alive:
 		pull_skills()
@@ -96,6 +104,16 @@ func take_damage(damage: float) -> void:
 	health_changed.emit(player_stat.hp)
 	is_invincible = true
 	invincibility_timer.start()
+
+@rpc("any_peer", "call_local")
+func heal(amount: float) -> void:
+	if not is_alive:
+		return
+	player_stat.hp += amount
+	if player_stat.hp > player_stat.max_hp:
+		player_stat.hp = player_stat.max_hp
+	
+	health_changed.emit(player_stat.hp)
 
 func die() -> void:
 	is_alive = false
