@@ -14,6 +14,10 @@ func _ready() -> void:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not multiplayer.is_server(): return
 	var projectile = area.owner as Projectile
+	process_projectile_hit(projectile)
+	
+func process_projectile_hit(projectile: Projectile) -> void:
+	if not multiplayer.is_server(): return
 	var critical_hit: bool = false
 	var result = 0.0
 	
@@ -32,7 +36,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 @rpc("any_peer", "call_local")
 func take_damage(projectile_damage: float, critical_hit: bool) -> void:
 	emit_signal("on_hit", projectile_damage)
-	
+		
 	DamageNumber.display_number(projectile_damage, damage_number_position.global_position, critical_hit)
 	actor.hp -= projectile_damage
 	actor.hit_flash_animation_player.play("hit_flash")

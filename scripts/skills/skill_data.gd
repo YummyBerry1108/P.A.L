@@ -6,6 +6,7 @@ class_name SkillData extends Node
 @export var disable: bool = false
 @export var projectile_type: String = "Normal"
 @export var skill_name: String = "NULL"
+@export var shooter_id: int = 0
 
 @export_category("ShootingSetting")
 @export var scale: float = 0.30
@@ -19,6 +20,7 @@ class_name SkillData extends Node
 
 @export_category("ProjectileSetting")
 @export var projectile_damage: float = 10.0
+@export var cooldown: float = 1.0
 @export var status_effects: Array[StatusEffectRes] = []
 @export_group("CriticalHitSetting")
 @export_range(0.0, 1.0, 0.01) var crit_chance: float = 0
