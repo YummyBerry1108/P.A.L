@@ -21,7 +21,7 @@ func cooldown() -> void:
 func fire_in_different_rotations(skill_name: String) -> void:
 	var skill_data: SkillData = owner.skills[skill_name]
 	var rotations: Array[float] = calculate_directions(owner.global_position, owner.get_global_mouse_position(), skill_data.projectile_count, min(skill_data.arc + skill_data.arc_increment * skill_data.projectile_count, 360))
-	#print(rotations)q
+	#print(rotations)
 	for rot in rotations:
 		#print("ROT : ", rot)
 		create_shooting_helper.rpc(skill_name, rot)
@@ -32,7 +32,6 @@ func create_shooting_helper(skill_name: String, rot: float) -> void:
 	var skill_data: SkillData = owner.skills[skill_name]
 	var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
 	
-	skill_data.shooter_id = multiplayer.get_remote_sender_id()
 	add_child(shooting_helper, true)
 	shooting_helper.set_shoot_timer(0.1, skill_data, rot, skill_scene_name)
 

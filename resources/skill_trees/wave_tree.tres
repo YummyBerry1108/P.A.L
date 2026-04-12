@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillTreeData" load_steps=8 format=3 uid="uid://bfyyyftsg8l5q"]
+
+[ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_jn3lg"]
+[ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_gdbsg"]
+[ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_ib5mu"]
+[ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_1qhmk"]
+
+[sub_resource type="Resource" id="Resource_bpyiv"]
+script = ExtResource("4_1qhmk")
+stat_name = "scale"
+operation = 1
+value = 1.1
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_xuk42"]
+script = ExtResource("3_ib5mu")
+skill_id = "wave_scale+"
+upgrade_effects = Array[ExtResource("4_1qhmk")]([SubResource("Resource_bpyiv")])
+next_node_uids = Array[String]([])
+skill_name = "未命名技能"
+skill_description = ""
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_58p64"]
+script = ExtResource("2_gdbsg")
+skill_nodes = Array[ExtResource("3_ib5mu")]([SubResource("Resource_xuk42")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[resource]
+script = ExtResource("1_jn3lg")
+skill_name = "wave"
+skill_paths = Array[ExtResource("2_gdbsg")]([SubResource("Resource_58p64")])
+metadata/_custom_type_script = "uid://bwxmarxo3thqj"

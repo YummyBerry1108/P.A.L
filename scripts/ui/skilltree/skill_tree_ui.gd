@@ -17,7 +17,7 @@ extends Control
 
 var manager_ref: SkillTreeManager
 var upgrade_point: int = 0
-var skill_icons: Array[Resource]
+var skill_icons: Dictionary
 var curr_idx: int = 0
 
 func _ready() -> void:
@@ -25,7 +25,7 @@ func _ready() -> void:
 	_put_icons()
 	hide()
 	tooltip_panel.hide()
-	texture_rect.texture = skill_icons[curr_idx]
+	texture_rect.texture = skill_icons["snowball"]
 	
 func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
@@ -48,7 +48,7 @@ func _put_icons() -> void:
 		for sorted_name in file_names:
 			#print("Found file: " + sorted_name)
 			var icon: Resource = load("res://imgs/skills/" + sorted_name)
-			skill_icons.append(icon)
+			skill_icons[sorted_name.split(".")[0]] = icon
 	else:
 		print("An error occurred when trying to access the path.")
 
@@ -60,6 +60,8 @@ func _on_manager_ready(manager: SkillTreeManager) -> void:
 func _generate_ui_from_data() -> void:
 	if not manager_ref: return
 	var skill_tree_data: SkillTreeData = manager_ref.skill_trees[curr_idx]
+	
+	texture_rect.texture = skill_icons[skill_tree_data.skill_name]
 	
 	for container in path_containers:
 		for child in container.get_children():
@@ -83,12 +85,10 @@ func _generate_ui_from_data() -> void:
 
 func next_skill() -> void:
 	curr_idx = (curr_idx + 1) % manager_ref.skill_trees.size()
-	texture_rect.texture = skill_icons[curr_idx]
 	_generate_ui_from_data()
 
 func previous_skill() -> void:
 	curr_idx = (curr_idx - 1 + manager_ref.skill_trees.size()) % manager_ref.skill_trees.size()
-	texture_rect.texture = skill_icons[curr_idx]
 	_generate_ui_from_data()
 	
 ## Manage Upgrade and Multiplayer Logic

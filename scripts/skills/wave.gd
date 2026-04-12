@@ -1,13 +1,13 @@
 extends Projectile
+
 "Note: the hitbox of weapon close the Monitorable property"
-@onready var cooldown_timer: Timer = $CooldownTimer
-
-
 """
 環繞之浪：
 1.攻擊：在周圍形成圓形的緩速打擊傷害(傷害比較低)
 2.升級路線：圓形範圍增加、緩速量增加、傷害提升並且吸血(傷害增加量也比較低)
 """
+
+@onready var cooldown_timer: Timer = $CooldownTimer
 
 var enemys: Dictionary # record enemy in the hitbox of this weapon
 
@@ -37,12 +37,8 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area == null: return
-	print(str(area) + " Enter wave!")
-	print("Owner is " + str(area.owner))
 	enemys[area.owner] = true
 	
 func _on_hitbox_area_exited(area: Area2D) -> void:
 	if area == null: return
-	print(str(area) + " Exit wave!")
-	print("Owner is " + str(area.owner))
 	enemys.erase(area.owner)
