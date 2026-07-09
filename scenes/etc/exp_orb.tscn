@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b78bhpq31lil4"]
+[gd_scene format=3 uid="uid://b78bhpq31lil4"]
 
 [ext_resource type="Script" uid="uid://dgqqs5ri3b6ep" path="res://scripts/etc/exp_orb.gd" id="1_5nfcg"]
 [ext_resource type="Texture2D" uid="uid://c4cbyw1w1iiwm" path="res://imgs/etc/exp_orb.png" id="2_iajgw"]
@@ -16,24 +16,24 @@ properties/1/path = NodePath(".:scale")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="ExpOrb" type="CharacterBody2D"]
+[node name="ExpOrb" type="CharacterBody2D" unique_id=1725801729]
 script = ExtResource("1_5nfcg")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=51004258]
 texture = ExtResource("2_iajgw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650706467]
 shape = SubResource("CircleShape2D_5nfcg")
 disabled = true
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." unique_id=272358646]
 collision_layer = 256
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=103838184]
 shape = SubResource("CircleShape2D_7v8t4")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=680984485]
 replication_config = SubResource("SceneReplicationConfig_5nfcg")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -92,10 +92,6 @@ func previous_skill() -> void:
 	_generate_ui_from_data()
 	
 ## Manage Upgrade and Multiplayer Logic
-func _on_level_up() -> void:
-	GameManager.change_pause_state.rpc(true)
-	show_upgrades.rpc()
-	
 @rpc("authority", "call_local", "reliable")
 func show_upgrades() -> void:
 	if not GameManager.local_player.is_alive:

@@ -93,17 +93,19 @@ func spawn_enemy() -> void:
 	var selected_enemy: String = init_parameters[0]
 	var difficulty: float = init_parameters[1]
 	
-	if check_spawn_coord():
-		var res_coord: Vector2i = _choose_coord()
-		var enemy_node: PackedScene = name_to_enemy[selected_enemy]
-		var new_enemy: Enemy = enemy_node.instantiate()
-		new_enemy.multiplier = max(1, difficulty / 2)
-		new_enemy.global_position = map.map_to_local(res_coord)
-		new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
-		new_enemy._on_enemy_died.connect(owner._on_enemy_died)
-		new_enemy._enemy_screen_update.connect(enemy_despawner.update_enemy_onscreen_rpc)
-		enemy_container.add_child(new_enemy, true)
-		enemy_despawner._change_despawn_timer.connect(new_enemy._change_despawn_timer_rpc)
+	if not check_spawn_coord():
+		return
+		
+	var res_coord: Vector2i = _choose_coord()
+	var enemy_node: PackedScene = name_to_enemy[selected_enemy]
+	var new_enemy: Enemy = enemy_node.instantiate()
+	new_enemy.multiplier = max(1, difficulty / 2)
+	new_enemy.global_position = map.map_to_local(res_coord)
+	new_enemy.variant_type = new_enemy.VariantType.normal if randf() > _get_elite_chance() else new_enemy.VariantType.elite
+	new_enemy._enemy_died.connect(owner._on_enemy_died)
+	new_enemy._enemy_screen_update.connect(enemy_despawner.update_enemy_onscreen_rpc)
+	enemy_container.add_child(new_enemy, true)
+	enemy_despawner._change_despawn_timer.connect(new_enemy._change_despawn_timer_rpc)
 	
 func check_spawn_coord() -> bool:
 	available_coords.clear()

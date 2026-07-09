@@ -15,8 +15,7 @@ var upgrades_ref: StatUpgradeManager
 func _ready() -> void:
 	UpgradeEventbus.local_stat_upgrade_ready.connect(_on_stat_upgrade_ready)
 	hide()
-
-
+	
 func _process(delta: float) -> void:
 	upgrade_timer_label.text = str(int(ceil(upgrade_timer.time_left)))
 
@@ -27,10 +26,6 @@ func _on_stat_upgrade_ready(stat_upgrade: StatUpgradeManager) -> void:
 		container.add_child(card)
 		card.upgrade_selected.connect(_on_card_selected)
 
-func _on_level_up() -> void:
-	GameManager.change_pause_state.rpc(true)
-	show_upgrades.rpc()
-	
 @rpc("authority", "call_local", "reliable")
 func show_upgrades() -> void:
 	if not GameManager.local_player.is_alive:
