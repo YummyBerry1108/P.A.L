@@ -3,7 +3,7 @@ class_name SkillTreeManager
 
 @export var actor: SkillData
 @export var curr_skill_tree_data: SkillTreeData
-var skill_trees: Array[SkillTreeData]
+@export var skill_trees: Array[SkillTreeData]
 var skill_id_to_name: Dictionary[String, String] # to know this upgrade under which skill
 
 var uid_to_node: Dictionary[String, SkillNodeData] = {}

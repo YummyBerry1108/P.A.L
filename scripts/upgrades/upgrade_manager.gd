@@ -42,6 +42,6 @@ func _level_up() -> void:
 
 func choose_upgrade_manager() -> void:
 	if level % 5 == 0 and level <= 25:
-		skill_upgrade_manager.show_upgrade()
+		skill_upgrade_manager.show_upgrades()
 	else:
 		stat_upgrade_manager.show_upgrades()

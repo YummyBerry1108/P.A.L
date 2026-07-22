@@ -1,8 +1,8 @@
 extends Node
 class_name SkillUpgradeManager
 
-func show_upgrade() -> void:
-	pass
+func show_upgrades() -> void:
+	UpgradeEventbus.show_skill_upgrades.emit()
 	
-func apply_upgrade() -> void:
+func apply_upgrades() -> void:
 	pass

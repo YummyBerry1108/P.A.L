@@ -22,6 +22,7 @@ var curr_idx: int = 0
 
 func _ready() -> void:
 	UpgradeEventbus.local_manager_ready.connect(_on_manager_ready)
+	UpgradeEventbus.show_skill_upgrades.connect(show_upgrades.rpc)
 	_put_icons()
 	hide()
 	tooltip_panel.hide()
