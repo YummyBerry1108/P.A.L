@@ -39,6 +39,7 @@ func _ready() -> void:
 	health_changed.connect(health_bar._set_health)
 	max_health_changed.connect(health_bar.init_health)
 	health_bar.init_health(player_stat.hp)
+	pull_skills()
 	
 	if is_multiplayer_authority():
 		health_bar.hide()
@@ -133,4 +134,5 @@ func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
 
 func pull_skills() -> void:
 	for child: SkillData in get_node("Skills").get_children():
+		child.shooter_id = get_multiplayer_authority()
 		skills[child.skill_name] = child

@@ -33,7 +33,7 @@ func create_shooting_helper(skill_name: String, rot: float) -> void:
 		push_warning("找不到技能資料: ", skill_name, "，略過本次生成。")
 		return
 	var skill_scene_name: String = "res://scenes/skills/" + skill_name + ".tscn"
-	var skill_data: SkillData = owner.skills[skill_name] 
+	var skill_data: SkillData = owner.skills[skill_name]
 	var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
 	
 	add_child(shooting_helper, true)

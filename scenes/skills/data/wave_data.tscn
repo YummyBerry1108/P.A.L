@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c6iveblpi8knb"]
+
+[ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="1_e63op"]
+
+[node name="WaveData" type="Node"]
+script = ExtResource("1_e63op")
+skill_name = "wave"
+firerate = 0.001
+crit_chance = 0.1
+metadata/_custom_type_script = "uid://bxtkkso1tmt8a"

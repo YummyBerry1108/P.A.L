@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/tachi_data.tscn" id="13_fcs02"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
+[ext_resource type="PackedScene" uid="uid://c6iveblpi8knb" path="res://scenes/skills/data/wave_data.tscn" id="21_iqsei"]
 [ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
@@ -156,6 +157,8 @@ knockback_force = 250.0
 
 [node name="TachiData" parent="Skills" unique_id=1047118177 instance=ExtResource("13_fcs02")]
 firerate = 1.0
+
+[node name="WaveData" parent="Skills" unique_id=406529094 instance=ExtResource("21_iqsei")]
 
 [node name="SkillTreeManager" type="Node" parent="." unique_id=1964937448]
 script = ExtResource("11_myrg7")
