@@ -22,5 +22,4 @@ func setup(data: StatUpgradeData) -> void:
 	var target_color: Color = StatUpgradeData.RARITY_COLORS[data.rarity]
 
 func _on_button_pressed() -> void:
-	UpgradeEventbus.stat_upgrade.emit(stat_id)
 	upgrade_selected.emit(stat_id)

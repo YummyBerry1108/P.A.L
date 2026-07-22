@@ -21,7 +21,7 @@ func change_pause_state(state: bool) -> void:
 
 ## Check how many player have upgraded
 @rpc("any_peer", "call_local", "reliable")
-func submit_upgrade() -> void:
+func choosed_upgrade() -> void:
 	if not multiplayer.is_server():
 		return
 		

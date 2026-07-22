@@ -12,6 +12,7 @@ extends Node2D
 @onready var multiplayer_enemy_spawner: MultiplayerSpawner = $MultiplayerEnemySpawner
 @onready var enemy_spawner: Node = $EnemySpawner
 @onready var enemy_despawner: Node = $EnemySpawner/EnemyDespawner
+@onready var upgrade_manager: UpgradeManager = $UpgradeManager
 
 # Server variable
 var player_amount: int = 0
@@ -84,7 +85,8 @@ func _level_up() -> void:
 	GameManager.change_pause_state.rpc(true)
 	ui.update_level_display(level)
 	ui.show_pause_waiting()
-	ui.show_upgrades_by_level(level)
+	upgrade_manager.level_up(level)
+	#ui.show_upgrades_by_level(level)
 
 func _on_player_spawned(player: Player) -> void:
 	if not player.is_multiplayer_authority():
