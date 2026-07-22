@@ -15,6 +15,7 @@ extends Node2D
 @onready var upgrade_manager: UpgradeManager = $UpgradeManager
 
 # Server variable
+var players_spawn_ready_count: int = 0
 var player_amount: int = 0
 var player_died_amount: int = 0
 var experience: int = 0
@@ -26,7 +27,6 @@ var is_timer_running: bool = true
 
 
 func _ready() -> void:
-	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 	Lobby.server_disconnected.connect(_on_server_disconnected)
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 	player_spawner.spawned.connect(_on_player_spawned)
@@ -37,6 +37,8 @@ func _ready() -> void:
 	
 	ui.update_experience_display(upgrade_manager.experience, upgrade_manager.experience_cap)
 	ui.update_level_display(upgrade_manager.level)
+	GameManager.change_pause_state(true)
+	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 
 func _process(delta: float) -> void:		
 	if is_timer_running:
@@ -74,6 +76,7 @@ func _on_player_spawned(player: Player) -> void:
 	ui.update_max_health_display(player.player_stat.hp)
 	enemy_despawner.add_player.rpc(player.name.to_int())
 	player.player_died.connect(enemy_despawner.remove_player_rpc)
+	_report_player_ready.rpc_id(1)
 		
 func _on_player_died(id: int) -> void:
 	if not multiplayer.is_server():
@@ -119,7 +122,22 @@ func game_over() -> void:
 	Lobby.return_to_lobby.rpc()
 	GameManager.is_game_start = false
 
-## Called only on the server.
+@rpc("any_peer", "call_local", "reliable")
+func _report_player_ready() -> void:
+	if not multiplayer.is_server():
+		return
+		
+	players_spawn_ready_count += 1
+	print("玩家 Ready 進度: %d/%d" % [players_spawn_ready_count, len(Lobby.players)])
+	if players_spawn_ready_count >= len(Lobby.players):
+		start_game.rpc()
+
+## Called in lobby.gd
+func spawn_players() -> void:
+	for player_id in Lobby.players:
+		player_amount += 1
+		_add_player_node(player_id) 
+		
 func _add_player_node(id: int) -> void:
 	var player: Player = player_scene.instantiate()
 	player.global_position = Vector2.ZERO
@@ -131,10 +149,9 @@ func _add_player_node(id: int) -> void:
 	if id == 1:
 		_on_player_spawned(player)
 
-## Called only on the server.
+@rpc("authority", "call_local", "reliable")
 func start_game() -> void:
 	print("Game Start!")
 	GameManager.is_game_start = true
-	for player_id in Lobby.players:
-		_add_player_node(player_id) 
-		player_amount += 1
+	GameManager.change_pause_state(false)
+	

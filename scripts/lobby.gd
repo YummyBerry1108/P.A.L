@@ -76,7 +76,7 @@ func player_loaded() -> void:
 	if multiplayer.is_server():
 		players_loaded += 1
 		if players_loaded == players.size():
-			$/root/Main.start_game()
+			$/root/Main.spawn_players()
 			players_loaded = 0
 			game_ready.rpc()
 

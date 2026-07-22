@@ -38,9 +38,9 @@ func _level_up() -> void:
 	
 	level_changed.emit(level)
 	upgrade_started.emit()
-	choose_upgrade_manager(level)
+	choose_upgrade_manager()
 
-func choose_upgrade_manager(level: int) -> void:
+func choose_upgrade_manager() -> void:
 	if level % 5 == 0 and level <= 25:
 		skill_upgrade_manager.show_upgrade()
 	else:
