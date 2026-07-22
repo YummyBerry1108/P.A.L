@@ -31,9 +31,12 @@ func _ready() -> void:
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 	player_spawner.spawned.connect(_on_player_spawned)
 	multiplayer_enemy_spawner.spawned.connect(_on_enemy_spawned)
+	upgrade_manager.experience_changed.connect(ui.update_experience_display)
+	upgrade_manager.level_changed.connect(ui.update_level_display)
+	upgrade_manager.upgrade_started.connect(ui.show_pause_waiting)
 	
-	ui.update_experience_display(experience, experience_cap)
-	ui.update_level_display(level)
+	ui.update_experience_display(upgrade_manager.experience, upgrade_manager.experience_cap)
+	ui.update_level_display(upgrade_manager.level)
 
 func _process(delta: float) -> void:		
 	if is_timer_running:
@@ -46,7 +49,7 @@ func _process(delta: float) -> void:
 	
 	# press E
 	if Input.is_action_pressed("get_exp"):
-		add_experience(1)
+		upgrade_manager.add_experience(1)
 
 func _on_enemy_spawned(_enemy: Enemy) -> void:
 	pass
@@ -56,39 +59,12 @@ func _on_enemy_died(enemy: Enemy) -> void:
 	var exp_orb: CharacterBody2D = exp_orb_scene.instantiate()
 	exp_orb.global_position = enemy.global_position
 	exp_orb.exp_amount = enemy.exp_amount
-	exp_orb.collected.connect(add_experience)
+	exp_orb.collected.connect(upgrade_manager.add_experience)
 	exp_orb.update_scale()
 	exp_orb_container.call_deferred("add_child", exp_orb, true)
 
-func add_experience(exp_value: int) -> void:
-	if not multiplayer.is_server():
-		return
-
-	while exp_value > 0:
-		if experience + exp_value > experience_cap:
-			exp_value = experience + exp_value - experience_cap
-			experience = experience_cap
-		else:
-			experience += exp_value
-			exp_value = 0
-		
-		if experience == experience_cap:
-			_level_up()
-	
-	ui.update_experience_display(experience, experience_cap)
-
-func _level_up() -> void:
-	level += 1
-	experience_cap = int(experience_cap * 1.1 + 1)
-	experience = 0
-	
-	GameManager.change_pause_state.rpc(true)
-	ui.update_level_display(level)
-	ui.show_pause_waiting()
-	upgrade_manager.level_up(level)
-	#ui.show_upgrades_by_level(level)
-
 func _on_player_spawned(player: Player) -> void:
+	player.player_stat.stat_upgrades = upgrade_manager.stat_upgrade_manager
 	if not player.is_multiplayer_authority():
 		return
 	GameManager.local_player = player
@@ -150,7 +126,8 @@ func _add_player_node(id: int) -> void:
 	player.name = str(id)
 	player.player_died.connect(_on_player_died)
 	player_container.add_child(player)
-
+	player.player_stat.stat_upgrades = upgrade_manager.stat_upgrade_manager
+	
 	if id == 1:
 		_on_player_spawned(player)
 

@@ -39,9 +39,3 @@ func _update_spectate_display(new_text: String) -> void:
 
 func show_pause_waiting() -> void:
 	pause_label.text = "Waiting for other player..."
-
-func show_upgrades_by_level(level: int) -> void:
-	if level % 5 == 0 and level <= 25:
-		skill_tree_ui.show_upgrades.rpc()
-	else:
-		stat_upgrade_ui.show_upgrades.rpc()

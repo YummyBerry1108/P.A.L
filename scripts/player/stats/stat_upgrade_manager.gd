@@ -2,13 +2,7 @@ extends Node
 class_name StatUpgradeManager
 
 func _ready() -> void:
-	if not is_multiplayer_authority():
-		return
-	#call_deferred("_announce_to_ui")
-
-#func _announce_to_ui() -> void:
-	#if is_multiplayer_authority():
-		#UpgradeEventbus.local_stat_upgrade_ready.emit(self)
+	UpgradeEventbus.stat_upgrade_selected.connect(_on_upgrade_selected)
 
 func show_upgrades() -> void:
 	if not multiplayer.is_server():
@@ -35,10 +29,8 @@ func _rpc_show_upgrades(chosen_ids: Array[String]) -> void:
 			
 	UpgradeEventbus.show_stat_upgrades.emit(options_data)
 
-@rpc("any_peer", "call_local", "reliable")
-func submit_upgrade_selection(selected_id: String) -> void:
-	if not multiplayer.is_server():
-		return
-		
-	var sender_id = multiplayer.get_remote_sender_id()
-	#apply_upgrade_to_player(sender_id, selected_id)
+func _on_upgrade_selected(upgrade_id: String) -> void:
+	GameManager.choosed_upgrade.rpc_id(1)
+	var local_player = GameManager.local_player
+	if is_instance_valid(local_player):
+		local_player.player_stat.apply_upgrade.rpc(upgrade_id)

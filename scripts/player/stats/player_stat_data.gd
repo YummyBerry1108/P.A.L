@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerStatData
 
-@onready var stat_upgrades: StatUpgradeManager = $"../StatUpgrades"
+@onready var stat_upgrades: StatUpgradeManager # assign in main.gd
 
 const SPEED: float = 300.0
 
@@ -17,12 +17,8 @@ const SPEED: float = 300.0
 @export var heal_amount: float = 2.0
 @export var speed_mutiplier: float = 1.0
 
-func _on_stat_upgrade_received(upgrade_id: String) -> void:
-	apply_upgrade.rpc(upgrade_id)
-
 @rpc("any_peer", "call_local", "reliable")
 func apply_upgrade(upgrade_id: String) -> void:
-		
 	var stat_upgrade: StatUpgradeData
 	for curr_stat_upgrade: StatUpgradeData in stat_upgrades.get_children():
 		if curr_stat_upgrade.upgrade_id == upgrade_id:
