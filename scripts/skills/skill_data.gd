@@ -2,6 +2,8 @@ class_name SkillData extends Node
 
 #ACTUAL NODE NAME DOES NOT MATTER FOR SKILL DATA NODES
 
+signal skill_updated
+
 @export_category("Basic")
 @export var disable: bool = false
 @export var projectile_type: String = "Normal"
@@ -30,24 +32,42 @@ class_name SkillData extends Node
 @export var knockback_duration: float = 0.0
 
 func apply_upgrade(effect: SkillUpgrade) -> void:
-	if effect.stat_name in self:
-
-		var current_value = self.get(effect.stat_name)
-		var new_value = current_value
+	var stat_name = effect.get_stat_name()
+	if stat_name in self:
+		var new_val = _calculate_new_value(self.get(stat_name), effect)
+		self.set(stat_name, new_val)
+		skill_updated.emit()
 		
-		match effect.operation:
-			SkillUpgrade.OpType.ADD:
-				new_value += effect.value
-			SkillUpgrade.OpType.MULTIPLY:
-				new_value *= effect.value
-			SkillUpgrade.OpType.OVERRIDE:
-				new_value = effect.value
-				
-		if typeof(current_value) == TYPE_INT:
-			new_value = int(new_value)
-			
-		self.set(effect.stat_name, new_value)
-		#if is_multiplayer_authority():
-			#print("已將 %s 的 %s 從 %s 修改為 %s" % [skill_name, effect.stat_name, current_value, new_value])
+		if is_multiplayer_authority():
+			print("已將 %s 的 %s 修改為 %s" % [skill_name, stat_name, new_val])
+		return
+		
+	var updated_status_effect: bool = false
+	for status_effect in status_effects:
+		if status_effect and stat_name in status_effect:
+			var new_val = _calculate_new_value(status_effect.get(stat_name), effect)
+			status_effect.set(stat_name, new_val)
+			updated_status_effect = true
+
+	if updated_status_effect:
+		skill_updated.emit()
+		if is_multiplayer_authority():
+			print("已更新 %s 的 StatusEffect 屬性: %s" % [skill_name, stat_name])
 	else:
-		push_warning("SkillData 中找不到變數: " + effect.stat_name)
+		push_warning("SkillData 與 StatusEffects 中均找不到變數: " + stat_name)
+
+func _calculate_new_value(current_value, effect: SkillUpgrade):
+	var new_value = current_value
+	
+	match effect.operation:
+		SkillUpgrade.OpType.ADD:
+			new_value += effect.value
+		SkillUpgrade.OpType.MULTIPLY:
+			new_value *= effect.value
+		SkillUpgrade.OpType.OVERRIDE:
+			new_value = effect.value
+			
+	if typeof(current_value) == TYPE_INT:
+		new_value = int(new_value)
+		
+	return new_value

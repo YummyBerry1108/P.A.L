@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://c6iveblpi8knb"]
 
 [ext_resource type="Script" uid="uid://bxtkkso1tmt8a" path="res://scripts/skills/skill_data.gd" id="1_e63op"]
+[ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="2_383dj"]
+[ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="3_cemk6"]
 
-[node name="WaveData" type="Node"]
+[sub_resource type="Resource" id="Resource_msp6f"]
+script = ExtResource("3_cemk6")
+speed_multiplier = 0.5
+metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
+
+[node name="WaveData" type="Node" unique_id=1584799972]
 script = ExtResource("1_e63op")
 skill_name = "wave"
 firerate = 0.001
+status_effects = Array[ExtResource("2_383dj")]([SubResource("Resource_msp6f")])
 crit_chance = 0.1
 metadata/_custom_type_script = "uid://bxtkkso1tmt8a"

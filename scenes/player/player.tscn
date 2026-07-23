@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://l7jelo8hnshc" path="res://scripts/player/stats/player_stat_data.gd" id="11_uf5tr"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/tachi_data.tscn" id="13_fcs02"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
+[ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="17_cnsyf"]
+[ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="18_007i1"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
 [ext_resource type="PackedScene" uid="uid://c6iveblpi8knb" path="res://scenes/skills/data/wave_data.tscn" id="21_iqsei"]
 [ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
@@ -65,6 +67,12 @@ height = 198.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je7p5"]
 radius = 64.0
 height = 202.0
+
+[sub_resource type="Resource" id="Resource_6cv16"]
+resource_local_to_scene = true
+script = ExtResource("18_007i1")
+speed_multiplier = 0.5
+metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
 
 [sub_resource type="LabelSettings" id="LabelSettings_5gtgg"]
 font_size = 32
@@ -159,6 +167,7 @@ knockback_force = 250.0
 firerate = 1.0
 
 [node name="WaveData" parent="Skills" unique_id=406529094 instance=ExtResource("21_iqsei")]
+status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_6cv16")])
 
 [node name="SkillTreeManager" type="Node" parent="." unique_id=1964937448]
 script = ExtResource("11_myrg7")
