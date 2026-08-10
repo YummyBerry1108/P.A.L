@@ -9,7 +9,6 @@ extends Projectile
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 
-var target_player: Player = null
 var skill_data: SkillData = null
 var enemys: Dictionary = {} # record enemy in the hitbox of this weapon
 
@@ -21,28 +20,22 @@ func _ready() -> void:
 		if not hitbox.area_exited.is_connected(_on_hitbox_area_exited):
 			hitbox.area_exited.connect(_on_hitbox_area_exited)
 
-	_setup_target_player()
+	_setup_skill_data()
 
 func _physics_process(delta: float) -> void:
 
-	if is_instance_valid(target_player):
-		global_position = target_player.global_position
+	if is_instance_valid(actor):
+		global_position = actor.global_position
 	else:
 		queue_free()
 
-func _setup_target_player() -> void:
-	var players = get_tree().get_nodes_in_group("players")
-	for player: Player in players:
-		if player.name == str(shooter_id):
-			target_player = player
-			break
-			
-	if not target_player:
-		push_warning("環繞之浪找不到對應的 Shooter ID: " + str(shooter_id))
+func _setup_skill_data() -> void:
+	if not actor:
+		push_warning("環繞之浪找不到對應的玩家")
 		return
 		
-	if target_player.skills.has("wave"):
-		skill_data = target_player.skills["wave"]
+	if actor.skills.has("wave"):
+		skill_data = actor.skills["wave"]
 		apply_skill_data()
 		if skill_data.has_signal("skill_updated"):
 			skill_data.skill_updated.connect(apply_skill_data)
@@ -52,16 +45,21 @@ func apply_skill_data() -> void:
 		return
 		
 	status_effects = skill_data.status_effects
-	damage = skill_data.projectile_damage
+	for effect: StatusEffectRes in status_effects:
+		if effect is LifeStealEffect:
+			effect.damage_dealt = damage
+			effect.healer = actor
+	damage = skill_data.projectile_damage + actor.player_stat.damage
 	if skill_data.firerate > 0:
 		cooldown_timer.wait_time = skill_data.cooldown
 	if "scale" in skill_data:
 		scale = Vector2.ONE * skill_data.scale
+	
 
 func _on_cooldown_timer_timeout() -> void:
 	if not multiplayer.is_server():
 		return
-
+	damage = skill_data.projectile_damage + actor.player_stat.damage
 	var current_enemies = enemys.keys().duplicate()
 	for enemy in current_enemies:
 		if not is_instance_valid(enemy):
@@ -73,7 +71,6 @@ func _on_cooldown_timer_timeout() -> void:
 			print("Damage Component disappear!")
 			return
 		damage_component.process_projectile_hit(self)
-		target_player.heal.rpc(damage*0.1)
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area == null or area.owner == null: return

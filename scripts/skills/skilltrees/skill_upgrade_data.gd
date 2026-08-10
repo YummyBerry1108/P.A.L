@@ -12,7 +12,8 @@ enum StatType {
 	KNOCKBACK_FORCE,
 	# Status Effect 相關
 	POISON_DAMAGE,
-	SLOW_RATIO
+	SLOW_RATIO,
+	LIFE_STEAL_RATIO
 }
 
 @export_category("Upgrade Settings")
@@ -31,4 +32,5 @@ func get_stat_name() -> String:
 		StatType.KNOCKBACK_FORCE: return "knockback_force"
 		StatType.POISON_DAMAGE: return "poison_damage"
 		StatType.SLOW_RATIO: return "speed_multiplier"
+		StatType.LIFE_STEAL_RATIO: return "lifesteal_rate"
 	return ""

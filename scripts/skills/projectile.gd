@@ -14,7 +14,7 @@ class_name Projectile extends CharacterBody2D
 @export var knockback_force: float = 0.0
 @export var knockback_duration: float = 0.0
 
-var shooter_id: int = 0
+var actor: CharacterBody2D
 var speed: float = 0.0
 var direction: Vector2 = Vector2.RIGHT
 

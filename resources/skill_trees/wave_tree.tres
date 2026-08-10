@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 script = ExtResource("4_1qhmk")
 stat_name = 8
 operation = 2
+value = 0.5
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
 [sub_resource type="Resource" id="Resource_cemk6"]
@@ -42,8 +43,32 @@ script = ExtResource("2_gdbsg")
 skill_nodes = Array[ExtResource("3_ib5mu")]([SubResource("Resource_cemk6")])
 metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
+[sub_resource type="Resource" id="Resource_j4nxn"]
+script = ExtResource("4_1qhmk")
+stat_name = 9
+operation = 2
+value = 0.1
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_ib5mu"]
+script = ExtResource("4_1qhmk")
+value = 5.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_6cv16"]
+script = ExtResource("3_ib5mu")
+skill_id = "wave_life_steal+"
+upgrade_effects = Array[ExtResource("4_1qhmk")]([SubResource("Resource_j4nxn"), SubResource("Resource_ib5mu")])
+skill_name = "吸血"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_007i1"]
+script = ExtResource("2_gdbsg")
+skill_nodes = Array[ExtResource("3_ib5mu")]([SubResource("Resource_6cv16")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
 [resource]
 script = ExtResource("1_jn3lg")
 skill_name = "wave"
-skill_paths = Array[ExtResource("2_gdbsg")]([SubResource("Resource_58p64"), SubResource("Resource_383dj")])
+skill_paths = Array[ExtResource("2_gdbsg")]([SubResource("Resource_58p64"), SubResource("Resource_383dj"), SubResource("Resource_007i1")])
 metadata/_custom_type_script = "uid://bwxmarxo3thqj"

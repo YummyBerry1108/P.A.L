@@ -134,5 +134,4 @@ func fetch_behavior(behavior_name: String, args: Dictionary) -> void:
 
 func pull_skills() -> void:
 	for child: SkillData in get_node("Skills").get_children():
-		child.shooter_id = get_multiplayer_authority()
 		skills[child.skill_name] = child

@@ -7,7 +7,7 @@ enum StackMode {
 	IGNORE
 }
 
-var effect_name: String = "Effect"
+@export var effect_name: String = "Effect"
 @export var stack_mode: StackMode = StackMode.REFRESH
 @export var duration: float = 3.0
 @export var tick_interval: float = 1.0

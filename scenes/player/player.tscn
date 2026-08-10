@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
 [ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="17_cnsyf"]
 [ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="18_007i1"]
+[ext_resource type="Script" uid="uid://dghf5yi3qxfeo" path="res://scripts/effects/life_steal_effect.gd" id="19_007i1"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
 [ext_resource type="PackedScene" uid="uid://c6iveblpi8knb" path="res://scenes/skills/data/wave_data.tscn" id="21_iqsei"]
 [ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
@@ -68,11 +69,19 @@ height = 198.0
 radius = 64.0
 height = 202.0
 
-[sub_resource type="Resource" id="Resource_6cv16"]
+[sub_resource type="Resource" id="Resource_cnsyf"]
 resource_local_to_scene = true
 script = ExtResource("18_007i1")
-speed_multiplier = 0.5
+speed_multiplier = 0.8
+effect_name = "SlowEffect"
 metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
+
+[sub_resource type="Resource" id="Resource_olppc"]
+resource_local_to_scene = true
+script = ExtResource("19_007i1")
+effect_name = "LifeStealEffect"
+duration = 0.0
+metadata/_custom_type_script = "uid://dghf5yi3qxfeo"
 
 [sub_resource type="LabelSettings" id="LabelSettings_5gtgg"]
 font_size = 32
@@ -167,7 +176,8 @@ knockback_force = 250.0
 firerate = 1.0
 
 [node name="WaveData" parent="Skills" unique_id=406529094 instance=ExtResource("21_iqsei")]
-status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_6cv16")])
+projectile_damage = 0.0
+status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_cnsyf"), SubResource("Resource_olppc")])
 
 [node name="SkillTreeManager" type="Node" parent="." unique_id=1964937448]
 script = ExtResource("11_myrg7")
