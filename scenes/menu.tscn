@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cij6qhko0lb6q"]
+[gd_scene format=3 uid="uid://cij6qhko0lb6q"]
 
 [ext_resource type="Script" uid="uid://cusmopn4cbjkq" path="res://scripts/menu.gd" id="1_7w7rl"]
 [ext_resource type="PackedScene" uid="uid://bbk8rk6x2y5j1" path="res://scenes/ui/setting.tscn" id="2_vjb58"]
@@ -8,7 +8,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_vjb58"]
 font_size = 30
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("ip", "username")]
+[node name="Menu" type="Control" unique_id=727657426 node_paths=PackedStringArray("ip", "username")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ script = ExtResource("1_7w7rl")
 ip = NodePath("VBoxContainer/IP")
 username = NodePath("VBoxContainer/Username")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1637758980]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -30,53 +30,53 @@ offset_bottom = 344.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=2027580855]
 layout_mode = 2
 theme_override_constants/separation = 50
 theme_override_styles/separator = SubResource("StyleBoxEmpty_yqeox")
 
-[node name="Server" type="Button" parent="VBoxContainer"]
+[node name="Server" type="Button" parent="VBoxContainer" unique_id=1866575791]
 custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Server"
 
-[node name="Client" type="Button" parent="VBoxContainer"]
+[node name="Client" type="Button" parent="VBoxContainer" unique_id=1514569754]
 custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Client"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=485787032]
 layout_mode = 2
 theme_override_constants/separation = 75
 theme_override_styles/separator = SubResource("StyleBoxEmpty_yqeox")
 
-[node name="IP" type="LineEdit" parent="VBoxContainer"]
+[node name="IP" type="LineEdit" parent="VBoxContainer" unique_id=1883064074]
 custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "127.0.0.1"
 placeholder_text = "Enter IP"
 
-[node name="Username" type="LineEdit" parent="VBoxContainer"]
+[node name="Username" type="LineEdit" parent="VBoxContainer" unique_id=1301019903]
 custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter Username"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=707472590]
 layout_mode = 2
 theme_override_constants/separation = 75
 theme_override_styles/separator = SubResource("StyleBoxEmpty_yqeox")
 
-[node name="SettingButton" type="Button" parent="VBoxContainer"]
+[node name="SettingButton" type="Button" parent="VBoxContainer" unique_id=611079304]
 custom_minimum_size = Vector2(412, 53)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Setting"
 
-[node name="Setting" parent="." instance=ExtResource("2_vjb58")]
+[node name="Setting" parent="." unique_id=1284328210 instance=ExtResource("2_vjb58")]
 visible = false
 layout_mode = 1
 offset_left = 146.0
@@ -84,7 +84,7 @@ offset_top = 43.0
 offset_right = -154.0
 offset_bottom = -57.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=72313822]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 569.0

@@ -10,8 +10,10 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 	new_projectile.global_position = owner.global_position
 	new_projectile.global_rotation = projectile_global_rotation
 	new_projectile.scale = Vector2(skill_data.scale, skill_data.scale)
+	new_projectile.actor = get_parent()
 	if multiplayer.is_server():
 		new_projectile.damage = skill_data.projectile_damage + owner.player_stat.damage
+		new_projectile.cooldown = skill_data.cooldown
 		new_projectile.crit_chance = skill_data.crit_chance
 		new_projectile.crit_damage_multiplier = skill_data.crit_damage_multiplier
 		new_projectile.status_effects = skill_data.status_effects

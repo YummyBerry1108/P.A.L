@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bjopfo0qvphm6"]
+
+[ext_resource type="Script" uid="uid://cqsbcsxydelc5" path="res://scripts/upgrades/upgrade_manager.gd" id="1_6bsfc"]
+[ext_resource type="Script" uid="uid://cqmym637gdqmy" path="res://scripts/player/stats/stat_upgrade_manager.gd" id="2_6ylsl"]
+[ext_resource type="Script" uid="uid://fmua36g13d4h" path="res://scripts/player/stats/stat_upgrade_data.gd" id="3_a1g8y"]
+[ext_resource type="Script" uid="uid://88k1boog4uy8" path="res://scripts/upgrades/skill_upgrade_manager.gd" id="3_xao5k"]
+[ext_resource type="Texture2D" uid="uid://blmto0svdbd23" path="res://imgs/ui/stat_upgrade/upgrade_HP.png" id="4_aofub"]
+[ext_resource type="Texture2D" uid="uid://jniau3rggiae" path="res://imgs/ui/stat_upgrade/upgrade_card_red.png" id="5_er3o5"]
+[ext_resource type="Texture2D" uid="uid://dxolm3i2d2qdu" path="res://imgs/ui/stat_upgrade/upgrade_speed.png" id="6_0lmg6"]
+[ext_resource type="Texture2D" uid="uid://dtxxn1mwmuan4" path="res://imgs/ui/stat_upgrade/upgrade_card_blue.png" id="7_46fof"]
+[ext_resource type="Texture2D" uid="uid://de4lojfij7ekk" path="res://imgs/ui/stat_upgrade/upgrade_damage.png" id="8_35sa1"]
+[ext_resource type="Texture2D" uid="uid://b5e75bns2pp48" path="res://imgs/ui/stat_upgrade/upgrade_card_yellow.png" id="9_j4lia"]
+
+[node name="UpgradeManager" type="Node" unique_id=1262974720 node_paths=PackedStringArray("stat_upgrade_manager", "skill_upgrade_manager")]
+script = ExtResource("1_6bsfc")
+stat_upgrade_manager = NodePath("StatUpgradeManager")
+skill_upgrade_manager = NodePath("SkillUpgradeManager")
+metadata/_custom_type_script = "uid://cqsbcsxydelc5"
+
+[node name="StatUpgradeManager" type="Node" parent="." unique_id=491206945]
+script = ExtResource("2_6ylsl")
+metadata/_custom_type_script = "uid://cqmym637gdqmy"
+
+[node name="hp_up" type="Node" parent="StatUpgradeManager" unique_id=1876752256]
+script = ExtResource("3_a1g8y")
+upgrade_id = "hp_up"
+stat_name = "max_hp"
+value = 10.0
+title = "HP+"
+description = "Add 10 HP"
+upgrade_icon = ExtResource("4_aofub")
+card_image = ExtResource("5_er3o5")
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="speed_up" type="Node" parent="StatUpgradeManager" unique_id=2121389748]
+script = ExtResource("3_a1g8y")
+upgrade_id = "speed_up"
+stat_name = "speed_mutiplier"
+value = 0.1
+title = "Speed+"
+description = "Increase speed"
+upgrade_icon = ExtResource("6_0lmg6")
+card_image = ExtResource("7_46fof")
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="damage_up" type="Node" parent="StatUpgradeManager" unique_id=505740915]
+script = ExtResource("3_a1g8y")
+upgrade_id = "damage_up"
+stat_name = "damage"
+value = 5.0
+title = "Damage+"
+description = "Increase damage"
+upgrade_icon = ExtResource("8_35sa1")
+card_image = ExtResource("9_j4lia")
+metadata/_custom_type_script = "uid://fmua36g13d4h"
+
+[node name="SkillUpgradeManager" type="Node" parent="." unique_id=901676417]
+script = ExtResource("3_xao5k")
+metadata/_custom_type_script = "uid://88k1boog4uy8"

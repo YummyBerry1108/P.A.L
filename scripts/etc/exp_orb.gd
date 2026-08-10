@@ -22,6 +22,5 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		return
 	if not player.is_in_group("players"):
 		return
-	
 	collected.emit(exp_amount)
 	queue_free()

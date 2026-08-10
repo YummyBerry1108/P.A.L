@@ -20,4 +20,4 @@ func _on_volume_value_changed(value: float) -> void:
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("pause"):
-		visible = not visible
+		hide()

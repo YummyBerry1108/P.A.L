@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTreeData" load_steps=16 format=3 uid="uid://dh1vs8esjfrgm"]
+[gd_resource type="Resource" script_class="SkillTreeData" format=3 uid="uid://dh1vs8esjfrgm"]
 
 [ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_ukurl"]
 [ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_msp6f"]
@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_xf0gt"]
 script = ExtResource("4_rhmth")
-stat_name = "scale"
+stat_name = 3
 operation = 1
 value = 1.5
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_3ks5h"]
 script = ExtResource("4_rhmth")
-stat_name = "scale"
+stat_name = 3
 operation = 1
 value = 2.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
@@ -35,7 +35,6 @@ script = ExtResource("3_f1285")
 icon = ExtResource("4_msp6f")
 skill_id = "snowball_scale++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_3ks5h")])
-next_node_uids = Array[String]([])
 skill_name = "更大的雪球"
 skill_description = "大還要更大"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"
@@ -47,8 +46,6 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
 [sub_resource type="Resource" id="Resource_vl580"]
 script = ExtResource("4_rhmth")
-stat_name = "projectile_damage"
-operation = 0
 value = 10.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
@@ -64,8 +61,6 @@ metadata/_custom_type_script = "uid://cyhc75bf8083e"
 
 [sub_resource type="Resource" id="Resource_johu8"]
 script = ExtResource("4_rhmth")
-stat_name = "projectile_damage"
-operation = 0
 value = 30.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
 
@@ -74,7 +69,6 @@ script = ExtResource("3_f1285")
 icon = ExtResource("4_msp6f")
 skill_id = "snowball_damage++"
 upgrade_effects = Array[ExtResource("4_rhmth")]([SubResource("Resource_johu8")])
-next_node_uids = Array[String]([])
 skill_name = "裡面包火屬性石頭"
 skill_description = "傷害增加"
 metadata/_custom_type_script = "uid://cyhc75bf8083e"

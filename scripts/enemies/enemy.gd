@@ -1,6 +1,6 @@
 class_name Enemy extends CharacterBody2D
 
-signal _on_enemy_died(enemy: Enemy)
+signal _enemy_died(enemy: Enemy)
 signal _enemy_screen_update(player_id: int, enemy: Enemy, on_screen: bool)
 
 enum VariantType {normal, elite, boss}
@@ -121,5 +121,5 @@ func get_nearest_player() -> Vector2:
 	return res
 
 func die() -> void:
-	_on_enemy_died.emit(self)
+	_enemy_died.emit(self)
 	queue_free()

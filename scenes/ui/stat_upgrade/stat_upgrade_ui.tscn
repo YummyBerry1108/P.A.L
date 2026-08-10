@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5bj02fgrvrpf"]
+[gd_scene format=3 uid="uid://b5bj02fgrvrpf"]
 
 [ext_resource type="Script" uid="uid://bg40okqql5s42" path="res://scripts/ui/stat_upgrade/stat_upgrade_ui.gd" id="1_r3gfj"]
 [ext_resource type="PackedScene" uid="uid://cv610u5482jt6" path="res://scenes/ui/stat_upgrade/stat_upgrade_button.tscn" id="2_pjxy1"]
@@ -8,7 +8,7 @@ font_size = 32
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="StatUpgradeUI" type="Control" node_paths=PackedStringArray("container", "upgrade_timer", "upgrade_timer_label", "background")]
+[node name="StatUpgradeUI" type="Control" unique_id=234769577 node_paths=PackedStringArray("container", "upgrade_timer", "upgrade_timer_label", "background")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -24,7 +24,7 @@ upgrade_timer = NodePath("UpgradeTimer")
 upgrade_timer_label = NodePath("UpgradeTimeLabel")
 background = NodePath("Mask")
 
-[node name="Mask" type="ColorRect" parent="."]
+[node name="Mask" type="ColorRect" parent="." unique_id=1013117642]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.568627)
 
-[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="."]
+[node name="StatUpgradeHBoxContainer" type="HBoxContainer" parent="." unique_id=910046312]
 layout_mode = 0
 offset_left = 126.0
 offset_top = 141.0
@@ -41,7 +41,7 @@ offset_right = 1145.0
 offset_bottom = 686.0
 alignment = 1
 
-[node name="UpgradeTimeLabel" type="Label" parent="."]
+[node name="UpgradeTimeLabel" type="Label" parent="." unique_id=1056913357]
 layout_mode = 0
 offset_left = 502.0
 offset_top = 85.0
@@ -51,7 +51,7 @@ text = "Upgrade Left Time"
 label_settings = SubResource("LabelSettings_n1a3i")
 horizontal_alignment = 1
 
-[node name="UpgradeTimer" type="Timer" parent="."]
+[node name="UpgradeTimer" type="Timer" parent="." unique_id=261134590]
 one_shot = true
 
 [connection signal="timeout" from="UpgradeTimer" to="." method="_on_timer_timeout"]

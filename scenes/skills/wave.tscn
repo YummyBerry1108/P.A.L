@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b8l6hlar1p05y"]
+
+[ext_resource type="Script" uid="uid://c6ev56qougp75" path="res://scripts/skills/wave.gd" id="1_olppc"]
+[ext_resource type="Texture2D" uid="uid://64gwusxyxfto" path="res://icon.svg" id="1_qsyv4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olppc"]
+radius = 169.027
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ywhkk"]
+radius = 169.0
+
+[node name="Wave" type="CharacterBody2D" unique_id=2065500880]
+script = ExtResource("1_olppc")
+initial_speed = 0.0
+target_speed = 0.0
+lifespan = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1376969490]
+scale = Vector2(9, 9)
+texture = ExtResource("1_qsyv4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1386682544]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_olppc")
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=290798611]
+collision_layer = 16
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=913007006]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ywhkk")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=19231585]
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

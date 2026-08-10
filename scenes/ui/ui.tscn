@@ -1,11 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://bogubau3wnkvt"]
+[gd_scene format=3 uid="uid://bogubau3wnkvt"]
 
 [ext_resource type="Script" uid="uid://b3fkyyse8r4fg" path="res://scripts/ui/ui.gd" id="1_0dwhk"]
 [ext_resource type="PackedScene" uid="uid://nj4em35bb2li" path="res://scenes/ui/health_bar.tscn" id="1_g5kmx"]
-[ext_resource type="Script" uid="uid://d26l7ipj7wqlo" path="res://scripts/ui/exp_bar.gd" id="2_0dwhk"]
 [ext_resource type="Texture2D" uid="uid://m6mof2chgq3" path="res://imgs/ui/map_frame.png" id="2_pfayw"]
 [ext_resource type="Texture2D" uid="uid://7qyh2o1fk3hf" path="res://imgs/ui/exp_icon.png" id="2_uegxj"]
-[ext_resource type="Script" uid="uid://dv8r8iyljuman" path="res://scripts/ui/exp_label.gd" id="3_pfayw"]
 [ext_resource type="Script" uid="uid://y0ulfkia0dwf" path="res://scripts/ui/pause_label.gd" id="4_7vp6q"]
 [ext_resource type="PackedScene" uid="uid://bo5plno10hitc" path="res://scenes/ui/teammate_display.tscn" id="7_swkix"]
 [ext_resource type="PackedScene" uid="uid://b4ojmlbosfvpg" path="res://scenes/ui/status_display.tscn" id="8_swkix"]
@@ -77,7 +75,7 @@ properties/4/path = NodePath("../PauseLabel:text")
 properties/4/spawn = false
 properties/4/replication_mode = 2
 
-[node name="UI" type="Control" node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label")]
+[node name="UI" type="Control" unique_id=252595703 node_paths=PackedStringArray("exp_bar", "exp_label", "health_bar", "time_label", "pause_label", "spectate_label", "stat_upgrade_ui", "skill_tree_ui")]
 z_index = 5
 z_as_relative = false
 layout_mode = 3
@@ -95,8 +93,10 @@ health_bar = NodePath("BottomVBoxContainer2/HBoxContainer/HealthBar")
 time_label = NodePath("TimeLabel")
 pause_label = NodePath("PauseLabel")
 spectate_label = NodePath("BottomVBoxContainer/SpectateLabel")
+stat_upgrade_ui = NodePath("StatUpgradeUI")
+skill_tree_ui = NodePath("SkillTreeUI")
 
-[node name="BottomVBoxContainer" type="VBoxContainer" parent="."]
+[node name="BottomVBoxContainer" type="VBoxContainer" parent="." unique_id=1705207483]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -107,49 +107,48 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 2
 
-[node name="SpectateLabel" type="Label" parent="BottomVBoxContainer"]
+[node name="SpectateLabel" type="Label" parent="BottomVBoxContainer" unique_id=608146461]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Spectating: "
 label_settings = SubResource("LabelSettings_sugp2")
 
-[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer" unique_id=1465126346]
 layout_mode = 2
 theme_override_constants/separation = 6
 theme_override_styles/separator = SubResource("StyleBoxEmpty_swkix")
 
-[node name="ExpBoxContainer" type="VBoxContainer" parent="BottomVBoxContainer"]
+[node name="ExpBoxContainer" type="VBoxContainer" parent="BottomVBoxContainer" unique_id=1412547933]
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 2
 
-[node name="ExpLabelHBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer"]
+[node name="ExpLabelHBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer" unique_id=615095063]
 layout_mode = 2
 alignment = 2
 
-[node name="ExpLabel" type="Label" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer"]
+[node name="ExpLabel" type="Label" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer" unique_id=831290621]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Level: 0"
 label_settings = SubResource("LabelSettings_jyhfs")
-script = ExtResource("3_pfayw")
 
-[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer" unique_id=1540705838]
 layout_mode = 2
 theme_override_constants/separation = 650
 theme_override_styles/separator = SubResource("StyleBoxEmpty_0dwhk")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer/ExpBoxContainer" unique_id=132844135]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer" unique_id=317166039]
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxEmpty_uegxj")
 
-[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer" unique_id=1217634359]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -157,7 +156,7 @@ texture = ExtResource("2_uegxj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ExpBar" type="ProgressBar" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer"]
+[node name="ExpBar" type="ProgressBar" parent="BottomVBoxContainer/ExpBoxContainer/HBoxContainer" unique_id=1580228147]
 z_as_relative = false
 custom_minimum_size = Vector2(700, 27)
 layout_mode = 2
@@ -169,14 +168,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jyhfs")
 max_value = 5.0
 value = 5.0
 show_percentage = false
-script = ExtResource("2_0dwhk")
 
-[node name="HSeparator2" type="HSeparator" parent="BottomVBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="BottomVBoxContainer" unique_id=1008206388]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_y220t")
 
-[node name="BottomVBoxContainer2" type="VBoxContainer" parent="."]
+[node name="BottomVBoxContainer2" type="VBoxContainer" parent="." unique_id=354967850]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -186,34 +184,34 @@ offset_top = -104.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomVBoxContainer2" unique_id=1361646720]
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomVBoxContainer2/HBoxContainer" unique_id=623708341]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("9_y220t")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="HealthBar" parent="BottomVBoxContainer2/HBoxContainer" instance=ExtResource("1_g5kmx")]
+[node name="HealthBar" parent="BottomVBoxContainer2/HBoxContainer" unique_id=1107172473 instance=ExtResource("1_g5kmx")]
 custom_minimum_size = Vector2(400, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer2/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BottomVBoxContainer2/HBoxContainer" unique_id=947939232]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hl07w")
 
-[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="BottomVBoxContainer2" unique_id=1832295146]
 layout_mode = 2
 theme_override_constants/separation = 50
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hc5d0")
 
-[node name="RightSideVBoxContainer" type="VBoxContainer" parent="."]
+[node name="RightSideVBoxContainer" type="VBoxContainer" parent="." unique_id=1469112025]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -223,54 +221,54 @@ offset_left = -314.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TeammateDisplay" parent="RightSideVBoxContainer" instance=ExtResource("7_swkix")]
+[node name="TeammateDisplay" parent="RightSideVBoxContainer" unique_id=998719948 instance=ExtResource("7_swkix")]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="RightSideVBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="RightSideVBoxContainer" unique_id=610789463]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4kltc")
 
-[node name="Control" type="Control" parent="RightSideVBoxContainer"]
+[node name="Control" type="Control" parent="RightSideVBoxContainer" unique_id=1798921266]
 custom_minimum_size = Vector2(300, 400)
 layout_mode = 2
 
-[node name="StatusDisplay" parent="RightSideVBoxContainer/Control" instance=ExtResource("8_swkix")]
-layout_mode = 2
+[node name="StatusDisplay" parent="RightSideVBoxContainer/Control" unique_id=1966812761 instance=ExtResource("8_swkix")]
+layout_mode = 0
 offset_top = 4.0
 offset_right = 314.0
 offset_bottom = 404.0
 
-[node name="LeftSideVBoxContainer" type="VBoxContainer" parent="."]
+[node name="LeftSideVBoxContainer" type="VBoxContainer" parent="." unique_id=43113516]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 300.0
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="LeftSideVBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="LeftSideVBoxContainer" unique_id=43944737]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="LeftSideVBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="LeftSideVBoxContainer" unique_id=1660859243]
 layout_mode = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="LeftSideVBoxContainer/MarginContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="LeftSideVBoxContainer/MarginContainer" unique_id=1271248269]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MiniMap" type="SubViewport" parent="LeftSideVBoxContainer/MarginContainer/SubViewportContainer"]
+[node name="MiniMap" type="SubViewport" parent="LeftSideVBoxContainer/MarginContainer/SubViewportContainer" unique_id=687210728]
 handle_input_locally = false
 size = Vector2i(180, 180)
 render_target_update_mode = 4
 script = ExtResource("10_hc5d0")
 
-[node name="MiniMapCamera" type="Camera2D" parent="LeftSideVBoxContainer/MarginContainer/SubViewportContainer/MiniMap"]
+[node name="MiniMapCamera" type="Camera2D" parent="LeftSideVBoxContainer/MarginContainer/SubViewportContainer/MiniMap" unique_id=1536380599]
 position = Vector2(24, 14)
 zoom = Vector2(0.05, 0.05)
 
-[node name="Frame" type="TextureRect" parent="LeftSideVBoxContainer/MarginContainer"]
+[node name="Frame" type="TextureRect" parent="LeftSideVBoxContainer/MarginContainer" unique_id=1610508186]
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -278,7 +276,7 @@ texture = ExtResource("2_pfayw")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="TimeLabel" type="Label" parent="."]
+[node name="TimeLabel" type="Label" parent="." unique_id=1611974872]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -292,7 +290,7 @@ label_settings = SubResource("LabelSettings_tipki")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseLabel" type="Label" parent="."]
+[node name="PauseLabel" type="Label" parent="." unique_id=516573804]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 8
@@ -310,21 +308,14 @@ text = "Game Pause!"
 label_settings = SubResource("LabelSettings_tefeu")
 script = ExtResource("4_7vp6q")
 
-[node name="StatUpgradeUI" parent="." instance=ExtResource("11_4kltc")]
+[node name="StatUpgradeUI" parent="." unique_id=1632033692 instance=ExtResource("11_4kltc")]
 visible = false
 layout_mode = 1
 
-[node name="SkillTreeUI" parent="." instance=ExtResource("12_hl07w")]
+[node name="SkillTreeUI" parent="." unique_id=1669735170 instance=ExtResource("12_hl07w")]
 visible = false
 layout_mode = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=330944989]
 root_path = NodePath("../TimeLabel")
 replication_config = SubResource("SceneReplicationConfig_tefeu")
-
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
-[connection signal="_on_little_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="StatUpgradeUI" method="_on_level_up"]
-[connection signal="_on_medium_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="BottomVBoxContainer/ExpBoxContainer/ExpLabelHBoxContainer/ExpLabel" method="_level_up"]
-[connection signal="_on_medium_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="PauseLabel" method="_on_level_up"]
-[connection signal="_on_medium_level_up" from="BottomVBoxContainer/ExpBoxContainer/HBoxContainer/ExpBar" to="SkillTreeUI" method="_on_level_up"]

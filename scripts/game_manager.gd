@@ -5,10 +5,12 @@ extends Node
 signal pause_state_changed(is_paused: bool) 
 signal player_amount_changed() # record player amount message by pause label
 
+var is_game_start: bool = false
 var local_player: Player # the player that user control
 var players_upgraded: Array[int] = [] # use multiplayer id to record
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Lobby.player_disconnected.connect(_on_player_disconnected)
 
 ## Only server can call this rpc to stop game, true is stop
@@ -19,7 +21,7 @@ func change_pause_state(state: bool) -> void:
 
 ## Check how many player have upgraded
 @rpc("any_peer", "call_local", "reliable")
-func submit_upgrade() -> void:
+func choosed_upgrade() -> void:
 	if not multiplayer.is_server():
 		return
 		
@@ -55,3 +57,8 @@ func _get_player_node(peer_id: int) -> Node:
 		if player.name == target_name:
 			return player
 	return null
+	
+func _unhandled_input(event) -> void:
+	if event.is_action_pressed("pause") and multiplayer.is_server() and is_game_start:
+		var new_state = not get_tree().paused
+		GameManager.change_pause_state.rpc(new_state)
