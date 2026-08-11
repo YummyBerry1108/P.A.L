@@ -23,7 +23,7 @@ func _ready() -> void:
 	direction = Vector2.RIGHT.rotated(global_rotation)
 	
 	if hitbox:
-		hitbox.area_entered.connect(_on_hurt_box_aera_entered)
+		hitbox.area_entered.connect(_on_hurt_box_area_entered)
 
 	await get_tree().create_timer(lifespan).timeout
 	_before_lifespan_expired()
@@ -41,5 +41,5 @@ func _physics_process(delta: float) -> void:
 func _before_lifespan_expired() -> void:
 	pass
 
-func _on_hurt_box_aera_entered(area: Area2D) -> void:
+func _on_hurt_box_area_entered(area: Area2D) -> void:
 	pass

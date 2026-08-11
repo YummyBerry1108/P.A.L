@@ -6,6 +6,7 @@ var active_effects: Array[EffectInstance] = []
 
 func add_effect(res: StatusEffectRes) -> void:
 	var existing_effect = null
+	
 	for inst in active_effects:
 		if inst.data.effect_name == res.effect_name:
 			existing_effect = inst
@@ -20,7 +21,8 @@ func add_effect(res: StatusEffectRes) -> void:
 			StatusEffectRes.StackMode.IGNORE:
 				return
 			StatusEffectRes.StackMode.STACK:
-				pass
+				existing_effect.data.on_stack(existing_effect, res)
+				return
 	var new_instance = EffectInstance.new(res)
 	active_effects.append(new_instance)
 	
@@ -40,6 +42,6 @@ func _process(delta: float) -> void:
 
 func get_speed_multiplier(mult: float = 1.0) -> float:
 	for inst in active_effects:
-		if inst.data is SlowEffect:
+		if inst.data is SlowEffect or inst.data is SpeedUpEffect:
 			mult *= inst.data.speed_multiplier
 	return mult

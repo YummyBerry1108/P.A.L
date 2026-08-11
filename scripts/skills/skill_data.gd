@@ -10,7 +10,6 @@ signal skill_updated
 @export var skill_name: String = "NULL"
 
 @export_category("ShootingSetting")
-@export var scale: float = 0.30
 @export var multishot: int = 1
 @export var projectile_count: int = 1
 @export var firerate: float = 1
@@ -20,6 +19,7 @@ signal skill_updated
 @export_range(0, 360) var arc_increment: float = 30
 
 @export_category("ProjectileSetting")
+@export var scale: float = 0.30
 @export var projectile_damage: float = 10.0
 @export var cooldown: float = 1.0
 @export var status_effects: Array[StatusEffectRes] = []

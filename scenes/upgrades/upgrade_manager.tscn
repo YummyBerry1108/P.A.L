@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="speed_up" type="Node" parent="StatUpgradeManager" unique_id=2121389748]
 script = ExtResource("3_a1g8y")
 upgrade_id = "speed_up"
-stat_name = "speed_mutiplier"
+stat_name = "speed_multiplier"
 value = 0.1
 title = "Speed+"
 description = "Increase speed"

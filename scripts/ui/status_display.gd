@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	Max HP: %d
 	Damage: %d
 	Speed Multiplier: %.1f
-	" % [ int(player_data.max_hp), player_data.damage, player_data.speed_mutiplier ]
+	" % [ int(player_data.max_hp), player_data.damage, player_data.speed_multiplier ]
 
 func _on_all_player_ready() -> void:
 	var players = get_tree().get_nodes_in_group("players")

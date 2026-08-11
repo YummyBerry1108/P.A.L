@@ -35,7 +35,3 @@ shape = SubResource("CircleShape2D_ywhkk")
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=19231585]
 autostart = true
-
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="SkillTreeData" format=3 uid="uid://dmvdvp1wtarcj"]
+
+[ext_resource type="Script" uid="uid://bwxmarxo3thqj" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_bfld4"]
+[ext_resource type="Script" uid="uid://b28lmca6cul8n" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_luju4"]
+[ext_resource type="Script" uid="uid://cyhc75bf8083e" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_3xa3x"]
+[ext_resource type="Texture2D" uid="uid://bs231370wbas5" path="res://imgs/skills/tachi.png" id="4_lqx80"]
+[ext_resource type="Script" uid="uid://drjyc2eoax3n4" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="5_m6qvf"]
+
+[sub_resource type="Resource" id="Resource_2uoae"]
+script = ExtResource("5_m6qvf")
+value = 10.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_v3fhl"]
+script = ExtResource("3_3xa3x")
+icon = ExtResource("4_lqx80")
+skill_id = "tachi_damage+"
+upgrade_effects = Array[ExtResource("5_m6qvf")]([SubResource("Resource_2uoae")])
+skill_name = "傷害"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_7yssp"]
+script = ExtResource("2_luju4")
+skill_nodes = Array[ExtResource("3_3xa3x")]([SubResource("Resource_v3fhl")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[sub_resource type="Resource" id="Resource_pgvc7"]
+script = ExtResource("5_m6qvf")
+stat_name = 10
+operation = 2
+value = 2.0
+metadata/_custom_type_script = "uid://drjyc2eoax3n4"
+
+[sub_resource type="Resource" id="Resource_qwptc"]
+script = ExtResource("3_3xa3x")
+icon = ExtResource("4_lqx80")
+skill_id = "tachi_speed_up+"
+upgrade_effects = Array[ExtResource("5_m6qvf")]([SubResource("Resource_pgvc7")])
+skill_name = "打擊加速"
+metadata/_custom_type_script = "uid://cyhc75bf8083e"
+
+[sub_resource type="Resource" id="Resource_3dhna"]
+script = ExtResource("2_luju4")
+skill_nodes = Array[ExtResource("3_3xa3x")]([SubResource("Resource_qwptc")])
+metadata/_custom_type_script = "uid://b28lmca6cul8n"
+
+[resource]
+script = ExtResource("1_bfld4")
+skill_name = "tachi"
+skill_paths = Array[ExtResource("2_luju4")]([SubResource("Resource_7yssp"), SubResource("Resource_3dhna")])
+metadata/_custom_type_script = "uid://bwxmarxo3thqj"
