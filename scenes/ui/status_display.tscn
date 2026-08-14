@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ojmlbosfvpg"]
+[gd_scene format=3 uid="uid://b4ojmlbosfvpg"]
 
 [ext_resource type="Texture2D" uid="uid://dp2skaqw4riuv" path="res://imgs/ui/side_background.png" id="1_01ju4"]
 [ext_resource type="Script" uid="uid://cr3iveu57jsal" path="res://scripts/ui/status_display.gd" id="2_xeia0"]
@@ -7,7 +7,7 @@
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="StatusDisplay" type="TextureRect" node_paths=PackedStringArray("status_label", "toggle_button")]
+[node name="StatusDisplay" type="TextureRect" unique_id=627314739 node_paths=PackedStringArray("status_label", "toggle_button")]
 custom_minimum_size = Vector2(300, 400)
 offset_right = 300.0
 offset_bottom = 400.0
@@ -18,32 +18,32 @@ script = ExtResource("2_xeia0")
 status_label = NodePath("Label")
 toggle_button = NodePath("ButtonContainer/ToggleButton")
 
-[node name="ButtonContainer" type="VBoxContainer" parent="."]
+[node name="ButtonContainer" type="VBoxContainer" parent="." unique_id=567078859]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 26.0
 offset_right = 67.0
 offset_bottom = 188.0
 
-[node name="ToggleButton" type="Button" parent="ButtonContainer"]
+[node name="ToggleButton" type="Button" parent="ButtonContainer" unique_id=1131090478]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 text = ">"
 
-[node name="ToggleButton2" type="Button" parent="ButtonContainer"]
+[node name="ToggleButton2" type="Button" parent="ButtonContainer" unique_id=1354890272]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 text = "?"
 
-[node name="ToggleButton3" type="Button" parent="ButtonContainer"]
+[node name="ToggleButton3" type="Button" parent="ButtonContainer" unique_id=586530860]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 text = "?"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=469713816]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 44.0

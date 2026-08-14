@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
-	fetch_behavior("Movement", { "player": self, "SPEED": player_stat.SPEED * effect_component.get_speed_multiplier(player_stat.speed_mutiplier), "delta": delta })
+	fetch_behavior("Movement", { "player": self, "SPEED": player_stat.SPEED * effect_component.get_speed_multiplier(player_stat.speed_multiplier), "delta": delta })
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:

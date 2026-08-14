@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_bpyiv"]
 script = ExtResource("4_1qhmk")
-stat_name = 3
+stat_name = 4
 operation = 1
 value = 2.0
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://b28lmca6cul8n"
 
 [sub_resource type="Resource" id="Resource_0046l"]
 script = ExtResource("4_1qhmk")
-stat_name = 8
+stat_name = 9
 operation = 2
 value = 0.5
 metadata/_custom_type_script = "uid://drjyc2eoax3n4"

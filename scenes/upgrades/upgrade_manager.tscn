@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://cqmym637gdqmy"
 [node name="hp_up" type="Node" parent="StatUpgradeManager" unique_id=1876752256]
 script = ExtResource("3_a1g8y")
 upgrade_id = "hp_up"
-stat_name = "max_hp"
+stat_name = 2
 value = 10.0
 title = "HP+"
 description = "Add 10 HP"
@@ -35,7 +35,6 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="speed_up" type="Node" parent="StatUpgradeManager" unique_id=2121389748]
 script = ExtResource("3_a1g8y")
 upgrade_id = "speed_up"
-stat_name = "speed_mutiplier"
 value = 0.1
 title = "Speed+"
 description = "Increase speed"
@@ -46,7 +45,7 @@ metadata/_custom_type_script = "uid://fmua36g13d4h"
 [node name="damage_up" type="Node" parent="StatUpgradeManager" unique_id=505740915]
 script = ExtResource("3_a1g8y")
 upgrade_id = "damage_up"
-stat_name = "damage"
+stat_name = 1
 value = 5.0
 title = "Damage+"
 description = "Increase damage"
