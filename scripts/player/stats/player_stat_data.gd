@@ -25,9 +25,10 @@ func apply_upgrade(upgrade_id: String) -> void:
 			stat_upgrade = curr_stat_upgrade
 			break
 	
-	if stat_upgrade.stat_name in self:
+	var stat_name: String = stat_upgrade.get_stat_name()
+	if stat_name in self:
 		
-		var current_value = self.get(stat_upgrade.stat_name)
+		var current_value = self.get(stat_name)
 		var new_value = current_value
 		
 		match stat_upgrade.operation:
@@ -41,8 +42,8 @@ func apply_upgrade(upgrade_id: String) -> void:
 		if typeof(current_value) == TYPE_INT:
 			new_value = int(new_value)
 			
-		self.set(stat_upgrade.stat_name, new_value)
+		self.set(stat_name, new_value)
 		#if is_multiplayer_authority():
-			#print("已將 player %d 的 %s 從 %s 修改為 %s" % [multiplayer.get_unique_id(), stat_upgrade.stat_name, current_value, new_value])
+			#print("已將 player %d 的 %s 從 %s 修改為 %s" % [multiplayer.get_unique_id(), stat_name, current_value, new_value])
 	else:
-		push_warning("SkillData 中找不到變數: " + stat_upgrade.stat_name)
+		push_warning("SkillData 中找不到變數: " + stat_name)

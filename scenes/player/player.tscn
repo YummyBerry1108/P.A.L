@@ -173,13 +173,13 @@ metadata/_custom_type_script = "uid://l7jelo8hnshc"
 [node name="Skills" type="Node" parent="." unique_id=1368361760]
 
 [node name="IcicleData" parent="Skills" unique_id=1971128028 instance=ExtResource("6_5gtgg")]
-disable = true
 
 [node name="SnowballData" parent="Skills" unique_id=1094024664 instance=ExtResource("7_h17s1")]
 disable = true
 knockback_force = 250.0
 
 [node name="TachiData" parent="Skills" unique_id=1047118177 instance=ExtResource("13_fcs02")]
+disable = true
 firerate = 1.0
 status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_j4nxn")])
 
