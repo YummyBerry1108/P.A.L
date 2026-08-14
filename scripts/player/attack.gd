@@ -54,3 +54,14 @@ func calculate_directions(base_position: Vector2, target: Vector2, projectile_co
 	else:
 		rotations.append(rot)
 	return rotations
+
+func reset_skill_cooldown(skill_key: String) -> void:
+	if not multiplayer.is_server():
+		return
+	cooldowns.erase(skill_key)
+	var peer_id = owner.get_multiplayer_authority()
+	sync_reset_cooldown.rpc(skill_key)
+
+@rpc("any_peer", "call_local")
+func sync_reset_cooldown(skill_key: String) -> void:
+	cooldowns.erase(skill_key)

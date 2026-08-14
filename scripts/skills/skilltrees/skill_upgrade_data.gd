@@ -1,8 +1,13 @@
 extends Resource
 class_name SkillUpgrade
-
+enum UpgradeType {
+	NUMERIC_STAT,       # 修改數值（SkillData 或現有 Modifier/StatusEffect）
+	ADD_MODIFIER,       # 新增行為組件 (SkillModifier)
+	ADD_STATUS_EFFECT   # 新增狀態效果 (StatusEffectRes)
+}
 enum OpType { ADD, MULTIPLY, OVERRIDE } 
 enum StatType {
+	NONE,
 	PROJECTILE_DAMAGE,
 	FIRERATE,
 	PROJECTILE_COUNT,
@@ -16,11 +21,16 @@ enum StatType {
 	LIFE_STEAL_RATIO,
 	SPEED_UP
 }
-
-@export_category("Upgrade Settings")
+@export_category("Upgrade Type")
+@export var upgrade_type: UpgradeType = UpgradeType.NUMERIC_STAT
+@export_category("Numeric Settings")
 @export var stat_name: StatType
 @export var operation: OpType = OpType.ADD
 @export var value: float = 0.0
+@export_category("Modifier Settings")
+@export var modifier_to_add: SkillModifier
+@export_category("Status Effect Settings")
+@export var status_effect_to_add: StatusEffectRes
 
 func get_stat_name() -> String:
 	match stat_name:

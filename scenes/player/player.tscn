@@ -19,12 +19,13 @@
 [ext_resource type="Script" uid="uid://l7jelo8hnshc" path="res://scripts/player/stats/player_stat_data.gd" id="11_uf5tr"]
 [ext_resource type="PackedScene" uid="uid://nyu8sremmcpj" path="res://scenes/skills/data/tachi_data.tscn" id="13_fcs02"]
 [ext_resource type="Resource" uid="uid://dh1vs8esjfrgm" path="res://resources/skill_trees/snowball_tree.tres" id="14_kvlxm"]
-[ext_resource type="Script" uid="uid://djr88ug8wuwaf" path="res://scripts/effects/speed_up_effect.gd" id="17_6cv16"]
 [ext_resource type="Script" uid="uid://c6bmlvgeo0bj2" path="res://scripts/resources/effects/status_effect_res.gd" id="17_cnsyf"]
+[ext_resource type="Script" uid="uid://6eg5yod14irq" path="res://scripts/skills/skillmodifiers/alternating_animation_modifier.gd" id="17_j4nxn"]
 [ext_resource type="Script" uid="uid://b8xcfsnw3hk03" path="res://scripts/effects/slow_effect.gd" id="18_007i1"]
-[ext_resource type="Script" uid="uid://dghf5yi3qxfeo" path="res://scripts/effects/life_steal_effect.gd" id="19_007i1"]
 [ext_resource type="Script" uid="uid://bp7kkgm88fxmj" path="res://scripts/components/effect_component.gd" id="21_3j4b4"]
+[ext_resource type="Script" uid="uid://dk3yxmxpcl5mu" path="res://scripts/skills/skillmodifiers/skill_modifier.gd" id="21_28m0y"]
 [ext_resource type="PackedScene" uid="uid://c6iveblpi8knb" path="res://scenes/skills/data/wave_data.tscn" id="21_iqsei"]
+[ext_resource type="Script" uid="uid://bqliob5vn1c00" path="res://scripts/skills/skillmodifiers/life_steal_modifier.gd" id="22_uniwh"]
 [ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
@@ -70,23 +71,21 @@ height = 198.0
 radius = 64.0
 height = 202.0
 
-[sub_resource type="Resource" id="Resource_j4nxn"]
-script = ExtResource("17_6cv16")
-stack_mode = 1
-duration = 0.5
-metadata/_custom_type_script = "uid://djr88ug8wuwaf"
-
 [sub_resource type="Resource" id="Resource_6cv16"]
+resource_local_to_scene = true
+script = ExtResource("17_j4nxn")
+metadata/_custom_type_script = "uid://6eg5yod14irq"
+
+[sub_resource type="Resource" id="Resource_28m0y"]
 resource_local_to_scene = true
 script = ExtResource("18_007i1")
 speed_multiplier = 0.8
 metadata/_custom_type_script = "uid://b8xcfsnw3hk03"
 
-[sub_resource type="Resource" id="Resource_28m0y"]
+[sub_resource type="Resource" id="Resource_iqsei"]
 resource_local_to_scene = true
-script = ExtResource("19_007i1")
-duration = 0.0
-metadata/_custom_type_script = "uid://dghf5yi3qxfeo"
+script = ExtResource("22_uniwh")
+metadata/_custom_type_script = "uid://bqliob5vn1c00"
 
 [sub_resource type="LabelSettings" id="LabelSettings_5gtgg"]
 font_size = 32
@@ -181,12 +180,13 @@ knockback_force = 250.0
 [node name="TachiData" parent="Skills" unique_id=1047118177 instance=ExtResource("13_fcs02")]
 disable = true
 firerate = 1.0
-status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_j4nxn")])
+modifiers = Array[ExtResource("21_28m0y")]([SubResource("Resource_6cv16")])
 
 [node name="WaveData" parent="Skills" unique_id=406529094 instance=ExtResource("21_iqsei")]
 disable = true
 projectile_damage = 0.0
-status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_6cv16"), SubResource("Resource_28m0y")])
+status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_28m0y")])
+modifiers = Array[ExtResource("21_28m0y")]([SubResource("Resource_iqsei")])
 
 [node name="SkillTreeManager" type="Node" parent="." unique_id=1964937448]
 script = ExtResource("11_myrg7")

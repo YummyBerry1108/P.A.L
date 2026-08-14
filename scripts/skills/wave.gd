@@ -9,7 +9,6 @@ extends Projectile
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 
-var skill_data: SkillData = null
 var enemys: Dictionary = {} # record enemy in the hitbox of this weapon
 
 func _ready() -> void:
@@ -18,42 +17,29 @@ func _ready() -> void:
 		hitbox.area_entered.connect(_on_hurt_box_area_entered)
 		hitbox.area_exited.connect(_on_hurt_box_area_exited)
 	cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
-	_setup_skill_data()
+	skill_data.skill_updated.connect(apply_skill_data)
+	apply_skill_data()
 
 func _physics_process(delta: float) -> void:
-
 	if is_instance_valid(actor):
 		global_position = actor.global_position
 	else:
 		_before_lifespan_expired()
 		queue_free()
 
-func _setup_skill_data() -> void:
-	if not actor or not actor.skills.has("wave"):
-		push_warning("環繞之浪找不到玩家或SkillData")
-		return
-	skill_data = actor.skills["wave"]
-	if skill_data.has_signal("skill_updated"):
-		skill_data.skill_updated.connect(apply_skill_data)
-	apply_skill_data()
-
 func apply_skill_data() -> void:
-	if not skill_data:
+	if not skill_data or not is_instance_valid(actor):
 		return
 		
 	damage = skill_data.projectile_damage + actor.player_stat.damage
 	cooldown_timer.wait_time = skill_data.cooldown
 	scale = Vector2.ONE * skill_data.scale
-	status_effects = skill_data.status_effects
-	for effect: StatusEffectRes in status_effects:
-		if effect is LifeStealEffect:
-			effect.damage_dealt = damage
-			effect.healer = actor
 
 func _on_cooldown_timer_timeout() -> void:
 	if not multiplayer.is_server():
 		return
 	damage = skill_data.projectile_damage + actor.player_stat.damage
+	hit_count = 0
 	var current_enemies = enemys.keys().duplicate()
 	for enemy in current_enemies:
 		if not is_instance_valid(enemy):

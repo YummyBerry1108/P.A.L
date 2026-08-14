@@ -29,35 +29,106 @@ signal skill_updated
 @export_group("KnockbackSetting")
 @export var knockback_force: float = 0.0
 @export var knockback_duration: float = 0.0
+@export_category("Custom Modifiers")
+@export var modifiers: Array[SkillModifier] = []
 
-func apply_upgrade(effect: SkillUpgrade) -> void:
-	var stat_name = effect.get_stat_name()
-	if stat_name in self:
-		var new_val = _calculate_new_value(self.get(stat_name), effect)
-		self.set(stat_name, new_val)
-		skill_updated.emit()
-		
-		if is_multiplayer_authority():
-			print("已將 %s 的 %s 修改為 %s" % [skill_name, stat_name, new_val])
+func trigger_projectile_spawned(context: SkillContext) -> void:
+	for mod in modifiers:
+		if mod and mod.is_active:
+			mod.on_projectile_spawned(context)
+
+func trigger_pre_damage(context: SkillContext) -> void:
+	for mod in modifiers:
+		if mod and mod.is_active:
+			mod.on_pre_damage(context)
+
+func trigger_post_hit(context: SkillContext) -> void:
+	for mod in modifiers:
+		if mod and mod.is_active:
+			mod.on_post_hit(context)
+
+func trigger_projectile_expired(context: SkillContext) -> void:
+	for mod in modifiers:
+		if mod and mod.is_active:
+			mod.on_projectile_expired(context)
+
+func apply_upgrade(upgrade: SkillUpgrade) -> void:
+	match upgrade.upgrade_type:
+		SkillUpgrade.UpgradeType.ADD_MODIFIER:
+			_apply_add_modifier(upgrade)
+			
+		SkillUpgrade.UpgradeType.ADD_STATUS_EFFECT:
+			_apply_add_status_effect(upgrade)
+			
+		SkillUpgrade.UpgradeType.NUMERIC_STAT:
+			_apply_numeric_stat(upgrade)
+
+	skill_updated.emit()
+
+
+func _apply_add_modifier(upgrade: SkillUpgrade) -> void:
+	if not upgrade.modifier_to_add:
+		push_warning("SkillUpgrade 未設定 modifier_to_add")
 		return
 		
-	var updated_status_effect: bool = false
-	for status_effect in status_effects:
-		if status_effect and stat_name in status_effect:
-			var new_val = _calculate_new_value(status_effect.get(stat_name), effect)
-			status_effect.set(stat_name, new_val)
-			updated_status_effect = true
-
-	if updated_status_effect:
-		skill_updated.emit()
+	var new_mod = upgrade.modifier_to_add.duplicate(true)
+	var existing_idx = -1
+	for i in range(modifiers.size()):
+		if modifiers[i] and modifiers[i].id == new_mod.id:
+			existing_idx = i
+			break
+	if existing_idx != -1:
+		modifiers[existing_idx] = new_mod
 		if is_multiplayer_authority():
-			print("已更新 %s 的 StatusEffect 屬性: %s" % [skill_name, stat_name])
+			print("[%s] 已覆寫/更新 Modifier: %s" % [skill_name, new_mod.id])
 	else:
-		push_warning("SkillData 與 StatusEffects 中均找不到變數: " + stat_name)
+		modifiers.append(new_mod)
+		if is_multiplayer_authority():
+			print("[%s] 已新增 Modifier: %s" % [skill_name, new_mod.id])
+
+func _apply_add_status_effect(upgrade: SkillUpgrade) -> void:
+	if not upgrade.status_effect_to_add:
+		push_warning("SkillUpgrade 未設定 status_effect_to_add")
+		return
+		
+	var new_effect = upgrade.status_effect_to_add.duplicate(true)
+	status_effects.append(new_effect)
+	if is_multiplayer_authority():
+		print("[%s] 已新增 StatusEffect: %s" % [skill_name, new_effect.resource_path])
+
+func _apply_numeric_stat(upgrade: SkillUpgrade) -> void:
+	var stat_str = upgrade.get_stat_name()
+	var modified: bool = false
+	
+	if stat_str in self:
+		var new_val = _calculate_new_value(self.get(stat_str), upgrade)
+		self.set(stat_str, new_val)
+		modified = true
+		if is_multiplayer_authority():
+			print("[%s] 自身屬性 %s 更新為: %s" % [skill_name, stat_str, new_val])
+	
+	for effect in status_effects:
+		if effect and stat_str in effect:
+			var new_val = _calculate_new_value(effect.get(stat_str), upgrade)
+			effect.set(stat_str, new_val)
+			modified = true
+			if is_multiplayer_authority():
+				print("[%s] StatusEffect 屬性 %s 更新為: %s" % [skill_name, stat_str, new_val])
+
+	for mod in modifiers:
+		if mod and stat_str in mod:
+			var new_val = _calculate_new_value(mod.get(stat_str), upgrade)
+			mod.set(stat_str, new_val)
+			modified = true
+			if is_multiplayer_authority():
+				print("[%s] Modifier [%s] 屬性 %s 更新為: %s" % [skill_name, mod.id, stat_str, new_val])
+
+	if not modified:
+		push_warning("[%s] 找不到變數 %s 無法套用數值升級" % [skill_name, stat_str])
+
 
 func _calculate_new_value(current_value, effect: SkillUpgrade):
 	var new_value = current_value
-	
 	match effect.operation:
 		SkillUpgrade.OpType.ADD:
 			new_value += effect.value

@@ -17,21 +17,27 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	process_projectile_hit(projectile)
 	
 func process_projectile_hit(projectile: Projectile) -> void:
-	if not multiplayer.is_server(): return
-	var critical_hit: bool = false
-	var result = 0.0
+	if not multiplayer.is_server() or projectile == null: return
+	var skill_data = projectile.skill_data
+	projectile.hit_count += 1
 	
-	if projectile != null:
-		if randf() <= projectile.crit_chance:
-			result = projectile.damage * projectile.crit_damage_multiplier
-			critical_hit = true
-		else:
-			result = projectile.damage
+	var hit_ctx = SkillContext.new(skill_data, projectile.actor)
+	hit_ctx.projectile = projectile
+	hit_ctx.target = actor
+	hit_ctx.hit_count = projectile.hit_count
+	hit_ctx.base_damage = projectile.damage
+	hit_ctx.final_damage = projectile.damage
+	if randf() <= skill_data.crit_chance:
+		hit_ctx.is_critical = true
+		hit_ctx.final_damage *= skill_data.crit_damage_multiplier
+
+	skill_data.trigger_pre_damage(hit_ctx)
+	
+	take_damage.rpc(hit_ctx.final_damage, hit_ctx.is_critical)
+	for effect in hit_ctx.status_effects:
+		effect_component.add_effect(effect)
 		
-		take_damage.rpc(result, critical_hit)
-		
-		for effect in projectile.status_effects:
-			effect_component.add_effect(effect)
+	skill_data.trigger_post_hit(hit_ctx)
 			
 @rpc("any_peer", "call_local")
 func take_damage(projectile_damage: float, critical_hit: bool) -> void:
