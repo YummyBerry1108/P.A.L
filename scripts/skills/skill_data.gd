@@ -37,10 +37,10 @@ func trigger_projectile_spawned(context: SkillContext) -> void:
 		if mod and mod.is_active:
 			mod.on_projectile_spawned(context)
 
-func trigger_pre_damage(context: SkillContext) -> void:
+func trigger_pre_hit(context: SkillContext) -> void:
 	for mod in modifiers:
 		if mod and mod.is_active:
-			mod.on_pre_damage(context)
+			mod.on_pre_hit(context)
 
 func trigger_post_hit(context: SkillContext) -> void:
 	for mod in modifiers:

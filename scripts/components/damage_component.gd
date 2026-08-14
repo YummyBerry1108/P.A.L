@@ -31,7 +31,7 @@ func process_projectile_hit(projectile: Projectile) -> void:
 		hit_ctx.is_critical = true
 		hit_ctx.final_damage *= skill_data.crit_damage_multiplier
 
-	skill_data.trigger_pre_damage(hit_ctx)
+	skill_data.trigger_pre_hit(hit_ctx)
 	
 	take_damage.rpc(hit_ctx.final_damage, hit_ctx.is_critical)
 	for effect in hit_ctx.status_effects:
