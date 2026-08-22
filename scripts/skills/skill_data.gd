@@ -47,6 +47,11 @@ func trigger_post_hit(context: SkillContext) -> void:
 		if mod and mod.is_active:
 			mod.on_post_hit(context)
 
+func trigger_on_kill(context: SkillContext) -> void:
+	for mod in modifiers:
+		if mod and mod.is_active:
+			mod.on_kill(context)
+
 func trigger_projectile_expired(context: SkillContext) -> void:
 	for mod in modifiers:
 		if mod and mod.is_active:

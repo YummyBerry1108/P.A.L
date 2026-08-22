@@ -18,6 +18,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 func process_projectile_hit(projectile: Projectile) -> void:
 	if not multiplayer.is_server() or projectile == null: return
+	if actor.is_dead: return
 	var skill_data = projectile.skill_data
 	projectile.hit_count += 1
 	
@@ -38,6 +39,10 @@ func process_projectile_hit(projectile: Projectile) -> void:
 		effect_component.add_effect(effect)
 		
 	skill_data.trigger_post_hit(hit_ctx)
+
+	# 能走到這裡代表這一擊之前 actor 還活著，所以現在死了就是這一擊打死的
+	if actor.is_dead:
+		skill_data.trigger_on_kill(hit_ctx)
 			
 @rpc("any_peer", "call_local")
 func take_damage(projectile_damage: float, critical_hit: bool) -> void:

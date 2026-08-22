@@ -4,6 +4,7 @@ extends TextureRect
 @export var toggle_button: Button
 
 var player_data: PlayerStatData
+var arcane_stacks: ArcaneStackComponent
 var player_ready: bool = false
 var is_close: bool = false
 
@@ -17,6 +18,9 @@ func _process(delta: float) -> void:
 	Damage: %d
 	Speed Multiplier: %.1f
 	" % [ int(player_data.max_hp), player_data.damage, player_data.speed_multiplier ]
+	if arcane_stacks and arcane_stacks.is_active():
+		var undying_tag: String = " [不死]" if arcane_stacks.is_undying else ""
+		status_label.text += "\tStacks (X): %d%s\n" % [arcane_stacks.get_stack_count(), undying_tag]
 
 func _on_all_player_ready() -> void:
 	var players = get_tree().get_nodes_in_group("players")
@@ -26,6 +30,7 @@ func _on_all_player_ready() -> void:
 	for player: Player in players:
 		if player.name == str(multiplayer.get_unique_id()): 
 			player_data = player.player_stat
+			arcane_stacks = player.arcane_stacks
 			
 func _on_toggle_button_pressed() -> void:
 	is_close = not is_close

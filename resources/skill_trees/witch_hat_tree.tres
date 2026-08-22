@@ -1,0 +1,148 @@
+[gd_resource type="Resource" script_class="SkillTreeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/skills/skilltrees/skill_tree_data.gd" id="1_tree"]
+[ext_resource type="Script" path="res://scripts/skills/skilltrees/skill_path_data.gd" id="2_path"]
+[ext_resource type="Script" path="res://scripts/skills/skilltrees/skill_node_data.gd" id="3_node"]
+[ext_resource type="Script" path="res://scripts/skills/skilltrees/skill_upgrade_data.gd" id="4_upgrade"]
+[ext_resource type="Texture2D" path="res://imgs/skills/witch_hat.png" id="5_icon"]
+
+[sub_resource type="Resource" id="Upgrade_dmg1"]
+script = ExtResource("4_upgrade")
+stat_name = 1
+value = 15.0
+
+[sub_resource type="Resource" id="Upgrade_dmg2"]
+script = ExtResource("4_upgrade")
+stat_name = 1
+value = 25.0
+
+[sub_resource type="Resource" id="Upgrade_magic"]
+script = ExtResource("4_upgrade")
+stat_name = 13
+value = 1.0
+
+[sub_resource type="Resource" id="Upgrade_scale1"]
+script = ExtResource("4_upgrade")
+stat_name = 4
+value = 0.25
+
+[sub_resource type="Resource" id="Upgrade_scale2"]
+script = ExtResource("4_upgrade")
+stat_name = 4
+value = 0.35
+
+[sub_resource type="Resource" id="Upgrade_threshold"]
+script = ExtResource("4_upgrade")
+stat_name = 14
+value = -15.0
+
+[sub_resource type="Resource" id="Upgrade_stack1"]
+script = ExtResource("4_upgrade")
+stat_name = 12
+value = 1.0
+
+[sub_resource type="Resource" id="Upgrade_stack2"]
+script = ExtResource("4_upgrade")
+stat_name = 12
+value = 1.0
+
+[sub_resource type="Resource" id="Upgrade_undying"]
+script = ExtResource("4_upgrade")
+stat_name = 15
+operation = 1
+value = 0.5
+
+[sub_resource type="Resource" id="Node_dmg1"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_damage+"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_dmg1")])
+next_node_uids = Array[String](["witch_hat_damage++"])
+skill_name = "巫王的怨念"
+skill_description = "圓形範圍的打擊傷害 +15"
+
+[sub_resource type="Resource" id="Node_dmg2"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_damage++"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_dmg2")])
+next_node_uids = Array[String](["witch_hat_magic+"])
+skill_name = "深淵凝視"
+skill_description = "圓形範圍的打擊傷害 +25"
+
+[sub_resource type="Resource" id="Node_magic"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_magic+"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_magic")])
+skill_name = "魔力灌注"
+skill_description = "每層堆疊提供的魔法傷害 +1。這段傷害會附加在所有武器的每一次打擊上。"
+
+[sub_resource type="Resource" id="Node_scale1"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_scale+"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_scale1")])
+next_node_uids = Array[String](["witch_hat_scale++"])
+skill_name = "擴張"
+skill_description = "圓形範圍擴大 25%"
+
+[sub_resource type="Resource" id="Node_scale2"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_scale++"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_scale2")])
+next_node_uids = Array[String](["witch_hat_circle_threshold-"])
+skill_name = "籠罩"
+skill_description = "圓形範圍再擴大 35%"
+
+[sub_resource type="Resource" id="Node_threshold"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_circle_threshold-"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_threshold")])
+skill_name = "群星降臨"
+skill_description = "多長出一個圓形範圍所需的堆疊數由 60 降為 45"
+
+[sub_resource type="Resource" id="Node_stack1"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_stacks+"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_stack1")])
+next_node_uids = Array[String](["witch_hat_stacks++"])
+skill_name = "收割"
+skill_description = "每次擊殺獲得的堆疊 +1"
+
+[sub_resource type="Resource" id="Node_stack2"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_stacks++"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_stack2")])
+next_node_uids = Array[String](["witch_hat_undying+"])
+skill_name = "豐收"
+skill_description = "每次擊殺獲得的堆疊再 +1"
+
+[sub_resource type="Resource" id="Node_undying"]
+script = ExtResource("3_node")
+icon = ExtResource("5_icon")
+skill_id = "witch_hat_undying+"
+upgrade_effects = Array[ExtResource("4_upgrade")]([SubResource("Upgrade_undying")])
+skill_name = "不朽"
+skill_description = "不死狀態每秒消耗的堆疊減半，同樣的堆疊可以撐兩倍時間"
+
+[sub_resource type="Resource" id="Path_damage"]
+script = ExtResource("2_path")
+skill_nodes = Array[ExtResource("3_node")]([SubResource("Node_dmg1"), SubResource("Node_dmg2"), SubResource("Node_magic")])
+
+[sub_resource type="Resource" id="Path_scale"]
+script = ExtResource("2_path")
+skill_nodes = Array[ExtResource("3_node")]([SubResource("Node_scale1"), SubResource("Node_scale2"), SubResource("Node_threshold")])
+
+[sub_resource type="Resource" id="Path_stack"]
+script = ExtResource("2_path")
+skill_nodes = Array[ExtResource("3_node")]([SubResource("Node_stack1"), SubResource("Node_stack2"), SubResource("Node_undying")])
+
+[resource]
+script = ExtResource("1_tree")
+skill_name = "witch_hat"
+skill_paths = Array[ExtResource("2_path")]([SubResource("Path_damage"), SubResource("Path_scale"), SubResource("Path_stack")])

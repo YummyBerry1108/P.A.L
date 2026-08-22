@@ -24,10 +24,11 @@ func fire_in_different_rotations(skill_name: String) -> void:
 	#print(rotations)
 	for rot in rotations:
 		#print("ROT : ", rot)
-		create_shooting_helper.rpc(skill_name, rot)
+		# 亂數種子在權威端擲一次再廣播，讓每個 peer 的投射物做出完全相同的隨機結果
+		create_shooting_helper.rpc(skill_name, rot, randi())
 
 @rpc("any_peer", "call_local")
-func create_shooting_helper(skill_name: String, rot: float) -> void:
+func create_shooting_helper(skill_name: String, rot: float, spawn_seed: int) -> void:
 	#owner.pull_skills()
 	if not owner.skills.has(skill_name):
 		push_warning("找不到技能資料: ", skill_name, "，略過本次生成。")
@@ -37,7 +38,7 @@ func create_shooting_helper(skill_name: String, rot: float) -> void:
 	var shooting_helper: ShootingHelper = shooting_helper_scene.instantiate()
 	
 	add_child(shooting_helper, true)
-	shooting_helper.set_shoot_timer(0.1, skill_data, rot, skill_scene_name)
+	shooting_helper.set_shoot_timer(0.1, skill_data, rot, skill_scene_name, spawn_seed)
 
 func calculate_directions(base_position: Vector2, target: Vector2, projectile_count: int, shooting_arc: float) -> Array[float]:
 	var rot = base_position.direction_to(target).angle()

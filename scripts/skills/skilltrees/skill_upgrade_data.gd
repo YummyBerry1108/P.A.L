@@ -19,7 +19,12 @@ enum StatType {
 	POISON_DAMAGE,
 	SLOW_RATIO,
 	LIFE_STEAL_RATIO,
-	SPEED_UP
+	SPEED_UP,
+	# 巫王帽帽 (ArcaneStackModifier) 相關
+	STACKS_PER_KILL,
+	MAGIC_DAMAGE_PER_STACK,
+	STACKS_PER_EXTRA_CIRCLE,
+	UNDYING_DRAIN_PER_SECOND
 }
 @export_category("Upgrade Type")
 @export var upgrade_type: UpgradeType = UpgradeType.NUMERIC_STAT
@@ -45,4 +50,8 @@ func get_stat_name() -> String:
 		StatType.SLOW_RATIO: return "speed_multiplier"
 		StatType.LIFE_STEAL_RATIO: return "lifesteal_rate"
 		StatType.SPEED_UP: return "speed_multiplier"
+		StatType.STACKS_PER_KILL: return "stacks_per_kill"
+		StatType.MAGIC_DAMAGE_PER_STACK: return "magic_damage_per_stack"
+		StatType.STACKS_PER_EXTRA_CIRCLE: return "stacks_per_extra_circle"
+		StatType.UNDYING_DRAIN_PER_SECOND: return "undying_drain_per_second"
 	return ""

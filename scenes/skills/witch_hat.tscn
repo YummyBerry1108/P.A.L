@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/skills/witch_hat.gd" id="1_wh"]
+[ext_resource type="PackedScene" path="res://scenes/skills/witch_hat_circle.tscn" id="2_wh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_whroot"]
+radius = 8.0
+
+[node name="WitchHat" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_wh")
+circle_scene = ExtResource("2_wh")
+initial_speed = 0.0
+target_speed = 0.0
+lifespan = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_whroot")
+disabled = true

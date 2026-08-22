@@ -37,6 +37,7 @@ var direction: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 var exp_amount: int = 1
+var is_dead: bool = false
 var color: String = "red"
 
 func _ready() -> void:
@@ -121,5 +122,9 @@ func get_nearest_player() -> Vector2:
 	return res
 
 func die() -> void:
+	# 同一幀可能有多發投射物 / 魔法傷害同時把血打到 0，只結算一次
+	if is_dead:
+		return
+	is_dead = true
 	_enemy_died.emit(self)
 	queue_free()

@@ -2,7 +2,7 @@ extends Node
 
 var loaded_skills: Dictionary = {}
 
-func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_global_rotation: float) -> void:
+func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_global_rotation: float, spawn_seed: int = 0) -> void:
 	if not loaded_skills.has(skill_scene_name):
 		loaded_skills[skill_scene_name] = load(skill_scene_name)
 
@@ -12,6 +12,7 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 	new_projectile.scale = Vector2(skill_data.scale, skill_data.scale)
 	new_projectile.actor = get_parent()
 	new_projectile.skill_data = skill_data
+	new_projectile.spawn_seed = spawn_seed
 	
 	if multiplayer.is_server():
 		var spawn_ctx = SkillContext.new(skill_data, owner)
@@ -23,3 +24,4 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 
 	add_child(new_projectile, true)
 	new_projectile.owner = owner
+	owner.skill_fired.emit(skill_data.skill_name)

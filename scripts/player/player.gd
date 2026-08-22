@@ -4,6 +4,7 @@ signal health_changed(health: float)
 signal max_health_changed(health: float)
 signal player_died(id: int)
 signal spectate_changed(name: String) # used in spectate.gd
+signal skill_fired(skill_name: String) # 給外觀/特效用，每個 peer 都會收到
 
 @onready var hurt_box: Area2D = $HurtBox
 @onready var invincibility_timer: Timer = $HurtBox/InvincibilityTimer
@@ -15,6 +16,7 @@ signal spectate_changed(name: String) # used in spectate.gd
 @onready var player_stat: PlayerStatData = $PlayerStat
 @onready var effect_component: EffectComponent = $EffectComponent
 @onready var indicator_manager: Node = $IndicatorManager
+@onready var arcane_stacks: ArcaneStackComponent = $ArcaneStackComponent
 
 @export var is_invincible: bool = false
 @export var is_alive: bool = true
@@ -82,7 +84,13 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	elif "damage" in enemy_root:
 		enemy_damage = enemy_root.damage
 	
-	take_damage.rpc(enemy_damage)
+	# 致死判定與堆疊消耗一律由 server 決定後隨 rpc 一起送出，
+	# 否則各 peer 會依自己手上的 stacks 算出不同的生死結果。
+	var lethal_absorbed: bool = false
+	if player_stat.hp - enemy_damage <= 0:
+		lethal_absorbed = arcane_stacks.try_absorb_lethal()
+
+	take_damage.rpc(enemy_damage, lethal_absorbed)
 	
 func _on_timer_timeout() -> void:
 	is_invincible = false
@@ -97,13 +105,17 @@ func start_spectating():
 	$Behaviors/Spectate.switch_to_next_player()
 
 @rpc("any_peer", "call_local")
-func take_damage(damage: float) -> void:
+func take_damage(damage: float, lethal_absorbed: bool = false) -> void:
 	if not is_alive:
 		return
 	player_stat.hp -= damage
 	if player_stat.hp <= 0:
-		player_stat.hp = 0
-		die()
+		if lethal_absorbed:
+			# 巫王帽帽的不死狀態：HP 鎖在 1，改由堆疊每幀扣抵
+			player_stat.hp = 1
+		else:
+			player_stat.hp = 0
+			die()
 	health_changed.emit(player_stat.hp)
 	is_invincible = true
 	invincibility_timer.start()

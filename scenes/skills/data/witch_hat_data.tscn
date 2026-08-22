@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/skills/skill_data.gd" id="1_data"]
+[ext_resource type="Script" path="res://scripts/skills/skillmodifiers/skill_modifier.gd" id="2_base"]
+[ext_resource type="Script" path="res://scripts/skills/skillmodifiers/arcane_stack_modifier.gd" id="3_arcane"]
+
+[sub_resource type="Resource" id="Resource_arcane"]
+resource_local_to_scene = true
+script = ExtResource("3_arcane")
+magic_damage_per_stack = 1.0
+stacks_per_kill = 1
+stacks_per_extra_circle = 60
+undying_drain_per_second = 60.0
+
+[node name="WitchHatData" type="Node"]
+script = ExtResource("1_data")
+skill_name = "witch_hat"
+firerate = 0.5
+projectile_damage = 20.0
+scale = 1.0
+crit_chance = 0.1
+modifiers = Array[ExtResource("2_base")]([SubResource("Resource_arcane")])

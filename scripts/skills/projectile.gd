@@ -8,6 +8,7 @@ class_name Projectile extends CharacterBody2D
 @export var lifespan: float = 1.0
 
 var skill_data: SkillData
+var spawn_seed: int = 0 ## 由權威端廣播，讓所有 peer 的隨機結果一致
 var actor: Node
 var damage: float = 0.0
 

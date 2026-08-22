@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/witch_hat_cosmetic.gd" id="1_cos"]
+[ext_resource type="Texture2D" path="res://imgs/skills/witch_hat.png" id="2_hat"]
+
+[node name="WitchHatCosmetic" type="Node2D"]
+z_index = 1
+script = ExtResource("1_cos")
+
+[node name="Sparkle" type="CPUParticles2D" parent="."]
+position = Vector2(0, -14)
+amount = 12
+lifetime = 1.4
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 46.0
+direction = Vector2(0, -1)
+spread = 32.0
+gravity = Vector2(0, -26)
+initial_velocity_min = 16.0
+initial_velocity_max = 44.0
+scale_amount_min = 3.0
+scale_amount_max = 6.5
+color = Color(1, 0.83, 0.28, 0.85)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_hat")
+
+[node name="Burst" type="CPUParticles2D" parent="."]
+position = Vector2(0, -26)
+emitting = false
+amount = 18
+lifetime = 0.55
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 90)
+initial_velocity_min = 90.0
+initial_velocity_max = 230.0
+scale_amount_min = 4.0
+scale_amount_max = 9.0
+color = Color(0.73, 0.55, 1, 0.95)

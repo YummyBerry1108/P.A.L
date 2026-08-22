@@ -26,6 +26,9 @@
 [ext_resource type="Script" uid="uid://dk3yxmxpcl5mu" path="res://scripts/skills/skillmodifiers/skill_modifier.gd" id="21_28m0y"]
 [ext_resource type="PackedScene" uid="uid://c6iveblpi8knb" path="res://scenes/skills/data/wave_data.tscn" id="21_iqsei"]
 [ext_resource type="Script" uid="uid://bqliob5vn1c00" path="res://scripts/skills/skillmodifiers/life_steal_modifier.gd" id="22_uniwh"]
+[ext_resource type="PackedScene" path="res://scenes/skills/data/witch_hat_data.tscn" id="23_witch"]
+[ext_resource type="Script" path="res://scripts/components/arcane_stack_component.gd" id="24_arcane"]
+[ext_resource type="PackedScene" path="res://scenes/player/witch_hat_cosmetic.tscn" id="25_cos"]
 [ext_resource type="Script" uid="uid://bxebj3fipppey" path="res://scripts/ui/player_indicator.gd" id="26_uniwh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
@@ -174,19 +177,18 @@ metadata/_custom_type_script = "uid://l7jelo8hnshc"
 [node name="IcicleData" parent="Skills" unique_id=1971128028 instance=ExtResource("6_5gtgg")]
 
 [node name="SnowballData" parent="Skills" unique_id=1094024664 instance=ExtResource("7_h17s1")]
-disable = true
 knockback_force = 250.0
 
 [node name="TachiData" parent="Skills" unique_id=1047118177 instance=ExtResource("13_fcs02")]
-disable = true
 firerate = 1.0
 modifiers = Array[ExtResource("21_28m0y")]([SubResource("Resource_j4nxn")])
 
 [node name="WaveData" parent="Skills" unique_id=406529094 instance=ExtResource("21_iqsei")]
-disable = true
 projectile_damage = 0.0
 status_effects = Array[ExtResource("17_cnsyf")]([SubResource("Resource_28m0y")])
 modifiers = Array[ExtResource("21_28m0y")]([SubResource("Resource_uniwh")])
+
+[node name="WitchHatData" parent="Skills" instance=ExtResource("23_witch")]
 
 [node name="SkillTreeManager" type="Node" parent="." unique_id=1964937448]
 script = ExtResource("11_myrg7")
@@ -231,6 +233,10 @@ replication_config = SubResource("SceneReplicationConfig_75vfm")
 [node name="EffectComponent" type="Node" parent="." unique_id=28709430]
 script = ExtResource("21_3j4b4")
 metadata/_custom_type_script = "uid://bp7kkgm88fxmj"
+
+[node name="WitchHatCosmetic" parent="." instance=ExtResource("25_cos")]
+[node name="ArcaneStackComponent" type="Node" parent="."]
+script = ExtResource("24_arcane")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="HurtBox/InvincibilityTimer" to="." method="_on_timer_timeout"]
