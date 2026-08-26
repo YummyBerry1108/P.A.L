@@ -8,8 +8,7 @@ func _ready() -> void:
 	hitbox = $RotCenter/Hitbox
 	if hitbox:
 		hitbox.area_entered.connect(_on_hurt_box_area_entered)
-	
-	animation_player.play(custom_anim_name, -1, 2.0)
+	animation_player.play(custom_anim_name, -1)
 	animation_player.seek(0.0, true)
 	await animation_player.animation_finished
 	_before_lifespan_expired()

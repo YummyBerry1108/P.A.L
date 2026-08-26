@@ -32,7 +32,10 @@ signal skill_updated
 @export_category("Custom Modifiers")
 @export var modifiers: Array[SkillModifier] = []
 
+var spawn_count: int = 0
+
 func trigger_projectile_spawned(context: SkillContext) -> void:
+	sync_property.rpc("spawn_count", spawn_count + 1)
 	for mod in modifiers:
 		if mod and mod.is_active:
 			mod.on_projectile_spawned(context)
@@ -141,3 +144,7 @@ func _calculate_new_value(current_value, effect: SkillUpgrade):
 		new_value = int(new_value)
 		
 	return new_value
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_property(property: StringName, value: Variant) -> void:
+	set(property, value)

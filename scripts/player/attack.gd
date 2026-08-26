@@ -11,7 +11,7 @@ func run(args: Dictionary) -> void:
 		cooldown()
 
 func cooldown() -> void:
-	var now_time = Time.get_unix_time_from_system()
+	var now_time = GameManager.time_elapsed
 	for skill_name in owner.skills:
 		if owner.skills[skill_name].disable: continue
 		if not cooldowns.has(skill_name) or now_time >= cooldowns[skill_name]:
@@ -55,11 +55,11 @@ func calculate_directions(base_position: Vector2, target: Vector2, projectile_co
 		rotations.append(rot)
 	return rotations
 
+## 由 Server 呼叫
 func reset_skill_cooldown(skill_key: String) -> void:
 	if not multiplayer.is_server():
 		return
 	cooldowns.erase(skill_key)
-	var peer_id = owner.get_multiplayer_authority()
 	sync_reset_cooldown.rpc(skill_key)
 
 @rpc("any_peer", "call_local")

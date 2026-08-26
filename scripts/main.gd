@@ -22,10 +22,6 @@ var experience: int = 0
 var experience_cap: int = 5
 var level: int = 0
 
-var time_elapsed: float = 0.0 # use for total time 
-var is_timer_running: bool = true
-
-
 func _ready() -> void:
 	Lobby.server_disconnected.connect(_on_server_disconnected)
 	Lobby.player_disconnected.connect(_on_player_disconnected)
@@ -40,10 +36,8 @@ func _ready() -> void:
 	GameManager.change_pause_state(true)
 	Lobby.player_loaded.rpc_id(1) # Tell server this client is ready
 
-func _process(delta: float) -> void:		
-	if is_timer_running:
-		time_elapsed += delta
-		ui.update_timer_display(time_elapsed)
+func _process(delta: float) -> void:
+	ui.update_timer_display(GameManager.time_elapsed)
 	
 	# press R
 	if multiplayer.is_server() and Input.is_action_pressed("force_game_over"):

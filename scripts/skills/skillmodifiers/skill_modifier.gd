@@ -1,5 +1,7 @@
 class_name SkillModifier extends Resource
 
+# 各個 function 內的程式，必須要能夠廣播給所有客戶端，否則會造成不同步問題
+
 @export var is_active: bool = true
 var id: String = ""
 

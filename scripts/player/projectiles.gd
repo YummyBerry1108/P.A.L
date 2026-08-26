@@ -20,6 +20,6 @@ func add_projectile(skill_data: SkillData, skill_scene_name: String, projectile_
 		spawn_ctx.final_damage = spawn_ctx.base_damage
 		skill_data.trigger_projectile_spawned(spawn_ctx)
 		new_projectile.damage = spawn_ctx.final_damage
-
+	
 	add_child(new_projectile, true)
 	new_projectile.owner = owner

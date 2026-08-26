@@ -5,6 +5,7 @@ extends Node
 signal pause_state_changed(is_paused: bool) 
 signal player_amount_changed() # record player amount message by pause label
 
+var time_elapsed: float = 0.0
 var is_game_start: bool = false
 var local_player: Player # the player that user control
 var players_upgraded: Array[int] = [] # use multiplayer id to record
@@ -12,6 +13,10 @@ var players_upgraded: Array[int] = [] # use multiplayer id to record
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	Lobby.player_disconnected.connect(_on_player_disconnected)
+
+func _process(delta: float) -> void:		
+	if not get_tree().paused and is_game_start:
+		time_elapsed += delta
 
 ## Only server can call this rpc to stop game, true is stop
 @rpc("authority", "call_local", "reliable")
